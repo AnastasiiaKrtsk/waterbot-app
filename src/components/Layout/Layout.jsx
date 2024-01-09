@@ -10,19 +10,22 @@ const Layout = () => {
     <div>
       <header>
         <Wrapper>
-          <Logo>
-            <NavLink to="/" end>
+          <NavLink to="/" end>
+            <Logo>
               <img src={logoIcon} alt="" />
               <LogoContent>
                 <P>Tracker</P>
                 <P>of water</P>
               </LogoContent>
-            </NavLink>
-          </Logo>
+            </Logo>
+          </NavLink>
+
           <SignIn onClick={handleSignIn}>
             <NavLink to="/" end>
-              <p>Sign in</p>
-              <img src={logoIcon2} alt="" />
+              <Logo>
+                <p>Sign in</p>
+                <img src={logoIcon2} alt="" />{" "}
+              </Logo>
             </NavLink>
           </SignIn>
         </Wrapper>
