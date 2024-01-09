@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://AnastasiiaKrtsk.github.io/waterbot-app/",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
