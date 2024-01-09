@@ -21,6 +21,7 @@
     "mui": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
     "react-responsive-ui": "^0.15.56",
     "redux": "^5.0.1"
   },
