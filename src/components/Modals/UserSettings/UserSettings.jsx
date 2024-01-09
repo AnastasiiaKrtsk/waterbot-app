@@ -1,3 +1,3 @@
-export const DailyNorma = () => {
-  return <div>DailyNorma</div>;
+export const UserSettings = () => {
+  return <div>UserSettings</div>;
 };
