@@ -10,7 +10,7 @@ import {
   SignInText,
   WrapperHeader,
 } from "./Layout.styled";
-import logoIcon2 from "../../images/svg+logo/svgs/user.svg";
+import sprite from "../../images/svg+logo/sprite.svg";
 
 const Layout = () => {
   const handleSignIn = () => {};
@@ -32,7 +32,9 @@ const Layout = () => {
             <NavLink to="/" end>
               <DivWrapper>
                 <SignInText>Sign in</SignInText>
-                <SignInImg src={logoIcon2} alt="" width={28} />
+                <SignInImg width="28" height="28">
+                  <use href={`${sprite}#user`} />
+                </SignInImg>
               </DivWrapper>
             </NavLink>
           </SignIn>

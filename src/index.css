@@ -98,13 +98,7 @@ textarea {
   padding-left: 24px;
   padding-right: 24px;
 }
-@media screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding-left: 80px;
-    padding-right: 80px;
-  }
-}
+
 @media screen and (min-width: 320px) {
   .container {
     max-width: 320px;
@@ -116,11 +110,17 @@ textarea {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
-
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding-left: 112px;
+    padding-right: 112px;
+  }
+}
 .visually-hidden {
   position: absolute;
   width: 1px;

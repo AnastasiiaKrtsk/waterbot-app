@@ -49,6 +49,6 @@ export const SignIn = styled.div`
     }
   }
 `;
-export const SignInImg = styled.img`
+export const SignInImg = styled.svg`
   margin-left: 4px;
 `;
