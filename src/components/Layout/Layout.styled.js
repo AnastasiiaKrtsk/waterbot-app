@@ -1,29 +1,34 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const WrapperHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 16px 20px 0;
+  margin: 16px 20px 24px;
 
   @media screen and (min-width: 768px) {
-    margin: 16px 32px 0;
+    margin: 16px 32px 40px;
   }
 
   @media screen and (min-width: 1440px) {
-    margin: 16px 112px 0;
+    margin: 16px 112px 80px;
   }
 `;
 
-export const P = styled.p`
+export const LogoText = styled.p`
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: var(--bold);
   color: var(--dark-blue);
   font-size: 12px;
 `;
-
-export const Logo = styled.div`
+export const SignInText = styled.p`
+  color: var(--dark-blue);
+  font-size: 16px;
+  font-weight: var(--regular);
+`;
+export const DivWrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 4px;
 `;
 
 export const LogoContent = styled.div`
@@ -43,4 +48,7 @@ export const SignIn = styled.div`
       display: none;
     }
   }
+`;
+export const SignInImg = styled.img`
+  margin-left: 4px;
 `;
