@@ -3,7 +3,6 @@ import ConsumTracker from "../../components/ConsumTracker/ConsumTracker";
 import WhyDrinkWater from "../../components/WhyDrinkWater/WhyDrinkWater";
 import { Descr, H1 } from "./WelcomePage.styled";
 import UserSettings from "../../components/Modals/UserSettings/UserSettings";
-import { Descr, H1 } from "./WelcomePage.styled";
 const WelcomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
