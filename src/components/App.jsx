@@ -1,6 +1,7 @@
 // import { Route, Routes } from "react-router-dom";
 import WelcomePage from "../pages/WelcomePage/WelcomePage";
 import Layout from "./Layout/Layout";
+import UserSettings from "./Modals/UserSettings/UserSettings";
 // import PublicRoute from "./PublicRoute/PublicRoute";
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       </Routes> */}
       <Layout />
       <WelcomePage />
+      <UserSettings />
     </>
   );
 };
