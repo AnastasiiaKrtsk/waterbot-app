@@ -13,6 +13,14 @@ export const SubTitle = styled.p`
 export const BenefitsList = styled.ul`
   display: flex;
   flex-direction: column;
+  @media only screen and (min-width: 767px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @media only screen and (min-width: 1440px) {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 export const BenefitsItems = styled.li`
   display: flex;
@@ -57,6 +65,8 @@ export const TryTrackerBtn = styled.button`
   font-style: normal;
   font-weight: var(--medium);
   line-height: calc(20 / 16);
-  @media only screen and (max-width: 767px) {
+  @media only screen and (min-width: 767px) {
+    width: 336px;
+    padding: 10px 30px;
   }
 `;
