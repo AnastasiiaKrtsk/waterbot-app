@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 
 export const ModalSettingWindow = styled.div`
-  position: inherit;
-  background-color: white;
   padding: 32px 12px;
+  position: fixed;
 
   display: inline-flex;
   flex-direction: column;
@@ -33,6 +32,19 @@ export const StyledSettingsPasswordDiv = styled.div`
   margin-bottom: 24px;
 `;
 
+export const SettingsCrossDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const YourPhotoTitleH3 = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 8px;
+  color: var(--black);
+`;
+
 export const SettingModalTitleH2 = styled.h2`
   font-size: 26px;
   font-weight: 500;
@@ -59,6 +71,12 @@ export const StyledSettingModalH3 = styled.h3`
   font-weight: 500;
   line-height: 20px;
   color: var(--black);
+`;
+
+export const SettingGenderList = styled.ul`
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
 `;
 
 export const SettingPhotoWrapper = styled.div`
@@ -91,6 +109,7 @@ export const StyledYourGenderTitle = styled.h4`
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
+  margin-bottom: 12px;
   color: var(--black);
 `;
 
@@ -101,11 +120,11 @@ export const StyledRadioLabel = styled.label`
   color: var(--black);
 `;
 
-export const StyledCloseSvg = styled.svg`
-  position: absolute;
-  top: 36px;
-  right: 12px;
+export const InputRadioSettings = styled.input`
+  margin-right: 8px;
 `;
+
+export const StyledCloseSvg = styled.svg``;
 
 export const BtnSettingSave = styled.button`
   display: flex;
