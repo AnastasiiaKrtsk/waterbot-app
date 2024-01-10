@@ -15,5 +15,6 @@ export const StyledDeleteWaterButton = styled.button`
     width: 100%;
     height: 1px;
     background-color: var(--red);
+    border-radius: 1px;
   }
 `;
