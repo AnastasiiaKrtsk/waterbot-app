@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ConsumTracker from "../../components/ConsumTracker/ConsumTracker";
 import WhyDrinkWater from "../../components/WhyDrinkWater/WhyDrinkWater";
-import { Descr, H1 } from "./WelcomePage.styled";
+import { Descr, Div, H1 } from "./WelcomePage.styled";
 import UserSettings from "../../components/Modals/UserSettings/UserSettings";
 const WelcomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,19 +13,22 @@ const WelcomePage = () => {
     setIsModalOpen(false);
   };
   return (
-    <div>
-      <H1>Water consumption tracker</H1>
-      <Descr>
-        Record daily water <br />
-        intake and track
-      </Descr>
-      <ConsumTracker />
-      <WhyDrinkWater />
+    <>
+      <Div>
+        <div>
+          <H1>Water consumption tracker</H1>
+          <Descr>Record daily water intake and track</Descr>
+          <ConsumTracker />
+        </div>
+        <div>
+          <WhyDrinkWater />
+        </div>
+      </Div>
       <button type="button" onClick={handleOpenModal}>
         Settings
       </button>
       <UserSettings handleClose={handleCloseModal} isModalOpen={isModalOpen} />
-    </div>
+    </>
   );
 };
 export default WelcomePage;
