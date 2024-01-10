@@ -23,13 +23,15 @@ const Layout = () => {
             <DivWrapper>
               <img src={logoIcon} alt="" />
               <LogoContent>
-                <LogoText>Tracker of water</LogoText>
+                <LogoText>
+                  Tracker <br /> of water
+                </LogoText>
               </LogoContent>
             </DivWrapper>
           </NavLink>
 
           <SignIn onClick={handleSignIn}>
-            <NavLink to="/" end>
+            <NavLink to="/signin" end>
               <DivWrapper>
                 <SignInText>Sign in</SignInText>
                 <SignInImg width="28" height="28">
