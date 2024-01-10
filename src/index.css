@@ -29,6 +29,8 @@ html {
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+  background-position: center top;
+  background-repeat: no-repeat;
   background-size: cover;
   background-image: url("./images/mobile/Mobile-Background-Main-Page@2x.png");
 }

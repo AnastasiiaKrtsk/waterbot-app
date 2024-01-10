@@ -9,6 +9,13 @@ export const WhyWrapper = styled.div`
   border-radius: 10px;
   background: var(--light-blue-1);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+  @media only screen and (min-width: 767px) {
+    width: 494px;
+    padding: 32px 24px;
+  }
+  @media only screen and (min-width: 1440px) {
+    padding: 16px 24px;
+  }
 `;
 export const WhyText = styled.div`
   font-size: 18px;
@@ -37,6 +44,16 @@ export const WhyList = styled.ol`
     left: -20px;
     top: 50%; /* Adjust vertically to center */
     transform: translateY(-50%); /* Adjust vertically to center */
+  }
+  @media only screen and (min-width: 767px) {
+    li {
+      margin-bottom: 16px;
+    }
+  }
+  @media only screen and (min-width: 1440px) {
+    li {
+      margin-bottom: 16px;
+    }
   }
 `;
 export const WhyItem = styled.li``;
