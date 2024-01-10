@@ -12,4 +12,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
-// "homepage": "https://AnastasiiaKrtsk.github.io/waterbot-app/",
