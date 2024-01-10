@@ -29,6 +29,20 @@ html {
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+  background-size: cover;
+  background-image: url("./images/mobile/Mobile-Background-Main-Page@2x.png");
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    background-image: url("./images/tablet/Tablet-Background-Main-Page@2x.png");
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  body {
+    background-image: url("./images/desktop/Desk-Background-Main-Page@2x.png");
+  }
 }
 
 img {
