@@ -45,6 +45,7 @@ export const SettingsIcon = styled.img.attrs({ src: ToolsSvg })`
   }
 `;
 export const TryTrackerBtn = styled.button`
+  margin-bottom: 40px;
   width: 100%;
   padding: 8px 30px;
   border: none;

@@ -7,8 +7,9 @@ import {
   SubTitle,
   TryTrackerBtn,
 } from "./ConsumTracker.styled";
+import { Link } from "react-router-dom";
+
 const ConsumTracker = () => {
-  const handleToAuth = () => {};
   return (
     <>
       <SubTitle>Tracker Benefits</SubTitle>
@@ -26,9 +27,9 @@ const ConsumTracker = () => {
           Personal rate setting
         </BenefitsItems>
       </BenefitsList>
-      <TryTrackerBtn type="button" onClick={handleToAuth}>
-        Try tracker
-      </TryTrackerBtn>
+      <Link to="/homepage">
+        <TryTrackerBtn type="button">Try tracker</TryTrackerBtn>
+      </Link>
     </>
   );
 };
