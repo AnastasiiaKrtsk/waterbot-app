@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://"; // added URL
+const BASE_URL = "https://backend-water-tracker.onrender.com/";
 const $instance = axios.create({ baseURL: BASE_URL });
 
 export const setToken = (token) => {
