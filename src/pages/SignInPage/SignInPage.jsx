@@ -1,6 +1,6 @@
-import SignUpPage from "../SignUpPage/SignUpPage";
+import { Link } from "react-router-dom";
 
-export const SignInPage = () => {
+const SignInPage = () => {
   return (
     <>
       <h2>Sign In</h2>
@@ -10,8 +10,8 @@ export const SignInPage = () => {
         <label>Enter your password</label>
         <input />
         <button type="submit">Sign In</button>
+        <Link to="/signup">Sign Up</Link>
       </form>
-      <SignUpPage />
     </>
   );
 };
