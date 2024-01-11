@@ -21,7 +21,7 @@ export const BackdropSettingModal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(6, 33, 54, 0.4);
+  background: rgba(0, 0, 0, 0.8);
   overflow: scroll;
 `;
 
@@ -100,11 +100,18 @@ export const ImgDownloadIcon = styled.img`
   height: 16px;
 `;
 
-export const StyledParagraphUploadPhoto = styled.p`
+export const PhotoInputUpload = styled.input`
+  display: none;
+`;
+
+export const PhotoInputUploadLabel = styled.label`
+  display: flex;
+  gap: 8px;
+
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: var(--blue);
+  color: var(--dark-blue);
 `;
 
 export const StyledYourGenderTitle = styled.h4`
@@ -185,6 +192,22 @@ export const PasswordSettingInput = styled.input`
     line-height: 20px;
     color: #9ebbff;
   }
+`;
+
+export const SettingsPasswordSvgDiv = styled.div`
+  position: relative;
+`;
+
+export const BtnEye = styled.button`
+  position: absolute;
+  top: 30%;
+  left: 87%;
+`;
+
+export const EyeSvg = styled.svg`
+  position: absolute;
+  top: 30%;
+  left: 87%;
 `;
 
 export const PasswordSettingLabel = styled.label`
