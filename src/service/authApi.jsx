@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://backend-water-tracker.onrender.com/";
+const BASE_URL = "https://backend-water-tracker.onrender.com/api/";
 const $instance = axios.create({ baseURL: BASE_URL });
 
 export const setToken = (token) => {
@@ -9,6 +9,7 @@ export const setToken = (token) => {
 
 export const signup = async (userData) => {
   const { data } = await $instance.post("/auth/signup", userData);
+  console.log(data);
   setToken(data.token);
   return data;
 };
