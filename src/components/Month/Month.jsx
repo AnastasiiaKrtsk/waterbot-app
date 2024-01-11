@@ -2,12 +2,18 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import {
   StyledMonthChanger,
+  StyledMonthName,
   StyledMonthTitle,
   StyledMonthWaterItem,
   StyledMonthWaterList,
+  StyledMonthWrapper,
+  StyledNextMonth,
   StyledPercentage,
+  StyledPrevMonth,
   StyledWaterListItemWrapper,
 } from "./Month.styled";
+
+import sprite from "../../images/svg+logo/sprite.svg";
 
 const Month = () => {
   const [shownDate, setShownDate] = useState(moment());
@@ -34,14 +40,22 @@ const Month = () => {
   );
   return (
     <div>
-      <StyledMonthTitle>Month</StyledMonthTitle>
-      <StyledMonthChanger>
-        <button onClick={prevMonth}>-</button>
-        <div>{shownDate.format("MMMM YYYY")}</div>
-        <button onClick={nextMonth} disabled={isCurrentMonth}>
-          +
-        </button>
-      </StyledMonthChanger>
+      <StyledMonthWrapper>
+        <StyledMonthTitle>Month</StyledMonthTitle>
+        <StyledMonthChanger>
+          <StyledPrevMonth onClick={prevMonth}>
+            <svg width={"16px"} height={"16px"}>
+              <use href={sprite + "#icon-left"}></use>
+            </svg>
+          </StyledPrevMonth>
+          <StyledMonthName>{shownDate.format("MMMM YYYY")}</StyledMonthName>
+          <StyledNextMonth onClick={nextMonth} disabled={isCurrentMonth}>
+          <svg width={"16px"} height={"16px"}>
+              <use href={sprite + "#icon-right"}></use>
+            </svg>
+          </StyledNextMonth>
+        </StyledMonthChanger>
+      </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => (
           <StyledWaterListItemWrapper key={day}>
