@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { logout, signin, signup } from "../service/authApi";
+import { logout, signin, signup, addAvatar } from "../service/authApi";
 
 export const signUpThunk = createAsyncThunk(
   "auth/signup",
@@ -33,6 +33,18 @@ export const logOutThunk = createAsyncThunk(
       return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error._message);
+    }
+  }
+);
+
+export const updateAvatarThunk = createAsyncThunk(
+  "users/avatars",
+  async (data, thunkAPI) => {
+    try {
+      const response = await addAvatar(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

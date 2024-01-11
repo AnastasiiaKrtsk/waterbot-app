@@ -27,11 +27,11 @@ export const logout = async () => {
   return data;
 };
 
-export const fetchAvatar = async () => {
-  const { data } = await $instance.patch("/users/avatars");
-  setToken(data.token);
-  console.log(data);
-  return data;
-};
-
-fetchAvatar();
+export const addAvatar = async (data) =>
+  axios
+    .patch("/users/avatars", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
