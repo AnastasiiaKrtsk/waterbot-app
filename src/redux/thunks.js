@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { logout, signin, signup } from "../service/authApi";
 
 export const signUpThunk = createAsyncThunk(
-  "auth/signUp",
+  "auth/signup",
   async (userData, thunkAPI) => {
     try {
       const response = await signup(userData);
@@ -14,7 +14,7 @@ export const signUpThunk = createAsyncThunk(
 );
 
 export const signInThunk = createAsyncThunk(
-  "auth/signIn",
+  "auth/signin",
   async (userData, thunkAPI) => {
     try {
       const response = await signin(userData);
@@ -26,7 +26,7 @@ export const signInThunk = createAsyncThunk(
 );
 
 export const logOutThunk = createAsyncThunk(
-  "auth/logOut",
+  "auth/logout",
   async (_, thunkAPI) => {
     try {
       await logout();
