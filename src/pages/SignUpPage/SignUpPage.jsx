@@ -23,7 +23,7 @@ const SignUpPage = () => {
     const submit = e.nativeEvent.submitter.name;
 
     if (data) {
-      const { email, password, passwordRepeat } = data;
+      const { username, email, password, passwordRepeat } = data;
 
       if (password !== passwordRepeat) {
         setPasswordError("Passwords do not match");
@@ -33,7 +33,12 @@ const SignUpPage = () => {
       }
 
       submit === "Sign in"
-        ? dispatch(signInThunk({ email: email, password: password }))
+        ? dispatch(
+            signInThunk({
+              email: email,
+              password: password,
+            })
+          )
             .unwrap()
             .then(() => {
               console.log("Signin successful");
@@ -41,10 +46,21 @@ const SignUpPage = () => {
             .catch((error) => {
               console.error("Registration failed: " + error.message);
             })
-        : dispatch(signUpThunk({ email: email, password: password }))
+        : dispatch(
+            signUpThunk({
+              username: username,
+              email: email,
+              password: password,
+            })
+          )
             .unwrap()
             .then(() => {
-              dispatch(signInThunk({ email: email, password: password }));
+              dispatch(
+                signInThunk({
+                  email: email,
+                  password: password,
+                })
+              );
               reset();
               console.log("Registration successful");
             })
@@ -58,6 +74,21 @@ const SignUpPage = () => {
     <>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Enter your name</label>
+          <input
+            type="text"
+            {...register("username", {
+              required: { value: true, message: "Field is required" },
+              minLength: { value: 3, message: "Minimum 8 characters" },
+              maxLength: {
+                value: 64,
+                message: "Maximum 64 characters",
+              },
+            })}
+          />
+          {errors.username && <p>{errors.username.message}</p>}
+        </div>
         <div>
           <label>Enter your email</label>
           <input
@@ -100,8 +131,8 @@ const SignUpPage = () => {
               },
             })}
           />
-          {errors.passwordRepeat && <p>{errors.passwordRepeat.message}</p>}
-          {passwordError && <p>{passwordError}</p>}
+          {(errors.passwordRepeat && <p>{errors.passwordRepeat.message}</p>) ||
+            (passwordError && <p>{passwordError}</p>)}
         </div>
         <button type="submit">Sign Up</button>
         <Link to="/signin">Sign In</Link>
