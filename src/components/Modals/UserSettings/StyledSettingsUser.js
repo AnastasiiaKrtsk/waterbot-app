@@ -35,6 +35,8 @@ export const StyledSettingsPasswordDiv = styled.div`
 export const SettingsCrossDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 `;
 
 export const YourPhotoTitleH3 = styled.h3`
@@ -49,7 +51,7 @@ export const SettingModalTitleH2 = styled.h2`
   font-size: 26px;
   font-weight: 500;
   line-height: 32px;
-  margin-bottom: 24px;
+
   color: var(--black);
 `;
 

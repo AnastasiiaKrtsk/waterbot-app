@@ -27,7 +27,7 @@ const ConsumTracker = () => {
           Personal rate setting
         </BenefitsItems>
       </BenefitsList>
-      <Link to="/homepage">
+      <Link to="/signin">
         <TryTrackerBtn type="button">Try tracker</TryTrackerBtn>
       </Link>
     </>
