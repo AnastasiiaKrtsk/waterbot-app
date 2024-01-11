@@ -23,5 +23,15 @@ export const signin = async (userData) => {
 export const logout = async () => {
   const { data } = await $instance.post("/auth/logout");
   setToken("");
+
   return data;
 };
+
+export const fetchAvatar = async () => {
+  const { data } = await $instance.patch("/users/avatars");
+  setToken(data.token);
+  console.log(data);
+  return data;
+};
+
+fetchAvatar();
