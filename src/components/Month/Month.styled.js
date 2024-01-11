@@ -8,12 +8,24 @@ export const StyledMonthTitle = styled.div`
   margin-bottom: 16px;
 `;
 
+export const StyledMonthChanger = styled.div`
+  display: flex;
+  justify-content:flex-end;
+  align-items:center;
+`;
+
 export const StyledMonthWaterList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 20px 22px;
 
-  width:544px;
+  width: 544px;
+`;
+
+export const StyledWaterListItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const StyledMonthWaterItem = styled.li`
@@ -24,5 +36,14 @@ export const StyledMonthWaterItem = styled.li`
   width: 34px;
   /* height: 34px; */
   border-radius: 50%;
-  border: 1px solid red;
+  /* border: 1px solid blue; */
+  background-color: var(--white);
+`;
+
+export const StyledPercentage = styled.div`
+  color:var(--light-blue-3);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
 `;
