@@ -4,16 +4,18 @@ import { useState, useEffect } from "react";
 import {
   Amount,
   BackdropDailyNorma,
-  CalcBtn,
   CalcResult,
   Formula,
   FormulaInfo,
   FormulaInfoText,
   FormulaInput,
+  Formulas,
   Formulas1,
   Formulas2,
   FormulasText,
   ModalDilyNorma,
+  SaveBtn,
+  SaveBtnDiv,
   StyledResult,
 } from "./DailyNorma.styled";
 import {
@@ -33,8 +35,15 @@ const DailyNorma = ({ handleClose, isModalOpen }) => {
   const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");
   const [activity, setActivity] = useState("");
+  const [amount, setAmount] = useState("");
   const [result, setResult] = useState(null);
-
+  useEffect(() => {
+    if (!weight || !activity) {
+      setResult("1.8");
+    } else {
+      calculateV(gender, weight, activity, setResult);
+    }
+  }, [gender, weight, activity]);
   // *MODAL SETUP
 
   const handleOverlayClick = (event) => {
@@ -69,14 +78,16 @@ const DailyNorma = ({ handleClose, isModalOpen }) => {
                 <use href={`${sprite}#icon-outline`} />
               </StyledCloseSvg>
             </SettingsCrossDiv>
-            <Formulas1>
-              <FormulasText>For woman:</FormulasText>
-              <Formula>V=(M*0.03) + (T*0.4)</Formula>
-            </Formulas1>
-            <Formulas2>
-              <FormulasText>For man:</FormulasText>
-              <Formula>V=(M*0.04) + (T*0.6)</Formula>
-            </Formulas2>
+            <Formulas>
+              <Formulas1>
+                <FormulasText>For woman:</FormulasText>
+                <Formula>V=(M*0.03) + (T*0.4)</Formula>
+              </Formulas1>
+              <Formulas2>
+                <FormulasText>For man:</FormulasText>
+                <Formula>V=(M*0.04) + (T*0.6)</Formula>
+              </Formulas2>
+            </Formulas>
             <FormulaInfo>
               <FormulaInfoText>
                 * V is the volume of the water norm in liters per day, M is your
@@ -133,17 +144,12 @@ const DailyNorma = ({ handleClose, isModalOpen }) => {
               value={activity}
               onChange={(e) => setActivity(e.target.value)}
             />
-            <CalcBtn
-              onClick={() => calculateV(gender, weight, activity, setResult)}
-            >
-              Calculate
-            </CalcBtn>
+
             <CalcResult>
               <Amount>The required amount of water in liters per day:</Amount>
-              {result !== null && (
-                <StyledResult id="result">{result + " L"}</StyledResult>
-              )}
+              <StyledResult id="result">{result} L</StyledResult>
             </CalcResult>
+
             <StyledYourGenderTitle>
               Write down how much water you will drink:
             </StyledYourGenderTitle>
@@ -152,9 +158,12 @@ const DailyNorma = ({ handleClose, isModalOpen }) => {
               type="number"
               id="amount"
               placeholder="0"
-              value={activity}
-              onChange={(e) => setActivity(e.target.value)}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
             />
+            <SaveBtnDiv>
+              <SaveBtn type="button">Save</SaveBtn>
+            </SaveBtnDiv>
           </ModalDilyNorma>
         </BackdropDailyNorma>,
         normaRoot
