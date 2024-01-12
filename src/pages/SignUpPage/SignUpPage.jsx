@@ -29,7 +29,7 @@ const SignUpPage = () => {
       reset();
       toast.success("Registration completed successfully");
     } catch (error) {
-      toast.error("Registration failed: " + error.message);
+      toast.error(error.message);
     }
   };
 

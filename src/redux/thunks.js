@@ -7,6 +7,7 @@ import {
   signup,
   updateAvatar,
 } from "../service/authApi";
+import { toast } from "react-toastify";
 
 export const signUpThunk = createAsyncThunk(
   "auth/signup",
@@ -15,6 +16,7 @@ export const signUpThunk = createAsyncThunk(
       const response = await signup(userData);
       return response;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -27,6 +29,7 @@ export const signInThunk = createAsyncThunk(
       const response = await signin(userData);
       return response;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -39,6 +42,7 @@ export const logOutThunk = createAsyncThunk(
       await logout();
       return;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error._message);
     }
   }
