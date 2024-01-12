@@ -4,7 +4,7 @@ import { selectToken } from "../../redux/selectors";
 
 const PublicRoute = () => {
   const token = useSelector(selectToken);
-  return !token ? <Outlet /> : <Navigate to="/dashboard" />;
+  return !token ? <Outlet /> : <Navigate to="/homepage" />;
 };
 
 export default PublicRoute;
