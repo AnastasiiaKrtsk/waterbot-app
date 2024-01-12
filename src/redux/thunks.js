@@ -1,5 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { logout, signin, signup, addAvatar } from "../service/authApi";
+import {
+  currentUser,
+  logout,
+  setToken,
+  signin,
+  signup,
+  updateAvatar,
+} from "../service/authApi";
 
 export const signUpThunk = createAsyncThunk(
   "auth/signup",
@@ -37,11 +44,29 @@ export const logOutThunk = createAsyncThunk(
   }
 );
 
-export const updateAvatarThunk = createAsyncThunk(
-  "users/avatars",
-  async (data, thunkAPI) => {
+export const userCurrentThunk = createAsyncThunk(
+  "users/current",
+  async (_, thunkAPI) => {
+    const token = thunkAPI.getState().user.accessToken;
+    setToken(token);
+
     try {
-      const response = await addAvatar(data);
+      if (!token) {
+        throw new Error();
+      }
+      const response = await currentUser();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateAvatarThunk = createAsyncThunk(
+  "user/updateAvatar",
+  async (avatar, thunkAPI) => {
+    try {
+      const response = await updateAvatar(avatar);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

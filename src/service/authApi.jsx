@@ -9,7 +9,6 @@ export const setToken = (token) => {
 
 export const signup = async (userData) => {
   const { data } = await $instance.post("/auth/signup", userData);
-  console.log(data);
   setToken(data.token);
   return data;
 };
@@ -27,11 +26,16 @@ export const logout = async () => {
   return data;
 };
 
-export const addAvatar = async (data) =>
+export const currentUser = async () => {
+  const { data } = await $instance.get("/users/current");
+  return data;
+};
+
+export const updateAvatar = async (data) =>
   axios
     .patch("/users/avatars", data, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        avatar: "multipart/form-data",
       },
     })
     .then((response) => response.data);

@@ -4,13 +4,14 @@ import {
   signInThunk,
   signUpThunk,
   updateAvatarThunk,
+  userCurrentThunk,
 } from "./thunks";
 
 const initialState = {
   user: {
     username: null,
     email: null,
-    avatarURL: null,
+    avatarURL: "V",
     gender: null,
     dailyNorma: null,
   },
@@ -70,6 +71,24 @@ const authSlice = createSlice({
       .addCase(logOutThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isSignedIn = false;
+        state.error = action.payload;
+      })
+
+      //========== Current User ==================//
+
+      .addCase(userCurrentThunk.pending, (state) => {
+        state.error = null;
+        state.isLoading = true;
+      })
+      .addCase(userCurrentThunk.fulfilled, (state, action) => {
+        state.error = null;
+        state.isLoading = false;
+        state.userData = action.payload;
+        state.isSignedIn = true;
+        state.user = action.payload.user;
+      })
+      .addCase(userCurrentThunk.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       })
 

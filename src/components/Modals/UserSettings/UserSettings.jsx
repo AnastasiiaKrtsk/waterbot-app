@@ -40,7 +40,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
   console.log(avatarUrl);
 
   const [showPassword, setShowPassword] = useState(false);
-
+  const [avatar, setAvatar] = useState();
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
       ...prevPasswords,
@@ -57,9 +57,22 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
 
   const dispatch = useDispatch();
 
-  const handleUpdateAvatar = (newAvatar) => {
-    dispatch(updateAvatarThunk(newAvatar));
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setAvatar(selectedFile);
   };
+
+  const handleUpdateAvatar = () => {
+    dispatch(updateAvatarThunk(avatar));
+  };
+
+  // const handleUpdateAvatar = () => {
+  //   if (avatar) {
+  //     dispatch(updateAvatarThunk(avatar));
+  //   } else {
+  //     console.error("Please choose file");
+  //   }
+  // };
 
   //=============================
 
@@ -110,7 +123,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                   id="photoInput"
                   name="photo"
                   accept="image/*"
-                  onClick={handleUpdateAvatar}
+                  onChange={handleFileChange}
                 />
               </SettingPhotoWrapper>
 
