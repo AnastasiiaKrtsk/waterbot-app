@@ -2,7 +2,10 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { selectAvatarUrl } from "../../../redux/selectors.js";
+import {
+  selectAvatarUrl,
+  // selectCurrentUser,
+} from "../../../redux/selectors.js";
 import { updateAvatarThunk } from "../../../redux/thunks.js";
 import {
   BackdropSettingModal,
@@ -41,12 +44,14 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [avatar, setAvatar] = useState();
+
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
       ...prevPasswords,
       [inputId]: !prevPasswords[inputId],
     }));
   };
+
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       handleClose();
@@ -109,7 +114,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
 
               <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
               <SettingPhotoWrapper>
-                <SettingAvatarImg src={avatarUrl} />
+                <SettingAvatarImg src={avatarUrl || "V"} />
 
                 <PhotoInputUploadLabel
                   id="customFileUpload"
