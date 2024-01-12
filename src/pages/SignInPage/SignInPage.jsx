@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { signInThunk } from "../../redux/thunks";
+import { signInSchema } from "../../helpers/validation";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ const SignInPage = () => {
     reset,
   } = useForm({
     mode: "all",
+    resolver: yupResolver(signInSchema),
   });
 
   const onSubmit = (data, e) => {
@@ -26,34 +29,17 @@ const SignInPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Enter your email</label>
-          <input
-            type="email"
-            placeholder="E-mail"
-            {...register("email", {
-              required: { value: true, message: "Field is required" },
-              pattern: {
-                value: /^[a-z0-9._-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
-                message: "Enter a correct email",
-              },
-            })}
-          />
-          {errors.email && <p>{errors.email.message}</p>}
+          <input type="email" placeholder="E-mail" {...register("email")} />
+          <p>{errors.email?.message}</p>
         </div>
         <div>
           <label>Enter your password</label>
           <input
             type="password"
             placeholder="Password"
-            {...register("password", {
-              required: { value: true, message: "Field is required" },
-              minLength: { value: 8, message: "Minimum 8 characters" },
-              maxLength: {
-                value: 64,
-                message: "Maximum 64 characters",
-              },
-            })}
+            {...register("password")}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          <p>{errors.password?.message}</p>
         </div>
         <button type="submit">Sign In</button>
         <Link to="/signup">Sign Up</Link>
