@@ -43,7 +43,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
   console.log(avatarUrl);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [avatar, setAvatar] = useState();
+  // const [avatar, setAvatar] = useState();
 
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
@@ -64,20 +64,14 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    setAvatar(selectedFile);
+    uploadAvatar(selectedFile);
   };
 
-  const handleUpdateAvatar = () => {
-    dispatch(updateAvatarThunk(avatar));
+  const uploadAvatar = (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    dispatch(updateAvatarThunk(formData));
   };
-
-  // const handleUpdateAvatar = () => {
-  //   if (avatar) {
-  //     dispatch(updateAvatarThunk(avatar));
-  //   } else {
-  //     console.error("Please choose file");
-  //   }
-  // };
 
   //=============================
 

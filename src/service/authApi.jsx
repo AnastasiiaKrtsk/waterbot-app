@@ -1,4 +1,5 @@
 import axios from "axios";
+import { longFormatters } from "date-fns";
 
 const BASE_URL = "https://backend-water-tracker.onrender.com/api/";
 const $instance = axios.create({ baseURL: BASE_URL });
@@ -31,11 +32,23 @@ export const currentUser = async () => {
   return data;
 };
 
-export const updateAvatar = async (data) =>
-  axios
-    .patch("/users/avatars", data, {
-      headers: {
-        avatar: "multipart/form-data",
-      },
-    })
-    .then((response) => response.data);
+// export const updateAvatar = async (data) =>
+//   axios
+//     .patch("/users/avatars", data, {
+//       headers: {
+//         avatarURL: "multipart/form-data",
+//       },
+//     })
+//     .then((response) => response.data);
+
+export const updateAvatar = async (data) => {
+  const response = await $instance.patch("/users/avatars", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data;
+};
+
+// export const updateAvatar = async (data) =>
+//   axios.patch("/users/avatars", data).then((response) => response.data);
