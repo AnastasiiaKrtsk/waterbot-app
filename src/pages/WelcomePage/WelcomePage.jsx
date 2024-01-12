@@ -4,6 +4,7 @@ import WhyDrinkWater from "../../components/WhyDrinkWater/WhyDrinkWater";
 import { Descr, Div, H1 } from "./WelcomePage.styled";
 import UserSettings from "../../components/Modals/UserSettings/UserSettings";
 import DailyNorma from "../../components/Modals/DailyNorma/DailyNorma";
+import DropDown from "../../components/Modals/DropDown/DropDown";
 const WelcomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDailyNormaOpen, setIsDailyNormaOpen] = useState(false);
@@ -46,6 +47,7 @@ const WelcomePage = () => {
         handleClose={handleCloseDailyNorma}
         isModalOpen={isDailyNormaOpen}
       />
+      <DropDown />
     </>
   );
 };

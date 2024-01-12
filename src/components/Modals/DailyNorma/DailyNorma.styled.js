@@ -12,22 +12,30 @@ export const BackdropDailyNorma = styled.div`
   height: 100%;
   background-color: rgba(6, 33, 54, 0.4);
   overflow: scroll;
+
+  /* @media only screen and (min-width: 767px) {
+    padding: 44px 24px;
+  } */
 `;
 export const ModalDilyNorma = styled.div`
   padding: 32px 12px;
   position: fixed;
-
   display: inline-flex;
   flex-direction: column;
-
   border-radius: 10px;
   background: var(--white);
+
+  @media only screen and (min-width: 767px) {
+    padding: 32px 24px;
+    width: 592px;
+  }
 `;
 export const Formulas1 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
   margin-bottom: 16px;
+  margin-right: 24px;
 `;
 export const Formulas2 = styled.div`
   display: flex;
@@ -60,7 +68,7 @@ export const FormulaInput = styled.input`
   padding: 12px 10px;
   margin: 8px 0 16px;
   color: var(--dark-blue);
-  border: 1px solid var(--dark-blue);
+  border: 1px solid var(--light-blue-2);
   font-size: 16px;
   border-radius: 6px;
   &.hide-number-arrows::-webkit-inner-spin-button,
@@ -98,7 +106,6 @@ export const CalcBtn = styled.button`
 export const CalcResult = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 `;
@@ -109,12 +116,39 @@ export const ResultParagraph = styled.p`
   font-weight: bold;
 `;
 export const StyledResult = styled(ResultParagraph)``;
+
 export const Amount = styled.p`
   width: 190px;
+  @media only screen and (min-width: 767px) {
+    width: 328px;
+    margin-right: 6px;
+  }
 `;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
+export const Formulas = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media only screen and (min-width: 767px) {
+    flex-direction: row;
+  }
+`;
+export const SaveBtnDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  @media only screen and (min-width: 767px) {
+    justify-content: right;
+  }
+`;
+export const SaveBtn = styled.button`
+  width: 100%;
+  padding: 10px 30px;
+  border: none;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border-radius: 10px;
+  @media only screen and (min-width: 767px) {
+    width: 160px;
+  }
+`;
 // export const Formulas = styled.div``;
 // export const Formulas = styled.div``;
 // export const Formulas = styled.div``;

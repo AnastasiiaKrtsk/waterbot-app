@@ -4,10 +4,10 @@ export const calculateV = (gender, weight, activity, setResult) => {
   const activityFloat = parseFloat(activity);
 
   // Check if inputs are valid numbers
-  if (isNaN(weightFloat) || isNaN(activityFloat)) {
-    alert("Please enter valid numbers for weight and activity.");
-    return;
-  }
+  // if (isNaN(weightFloat) || isNaN(activityFloat)) {
+  //   alert("Please enter valid numbers for weight and activity.");
+  //   return;
+  // }
 
   // Calculate V using different formulas based on gender
   let activityMultiplier = 0;
