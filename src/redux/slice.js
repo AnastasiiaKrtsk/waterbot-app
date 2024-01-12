@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logOutThunk, signInThunk, signUpThunk } from "./thunks";
+import {
+  logOutThunk,
+  signInThunk,
+  signUpThunk,
+  updateAvatarThunk,
+  userCurrentThunk,
+} from "./thunks";
 
 const initialState = {
   user: {
     username: null,
     email: null,
-    avatarURL: null,
+    avatarURL: "V",
     gender: null,
     dailyNorma: null,
   },
@@ -65,6 +71,42 @@ const authSlice = createSlice({
       .addCase(logOutThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.isSignedIn = false;
+        state.error = action.payload;
+      })
+
+      //========== Current User ==================//
+
+      .addCase(userCurrentThunk.pending, (state) => {
+        state.error = null;
+        state.isLoading = true;
+      })
+      .addCase(userCurrentThunk.fulfilled, (state, action) => {
+        state.error = null;
+        state.isLoading = false;
+        state.userData = action.payload;
+        state.isSignedIn = true;
+        state.user = action.payload.user;
+      })
+      .addCase(userCurrentThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      //=========== Update AVATAR =================//
+
+      .addCase(updateAvatarThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateAvatarThunk.fulfilled, (state, action) => {
+        state.user = {
+          ...state.user,
+          avatarURL: action.payload.avatarURL,
+        };
+        state.isLoading = false;
+      })
+      .addCase(updateAvatarThunk.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       });
   },

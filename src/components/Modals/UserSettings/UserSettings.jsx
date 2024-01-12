@@ -1,6 +1,9 @@
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { selectAvatarUrl } from "../../../redux/selectors.js";
+import { updateAvatarThunk } from "../../../redux/thunks.js";
 import {
   BackdropSettingModal,
   BtnSettingSave,
@@ -33,9 +36,11 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 
 const UserSettings = ({ handleClose, isModalOpen }) => {
   const modalRoot = document.getElementById("modals");
+  const avatarUrl = useSelector(selectAvatarUrl);
+  console.log(avatarUrl);
 
   const [showPassword, setShowPassword] = useState(false);
-
+  const [avatar, setAvatar] = useState();
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
       ...prevPasswords,
@@ -47,6 +52,29 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
       handleClose();
     }
   };
+
+  //=========dispatch============
+
+  const dispatch = useDispatch();
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setAvatar(selectedFile);
+  };
+
+  const handleUpdateAvatar = () => {
+    dispatch(updateAvatarThunk(avatar));
+  };
+
+  // const handleUpdateAvatar = () => {
+  //   if (avatar) {
+  //     dispatch(updateAvatarThunk(avatar));
+  //   } else {
+  //     console.error("Please choose file");
+  //   }
+  // };
+
+  //=============================
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -81,7 +109,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
 
               <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
               <SettingPhotoWrapper>
-                <SettingAvatarImg src="#" />
+                <SettingAvatarImg src={avatarUrl} />
 
                 <PhotoInputUploadLabel
                   id="customFileUpload"
@@ -95,6 +123,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                   id="photoInput"
                   name="photo"
                   accept="image/*"
+                  onChange={handleFileChange}
                 />
               </SettingPhotoWrapper>
 
