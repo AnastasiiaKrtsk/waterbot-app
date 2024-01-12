@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const WrapperHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 16px 20px 24px;
+  margin: 16px 20px 0px;
 
   @media screen and (min-width: 768px) {
-    margin: 16px 32px 40px;
+    margin: 16px 32px 0px;
   }
 
   @media screen and (min-width: 1440px) {
-    margin: 16px 112px 80px;
+    margin: 16px 112px 0px;
   }
 `;
 
@@ -29,6 +29,12 @@ export const DivWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+  &:hover {
+    ${SignInText} {
+      color: var(--orange);
+    }
+  }
+  transition: color var(--transition);
 `;
 
 export const LogoContent = styled.div`

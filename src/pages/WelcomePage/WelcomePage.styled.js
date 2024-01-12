@@ -21,11 +21,21 @@ export const Descr = styled.h2`
     line-height: calc(32 / 26);
   }
 `;
+
 export const Div = styled.div`
   @media only screen and (min-width: 1440px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 81px;
+    margin-top: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 40px;
+  }
+
+  @media screen and (min-width: 320px) {
+    margin-top: 24px;
   }
 `;

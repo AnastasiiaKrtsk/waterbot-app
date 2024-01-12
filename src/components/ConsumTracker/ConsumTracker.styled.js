@@ -53,7 +53,7 @@ export const SettingsIcon = styled.img.attrs({ src: ToolsSvg })`
   }
 `;
 export const TryTrackerBtn = styled.button`
-  margin-bottom: 40px;
+  margin-bottom: 16px;
   width: 100%;
   padding: 8px 30px;
   border: none;
@@ -69,4 +69,8 @@ export const TryTrackerBtn = styled.button`
     width: 336px;
     padding: 10px 30px;
   }
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
 `;
