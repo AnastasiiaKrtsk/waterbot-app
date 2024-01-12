@@ -28,6 +28,7 @@ const SignInPage = () => {
           <label>Enter your email</label>
           <input
             type="email"
+            placeholder="E-mail"
             {...register("email", {
               required: { value: true, message: "Field is required" },
               pattern: {
@@ -42,6 +43,7 @@ const SignInPage = () => {
           <label>Enter your password</label>
           <input
             type="password"
+            placeholder="Password"
             {...register("password", {
               required: { value: true, message: "Field is required" },
               minLength: { value: 8, message: "Minimum 8 characters" },

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signInThunk, signUpThunk } from "../../redux/thunks";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
   const {
@@ -19,9 +20,6 @@ const SignUpPage = () => {
   const onSubmit = (data, e) => {
     e.preventDefault();
 
-    // const form = e.currentTarget;
-    const submit = e.nativeEvent.submitter.name;
-
     if (data) {
       const { username, email, password, passwordRepeat } = data;
 
@@ -32,41 +30,27 @@ const SignUpPage = () => {
         setPasswordError("");
       }
 
-      submit === "Sign in"
-        ? dispatch(
+      dispatch(
+        signUpThunk({
+          username: username,
+          email: email,
+          password: password,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          dispatch(
             signInThunk({
               email: email,
               password: password,
             })
-          )
-            .unwrap()
-            .then(() => {
-              console.log("Signin successful");
-            })
-            .catch((error) => {
-              console.error("Registration failed: " + error.message);
-            })
-        : dispatch(
-            signUpThunk({
-              username: username,
-              email: email,
-              password: password,
-            })
-          )
-            .unwrap()
-            .then(() => {
-              dispatch(
-                signInThunk({
-                  email: email,
-                  password: password,
-                })
-              );
-              reset();
-              console.log("Registration successful");
-            })
-            .catch((error) => {
-              console.error("Registration failed: " + error.message);
-            });
+          );
+          reset();
+          toast.success("Registration completed successfully");
+        })
+        .catch((error) => {
+          toast.error("Registration failed: " + error.message);
+        });
     }
   };
 
@@ -78,6 +62,7 @@ const SignUpPage = () => {
           <label>Enter your name</label>
           <input
             type="text"
+            placeholder="Name"
             {...register("username", {
               required: { value: true, message: "Field is required" },
               minLength: { value: 3, message: "Minimum 8 characters" },
@@ -93,6 +78,7 @@ const SignUpPage = () => {
           <label>Enter your email</label>
           <input
             type="email"
+            placeholder="E-mail"
             {...register("email", {
               required: { value: true, message: "Field is required" },
               pattern: {
@@ -107,6 +93,7 @@ const SignUpPage = () => {
           <label>Enter your password</label>
           <input
             type="password"
+            placeholder="Password"
             {...register("password", {
               required: { value: true, message: "Field is required" },
               minLength: { value: 8, message: "Minimum 8 characters" },
@@ -122,6 +109,7 @@ const SignUpPage = () => {
           <label>Repeat password</label>
           <input
             type="password"
+            placeholder="Repeat password"
             {...register("passwordRepeat", {
               required: { value: true, message: "Field is required" },
               minLength: { value: 8, message: "Minimum 8 characters" },
