@@ -4,8 +4,8 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.25 1C0.25 0.801088 0.329018 0.610323 0.46967 0.46967C0.610322 0.329018 0.801088 0.25 1 0.25H13C13.1989 0.25 13.3897 0.329018 13.5303 0.46967C13.671 0.610323 13.75 0.801088 13.75 1C13.75 1.19891 13.671 1.38968 13.5303 1.53033C13.3897 1.67098 13.1989 1.75 13 1.75H1C0.801088 1.75 0.610322 1.67098 0.46967 1.53033C0.329018 1.38968 0.25 1.19891 0.25 1Z" fill="#2F2F2F"/>
 </symbol>
 
-<symbol id="plus" width="14" height="14" viewBox="0 0 14 14" fill="none">
-<path d="M7 1V13M13 7H1" stroke="#2F2F2F" stroke-linecap="round" stroke-linejoin="round"/>
+<symbol id="icon-plus" viewBox="0 0 32 32">
+<path fill="none" stroke="#fff" style="stroke: var(--color1, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 12v8M20 16h-8M28 16c0 1.576-0.31 3.136-0.913 4.592s-1.487 2.779-2.601 3.893c-1.114 1.114-2.437 1.998-3.893 2.601s-3.016 0.913-4.592 0.913-3.136-0.31-4.592-0.913c-1.456-0.603-2.779-1.487-3.893-2.601s-1.998-2.437-2.601-3.893c-0.603-1.456-0.913-3.016-0.913-4.592 0-3.183 1.264-6.235 3.515-8.485s5.303-3.515 8.485-3.515c3.183 0 6.235 1.264 8.485 3.515s3.515 5.303 3.515 8.485z"></path>
 </symbol>
 
 <symbol id="plus-in-elipse" width="20" height="20" viewBox="0 0 20 20" fill="none">

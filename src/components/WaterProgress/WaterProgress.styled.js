@@ -18,3 +18,5 @@ export const StyledProgressTitle = styled.div`
   font-weight: 400;
   line-height: 24px;
 `;
+
+

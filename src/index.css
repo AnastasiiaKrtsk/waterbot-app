@@ -115,6 +115,8 @@ textarea {
   margin-right: auto;
   padding-left: 24px;
   padding-right: 24px;
+  /* padding-left: 24px;
+  padding-right: 24px; */
 }
 
 @media screen and (min-width: 320px) {
@@ -122,6 +124,8 @@ textarea {
     max-width: 320px;
     padding-left: 20px;
     padding-right: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
   }
 }
 
@@ -130,6 +134,8 @@ textarea {
     max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
+    /* padding-left: 32px;
+    padding-right: 32px; */
   }
 }
 @media screen and (min-width: 1440px) {
@@ -137,6 +143,9 @@ textarea {
     max-width: 1440px;
     padding-left: 112px;
     padding-right: 112px;
+    padding-left: 90px;
+    padding-right: 90px;
+    /* margin: 0; */
   }
 }
 .visually-hidden {
