@@ -13,6 +13,6 @@ export const StyledAddWaterBtn = styled.button`
   height: 24px;
 
   &:hover {
-    color:var(--orange);
+    color: var(--orange);
   }
 `;
