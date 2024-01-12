@@ -51,17 +51,17 @@ export const logOutThunk = createAsyncThunk(
 export const userCurrentThunk = createAsyncThunk(
   "users/current",
   async (_, thunkAPI) => {
-    const token = thunkAPI.getState().user.accessToken;
+    const token = thunkAPI.getState().auth.token;
+    console.log(token);
     setToken(token);
-
     try {
       if (!token) {
-        throw new Error();
+        throw new Error("Token is missing");
       }
       const response = await currentUser();
       return response;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue("Token is missing");
     }
   }
 );

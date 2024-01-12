@@ -7,8 +7,17 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { userCurrentThunk } from "./redux/thunks";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userCurrentThunk());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
