@@ -1,13 +1,17 @@
 // import AddWater from "../Buttons/AddWater/AddWater"
+import AddWaterBlue from "../Buttons/AddWater/AddWaterBlue";
 import Month from "../Month/Month";
 import Today from "../Today/Today";
 import WaterProgress from "../WaterProgress/WaterProgress";
-import { StyledDashboardWrapper, StyledWaterInfoWrapper } from "./Dashboard.styled";
+import { StyledDashboardWrapper, StyledProgressWrapper, StyledWaterInfoWrapper } from "./Dashboard.styled";
 
 const Dashboard = () => {
   return (
     <StyledDashboardWrapper>
-      <WaterProgress />
+      <StyledProgressWrapper>
+        <WaterProgress />
+        <AddWaterBlue />
+      </StyledProgressWrapper>
       <StyledWaterInfoWrapper>
         <Today />
         <Month />
