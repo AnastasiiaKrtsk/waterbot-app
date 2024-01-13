@@ -4,15 +4,16 @@ import {
   signInThunk,
   signUpThunk,
   updateAvatarThunk,
+  updateUserInfoThunk,
   userCurrentThunk,
 } from "./thunks";
 
 const initialState = {
-  user: {
+  userData: {
     username: null,
     email: null,
     avatarURL: "V",
-    gender: null,
+    gender: "woman",
     dailyNorma: null,
   },
   token: null,
@@ -32,7 +33,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(signUpThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.userData = action.payload.user;
         state.token = action.payload.token;
         state.error = null;
         state.isSignedIn = true;
@@ -81,6 +82,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(userCurrentThunk.fulfilled, (state, action) => {
+        state.user = action.payload.user;
         state.error = null;
         state.isLoading = false;
         state.userData = action.payload;
@@ -101,13 +103,26 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(updateAvatarThunk.fulfilled, (state, action) => {
-        state.user = {
-          ...state.user,
+        state.userData = {
+          ...state.userData,
           avatarURL: action.payload.avatarURL,
         };
         state.isLoading = false;
       })
       .addCase(updateAvatarThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      //========== Update User Info =================//
+      .addCase(updateUserInfoThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
+        state.userData = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(updateUserInfoThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

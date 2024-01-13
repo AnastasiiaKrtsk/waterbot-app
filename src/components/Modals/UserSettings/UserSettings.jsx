@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   selectAvatarUrl,
+  selectUserEmail,
+  selectUsername,
   // selectCurrentUser,
 } from "../../../redux/selectors.js";
 import { updateAvatarThunk } from "../../../redux/thunks.js";
@@ -36,13 +38,16 @@ import {
 } from "./StyledSettingsUser";
 import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
+// import { updateUserInfo } from "../../../service/authApi.jsx";
 
 const UserSettings = ({ handleClose, isModalOpen }) => {
   const modalRoot = document.getElementById("modals");
   const avatarUrl = useSelector(selectAvatarUrl);
-  console.log(avatarUrl);
+  const userName = useSelector(selectUsername);
+  const userEmail = useSelector(selectUserEmail);
 
   const [showPassword, setShowPassword] = useState(false);
+
   // const [avatar, setAvatar] = useState();
 
   const togglePasswordVisibility = (inputId) => {
@@ -57,6 +62,14 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
       handleClose();
     }
   };
+
+  //=======Radio Btn Handle Change =====
+
+  // const handleGenderChange = (event) => {
+  //   const newGender = event.target.value;
+  //   setSelectedGender(newGender);
+  //   dispatch(updateUserInfo(newGender));
+  // };
 
   //=========dispatch============
 
@@ -157,7 +170,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                 <SettingNameEmailDiv>
                   <StyledSettingModalH3>Your name</StyledSettingModalH3>
                   <NameSettingInput
-                    placeholder="Name"
+                    placeholder={userName}
                     type="text"
                     name="name"
                   />
@@ -166,7 +179,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                 <SettingNameEmailDiv>
                   <StyledSettingModalH3>E-mail</StyledSettingModalH3>
                   <NameSettingInput
-                    placeholder="Email"
+                    placeholder={userEmail}
                     type="email"
                     name="email"
                   />
