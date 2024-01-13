@@ -6,6 +6,7 @@ import {
   signin,
   signup,
   updateAvatar,
+  updateUserInfo,
 } from "../service/authApi";
 import { toast } from "react-toastify";
 
@@ -68,9 +69,21 @@ export const userCurrentThunk = createAsyncThunk(
 
 export const updateAvatarThunk = createAsyncThunk(
   "user/updateAvatar",
-  async (avatar, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await updateAvatar(avatar);
+      const response = await updateAvatar(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserInfoThunk = createAsyncThunk(
+  "users/updateInfo",
+  async (data, thunkAPI) => {
+    try {
+      const response = await updateUserInfo(data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
