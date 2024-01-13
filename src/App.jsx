@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./components/Dashboard/Dashboard";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import Layout from "./components/Layout/Layout";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
@@ -10,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { userCurrentThunk } from "./redux/thunks";
+import HomePage from "./pages/HomePage/HomePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const App = () => {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
           </Route>
-          <Route path="/homepage" element={<Dashboard />} />
+          <Route path="/homepage" element={<HomePage />} />
         </Route>
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} />
