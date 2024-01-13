@@ -12,6 +12,9 @@ export const ModalUserMenu = styled.div`
   border-radius: 10px;
   background: var(--Primery-Color-White, #fff);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
+  @media screen and (min-width: 1440px) {
+    right: 112px;
+  }
 `;
 
 export const BackdropUserMenu = styled.div`
