@@ -54,6 +54,6 @@ export const updateAvatar = async (data) => {
 //   axios.patch("/users/avatars", data).then((response) => response.data);
 
 export const updateUserInfo = async (data) => {
-  const response = await $instance.put("/users/update", data);
+  const response = await $instance.patch("/users/update", data);
   return response.data;
 };

@@ -3,12 +3,26 @@ import styled from "@emotion/styled";
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   position: fixed;
+  width: 280px;
 
   display: inline-flex;
   flex-direction: column;
 
   border-radius: 10px;
   background: var(--white);
+
+  @media screen and (min-width: 768px) {
+    padding: 32px 24px;
+    width: 704px;
+  }
+`;
+
+export const SettingsFormWrapper = styled.div`
+  width: 256px;
+
+  @media screen and (min-width: 768px) {
+    width: 392px;
+  }
 `;
 
 export const BackdropSettingModal = styled.div`
@@ -152,6 +166,20 @@ export const BtnSettingSave = styled.button`
   font-weight: 500;
   line-height: 20px;
   color: var(--white);
+
+  @media screen and (min-width: 768px) {
+    padding: 10px 30px;
+    width: 160px;
+  }
+`;
+
+export const BtnSaveWrapper = styled.div`
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
 export const NameSettingInput = styled.input`

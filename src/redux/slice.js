@@ -13,7 +13,7 @@ const initialState = {
     username: null,
     email: null,
     avatarURL: "V",
-    gender: "woman",
+    gender: "Woman",
     dailyNorma: null,
   },
   token: null,
