@@ -40,6 +40,7 @@ const Layout = () => {
     setIsUserModalOpen(false);
   };
   return (
+
     <>
       {token ? (
         <>
@@ -119,6 +120,7 @@ const Layout = () => {
         </>
       )}
     </>
+
   );
 };
 
