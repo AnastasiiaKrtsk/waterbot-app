@@ -28,7 +28,7 @@ export const SignInText = styled.p`
 export const DivWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   &:hover {
     ${SignInText} {
       color: var(--orange);
@@ -58,3 +58,21 @@ export const SignIn = styled.div`
 export const SignInImg = styled.svg`
   margin-left: 4px;
 `;
+
+export const DropMenuBtn = styled.button`
+  background-color: transparent;
+  padding: 0;
+  border: none;
+`;
+export const AvatarInMenu = styled.img``;
+
+export const AvatarWrapper = styled.div`
+  overflow: hidden;
+  border-radius: 50%;
+`;
+export const NameBtn = styled.button`
+  background-color: transparent;
+  padding: 0;
+  border: none;
+`;
+// export const DropMenuBtn = styled.button``;
