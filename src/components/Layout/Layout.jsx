@@ -43,7 +43,7 @@ const Layout = () => {
         </WrapperHeader>
       </header>
 
-      <main className="container">
+      <main>
         <Outlet />
       </main>
 
