@@ -7,16 +7,20 @@ const DeleteWater = () => {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-    <StyledDeleteWaterButton onClick={()=>setOpenModal(true)}>
-      <svg width={"16px"} height={"16px"}>
-        <use href={sprite + "#trash"}></use>
-      </svg>
-    </StyledDeleteWaterButton>
-    <Modal open={openModal} onClose={()=>{setOpenModal(false)}}>
-      Delete water
-    </Modal>
+      <StyledDeleteWaterButton onClick={() => setOpenModal(true)}>
+        <svg width={"16px"} height={"16px"}>
+          <use href={sprite + "#trash"}></use>
+        </svg>
+      </StyledDeleteWaterButton>
+      <Modal
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
+        }}
+      >
+        Delete water
+      </Modal>
     </>
-    
   );
 };
 

@@ -10,19 +10,13 @@ import {
 } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import UserSettings from "../../../components/Modals/UserSettings/UserSettings";
-import LogOut from "../../../components/Modals/LogOut/LogOut";
-// import { useDispatch } from "react-redux";
-// import { logOutThunk } from "../../../redux/thunks";
+import AreYouSureModal from "../../Modals/AreYouSure/AreYouSureModal";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
   const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
-  // const dispatch = useDispatch();
-  const normaRoot = document.getElementById("modal");
 
-  // const handleLogOut = () => {
-  //   dispatch(logOutThunk());
-  // };
+  const normaRoot = document.getElementById("modal");
 
   // *Settings Modal
 
@@ -87,9 +81,13 @@ const UserModal = ({ handleClose, isModalOpen }) => {
               </MenuBtnSvg>
               Log Out
             </MenuBtns>
-            <LogOut
+            <AreYouSureModal
               isModalOpen={isLogOutOpen}
               handleClose={handleLogOutCloseModal}
+              title="Log out"
+              message="Do you really want to leave?"
+              firstButton="Log out"
+              cancelButton="Cancel"
             />
           </ModalUserMenu>
         </BackdropUserMenu>,
