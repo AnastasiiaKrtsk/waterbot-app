@@ -3,13 +3,21 @@ import styled from "styled-components";
 export const StyledDashboardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 32px;
+`;
+
+export const StyledLeftPartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top:52px;
 `;
 
 export const StyledWaterInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin: 20px 0 40px;
+  margin: 32px 0 40px;
   /* margin-left: auto; */
 
   padding: 32px 24px;

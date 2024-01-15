@@ -24,12 +24,12 @@ const Today = () => {
   const modalStatus = useSelector(selectOpenModal);
 
   const handleEditWater = () => {
-    dispatch(setModalStatus(!modalStatus))
-    dispatch(setModalContent(<EditWaterForm />))
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent(<EditWaterForm />));
   };
   const handleDeleteWater = () => {
-    dispatch(setModalStatus(!modalStatus))
-    dispatch(setModalContent("Delete"))
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("Delete"));
   };
   const handleAddWater = () => {
     dispatch(setModalStatus(!modalStatus));
@@ -81,7 +81,6 @@ const Today = () => {
       </StyledTodayWaterList>
 
       <AddWater onClick={handleAddWater} />
-
     </StyledTodayWrapper>
   );
 };
