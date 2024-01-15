@@ -61,7 +61,6 @@ const Today = () => {
             <DeleteWater onClick={handleDeleteWater} />
           </StyledTodayButtonsWrapper>
         </StyledTodayWaterItem>
-
         <StyledTodayWaterItem>
           <StyledWaterInfo>
             <svg width={"36px"} height={"36px"}>
