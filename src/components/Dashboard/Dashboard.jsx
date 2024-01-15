@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <>
       <NormaBtn />
-      <StyledDashboardWrapper>
+      <StyledDashboardWrapper className="container">
         <StyledProgressWrapper>
           <WaterProgress />
           <AddWaterBlue />
