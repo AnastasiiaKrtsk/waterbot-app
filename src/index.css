@@ -78,6 +78,7 @@ img {
 
 button {
   cursor: pointer;
+  font-family: sans-serif;
 }
 
 .is-hidden {

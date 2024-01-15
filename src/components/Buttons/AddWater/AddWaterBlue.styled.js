@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledAddWaterBtnBlue = styled.button`
   display: flex;
-  padding: 10px 30px;
+  padding: 10px 29px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -12,7 +12,6 @@ export const StyledAddWaterBtnBlue = styled.button`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
 
   color: var(--white);
 
