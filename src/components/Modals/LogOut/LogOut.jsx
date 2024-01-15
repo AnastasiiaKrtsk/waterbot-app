@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { logOutThunk } from "../../../redux/thunks";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import { StyledBackDrop, StyledModalWindow } from "./StyledLogout";
 
 const LogOutModal = ({ handleClose, isModalOpen }) => {
   const modalRoot = document.getElementById("modal");
@@ -24,8 +25,8 @@ const LogOutModal = ({ handleClose, isModalOpen }) => {
 
   return isModalOpen
     ? createPortal(
-        <div onClick={handleOverlayClick}>
-          <div>
+        <StyledBackDrop onClick={handleOverlayClick}>
+          <StyledModalWindow>
             <span onClick={handleLogOutCloseModal}>
               <svg width="24" height="24">
                 <use href={`${sprite}#icon-outline`} />
@@ -35,8 +36,8 @@ const LogOutModal = ({ handleClose, isModalOpen }) => {
             <p>Do you really want to leave?</p>
             <button onClick={handleLogOutCloseModal}>Cancel</button>
             <button onClick={handleLogOut}>Log out</button>
-          </div>
-        </div>,
+          </StyledModalWindow>
+        </StyledBackDrop>,
         modalRoot
       )
     : null;
