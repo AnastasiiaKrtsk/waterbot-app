@@ -1,28 +1,50 @@
-import { useState } from "react";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import { useDispatch } from "react-redux";
+import { logOutThunk } from "../../../redux/thunks";
+import { createPortal } from "react-dom";
+import PropTypes from "prop-types";
 
-const ModalWithButtons = () => {
-  return (
-    <div>
-      <button onClick={handleOpenModal}>Open Modal</button>
+const LogOutModal = ({ handleClose, isModalOpen }) => {
+  const modalRoot = document.getElementById("modal");
+  const dispatch = useDispatch();
 
-      {isOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <span className="close-button" onClick={handleCloseModal}>
+  const handleLogOut = () => {
+    dispatch(logOutThunk());
+  };
+
+  const handleLogOutCloseModal = () => {
+    handleClose();
+  };
+
+  const handleOverlayClick = (event) => {
+    if (event.target === event.currentTarget) {
+      handleClose();
+    }
+  };
+
+  return isModalOpen
+    ? createPortal(
+        <div onClick={handleOverlayClick}>
+          <div>
+            <span onClick={handleLogOutCloseModal}>
               <svg width="24" height="24">
                 <use href={`${sprite}#icon-outline`} />
               </svg>
             </span>
             <h2>Log out</h2>
             <p>Do you really want to leave?</p>
-            <button onClick={handleCloseModal}>Cancel</button>
-            <button onClick={handleCloseModal}>Log out</button>
+            <button onClick={handleLogOutCloseModal}>Cancel</button>
+            <button onClick={handleLogOut}>Log out</button>
           </div>
-        </div>
-      )}
-    </div>
-  );
+        </div>,
+        modalRoot
+      )
+    : null;
 };
 
-export default ModalWithButtons;
+LogOutModal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+};
+
+export default LogOutModal;
