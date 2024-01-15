@@ -4,15 +4,26 @@ import { StyledBackdrop, StyledModalContent } from "./Modal.styled";
 
 const modalRootElement = document.querySelector("#modal");
 
-const Modal = (props) => {
-  const { open, onClose } = props;
+const Modal = ({ open, onClose, children }) => {
   const element = useMemo(() => document.createElement("div"), []);
 
-  const handleKeyDown = useCallback((event) => {
-    if (event.key === "Escape" && open) {
-      onClose();
-    }
-  }, [open, onClose]);
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === "Escape" && open) {
+        onClose();
+      }
+    },
+    [open, onClose]
+  );
+
+  const handleBackdropClick = useCallback(
+    (event) => {
+      if (event.target === event.currentTarget) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     modalRootElement.appendChild(element);
@@ -27,8 +38,8 @@ const Modal = (props) => {
 
   if (open) {
     return createPortal(
-      <StyledBackdrop onClick={onClose}>
-        <StyledModalContent>{props.children}</StyledModalContent>
+      <StyledBackdrop onClick={handleBackdropClick}>
+        <StyledModalContent>{children}</StyledModalContent>
       </StyledBackdrop>,
       element
     );
