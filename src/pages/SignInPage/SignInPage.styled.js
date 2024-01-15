@@ -135,6 +135,15 @@ export const Input = styled.input`
   }
 `;
 
+export const EyeSvg = styled.svg`
+  position: absolute;
+  right: 10px;
+  top: 58%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+`;
+
 export const Error = styled.p`
   position: absolute;
   top: 76px;
