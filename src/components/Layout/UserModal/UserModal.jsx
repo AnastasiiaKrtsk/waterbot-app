@@ -81,28 +81,6 @@ const UserModal = ({ handleClose, isModalOpen }) => {
       )
     : null;
 };
-
-//   return createPortal(
-//     <BackdropUserMenu onClick={handleOverlayClick}>
-//       <ModalUserMenu>
-//         <SettingsBtn>
-//           <svg width="20" height="20">
-//             <use href={`${sprite}#settings`} />
-//           </svg>
-//           Settings
-//         </SettingsBtn>
-//         <LogoutBtn>
-//           <svg width="17" height="17">
-//             <use href={`${sprite}#exit`} />
-//           </svg>
-//           Log Out
-//         </LogoutBtn>
-//       </ModalUserMenu>
-//     </BackdropUserMenu>,
-//     normaRoot
-//   );
-// };
-
 UserModal.propTypes = {
   handleClose: PropTypes.func.isRequired,
   isModalOpen: PropTypes.bool.isRequired,

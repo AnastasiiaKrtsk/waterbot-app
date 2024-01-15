@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signInThunk } from "../../redux/thunks";
 import { signInSchema } from "../../helpers/validation";
+import sprite from "../../images/svg+logo/sprite.svg";
 import {
   Bg,
   Bootle,
   Btn,
   Error,
+  EyeSvg,
   Form,
   Input,
   Label,
@@ -18,7 +21,6 @@ import {
 } from "./SignInPage.styled";
 
 const SignInPage = () => {
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -28,11 +30,20 @@ const SignInPage = () => {
     mode: "onTouched",
     resolver: yupResolver(signInSchema),
   });
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data, e) => {
     e.preventDefault();
     dispatch(signInThunk(data));
     reset();
+  };
+
+  const togglePasswordVisibility = (inputId) => {
+    setShowPassword((prevPasswords) => ({
+      ...prevPasswords,
+      [inputId]: !prevPasswords[inputId],
+    }));
   };
 
   return (
@@ -54,11 +65,22 @@ const SignInPage = () => {
             <WrapperInput>
               <Label>Enter your password</Label>
               <Input
-                type="password"
+                type={showPassword["password"] ? "text" : "password"}
                 placeholder="Password"
                 {...register("password")}
                 errors={!!errors.password}
               />
+              <div onClick={() => togglePasswordVisibility("password")}>
+                {showPassword["password"] ? (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision`} />
+                  </EyeSvg>
+                ) : (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision-crossed`} />
+                  </EyeSvg>
+                )}
+              </div>
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
             <Btn type="submit">Sign In</Btn>
