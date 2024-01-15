@@ -20,6 +20,7 @@ const initialState = {
   error: null,
   isSignedIn: false,
   isLoading: false,
+  openModal: false,
 };
 
 const authSlice = createSlice({

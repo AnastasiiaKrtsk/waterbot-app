@@ -26,7 +26,7 @@ const Today = () => {
             <StyledWaterVolume>250ml</StyledWaterVolume> Time
           </StyledWaterInfo>
           <StyledTodayButtonsWrapper>
-            <EditWater />
+            <EditWater onClick={()=>console.log('test')}/>
             <DeleteWater />
           </StyledTodayButtonsWrapper>
         </StyledTodayWaterItem>
@@ -66,7 +66,30 @@ const Today = () => {
             <DeleteWater />
           </StyledTodayButtonsWrapper>
         </StyledTodayWaterItem>
-
+        <StyledTodayWaterItem>
+          <StyledWaterInfo>
+            <svg width={"36px"} height={"36px"}>
+              <use href={sprite + "#icon-water-glass"}></use>
+            </svg>
+            <StyledWaterVolume>250ml</StyledWaterVolume> Time
+          </StyledWaterInfo>
+          <StyledTodayButtonsWrapper>
+            <EditWater />
+            <DeleteWater />
+          </StyledTodayButtonsWrapper>
+        </StyledTodayWaterItem>
+        <StyledTodayWaterItem>
+          <StyledWaterInfo>
+            <svg width={"36px"} height={"36px"}>
+              <use href={sprite + "#icon-water-glass"}></use>
+            </svg>
+            <StyledWaterVolume>250ml</StyledWaterVolume> Time
+          </StyledWaterInfo>
+          <StyledTodayButtonsWrapper>
+            <EditWater />
+            <DeleteWater />
+          </StyledTodayButtonsWrapper>
+        </StyledTodayWaterItem>
       </StyledTodayWaterList>
       <AddWater />
     </StyledTodayWrapper>
