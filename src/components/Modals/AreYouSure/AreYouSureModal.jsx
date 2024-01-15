@@ -13,7 +13,7 @@ import {
   StyledCancelButton,
   StyledLogOutButton,
   StyledModalWindow,
-} from "./StyledLogout";
+} from "./StyledLogOut";
 
 const AreYouSureModal = ({
   handleClose,
