@@ -9,9 +9,16 @@ import {
   ModalUserMenu,
 } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import { useDispatch } from "react-redux";
+import { logOutThunk } from "../../../redux/thunks";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
+  const dispatch = useDispatch();
   const normaRoot = document.getElementById("modals");
+
+  const handleLogOut = () => {
+    dispatch(logOutThunk());
+  };
 
   // *MODAL SETUP
   const handleOverlayClick = (event) => {
@@ -46,7 +53,7 @@ const UserModal = ({ handleClose, isModalOpen }) => {
               </MenuBtnSvg>
               Settings
             </MenuBtns>
-            <MenuBtns>
+            <MenuBtns onClick={handleLogOut}>
               <MenuBtnSvg width="17" height="17">
                 <use href={`${sprite}#exit`} />
               </MenuBtnSvg>

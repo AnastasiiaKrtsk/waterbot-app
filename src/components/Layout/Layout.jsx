@@ -24,6 +24,7 @@ import {
 } from "./Layout.styled";
 import sprite from "../../images/svg+logo/sprite.svg";
 import UserModal from "./UserModal/UserModal";
+import Loader from "../Loader/Loader";
 
 const Layout = () => {
   const token = useSelector(selectToken);
@@ -40,7 +41,6 @@ const Layout = () => {
     setIsUserModalOpen(false);
   };
   return (
-
     <>
       {token ? (
         <>
@@ -78,11 +78,11 @@ const Layout = () => {
             />
           </header>
 
-          <main className="container">
-            <Outlet />
+          <main>
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </main>
-
-          <Suspense fallback={null}></Suspense>
         </>
       ) : (
         <>
@@ -112,15 +112,14 @@ const Layout = () => {
             </WrapperHeader>
           </header>
 
-          <main className="container">
-            <Outlet />
+          <main>
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </main>
-
-          <Suspense fallback={null}></Suspense>
         </>
       )}
     </>
-
   );
 };
 

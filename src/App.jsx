@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { userCurrentThunk } from "./redux/thunks";
 import HomePage from "./pages/HomePage/HomePage";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,10 @@ const App = () => {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
           </Route>
-          <Route path="/homepage" element={<HomePage />} />
+          <Route path="" element={<PrivateRoute />}>
+            <Route path="/homepage" element={<HomePage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} />

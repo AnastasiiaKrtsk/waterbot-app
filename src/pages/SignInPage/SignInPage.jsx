@@ -25,7 +25,7 @@ const SignInPage = () => {
     formState: { errors },
     reset,
   } = useForm({
-    mode: "all",
+    mode: "onTouched",
     resolver: yupResolver(signInSchema),
   });
 
