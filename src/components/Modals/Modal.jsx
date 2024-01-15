@@ -16,6 +16,15 @@ const Modal = ({ open, onClose, children }) => {
     [open, onClose]
   );
 
+  const handleBackdropClick = useCallback(
+    (event) => {
+      if (event.target === event.currentTarget) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
   useEffect(() => {
     modalRootElement.appendChild(element);
 
@@ -29,7 +38,7 @@ const Modal = ({ open, onClose, children }) => {
 
   if (open) {
     return createPortal(
-      <StyledBackdrop onClick={onClose}>
+      <StyledBackdrop onClick={handleBackdropClick}>
         <StyledModalContent>{children}</StyledModalContent>
       </StyledBackdrop>,
       element

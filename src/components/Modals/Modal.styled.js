@@ -15,7 +15,6 @@ export const StyledBackdrop = styled.div`
 
 export const StyledModalContent = styled.div`
   background: white;
-  padding: 25px;
-  border: 3px solid black;
-  border-radius: 5px;
+  /* padding: 25px; */
+  border-radius: 10px;
 `;

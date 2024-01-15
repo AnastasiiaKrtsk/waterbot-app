@@ -14,13 +14,14 @@ import {
 import Modal from "../Modals/Modal";
 
 import sprite from "../../images/svg+logo/sprite.svg";
+import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
 
 const Today = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
   const handleEditWater = () => {
-    setModalContent("Edit water form");
+    setModalContent(<EditWaterForm />);
     setOpenModal(true);
   };
   const handleDeleteWater = () => {
