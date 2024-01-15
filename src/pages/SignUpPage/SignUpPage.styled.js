@@ -128,7 +128,13 @@ export const Input = styled.input`
     line-height: 1.25;
   }
 
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--white) inset;
+    -webkit-text-fill-color: var(--dark-blue);
+  }
+
   &:focus {
+    caret-color: var(--dark-blue);
     outline: none;
     border: 1px solid
       ${(props) => (props.errors ? "var(--red)" : "var(--light-blue-2)")};
