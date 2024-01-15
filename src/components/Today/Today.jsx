@@ -1,9 +1,8 @@
 import AddWater from "../Buttons/AddWater/AddWater";
 import DeleteWater from "../Buttons/DeleteWater/DeleteWater";
 import EditWater from "../Buttons/EditWater/EditWater";
-import Modal from "../Modals/Modal";
 
-import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm"
+import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
 import {
   StyledTodayButtonsWrapper,
   StyledTodayTitle,
@@ -17,31 +16,24 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../images/svg+logo/sprite.svg";
 import { selectOpenModal } from "../../redux/selectors";
-import { setModalStatus } from "../../redux/slice";
-import { useState } from "react";
+import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Today = () => {
   const dispatch = useDispatch();
-  const [modalContent, setModalContent] = useState(null);
 
   const modalStatus = useSelector(selectOpenModal);
 
   const handleEditWater = () => {
     dispatch(setModalStatus(!modalStatus))
-    setModalContent(<EditWaterForm />);
+    dispatch(setModalContent(<EditWaterForm />))
   };
   const handleDeleteWater = () => {
     dispatch(setModalStatus(!modalStatus))
-    setModalContent("Delete")
+    dispatch(setModalContent("Delete"))
   };
   const handleAddWater = () => {
     dispatch(setModalStatus(!modalStatus));
-    setModalContent("Add water");
-  };
-
-  const handleCloseModal = () => {
-    dispatch(setModalStatus(false))
-    setModalContent(null);
+    dispatch(setModalContent("Add water"));
   };
 
   return (
@@ -90,9 +82,6 @@ const Today = () => {
 
       <AddWater onClick={handleAddWater} />
 
-      <Modal open={modalStatus} onClose={handleCloseModal}>
-        {modalContent}
-      </Modal>
     </StyledTodayWrapper>
   );
 };

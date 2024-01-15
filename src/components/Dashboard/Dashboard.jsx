@@ -1,5 +1,6 @@
 // import AddWater from "../Buttons/AddWater/AddWater"
 // import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddWaterBlue from "../Buttons/AddWater/AddWaterBlue";
 // import Modal from "../Modals/Modal";
 import Month from "../Month/Month";
@@ -11,20 +12,18 @@ import {
   StyledWaterInfoWrapper,
 } from "./Dashboard.styled";
 import NormaBtn from "./NormaBtn/NormaBtn";
+import { selectOpenModal } from "../../redux/selectors";
+import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Dashboard = () => {
-  // const [openModal, setOpenModal] = useState(false);
-  // const [modalContent, setModalContent] = useState(null);
+  const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
 
   const handleAddWater = () => {
-    // setModalContent("Add water");
-    // setOpenModal(true);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("Add water"));
   };
 
-  // const handleCloseModal = () => {
-  //   setModalContent(null);
-  //   setOpenModal(false);
-  // };
 
   return (
     <>
@@ -39,9 +38,6 @@ const Dashboard = () => {
           <Month />
         </StyledWaterInfoWrapper>
       </StyledDashboardWrapper>
-      {/* <Modal open={openModal} onClose={handleCloseModal}>
-        {modalContent}
-      </Modal> */}
     </>
   );
 };

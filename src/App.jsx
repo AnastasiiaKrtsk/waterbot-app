@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/Layout/Layout";
-import Modal from "./components/Modals/Modal"; // Import the Modal component
+import Modal from "./components/Modals/Modal";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import HomePage from "./pages/HomePage/HomePage";
@@ -13,15 +13,14 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import { userCurrentThunk } from "./redux/thunks";
-// import "./App.css"; // Import your styles or any other necessary imports
-import { selectOpenModal } from "./redux/selectors";
-import { setModalStatus } from "./redux/slice";
+import { selectModalContent, selectOpenModal } from "./redux/selectors";
+import { setModalContent, setModalStatus } from "./redux/slice";
 
 const App = () => {
   const dispatch = useDispatch();
-  // const [modalStatus, setModalStatus] = useState(false);
 
   const modalStatus = useSelector(selectOpenModal);
+  const modalContent = useSelector(selectModalContent);
 
   useEffect(() => {
     dispatch(userCurrentThunk());
@@ -31,12 +30,9 @@ const App = () => {
     fetch("https://backend-water-tracker.onrender.com/api-docs/");
   }, []);
 
-  // const handleOpenModal = () => {
-  //   dispatch(setModalStatus(!modalStatus))
-  // };
-
   const handleCloseModal = () => {
-    dispatch(setModalStatus(false))
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent(null));
   };
 
   return (
@@ -55,11 +51,8 @@ const App = () => {
         </Route>
       </Routes>
 
-      {/* Render the Modal component */}
       <Modal open={modalStatus} onClose={handleCloseModal}>
-        {/* Content for your modal */}
-        <p>This is the content of the modal.</p>
-        <button onClick={handleCloseModal}>Close Modal</button>
+        {modalContent || null}
       </Modal>
 
       <ToastContainer position="top-center" autoClose={3000} />
