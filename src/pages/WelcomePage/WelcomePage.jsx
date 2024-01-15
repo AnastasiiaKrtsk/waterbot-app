@@ -2,19 +2,20 @@ import { useState } from "react";
 import ConsumTracker from "../../components/ConsumTracker/ConsumTracker";
 import WhyDrinkWater from "../../components/WhyDrinkWater/WhyDrinkWater";
 import { Descr, Div, H1 } from "./WelcomePage.styled";
-import UserSettings from "../../components/Modals/UserSettings/UserSettings";
+// import UserSettings from "../../components/Modals/UserSettings/UserSettings";
 import DailyNorma from "../../components/Modals/DailyNorma/DailyNorma";
 import DropDown from "../../components/Modals/DropDown/DropDown";
 const WelcomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDailyNormaOpen, setIsDailyNormaOpen] = useState(false);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false);
+  // };
   //*
 
   const handleOpenDailyNorma = () => {
@@ -36,13 +37,13 @@ const WelcomePage = () => {
           <WhyDrinkWater />
         </div>
       </Div>
-      <button type="button" onClick={handleOpenModal}>
+      {/* <button type="button" onClick={handleOpenModal}>
         Settings
-      </button>
+      </button> */}
       <button type="button" onClick={handleOpenDailyNorma}>
         Norma
       </button>
-      <UserSettings handleClose={handleCloseModal} isModalOpen={isModalOpen} />
+      {/* <UserSettings handleClose={handleCloseModal} isModalOpen={isModalOpen} /> */}
       <DailyNorma
         handleClose={handleCloseDailyNorma}
         isModalOpen={isDailyNormaOpen}

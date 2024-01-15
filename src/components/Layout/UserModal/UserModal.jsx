@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   BackdropUserMenu,
@@ -9,15 +9,27 @@ import {
   ModalUserMenu,
 } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import UserSettings from "../../../components/Modals/UserSettings/UserSettings";
 import { useDispatch } from "react-redux";
 import { logOutThunk } from "../../../redux/thunks";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
+  const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const dispatch = useDispatch();
   const normaRoot = document.getElementById("modals");
 
+  // *Settings Modal
+
   const handleLogOut = () => {
     dispatch(logOutThunk());
+  };
+
+  const handleOpenModal = () => {
+    setIsModalSettingsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalSettingsOpen(false);
   };
 
   // *MODAL SETUP
@@ -47,12 +59,16 @@ const UserModal = ({ handleClose, isModalOpen }) => {
     ? createPortal(
         <BackdropUserMenu onClick={handleOverlayClick}>
           <ModalUserMenu>
-            <MenuBtns>
+            <MenuBtns type="button" onClick={handleOpenModal}>
               <MenuBtnSvg width="20" height="20">
                 <use href={`${sprite}#settings`} />
               </MenuBtnSvg>
               Settings
             </MenuBtns>
+            <UserSettings
+              handleClose={handleCloseModal}
+              isModalOpen={isModalSettingsOpen}
+            />
             <MenuBtns onClick={handleLogOut}>
               <MenuBtnSvg width="17" height="17">
                 <use href={`${sprite}#exit`} />
