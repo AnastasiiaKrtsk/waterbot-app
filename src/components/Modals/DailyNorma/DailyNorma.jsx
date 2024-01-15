@@ -30,7 +30,7 @@ import {
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { calculateV } from "./CalcNorma";
 const DailyNorma = ({ handleClose, isModalOpen }) => {
-  const normaRoot = document.getElementById("modals");
+  const normaRoot = document.getElementById("modal");
   // *
   const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");

@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   BackdropUserMenu,
@@ -9,15 +9,43 @@ import {
   ModalUserMenu,
 } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import UserSettings from "../../../components/Modals/UserSettings/UserSettings";
 import { useDispatch } from "react-redux";
 import { logOutThunk } from "../../../redux/thunks";
+import LogOutModal from "../../Modals/LogOut/LogOut";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
-  const dispatch = useDispatch();
-  const normaRoot = document.getElementById("modals");
+  const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
+  const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
+  // const dispatch = useDispatch();
+  const normaRoot = document.getElementById("modal");
+
+  // const handleLogOut = () => {
+  //   dispatch(logOutThunk());
+  // };
+
+  // *Settings Modal
+
+  const handleOpenModal = () => {
+    setIsModalSettingsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalSettingsOpen(false);
+  };
+
+  // *Log Out
+
+  const handleLogOutOpenModal = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleLogOutCloseModal = () => {
+    setIsLogoutModalOpen(false);
+  };
 
   const handleLogOut = () => {
-    dispatch(logOutThunk());
+    setIsLogoutModalOpen(true);
   };
 
   // *MODAL SETUP
@@ -47,18 +75,26 @@ const UserModal = ({ handleClose, isModalOpen }) => {
     ? createPortal(
         <BackdropUserMenu onClick={handleOverlayClick}>
           <ModalUserMenu>
-            <MenuBtns>
+            <MenuBtns type="button" onClick={handleOpenModal}>
               <MenuBtnSvg width="20" height="20">
                 <use href={`${sprite}#settings`} />
               </MenuBtnSvg>
               Settings
             </MenuBtns>
-            <MenuBtns onClick={handleLogOut}>
+            <UserSettings
+              isModalOpen={isModalSettingsOpen}
+              handleClose={handleCloseModal}
+            />
+            <MenuBtns onClick={handleLogOutOpenModal}>
               <MenuBtnSvg width="17" height="17">
                 <use href={`${sprite}#exit`} />
               </MenuBtnSvg>
               Log Out
             </MenuBtns>
+            <LogOutModal
+              isModalOpen={isLogOutOpen}
+              handleClose={handleLogOutCloseModal}
+            />
           </ModalUserMenu>
         </BackdropUserMenu>,
         normaRoot

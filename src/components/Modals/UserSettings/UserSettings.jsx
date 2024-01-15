@@ -44,7 +44,7 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 // import { updateUserInfo } from "../../../service/authApi.jsx";
 
 const UserSettings = ({ handleClose, isModalOpen }) => {
-  const modalRoot = document.getElementById("modals");
+  const modalRoot = document.getElementById("modal");
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
