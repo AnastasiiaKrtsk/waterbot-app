@@ -13,7 +13,7 @@ const initialState = {
     username: null,
     email: null,
     avatarURL: "V",
-    gender: "Woman",
+    gender: "woman",
     dailyNorma: null,
   },
   token: null,
@@ -51,7 +51,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signInThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.userData = action.payload.user;
         state.token = action.payload.token;
         state.error = null;
         state.isSignedIn = true;
@@ -83,7 +83,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(userCurrentThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.userData = action.payload.user;
         state.error = null;
         state.isLoading = false;
         state.userData = action.payload;
