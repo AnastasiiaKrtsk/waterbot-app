@@ -10,10 +10,12 @@ export const WhyWrapper = styled.div`
   background: var(--light-blue-1);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
   @media only screen and (min-width: 767px) {
+    margin-top: 60px;
     width: 494px;
     padding: 32px 24px;
   }
   @media only screen and (min-width: 1440px) {
+    margin-top: 0;
     padding: 16px 24px;
   }
 `;
