@@ -10,19 +10,13 @@ import {
 } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import UserSettings from "../../../components/Modals/UserSettings/UserSettings";
-import { useDispatch } from "react-redux";
-import { logOutThunk } from "../../../redux/thunks";
-import LogOutModal from "../../Modals/LogOut/LogOut";
+import AreYouSureModal from "../../Modals/AreYouSure/AreYouSureModal";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
   const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
-  // const dispatch = useDispatch();
-  const normaRoot = document.getElementById("modal");
 
-  // const handleLogOut = () => {
-  //   dispatch(logOutThunk());
-  // };
+  const normaRoot = document.getElementById("modal");
 
   // *Settings Modal
 
@@ -42,10 +36,6 @@ const UserModal = ({ handleClose, isModalOpen }) => {
 
   const handleLogOutCloseModal = () => {
     setIsLogoutModalOpen(false);
-  };
-
-  const handleLogOut = () => {
-    setIsLogoutModalOpen(true);
   };
 
   // *MODAL SETUP
@@ -85,15 +75,19 @@ const UserModal = ({ handleClose, isModalOpen }) => {
               isModalOpen={isModalSettingsOpen}
               handleClose={handleCloseModal}
             />
-            <MenuBtns onClick={handleLogOutOpenModal}>
+            <MenuBtns type="button" onClick={handleLogOutOpenModal}>
               <MenuBtnSvg width="17" height="17">
                 <use href={`${sprite}#exit`} />
               </MenuBtnSvg>
               Log Out
             </MenuBtns>
-            <LogOutModal
+            <AreYouSureModal
               isModalOpen={isLogOutOpen}
               handleClose={handleLogOutCloseModal}
+              title="Log out"
+              message="Do you really want to leave?"
+              firstButton="Log out"
+              cancelButton="Cancel"
             />
           </ModalUserMenu>
         </BackdropUserMenu>,
