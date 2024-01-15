@@ -26,6 +26,11 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    setModalStatus: (state, action) => {
+      state.openModal = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //=======signUp=========================//
@@ -130,4 +135,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setModalStatus } = authSlice.actions;
 export const authReducer = authSlice.reducer;

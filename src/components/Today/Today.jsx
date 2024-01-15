@@ -1,7 +1,9 @@
-import { useState } from "react";
 import AddWater from "../Buttons/AddWater/AddWater";
 import DeleteWater from "../Buttons/DeleteWater/DeleteWater";
 import EditWater from "../Buttons/EditWater/EditWater";
+import Modal from "../Modals/Modal";
+
+import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm"
 import {
   StyledTodayButtonsWrapper,
   StyledTodayTitle,
@@ -11,31 +13,35 @@ import {
   StyledWaterInfo,
   StyledWaterVolume,
 } from "./Today.styled";
-import Modal from "../Modals/Modal";
 
+import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../images/svg+logo/sprite.svg";
-import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
+import { selectOpenModal } from "../../redux/selectors";
+import { setModalStatus } from "../../redux/slice";
+import { useState } from "react";
 
 const Today = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
   const [modalContent, setModalContent] = useState(null);
 
+  const modalStatus = useSelector(selectOpenModal);
+
   const handleEditWater = () => {
+    dispatch(setModalStatus(!modalStatus))
     setModalContent(<EditWaterForm />);
-    setOpenModal(true);
   };
   const handleDeleteWater = () => {
-    setModalContent("Delete water");
-    setOpenModal(true);
+    dispatch(setModalStatus(!modalStatus))
+    setModalContent("Delete")
   };
   const handleAddWater = () => {
+    dispatch(setModalStatus(!modalStatus));
     setModalContent("Add water");
-    setOpenModal(true);
   };
 
   const handleCloseModal = () => {
+    dispatch(setModalStatus(false))
     setModalContent(null);
-    setOpenModal(false);
   };
 
   return (
@@ -43,7 +49,6 @@ const Today = () => {
       <StyledTodayTitle>Today</StyledTodayTitle>
 
       <StyledTodayWaterList>
-
         <StyledTodayWaterItem>
           <StyledWaterInfo>
             <svg width={"36px"} height={"36px"}>
@@ -82,12 +87,11 @@ const Today = () => {
             <DeleteWater onClick={handleDeleteWater} />
           </StyledTodayButtonsWrapper>
         </StyledTodayWaterItem>
-
       </StyledTodayWaterList>
 
-      <AddWater onClick={handleAddWater}/>
+      <AddWater onClick={handleAddWater} />
 
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={modalStatus} onClose={handleCloseModal}>
         {modalContent}
       </Modal>
     </StyledTodayWrapper>

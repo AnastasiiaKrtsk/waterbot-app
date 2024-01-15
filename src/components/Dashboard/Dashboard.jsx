@@ -1,7 +1,7 @@
 // import AddWater from "../Buttons/AddWater/AddWater"
-import { useState } from "react";
+// import { useState } from "react";
 import AddWaterBlue from "../Buttons/AddWater/AddWaterBlue";
-import Modal from "../Modals/Modal";
+// import Modal from "../Modals/Modal";
 import Month from "../Month/Month";
 import Today from "../Today/Today";
 import WaterProgress from "../WaterProgress/WaterProgress";
@@ -13,18 +13,18 @@ import {
 import NormaBtn from "./NormaBtn/NormaBtn";
 
 const Dashboard = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  // const [openModal, setOpenModal] = useState(false);
+  // const [modalContent, setModalContent] = useState(null);
 
   const handleAddWater = () => {
-    setModalContent("Add water");
-    setOpenModal(true);
+    // setModalContent("Add water");
+    // setOpenModal(true);
   };
 
-  const handleCloseModal = () => {
-    setModalContent(null);
-    setOpenModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setModalContent(null);
+  //   setOpenModal(false);
+  // };
 
   return (
     <>
@@ -39,9 +39,9 @@ const Dashboard = () => {
           <Month />
         </StyledWaterInfoWrapper>
       </StyledDashboardWrapper>
-      <Modal open={openModal} onClose={handleCloseModal}>
+      {/* <Modal open={openModal} onClose={handleCloseModal}>
         {modalContent}
-      </Modal>
+      </Modal> */}
     </>
   );
 };
