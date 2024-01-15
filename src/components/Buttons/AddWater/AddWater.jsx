@@ -1,7 +1,7 @@
 import { StyledAddWaterBtn } from "./AddWater.styled";
 
-const AddWater = () => {
-  return <StyledAddWaterBtn>+ Add Water</StyledAddWaterBtn>;
+const AddWater = ({onClick}) => {
+  return <StyledAddWaterBtn onClick={onClick}>+ Add Water</StyledAddWaterBtn>;
 };
 
 export default AddWater;
