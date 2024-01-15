@@ -25,7 +25,7 @@ const SignUpPage = () => {
     formState: { errors },
     reset,
   } = useForm({
-    mode: "all",
+    mode: "onTouched",
     resolver: yupResolver(signUpSchema),
   });
   const dispatch = useDispatch();

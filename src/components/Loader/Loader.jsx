@@ -1,3 +1,5 @@
-export const AuthPage = () => {
-  return <div>AuthPage</div>;
+const Loader = () => {
+  return <div>Loader</div>;
 };
+
+export default Loader;
