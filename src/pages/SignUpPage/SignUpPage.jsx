@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import { signInThunk, signUpThunk } from "../../redux/thunks";
 import { toast } from "react-toastify";
 import { signUpSchema } from "../../helpers/validation";
+import sprite from "../../images/svg+logo/sprite.svg";
 import {
   Bg,
   Bootle,
   Btn,
   Error,
+  EyeSvg,
   Form,
   Input,
   Label,
@@ -17,6 +19,7 @@ import {
   WrapperForm,
   WrapperInput,
 } from "./SignUpPage.styled";
+import { useState } from "react";
 
 const SignUpPage = () => {
   const {
@@ -29,6 +32,7 @@ const SignUpPage = () => {
     resolver: yupResolver(signUpSchema),
   });
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async ({ username, email, password }, e) => {
     e.preventDefault();
@@ -43,6 +47,13 @@ const SignUpPage = () => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  const togglePasswordVisibility = (inputId) => {
+    setShowPassword((prevPasswords) => ({
+      ...prevPasswords,
+      [inputId]: !prevPasswords[inputId],
+    }));
   };
 
   return (
@@ -74,21 +85,43 @@ const SignUpPage = () => {
             <WrapperInput>
               <Label>Enter your password</Label>
               <Input
-                type="password"
+                type={showPassword["password"] ? "text" : "password"}
                 placeholder="Password"
                 {...register("password")}
                 errors={!!errors.password}
               />
+              <div onClick={() => togglePasswordVisibility("password")}>
+                {showPassword["password"] ? (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision`} />
+                  </EyeSvg>
+                ) : (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision-crossed`} />
+                  </EyeSvg>
+                )}
+              </div>
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
             <WrapperInput>
               <Label>Repeat password</Label>
               <Input
-                type="password"
+                type={showPassword["passwordRepeat"] ? "text" : "password"}
                 placeholder="Repeat password"
                 {...register("passwordRepeat")}
                 errors={!!errors.passwordRepeat}
               />
+              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
+                {showPassword["passwordRepeat"] ? (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision`} />
+                  </EyeSvg>
+                ) : (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision-crossed`} />
+                  </EyeSvg>
+                )}
+              </div>
               <Error>{errors.passwordRepeat?.message}</Error>
             </WrapperInput>
             <Btn type="submit">Sign Up</Btn>

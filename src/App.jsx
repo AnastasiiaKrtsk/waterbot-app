@@ -20,6 +20,10 @@ const App = () => {
     dispatch(userCurrentThunk());
   }, [dispatch]);
 
+  useEffect(() => {
+    fetch("https://backend-water-tracker.onrender.com/api-docs/");
+  }, []);
+
   return (
     <>
       <Routes>
