@@ -64,49 +64,49 @@ const SimpleForm = () => {
           <StyledRecordingTimeWrapper>
             <StyledTitle>Recording time:</StyledTitle>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["MobileTimePicker"]}>
+              <DemoContainer components={["MobileTimePicker"]}>
                 <DemoItem>
-              <TimePicker
-                sx={{
-                  width: "544px",
-                  "& .MuiInputBase-input:hover": { borderColor: "red" },
-                  "& .MuiTextField-root": {
-                    "&:hover": {
-                      borderColor: "var(--dark-blue)",
-                    },
-                  },
-                  "& .MuiSvgIcon-root": { fill: "var(--dark-blue)" },
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    "&:hover": {
-                      borderColor: "var(--dark-blue)",
-                    },
-                  },
-                  "& .MuiInputBase-root": {
-                    borderRadius: "6px",
-                    color: "var(--dark-blue)",
-                  },
-                  // ----------------
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "var(--light-blue-3)",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "var(--dark-blue)",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderRadius: "6px",
-                      border: "1.5px solid var(--dark-blue)",
-                      color: "var(--dark-blue)",
-                    },
-                  },
-                }}
-                name="time"
-                views={["hours", "minutes"]}
-                format="hh:mm a"
-                timeSteps={{ minutes: 1 }}
-                ampm={true}
-              />
-              </DemoItem>
+                  <TimePicker
+                    sx={{
+                      width: "544px",
+                      "& .MuiInputBase-input:hover": { borderColor: "red" },
+                      "& .MuiTextField-root": {
+                        "&:hover": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                      },
+                      "& .MuiSvgIcon-root": { fill: "var(--dark-blue)" },
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        "&:hover": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                      },
+                      "& .MuiInputBase-root": {
+                        borderRadius: "6px",
+                        color: "var(--dark-blue)",
+                      },
+                      // ----------------
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "var(--light-blue-3)",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderRadius: "6px",
+                          border: "1.5px solid var(--dark-blue)",
+                          color: "var(--dark-blue)",
+                        },
+                      },
+                    }}
+                    name="time"
+                    views={["hours", "minutes"]}
+                    format="hh:mm a"
+                    timeSteps={{ minutes: 1 }}
+                    ampm={true}
+                  />
+                </DemoItem>
               </DemoContainer>
             </LocalizationProvider>
           </StyledRecordingTimeWrapper>
@@ -144,10 +144,7 @@ const SimpleForm = () => {
               }}
             />
           </StyledUsedWater>
-          <StyledSaveBtn
-            type="submit"
-            color="primary"uiOutlinedInput-root
-          >
+          <StyledSaveBtn type="submit" color="primary" uiOutlinedInput-root>
             Save
           </StyledSaveBtn>
         </StyledForm>
