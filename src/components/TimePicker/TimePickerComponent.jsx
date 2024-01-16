@@ -1,29 +1,31 @@
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { TimeField } from "@mui/x-date-pickers/TimeField";
-import dayjs from "dayjs";
-import { useState } from "react";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
-export default function BasicTimeField() {
-  const [value, setValue] = useState(dayjs("2022-04-17T15:30"));
+export default function TimePickerViews() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <TimeField
-        sx={{
-          width: "544px",
-          "& .MuiOutlinedInput-root": {
-            padding: "12px 10px",
-          },
-
-          "& .MuiOutlinedInput-input":{
-            padding:0
-          }
-        }}
-        // label="Format without meridiem"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        format="HH:mm"
-      />
+      <DemoContainer
+        components={[
+          "MobileTimePicker",
+          "MobileTimePicker",
+          "MobileTimePicker",
+        ]}
+      >
+        <DemoItem>
+          <TimePicker
+            sx={{
+              "& .MuiSvgIcon-root": { fill: "var(--dark-blue)" },
+              "& .MuiInputBase-root": { border: "1px solid var(--light-blue-2)", borderRadius: "6px", color:"var(--dark-blue)" },
+            }}
+            views={["hours", "minutes"]}
+            format="hh:mm"
+            timeSteps={{ minutes: 1 }}
+            ampm={false}
+          />
+        </DemoItem>
+      </DemoContainer>
     </LocalizationProvider>
   );
 }

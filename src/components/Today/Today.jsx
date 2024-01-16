@@ -2,7 +2,6 @@ import AddWater from "../Buttons/AddWater/AddWater";
 import DeleteWater from "../Buttons/DeleteWater/DeleteWater";
 import EditWater from "../Buttons/EditWater/EditWater";
 
-import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
 import {
   StyledTodayButtonsWrapper,
   StyledTodayTitle,
@@ -25,7 +24,7 @@ const Today = () => {
 
   const handleEditWater = () => {
     dispatch(setModalStatus(!modalStatus));
-    dispatch(setModalContent(<EditWaterForm />));
+    dispatch(setModalContent('EditWaterForm'));
   };
   const handleDeleteWater = () => {
     dispatch(setModalStatus(!modalStatus));
