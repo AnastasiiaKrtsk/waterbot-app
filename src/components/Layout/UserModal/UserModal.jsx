@@ -11,17 +11,25 @@ import {
 import sprite from "../../../images/svg+logo/sprite.svg";
 import UserSettings from "../../../components/Modals/UserSettings/UserSettings";
 import AreYouSureModal from "../../Modals/AreYouSure/AreYouSureModal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectOpenModal } from "../../../redux/selectors";
+import { setModalContent, setModalStatus } from "../../../redux/slice";
 
 const UserModal = ({ handleClose, isModalOpen }) => {
   const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
 
-  const normaRoot = document.getElementById("modal");
+  const dispatch = useDispatch();
+
+  const modalStatus = useSelector(selectOpenModal);
+
+  // const normaRoot = document.getElementById("modal");
 
   // *Settings Modal
 
   const handleOpenModal = () => {
-    setIsModalSettingsOpen(true);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("UserSettings"));
   };
 
   const handleCloseModal = () => {
@@ -61,39 +69,40 @@ const UserModal = ({ handleClose, isModalOpen }) => {
   }, [handleClose, isModalOpen]);
   // *MODAL SETUP
 
-  return isModalOpen
-    ? createPortal(
-        <BackdropUserMenu onClick={handleOverlayClick}>
-          <ModalUserMenu>
-            <MenuBtns type="button" onClick={handleOpenModal}>
-              <MenuBtnSvg width="20" height="20">
-                <use href={`${sprite}#settings`} />
-              </MenuBtnSvg>
-              Settings
-            </MenuBtns>
-            <UserSettings
-              isModalOpen={isModalSettingsOpen}
-              handleClose={handleCloseModal}
-            />
-            <MenuBtns type="button" onClick={handleLogOutOpenModal}>
-              <MenuBtnSvg width="17" height="17">
-                <use href={`${sprite}#exit`} />
-              </MenuBtnSvg>
-              Log Out
-            </MenuBtns>
-            <AreYouSureModal
-              isModalOpen={isLogOutOpen}
-              handleClose={handleLogOutCloseModal}
-              title="Log out"
-              message="Do you really want to leave?"
-              firstButton="Log out"
-              cancelButton="Cancel"
-            />
-          </ModalUserMenu>
-        </BackdropUserMenu>,
-        normaRoot
-      )
-    : null;
+  // return isModalOpen
+  // ? createPortal(
+  return (
+    <BackdropUserMenu onClick={handleOverlayClick}>
+      <ModalUserMenu>
+        <MenuBtns type="button" onClick={handleOpenModal}>
+          <MenuBtnSvg width="20" height="20">
+            <use href={`${sprite}#settings`} />
+          </MenuBtnSvg>
+          Settings
+        </MenuBtns>
+        <UserSettings
+          isModalOpen={isModalSettingsOpen}
+          handleClose={handleCloseModal}
+        />
+        <MenuBtns type="button" onClick={handleLogOutOpenModal}>
+          <MenuBtnSvg width="17" height="17">
+            <use href={`${sprite}#exit`} />
+          </MenuBtnSvg>
+          Log Out
+        </MenuBtns>
+        <AreYouSureModal
+          isModalOpen={isLogOutOpen}
+          handleClose={handleLogOutCloseModal}
+          title="Log out"
+          message="Do you really want to leave?"
+          firstButton="Log out"
+          cancelButton="Cancel"
+        />
+      </ModalUserMenu>
+    </BackdropUserMenu>
+    // normaRoot
+    // : null;
+  );
 };
 UserModal.propTypes = {
   handleClose: PropTypes.func.isRequired,

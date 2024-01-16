@@ -1,6 +1,9 @@
 import { createPortal } from "react-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import {
   selectAvatarUrl,
@@ -8,7 +11,10 @@ import {
   selectUserGender,
   selectUsername,
 } from "../../../redux/selectors.js";
-import { updateAvatarThunk } from "../../../redux/thunks.js";
+import {
+  updateAvatarThunk,
+  updateUserInfoThunk,
+} from "../../../redux/thunks.js";
 import {
   BackdropSettingModal,
   BtnSaveWrapper,
@@ -41,14 +47,20 @@ import {
 } from "./StyledSettingsUser";
 import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import { updateUserSchema } from "../../../helpers/validation.js";
 
 const UserSettings = ({ handleClose, isModalOpen }) => {
   const modalRoot = document.getElementById("modal");
+
+  // ===== SELECTORS ==========
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
-  const userGender = useSelector(selectUserGender);
+  const storedUserGender = useSelector(selectUserGender);
 
+  // ===== USE STATES ==========
+
+  const [userGender, setUserGender] = useState(storedUserGender);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = (inputId) => {
@@ -64,7 +76,52 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
     }
   };
 
-  //=======Radio Btn Handle Change =====
+  // ======= * on Submit ==========
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(updateUserSchema),
+  });
+
+  const onSubmit = async ({
+    username,
+    email,
+    newPassword,
+    oldPassword,
+    gender,
+  }) => {
+    try {
+      await dispatch(
+        updateUserInfoThunk({
+          username,
+          email,
+          newPassword,
+          oldPassword,
+          gender,
+        })
+      ).unwrap();
+
+      setUserGender(gender);
+
+      reset();
+      handleClose();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1550);
+      toast.success("Changes completed successfully", {
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  //======= Avatar File Change ======
 
   const dispatch = useDispatch();
 
@@ -104,7 +161,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
     ? createPortal(
         <BackdropSettingModal onClick={handleOverlayClick}>
           <ModalSettingWindow className="container" isModalOpen={isModalOpen}>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <SettingsCrossDiv>
                 <SettingModalTitleH2>Setting</SettingModalTitleH2>
                 <StyledCloseSvg width="24" height="24" onClick={handleClose}>
@@ -145,7 +202,10 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                             type="radio"
                             id="woman"
                             name="radioGroup"
-                            defaultChecked={userGender}
+                            value="woman"
+                            defaultChecked={userGender === "woman"}
+                            onChange={() => setUserGender("woman")}
+                            {...register("gender")}
                           />
                           Woman
                         </StyledRadioLabel>
@@ -156,6 +216,10 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                             type="radio"
                             id="man"
                             name="radioGroup"
+                            value="man"
+                            defaultChecked={userGender === "man"}
+                            onChange={() => setUserGender("man")}
+                            {...register("gender")}
                           />
                           Man
                         </StyledRadioLabel>
@@ -168,8 +232,11 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         <NameSettingInput
                           placeholder={userName}
                           type="text"
-                          name="name"
+                          name="username"
+                          {...register("username")}
+                          errors={!!errors.username}
                         />
+                        <p>{errors.username?.message}</p>
                       </SettingNameEmailDiv>
 
                       <SettingNameEmailDiv>
@@ -178,7 +245,10 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                           placeholder={userEmail}
                           type="email"
                           name="email"
+                          {...register("email")}
+                          errors={!!errors.email}
                         />
+                        <p>{errors.email?.message}</p>
                       </SettingNameEmailDiv>
                     </SettingNameEmailWrapper>
                   </div>
@@ -197,6 +267,8 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                           }
                           id="old-password"
                           name="oldPassword"
+                          {...register("oldPassword")}
+                          errors={!!errors.oldPassword}
                         />
                         <div
                           onClick={() =>
@@ -213,6 +285,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                             </EyeSvg>
                           )}
                         </div>
+                        <p>{errors.oldPassword?.message}</p>
                       </SettingsPasswordSvgDiv>
 
                       <PasswordSettingLabel htmlFor="new-password">
@@ -226,6 +299,8 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                           }
                           id="new-password"
                           name="newPassword"
+                          {...register("newPassword")}
+                          errors={!!errors.newPassword}
                         />
                         <div
                           onClick={() =>
@@ -242,6 +317,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                             </EyeSvg>
                           )}
                         </div>
+                        <p>{errors.newPassword?.message}</p>
                       </SettingsPasswordSvgDiv>
 
                       <PasswordSettingLabel htmlFor="repeat-password">
@@ -256,7 +332,9 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                               : "password"
                           }
                           id="repeat-password"
-                          name="repeatPassword"
+                          name="passwordRepeat"
+                          {...register("passwordRepeat")}
+                          errors={!!errors.passwordRepeat}
                         />
                         <div
                           onClick={() =>
@@ -273,6 +351,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                             </EyeSvg>
                           )}
                         </div>
+                        <p>{errors.passwordRepeat?.message}</p>
                       </SettingsPasswordSvgDiv>
                     </StyledSettingsPasswordDiv>
                   </div>

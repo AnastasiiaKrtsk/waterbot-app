@@ -34,3 +34,38 @@ export const signInSchema = yup.object().shape({
     .min(8, "Minimum 8 characters")
     .max(64, "Maximum 64 characters"),
 });
+
+export const updateUserSchema = yup.object().shape({
+  gender: yup.string().oneOf(["woman", "man"]),
+  username: yup
+    .string()
+    .min(3, "Minimum 3 characters")
+    .max(64, "Maximum 64 characters")
+    .transform((value) => (value === "" ? undefined : value)),
+  email: yup
+    .string()
+    .matches(emailRegexp, "Enter a correct email")
+    .transform((value) => (value === "" ? undefined : value)),
+  oldPassword: yup
+    .string()
+    .min(8, "Minimum 8 characters")
+    .max(64, "Maximum 64 characters")
+    .transform((value) => (value === "" ? undefined : value)),
+  newPassword: yup
+    .string()
+    .min(8, "Minimum 8 characters")
+    .max(64, "Maximum 64 characters")
+    .transform((value) => (value === "" ? undefined : value))
+    .test(
+      "notEqual",
+      "New password must not match old password",
+      function (value) {
+        const oldPassword = this.parent.oldPassword;
+        return value !== oldPassword || oldPassword === undefined;
+      }
+    ),
+  passwordRepeat: yup
+    .string()
+    .oneOf([yup.ref("newPassword"), null], "Passwords do not match")
+    .transform((value) => (value === "" ? undefined : value)),
+});

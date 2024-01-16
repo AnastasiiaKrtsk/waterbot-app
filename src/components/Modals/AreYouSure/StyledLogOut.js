@@ -12,6 +12,11 @@ export const LogOutBackdrop = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   overflow: scroll;
+
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const StyledModalWindow = styled.div`
@@ -54,15 +59,20 @@ export const LogOutPar = styled.p`
 `;
 
 export const LogOutBntDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
   @media screen and (min-width: 768px) {
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
     gap: 24px;
   }
 `;
 
 export const StyledLogOutButton = styled.button`
-  width: 232px;
+  width: 100%;
   text-align: center;
   font-size: 16px;
   font-weight: 500;
@@ -86,6 +96,7 @@ export const StyledLogOutButton = styled.button`
 `;
 
 export const StyledCancelButton = styled.button`
+  width: 100%;
   text-align: center;
   font-size: 16px;
   font-weight: 500;
