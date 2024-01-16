@@ -16,7 +16,6 @@ export const BackdropSettingModal = styled.div`
 
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
-  position: fixed;
   width: 280px;
 
   display: inline-flex;
