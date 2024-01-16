@@ -25,11 +25,11 @@ import {
   StyledResult,
 } from "./DailyNorma.styled";
 import { calculateV } from "./CalcNorma";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectDailyNorma } from "../../../redux/selectors";
-import { setDailyNorma } from "../../../redux/slice";
+// import { setDailyNorma } from "../../../redux/slice";
 const DailyNorma = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const dailyNorma = useSelector(selectDailyNorma);
   console.log("daily", dailyNorma);
