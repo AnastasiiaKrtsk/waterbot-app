@@ -1,5 +1,19 @@
 import styled from "@emotion/styled";
 
+export const BackdropSettingModal = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 44px 20px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: scroll;
+`;
+
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   position: fixed;
@@ -15,6 +29,10 @@ export const ModalSettingWindow = styled.div`
     padding: 32px 24px;
     width: 704px;
   }
+
+  @media screen and (min-width: 1440px) {
+    padding: 32px 24px;
+  }
 `;
 
 export const SettingsFormWrapper = styled.div`
@@ -23,20 +41,6 @@ export const SettingsFormWrapper = styled.div`
   @media screen and (min-width: 768px) {
     width: 392px;
   }
-`;
-
-export const BackdropSettingModal = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 44px 20px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  overflow: scroll;
 `;
 
 export const StyledSettingsPasswordDiv = styled.div`
@@ -128,12 +132,29 @@ export const PhotoInputUploadLabel = styled.label`
   color: var(--dark-blue);
 `;
 
+export const UserDataWrapper = styled.div`
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    gap: 24px;
+  }
+`;
+
+export const GenderInfoDiv = styled.div`
+  @media screen and (min-width: 1440px) {
+    width: 392px;
+  }
+`;
+
 export const StyledYourGenderTitle = styled.h4`
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
   margin-bottom: 12px;
   color: var(--black);
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 52px;
+  }
 `;
 
 export const StyledRadioLabel = styled.label`
@@ -233,6 +254,8 @@ export const BtnEye = styled.button`
 `;
 
 export const EyeSvg = styled.svg`
+  width: 16px;
+  height: 16px;
   position: absolute;
   top: 30%;
   left: 87%;

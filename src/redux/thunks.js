@@ -67,13 +67,27 @@ export const userCurrentThunk = createAsyncThunk(
   }
 );
 
+// export const updateAvatarThunk = createAsyncThunk(
+//   "user/updateAvatar",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await updateAvatar(data);
+//       return response;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 export const updateAvatarThunk = createAsyncThunk(
   "user/updateAvatar",
   async (data, thunkAPI) => {
     try {
       const response = await updateAvatar(data);
+      console.log("Avatar updated successfully:", response); // Добавленное логирование
       return response;
     } catch (error) {
+      console.error("Error updating avatar:", error); // Добавленное логирование
       return thunkAPI.rejectWithValue(error.message);
     }
   }
