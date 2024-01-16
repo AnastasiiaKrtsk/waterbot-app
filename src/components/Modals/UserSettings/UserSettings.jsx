@@ -1,15 +1,19 @@
-import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+
 import {
   selectAvatarUrl,
   selectUserEmail,
   selectUserGender,
   selectUsername,
-  // selectCurrentUser,
 } from "../../../redux/selectors.js";
-import { updateAvatarThunk } from "../../../redux/thunks.js";
+import {
+  updateAvatarThunk,
+  updateUserInfoThunk,
+} from "../../../redux/thunks.js";
 import {
   BackdropSettingModal,
   BtnSaveWrapper,
@@ -37,22 +41,24 @@ import {
   StyledSettingModalH3,
   StyledSettingsPasswordDiv,
   StyledYourGenderTitle,
+  UserDataWrapper,
   YourPhotoTitleH3,
 } from "./StyledSettingsUser";
 import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
-// import { updateUserInfo } from "../../../service/authApi.jsx";
+import { updateUserSchema } from "../../../helpers/validation.js";
 
-const UserSettings = ({ handleClose, isModalOpen }) => {
-  const modalRoot = document.getElementById("modal");
+const UserSettings = () => {
+  // ===== SELECTORS ==========
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
-  const userGender = useSelector(selectUserGender);
+  const storedUserGender = useSelector(selectUserGender);
 
+  // ===== USE STATES ==========
+
+  const [userGender, setUserGender] = useState(storedUserGender);
   const [showPassword, setShowPassword] = useState(false);
-
-  // const [avatar, setAvatar] = useState();
 
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
@@ -61,21 +67,51 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
     }));
   };
 
-  const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      handleClose();
+  // ======= * on Submit ==========
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(updateUserSchema),
+  });
+
+  const onSubmit = async ({
+    username,
+    email,
+    newPassword,
+    oldPassword,
+    gender,
+  }) => {
+    try {
+      await dispatch(
+        updateUserInfoThunk({
+          username,
+          email,
+          newPassword,
+          oldPassword,
+          gender,
+        })
+      ).unwrap();
+
+      setUserGender(gender);
+
+      reset();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1400);
+      toast.success("Changes completed successfully", {
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
-  //=======Radio Btn Handle Change =====
-
-  // const handleGenderChange = (event) => {
-  //   const newGender = event.target.value;
-  //   setSelectedGender(newGender);
-  //   dispatch(updateUserInfo(newGender));
-  // };
-
-  //=========dispatch============
+  //======= Avatar File Change ======
 
   const dispatch = useDispatch();
 
@@ -90,59 +126,36 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
     dispatch(updateAvatarThunk(formData));
   };
 
-  //=============================
+  return (
+    <BackdropSettingModal>
+      <ModalSettingWindow className="container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <SettingsCrossDiv>
+            <SettingModalTitleH2>Setting</SettingModalTitleH2>
+            <StyledCloseSvg width="24" height="24">
+              <use href={`${sprite}#icon-outline`} />
+            </StyledCloseSvg>
+          </SettingsCrossDiv>
+          <SettingsFormWrapper>
+            <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
+            <SettingPhotoWrapper>
+              <SettingAvatarImg src={avatarUrl || "V"} />
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.code === "Escape" && isModalOpen) {
-        handleClose();
-      }
-    };
+              <PhotoInputUploadLabel id="customFileUpload" htmlFor="photoInput">
+                <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
+                Upload a photo
+              </PhotoInputUploadLabel>
+              <PhotoInputUpload
+                type="file"
+                id="photoInput"
+                name="photo"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+            </SettingPhotoWrapper>
 
-    const handleBodyOverflow = () => {
-      document.body.style.overflow = isModalOpen ? "hidden" : "auto";
-    };
-
-    handleBodyOverflow();
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleClose, isModalOpen]);
-
-  return isModalOpen
-    ? createPortal(
-        <BackdropSettingModal onClick={handleOverlayClick}>
-          <ModalSettingWindow className="container" isModalOpen={isModalOpen}>
-            <form>
-              <SettingsCrossDiv>
-                <SettingModalTitleH2>Setting</SettingModalTitleH2>
-                <StyledCloseSvg width="24" height="24" onClick={handleClose}>
-                  <use href={`${sprite}#icon-outline`} />
-                </StyledCloseSvg>
-              </SettingsCrossDiv>
-              <SettingsFormWrapper>
-                <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
-                <SettingPhotoWrapper>
-                  <SettingAvatarImg src={avatarUrl || "V"} />
-
-                  <PhotoInputUploadLabel
-                    id="customFileUpload"
-                    htmlFor="photoInput"
-                  >
-                    <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
-                    Upload a photo
-                  </PhotoInputUploadLabel>
-                  <PhotoInputUpload
-                    type="file"
-                    id="photoInput"
-                    name="photo"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
-                </SettingPhotoWrapper>
-
+            <UserDataWrapper>
+              <div>
                 <StyledYourGenderTitle>
                   Your gender identity
                 </StyledYourGenderTitle>
@@ -154,7 +167,10 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         type="radio"
                         id="woman"
                         name="radioGroup"
-                        defaultChecked={userGender}
+                        value="woman"
+                        defaultChecked={userGender === "woman"}
+                        onChange={() => setUserGender("woman")}
+                        {...register("gender")}
                       />
                       Woman
                     </StyledRadioLabel>
@@ -165,6 +181,10 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         type="radio"
                         id="man"
                         name="radioGroup"
+                        value="man"
+                        defaultChecked={userGender === "man"}
+                        onChange={() => setUserGender("man")}
+                        {...register("gender")}
                       />
                       Man
                     </StyledRadioLabel>
@@ -177,8 +197,11 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                     <NameSettingInput
                       placeholder={userName}
                       type="text"
-                      name="name"
+                      name="username"
+                      {...register("username")}
+                      errors={!!errors.username}
                     />
+                    <p>{errors.username?.message}</p>
                   </SettingNameEmailDiv>
 
                   <SettingNameEmailDiv>
@@ -187,10 +210,15 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                       placeholder={userEmail}
                       type="email"
                       name="email"
+                      {...register("email")}
+                      errors={!!errors.email}
                     />
+                    <p>{errors.email?.message}</p>
                   </SettingNameEmailDiv>
                 </SettingNameEmailWrapper>
+              </div>
 
+              <div>
                 <StyledSettingsPasswordDiv>
                   <StyledSettingModalH3>Password</StyledSettingModalH3>
                   <PasswordSettingLabel htmlFor="old-password">
@@ -202,6 +230,8 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                       type={showPassword["old-password"] ? "text" : "password"}
                       id="old-password"
                       name="oldPassword"
+                      {...register("oldPassword")}
+                      errors={!!errors.oldPassword}
                     />
                     <div
                       onClick={() => togglePasswordVisibility("old-password")}
@@ -216,6 +246,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         </EyeSvg>
                       )}
                     </div>
+                    <p>{errors.oldPassword?.message}</p>
                   </SettingsPasswordSvgDiv>
 
                   <PasswordSettingLabel htmlFor="new-password">
@@ -227,6 +258,8 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                       type={showPassword["new-password"] ? "text" : "password"}
                       id="new-password"
                       name="newPassword"
+                      {...register("newPassword")}
+                      errors={!!errors.newPassword}
                     />
                     <div
                       onClick={() => togglePasswordVisibility("new-password")}
@@ -241,6 +274,7 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         </EyeSvg>
                       )}
                     </div>
+                    <p>{errors.newPassword?.message}</p>
                   </SettingsPasswordSvgDiv>
 
                   <PasswordSettingLabel htmlFor="repeat-password">
@@ -253,7 +287,9 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         showPassword["repeat-password"] ? "text" : "password"
                       }
                       id="repeat-password"
-                      name="repeatPassword"
+                      name="passwordRepeat"
+                      {...register("passwordRepeat")}
+                      errors={!!errors.passwordRepeat}
                     />
                     <div
                       onClick={() =>
@@ -270,23 +306,19 @@ const UserSettings = ({ handleClose, isModalOpen }) => {
                         </EyeSvg>
                       )}
                     </div>
+                    <p>{errors.passwordRepeat?.message}</p>
                   </SettingsPasswordSvgDiv>
                 </StyledSettingsPasswordDiv>
-              </SettingsFormWrapper>
-              <BtnSaveWrapper>
-                <BtnSettingSave type="submit">Save</BtnSettingSave>
-              </BtnSaveWrapper>
-            </form>
-          </ModalSettingWindow>
-        </BackdropSettingModal>,
-        modalRoot
-      )
-    : null;
-};
-
-UserSettings.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
+              </div>
+            </UserDataWrapper>
+          </SettingsFormWrapper>
+          <BtnSaveWrapper>
+            <BtnSettingSave type="submit">Save</BtnSettingSave>
+          </BtnSaveWrapper>
+        </form>
+      </ModalSettingWindow>
+    </BackdropSettingModal>
+  );
 };
 
 export default UserSettings;

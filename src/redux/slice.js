@@ -13,7 +13,7 @@ const initialState = {
     username: null,
     email: null,
     avatarURL: "V",
-    gender: "woman",
+    gender: "woman" || "man",
     dailyNorma: 1.8,
   },
   token: null,
@@ -21,7 +21,7 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   openModal: false,
-  modalContent:null,
+  modalContent: null,
 };
 
 const authSlice = createSlice({
@@ -31,12 +31,12 @@ const authSlice = createSlice({
     setModalStatus: (state, action) => {
       state.openModal = action.payload;
     },
-    setModalContent:(state, action) => {
-      state.modalContent=action.payload
+    setModalContent: (state, action) => {
+      state.modalContent = action.payload;
     },
-    setDailyNorma: (state,action) => {
+    setDailyNorma: (state, action) => {
       state.userData.dailyNorma = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -142,5 +142,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setModalStatus, setModalContent, setDailyNorma } = authSlice.actions;
+export const { setModalStatus, setModalContent, setDailyNorma } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;

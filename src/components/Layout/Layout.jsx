@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logoIcon from "../../images/svg+logo/logo-icon.jpg";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   selectAvatarUrl,
   selectUsername,
   selectToken,
+  selectOpenModal,
 } from "../../redux/selectors";
 
 import {
@@ -23,23 +23,23 @@ import {
   WrapperHeader,
 } from "./Layout.styled";
 import sprite from "../../images/svg+logo/sprite.svg";
-import UserModal from "./UserModal/UserModal";
 import Loader from "../Loader/Loader";
+import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Layout = () => {
   const token = useSelector(selectToken);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
-  console.log("avatar-name", avatar, name);
-  //*modal
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const modalStatus = useSelector(selectOpenModal);
 
   const handleOpenUserModal = () => {
-    setIsUserModalOpen(true);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("OpenUserModal"));
   };
-  const handleCloseUserModal = () => {
-    setIsUserModalOpen(false);
-  };
+
   return (
     <>
       {token ? (
@@ -71,11 +71,6 @@ const Layout = () => {
                 </DivWrapper>
               </SignIn>
             </WrapperHeader>
-
-            <UserModal
-              handleClose={handleCloseUserModal}
-              isModalOpen={isUserModalOpen}
-            />
           </header>
 
           <main>

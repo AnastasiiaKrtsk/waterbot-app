@@ -1,5 +1,19 @@
 import styled from "@emotion/styled";
 
+export const BackdropSettingModal = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 44px 20px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: scroll;
+`;
+
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   position: fixed;
@@ -15,6 +29,11 @@ export const ModalSettingWindow = styled.div`
     padding: 32px 24px;
     width: 704px;
   }
+
+  @media screen and (min-width: 1440px) {
+    padding: 32px 24px;
+    width: 1008px;
+  }
 `;
 
 export const SettingsFormWrapper = styled.div`
@@ -23,20 +42,6 @@ export const SettingsFormWrapper = styled.div`
   @media screen and (min-width: 768px) {
     width: 392px;
   }
-`;
-
-export const BackdropSettingModal = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 44px 20px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  overflow: scroll;
 `;
 
 export const StyledSettingsPasswordDiv = styled.div`
@@ -93,6 +98,10 @@ export const SettingGenderList = styled.ul`
   display: flex;
   gap: 24px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 52px;
+  }
 `;
 
 export const SettingPhotoWrapper = styled.div`
@@ -106,7 +115,6 @@ export const SettingAvatarImg = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 2px solid blue;
 `;
 
 export const ImgDownloadIcon = styled.img`
@@ -126,6 +134,21 @@ export const PhotoInputUploadLabel = styled.label`
   font-weight: 500;
   line-height: 18px;
   color: var(--dark-blue);
+
+  cursor: pointer;
+`;
+
+export const UserDataWrapper = styled.div`
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    gap: 24px;
+  }
+`;
+
+export const GenderInfoDiv = styled.div`
+  @media screen and (min-width: 1440px) {
+    width: 392px;
+  }
 `;
 
 export const StyledYourGenderTitle = styled.h4`
@@ -141,9 +164,12 @@ export const StyledRadioLabel = styled.label`
   font-weight: 400;
   line-height: 20px;
   color: var(--black);
+
+  cursor: pointer;
 `;
 
 export const InputRadioSettings = styled.input`
+  cursor: pointer;
   margin-right: 8px;
 `;
 
@@ -200,6 +226,10 @@ export const NameSettingInput = styled.input`
     line-height: 20px;
     color: #9ebbff;
   }
+
+  @media screen and (min-width: 1440px) {
+    width: 392px;
+  }
 `;
 
 export const PasswordSettingInput = styled.input`
@@ -220,6 +250,10 @@ export const PasswordSettingInput = styled.input`
     line-height: 20px;
     color: #9ebbff;
   }
+
+  @media screen and (min-width: 1440px) {
+    width: 392px;
+  }
 `;
 
 export const SettingsPasswordSvgDiv = styled.div`
@@ -230,12 +264,22 @@ export const BtnEye = styled.button`
   position: absolute;
   top: 30%;
   left: 87%;
+
+  @media screen and (min-width: 1440px) {
+    left: 93%;
+  }
 `;
 
 export const EyeSvg = styled.svg`
+  width: 16px;
+  height: 16px;
   position: absolute;
   top: 30%;
   left: 87%;
+
+  @media screen and (min-width: 1440px) {
+    left: 93%;
+  }
 `;
 
 export const PasswordSettingLabel = styled.label`

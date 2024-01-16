@@ -53,7 +53,6 @@ export const userCurrentThunk = createAsyncThunk(
   "users/current",
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
-    console.log(token);
     setToken(token);
     try {
       if (!token) {
@@ -72,8 +71,10 @@ export const updateAvatarThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await updateAvatar(data);
+      console.log("Avatar updated successfully:", response);
       return response;
     } catch (error) {
+      console.error("Error updating avatar:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
