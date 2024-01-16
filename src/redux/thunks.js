@@ -87,6 +87,7 @@ export const updateUserInfoThunk = createAsyncThunk(
       const response = await updateUserInfo(data);
       return response;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

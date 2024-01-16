@@ -86,29 +86,20 @@ const UserSettings = () => {
     oldPassword,
     gender,
   }) => {
-    try {
-      await dispatch(
-        updateUserInfoThunk({
-          username,
-          email,
-          newPassword,
-          oldPassword,
-          gender,
-        })
-      ).unwrap();
+    await dispatch(
+      updateUserInfoThunk({
+        username,
+        email,
+        newPassword,
+        oldPassword,
+        gender,
+      })
+    ).unwrap();
 
-      setUserGender(gender);
+    setUserGender(gender);
 
-      reset();
-      setTimeout(() => {
-        window.location.reload();
-      }, 1400);
-      toast.success("Changes completed successfully", {
-        autoClose: 1000,
-      });
-    } catch (error) {
-      toast.error(error.message);
-    }
+    reset();
+    window.location.reload();
   };
 
   //======= Avatar File Change ======
