@@ -18,8 +18,10 @@ const ModalContent = () => {
       return "<AddWaterForm />";
     case "DailyNorma":
       return <DailyNorma />;
-    case "UserModal":
+    case "OpenUserModal":
       return <UserModal />;
+    case "UserSettings":
+      return <UserSettings />;
     default:
       return null;
   }
