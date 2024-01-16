@@ -12,7 +12,7 @@ const NormaWater = () => {
 
   const handleEditNorma = () => {
     dispatch(setModalStatus(!modalStatus))
-    dispatch(setModalContent(<DailyNorma />));
+    dispatch(setModalContent('DailyNorma'));
   };
   return (
     <NormaBtnWrapper>
