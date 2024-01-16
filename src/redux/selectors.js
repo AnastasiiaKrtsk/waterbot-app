@@ -4,3 +4,5 @@ export const selectUsername = (state) => state.auth.userData.username;
 export const selectUserEmail = (state) => state.auth.userData.email;
 export const selectUserGender = (state) => state.auth.userData.gender;
 export const selectOpenModal = (state) => state.auth.openModal;
+export const selectModalContent = (state) => state.auth.modalContent;
+export const selectDailyNorma = (state) => state.auth.userData.dailyNorma;
