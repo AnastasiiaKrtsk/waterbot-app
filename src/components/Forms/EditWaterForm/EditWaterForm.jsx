@@ -1,4 +1,5 @@
 import sprite from "../../../images/svg+logo/sprite.svg";
+import BasicTimeField from "../../TimePicker/TimePickerComponent";
 import {
   StyledButtonsWrapper,
   StyledCorrectDataWrapper,
@@ -45,7 +46,7 @@ const EditWaterForm = () => {
 
           <StyledRecordingTimeWrapper>
             <StyledTitle>Recording time:</StyledTitle>
-            {/* <TimePickerComponent/> */}
+            <BasicTimeField/>
           </StyledRecordingTimeWrapper>
         </StyledNewAmountWrapper>
         <StyledEditSubTitle>Enter the value of the water used:</StyledEditSubTitle>

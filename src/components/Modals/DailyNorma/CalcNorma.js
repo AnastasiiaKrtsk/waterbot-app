@@ -1,13 +1,8 @@
-export const calculateV = (gender, weight, activity, setResult) => {
+export const calculateV = (gender, weight, activity) => {
   // Get user inputs
   const weightFloat = parseFloat(weight);
   const activityFloat = parseFloat(activity);
 
-  // Check if inputs are valid numbers
-  // if (isNaN(weightFloat) || isNaN(activityFloat)) {
-  //   alert("Please enter valid numbers for weight and activity.");
-  //   return;
-  // }
 
   // Calculate V using different formulas based on gender
   let activityMultiplier = 0;
@@ -25,5 +20,5 @@ export const calculateV = (gender, weight, activity, setResult) => {
     weightFloat * weightMultiplier + activityFloat * activityMultiplier;
 
   // Set the result state
-  setResult(calculatedResult.toFixed(2));
+  return calculatedResult.toFixed(2)
 };

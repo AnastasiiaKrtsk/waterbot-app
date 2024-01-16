@@ -17,7 +17,7 @@ export const signUpThunk = createAsyncThunk(
       const response = await signup(userData);
       return response;
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(`Email is already in use`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -30,7 +30,7 @@ export const signInThunk = createAsyncThunk(
       const response = await signin(userData);
       return response;
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(`Incorrect email or password`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

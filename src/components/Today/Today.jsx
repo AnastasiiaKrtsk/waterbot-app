@@ -1,7 +1,8 @@
-import { useState } from "react";
 import AddWater from "../Buttons/AddWater/AddWater";
 import DeleteWater from "../Buttons/DeleteWater/DeleteWater";
 import EditWater from "../Buttons/EditWater/EditWater";
+
+import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
 import {
   StyledTodayButtonsWrapper,
   StyledTodayTitle,
@@ -11,31 +12,28 @@ import {
   StyledWaterInfo,
   StyledWaterVolume,
 } from "./Today.styled";
-import Modal from "../Modals/Modal";
 
+import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../images/svg+logo/sprite.svg";
-import EditWaterForm from "../Forms/EditWaterForm/EditWaterForm";
+import { selectOpenModal } from "../../redux/selectors";
+import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Today = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const dispatch = useDispatch();
+
+  const modalStatus = useSelector(selectOpenModal);
 
   const handleEditWater = () => {
-    setModalContent(<EditWaterForm />);
-    setOpenModal(true);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent(<EditWaterForm />));
   };
   const handleDeleteWater = () => {
-    setModalContent("Delete water");
-    setOpenModal(true);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("Delete"));
   };
   const handleAddWater = () => {
-    setModalContent("Add water");
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalContent(null);
-    setOpenModal(false);
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("Add water"));
   };
 
   return (
@@ -43,7 +41,18 @@ const Today = () => {
       <StyledTodayTitle>Today</StyledTodayTitle>
 
       <StyledTodayWaterList>
-
+        <StyledTodayWaterItem>
+          <StyledWaterInfo>
+            <svg width={"36px"} height={"36px"}>
+              <use href={sprite + "#icon-water-glass"}></use>
+            </svg>
+            <StyledWaterVolume>250ml</StyledWaterVolume> Time
+          </StyledWaterInfo>
+          <StyledTodayButtonsWrapper>
+            <EditWater onClick={handleEditWater} />
+            <DeleteWater onClick={handleDeleteWater} />
+          </StyledTodayButtonsWrapper>
+        </StyledTodayWaterItem>
         <StyledTodayWaterItem>
           <StyledWaterInfo>
             <svg width={"36px"} height={"36px"}>
@@ -69,27 +78,9 @@ const Today = () => {
             <DeleteWater onClick={handleDeleteWater} />
           </StyledTodayButtonsWrapper>
         </StyledTodayWaterItem>
-
-        <StyledTodayWaterItem>
-          <StyledWaterInfo>
-            <svg width={"36px"} height={"36px"}>
-              <use href={sprite + "#icon-water-glass"}></use>
-            </svg>
-            <StyledWaterVolume>250ml</StyledWaterVolume> Time
-          </StyledWaterInfo>
-          <StyledTodayButtonsWrapper>
-            <EditWater onClick={handleEditWater} />
-            <DeleteWater onClick={handleDeleteWater} />
-          </StyledTodayButtonsWrapper>
-        </StyledTodayWaterItem>
-
       </StyledTodayWaterList>
 
-      <AddWater onClick={handleAddWater}/>
-
-      <Modal open={openModal} onClose={handleCloseModal}>
-        {modalContent}
-      </Modal>
+      <AddWater onClick={handleAddWater} />
     </StyledTodayWrapper>
   );
 };
