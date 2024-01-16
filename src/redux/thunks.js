@@ -53,7 +53,6 @@ export const userCurrentThunk = createAsyncThunk(
   "users/current",
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
-    console.log(token);
     setToken(token);
     try {
       if (!token) {
@@ -67,27 +66,15 @@ export const userCurrentThunk = createAsyncThunk(
   }
 );
 
-// export const updateAvatarThunk = createAsyncThunk(
-//   "user/updateAvatar",
-//   async (data, thunkAPI) => {
-//     try {
-//       const response = await updateAvatar(data);
-//       return response;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const updateAvatarThunk = createAsyncThunk(
   "user/updateAvatar",
   async (data, thunkAPI) => {
     try {
       const response = await updateAvatar(data);
-      console.log("Avatar updated successfully:", response); // Добавленное логирование
+      console.log("Avatar updated successfully:", response);
       return response;
     } catch (error) {
-      console.error("Error updating avatar:", error); // Добавленное логирование
+      console.error("Error updating avatar:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

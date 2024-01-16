@@ -30,7 +30,6 @@ const Layout = () => {
   const token = useSelector(selectToken);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
-  console.log("avatar-name", avatar, name);
   //*modal
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
