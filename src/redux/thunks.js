@@ -7,7 +7,7 @@ import {
   signup,
   updateAvatar,
   updateUserInfo,
-} from "../service/authApi";
+} from "../service/api";
 import { toast } from "react-toastify";
 
 export const signUpThunk = createAsyncThunk(
