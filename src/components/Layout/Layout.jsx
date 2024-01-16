@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logoIcon from "../../images/svg+logo/logo-icon.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 import {
   selectAvatarUrl,
@@ -37,7 +36,8 @@ const Layout = () => {
   const modalStatus = useSelector(selectOpenModal);
 
   const handleOpenUserModal = () => {
-    dispatch(setModalContent("UserModal"));
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("OpenUserModal"));
   };
 
   //*modal
@@ -49,6 +49,7 @@ const Layout = () => {
   // const handleCloseUserModal = () => {
   //   setIsUserModalOpen(false);
   // };
+
   return (
     <>
       {token ? (
@@ -80,11 +81,6 @@ const Layout = () => {
                 </DivWrapper>
               </SignIn>
             </WrapperHeader>
-
-            <UserModal
-              handleClose={handleCloseUserModal}
-              isModalOpen={isUserModalOpen}
-            />
           </header>
 
           <main>
