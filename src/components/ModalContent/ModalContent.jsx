@@ -4,6 +4,7 @@ import EditWaterForm3 from "../Forms/EditWaterForm/EditWaterForm3";
 // import AddWaterForm from "../Forms/AddWaterForm/AddWaterForm";
 import { selectModalContent } from "../../redux/selectors";
 import DailyNorma from "../Modals/DailyNorma/DailyNorma";
+import UserModal from "../Layout/UserModal/UserModal";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);
@@ -14,9 +15,11 @@ const ModalContent = () => {
     case "Delete":
       return "Delete";
     case "Add water":
-      return '<AddWaterForm />';
+      return "<AddWaterForm />";
     case "DailyNorma":
       return <DailyNorma />;
+    case "UserModal":
+      return <UserModal />;
     default:
       return null;
   }

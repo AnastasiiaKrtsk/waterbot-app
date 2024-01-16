@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logoIcon from "../../images/svg+logo/logo-icon.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import {
@@ -25,20 +25,30 @@ import {
 import sprite from "../../images/svg+logo/sprite.svg";
 import UserModal from "./UserModal/UserModal";
 import Loader from "../Loader/Loader";
+import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Layout = () => {
   const token = useSelector(selectToken);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
-  //*modal
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const modalStatus = useSelector(selectOpenModal);
 
   const handleOpenUserModal = () => {
-    setIsUserModalOpen(true);
+    dispatch(setModalContent("UserModal"));
   };
-  const handleCloseUserModal = () => {
-    setIsUserModalOpen(false);
-  };
+
+  //*modal
+  // const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+
+  // const handleOpenUserModal = () => {
+  //   setIsUserModalOpen(true);
+  // };
+  // const handleCloseUserModal = () => {
+  //   setIsUserModalOpen(false);
+  // };
   return (
     <>
       {token ? (

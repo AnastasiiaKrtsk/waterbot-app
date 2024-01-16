@@ -1,7 +1,3 @@
-import { createPortal } from "react-dom";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-
 import {
   BackdropUserMenu,
   MenuBtnSvg,
@@ -15,62 +11,63 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectOpenModal } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 
-const UserModal = ({ handleClose, isModalOpen }) => {
-  const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
-  const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
+const UserModal = () => {
+  // const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
+  // const [isLogOutOpen, setIsLogoutModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
   const modalStatus = useSelector(selectOpenModal);
 
-  // const normaRoot = document.getElementById("modal");
-
-  // *Settings Modal
-
-  const handleOpenModal = () => {
+  const handleEditWater = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("UserSettings"));
   };
 
-  const handleCloseModal = () => {
-    setIsModalSettingsOpen(false);
-  };
+  // *Settings Modal
+
+  // const handleOpenModal = () => {
+  //   dispatch(setModalStatus(!modalStatus));
+  //   dispatch(setModalContent("UserSettings"));
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsModalSettingsOpen(false);
+  // };
 
   // *Log Out
 
-  const handleLogOutOpenModal = () => {
-    setIsLogoutModalOpen(true);
-  };
+  // const handleLogOutOpenModal = () => {
+  //   setIsLogoutModalOpen(true);
+  // };
 
-  const handleLogOutCloseModal = () => {
-    setIsLogoutModalOpen(false);
-  };
+  // const handleLogOutCloseModal = () => {
+  //   setIsLogoutModalOpen(false);
+  // };
 
   // *MODAL SETUP
-  const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      handleClose();
-    }
-  };
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.code === "Escape" && isModalOpen) {
-        handleClose();
-      }
-    };
-    const handleBodyOverflow = () => {
-      document.body.style.overflow = isModalOpen ? "hidden" : "auto";
-    };
-    handleBodyOverflow();
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleClose, isModalOpen]);
+  // const handleOverlayClick = (event) => {
+  //   if (event.target === event.currentTarget) {
+  //     handleClose();
+  //   }
+  // };
+  // useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     if (event.code === "Escape" && isModalOpen) {
+  //       handleClose();
+  //     }
+  //   };
+  //   const handleBodyOverflow = () => {
+  //     document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+  //   };
+  //   handleBodyOverflow();
+  //   window.addEventListener("keydown", handleKeyDown);
+  //   return () => {
+  //     window.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, [handleClose, isModalOpen]);
   // *MODAL SETUP
 
-  // return isModalOpen
-  // ? createPortal(
   return (
     <BackdropUserMenu onClick={handleOverlayClick}>
       <ModalUserMenu>
@@ -100,13 +97,7 @@ const UserModal = ({ handleClose, isModalOpen }) => {
         />
       </ModalUserMenu>
     </BackdropUserMenu>
-    // normaRoot
-    // : null;
   );
-};
-UserModal.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
 };
 
 export default UserModal;
