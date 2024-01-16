@@ -13,10 +13,10 @@ import PublicRoute from "./components/PublicRoute/PublicRoute";
 // import SignInPage from "./pages/SignInPage/SignInPage";
 // import SignUpPage from "./pages/SignUpPage/SignUpPage";
 // import WelcomePage from "./pages/WelcomePage/WelcomePage";
-import { userCurrentThunk } from "./redux/thunks";
-import { selectModalContent, selectOpenModal } from "./redux/selectors";
+import { selectOpenModal } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
+// import { userCurrentThunk } from "./redux/thunks";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
