@@ -85,12 +85,6 @@ const SimpleForm = () => {
                     borderRadius: "6px",
                     color: "var(--dark-blue)",
                   },
-                  "& .MuiTextField-root": {
-                    borderColor: "var(--dark-blue)",
-                  },
-                  "& .MuiOutlinedInput-root": {
-                    "&:hover": { borderColor: "red" },
-                  },
                   // ----------------
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -158,7 +152,7 @@ const SimpleForm = () => {
           <StyledSaveBtn
             type="submit"
             // variant="contained"
-            color="primary"
+            color="primary"uiOutlinedInput-root
             // fullWidth
           >
             Save
