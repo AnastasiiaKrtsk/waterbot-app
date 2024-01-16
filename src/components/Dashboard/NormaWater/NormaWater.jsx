@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NormaBtnWrapper, NormaResultDiv, StyledEditBtn, StyledNormaTitle, StyledNormaVolume } from "./NormaBtn.styled";
+import { NormaBtnWrapper, NormaResultDiv, StyledEditBtn, StyledNormaTitle, StyledNormaVolume } from "./NormaWater.styled";
 import { selectOpenModal } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import DailyNorma from "../../Modals/DailyNorma/DailyNorma";

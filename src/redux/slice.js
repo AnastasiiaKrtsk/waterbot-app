@@ -14,7 +14,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman",
-    dailyNorma: null,
+    dailyNorma: 1.8,
   },
   token: null,
   error: null,
@@ -33,6 +33,9 @@ const authSlice = createSlice({
     },
     setModalContent:(state, action) => {
       state.modalContent=action.payload
+    },
+    setDailyNorma: (state,action) => {
+      state.userData.dailyNorma = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -139,5 +142,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setModalStatus, setModalContent } = authSlice.actions;
+export const { setModalStatus, setModalContent, setDailyNorma } = authSlice.actions;
 export const authReducer = authSlice.reducer;
