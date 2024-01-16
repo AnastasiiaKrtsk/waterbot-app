@@ -97,7 +97,6 @@ const SimpleForm = () => {
                       borderRadius: "6px",
                       border: "1.5px solid var(--dark-blue)",
                       color: "var(--dark-blue)",
-                      // background: "var(--Primery-Color-White, #FFF)",
                     },
                   },
                 }}
@@ -130,7 +129,6 @@ const SimpleForm = () => {
                     borderRadius: "6px",
                     border: "1.5px solid var(--dark-blue)",
                     color: "var(--dark-blue)",
-                    // background: "var(--Primery-Color-White, #FFF)",
                   },
                 },
                 "& .MuiInputBase-root": {
@@ -139,9 +137,6 @@ const SimpleForm = () => {
                 },
               }}
               name="waterVolume"
-              // variant="outlined"
-              // fullWidth
-              // margin="normal"
               type="number"
               inputProps={{
                 min: 1,
@@ -151,9 +146,7 @@ const SimpleForm = () => {
           </StyledUsedWater>
           <StyledSaveBtn
             type="submit"
-            // variant="contained"
             color="primary"uiOutlinedInput-root
-            // fullWidth
           >
             Save
           </StyledSaveBtn>
