@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logoIcon from "../../images/svg+logo/logo-icon.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 import {
   selectAvatarUrl,
@@ -31,7 +30,6 @@ const Layout = () => {
   const token = useSelector(selectToken);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
-  console.log("avatar-name", avatar, name);
 
   const dispatch = useDispatch();
 

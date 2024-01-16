@@ -5,6 +5,8 @@ import EditWaterForm3 from "../Forms/EditWaterForm/EditWaterForm3";
 import { selectModalContent } from "../../redux/selectors";
 import DailyNorma from "../Modals/DailyNorma/DailyNorma";
 import UserModal from "../Layout/UserModal/UserModal";
+import UserSettings from "../Modals/UserSettings/UserSettings";
+import AreYouSureModal from "../Modals/AreYouSure/AreYouSureModal";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);
@@ -22,6 +24,8 @@ const ModalContent = () => {
       return <UserModal />;
     case "UserSettings":
       return <UserSettings />;
+    case "LogOut":
+      return <AreYouSureModal />;
     default:
       return null;
   }

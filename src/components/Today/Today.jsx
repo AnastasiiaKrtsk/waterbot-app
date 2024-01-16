@@ -24,7 +24,7 @@ const Today = () => {
 
   const handleEditWater = () => {
     dispatch(setModalStatus(!modalStatus));
-    dispatch(setModalContent('EditWaterForm'));
+    dispatch(setModalContent("EditWaterForm"));
   };
   const handleDeleteWater = () => {
     dispatch(setModalStatus(!modalStatus));
