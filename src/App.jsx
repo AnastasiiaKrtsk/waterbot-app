@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/Layout/Layout";
+import ModalContent from "./components/ModalContent/ModalContent";
 import Modal from "./components/Modals/Modal";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
@@ -12,15 +13,15 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
-import { userCurrentThunk } from "./redux/thunks";
-import { selectModalContent, selectOpenModal } from "./redux/selectors";
+import { selectOpenModal } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
+import { userCurrentThunk } from "./redux/thunks";
 
 const App = () => {
   const dispatch = useDispatch();
 
   const modalStatus = useSelector(selectOpenModal);
-  const modalContent = useSelector(selectModalContent);
+
 
   useEffect(() => {
     dispatch(userCurrentThunk());
@@ -52,7 +53,7 @@ const App = () => {
       </Routes>
 
       <Modal open={modalStatus} onClose={handleCloseModal}>
-        {modalContent || null}
+        {<ModalContent/> || null}
       </Modal>
 
       <ToastContainer position="top-center" autoClose={3000} />
