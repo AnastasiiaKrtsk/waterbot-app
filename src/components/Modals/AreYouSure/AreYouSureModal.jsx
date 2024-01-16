@@ -59,21 +59,22 @@ const AreYouSureModal = ({
     ? createPortal(
         <LogOutBackdrop onClick={handleOverlayClick}>
           <StyledModalWindow className="container" isModalOpen={isModalOpen}>
-            <LogOutCrossDiv>
-              <LogOutTitle>{title}</LogOutTitle>
-              <svg width="24" height="24" onClick={handleClose}>
-                <use href={`${sprite}#icon-outline`} />
-              </svg>
-            </LogOutCrossDiv>
-            <LogOutPar>{message}</LogOutPar>
-            <LogOutBntDiv>
-              <StyledLogOutButton onClick={handleLogOut}>
-                {firstButton}
-              </StyledLogOutButton>
-              <StyledCancelButton onClick={handleClose}>
-                {cancelButton}
-              </StyledCancelButton>
-            </LogOutBntDiv>
+
+          <LogOutCrossDiv>
+            <LogOutTitle>{title}</LogOutTitle>
+            <svg width="24" height="24" onClick={handleClose}>
+              <use href={`${sprite}#icon-outline`} />
+            </svg>
+          </LogOutCrossDiv>
+          <LogOutPar>{message}</LogOutPar>
+          <LogOutBntDiv>
+            <StyledLogOutButton onClick={handleLogOut}>
+              {firstButton}
+            </StyledLogOutButton>
+            <StyledCancelButton onClick={handleClose}>
+              {cancelButton}
+            </StyledCancelButton>
+          </LogOutBntDiv>
           </StyledModalWindow>
         </LogOutBackdrop>,
         modalRoot

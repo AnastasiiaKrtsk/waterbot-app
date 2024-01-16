@@ -1,24 +1,29 @@
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { TimeField } from "@mui/x-date-pickers/TimeField";
+import dayjs from "dayjs";
+import { useState } from "react";
 
-const TimePickerComponent = () => {
+export default function BasicTimeField() {
+  const [value, setValue] = useState(dayjs("2022-04-17T15:30"));
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={["TimePicker"]}>
-        <TimePicker
-          label="With Time Clock"
-          viewRenderers={{
-            hours: renderTimeViewClock,
-            minutes: renderTimeViewClock,
-            seconds: renderTimeViewClock,
-          }}
-        />
-      </DemoContainer>
+      <TimeField
+        sx={{
+          width: "544px",
+          "& .MuiOutlinedInput-root": {
+            padding: "12px 10px",
+          },
+
+          "& .MuiOutlinedInput-input":{
+            padding:0
+          }
+        }}
+        // label="Format without meridiem"
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        format="HH:mm"
+      />
     </LocalizationProvider>
   );
-};
-
-export default TimePickerComponent;
+}
