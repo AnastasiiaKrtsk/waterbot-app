@@ -29,7 +29,6 @@ const App = () => {
 
   const modalStatus = useSelector(selectOpenModal);
 
-
   useEffect(() => {
     dispatch(userCurrentThunk());
   }, [dispatch]);
@@ -60,7 +59,7 @@ const App = () => {
       </Routes>
 
       <Modal open={modalStatus} onClose={handleCloseModal}>
-        {<ModalContent/> || null}
+        {<ModalContent />}
       </Modal>
 
       <ToastContainer position="top-center" autoClose={3000} />
