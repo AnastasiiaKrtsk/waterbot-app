@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -7,15 +7,21 @@ import Layout from "./components/Layout/Layout";
 import Modal from "./components/Modals/Modal"; // Import the Modal component
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
-import HomePage from "./pages/HomePage/HomePage";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import SignInPage from "./pages/SignInPage/SignInPage";
-import SignUpPage from "./pages/SignUpPage/SignUpPage";
-import WelcomePage from "./pages/WelcomePage/WelcomePage";
+// import HomePage from "./pages/HomePage/HomePage";
+// import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+// import SignInPage from "./pages/SignInPage/SignInPage";
+// import SignUpPage from "./pages/SignUpPage/SignUpPage";
+// import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import { userCurrentThunk } from "./redux/thunks";
 // import "./App.css"; // Import your styles or any other necessary imports
 import { selectOpenModal } from "./redux/selectors";
 import { setModalStatus } from "./redux/slice";
+
+const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
+const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,7 +42,7 @@ const App = () => {
   // };
 
   const handleCloseModal = () => {
-    dispatch(setModalStatus(false))
+    dispatch(setModalStatus(false));
   };
 
   return (
