@@ -14,7 +14,7 @@ import {
   StyledProgressWrapper,
   StyledWaterInfoWrapper,
 } from "./Dashboard.styled";
-import NormaWater from "./NormaBtn/NormaWater";
+import NormaWater from "./NormaWater/NormaWater";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
