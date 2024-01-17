@@ -13,11 +13,9 @@ const ModalContent = () => {
 
   switch (modalContent) {
     case "EditWaterForm":
-      return <EditWaterForm3 />;
-    case "Delete":
-      return "Delete";
+      return <EditWaterForm3 action="edit"/>;
     case "Add water":
-      return "<AddWaterForm />";
+      return <EditWaterForm3 action="add"/>;
     case "DailyNorma":
       return <DailyNorma />;
     case "OpenUserModal":
@@ -25,7 +23,9 @@ const ModalContent = () => {
     case "UserSettings":
       return <UserSettings />;
     case "LogOut":
-      return <AreYouSureModal />;
+      return <AreYouSureModal title="Log out" message="Do you really want to leave?" buttonText="Log out" action="logOut"/>;
+    case "Delete":
+      return <AreYouSureModal title="Delete entry" message="Are you sure you want to delete the entry?" buttonText="Delete" action="delete"/>;
     default:
       return null;
   }

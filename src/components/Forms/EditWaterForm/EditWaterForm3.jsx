@@ -1,8 +1,11 @@
 import { TextField } from "@mui/material";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import { setModalStatus } from "../../../redux/slice";
 import {
   StyledButtonsWrapper,
   StyledCurrentValue,
@@ -14,12 +17,20 @@ import {
   StyledNewAmountWrapper,
   StyledRecordingTimeWrapper,
   StyledSaveBtn,
+  StyledSpan,
+  StyledSvg,
   StyledTitle,
   StyledUsedWater,
+  StyledWrapper,
 } from "./EditWaterForm.styled";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 
-const SimpleForm = () => {
+const SimpleForm = ({ action }) => {
+  const dispatch = useDispatch();
+
+  const handleCloseUserModal = () => {
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent(null));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -35,16 +46,33 @@ const SimpleForm = () => {
     <>
       <>
         <StyledForm onSubmit={handleSubmit}>
-          <StyledEditTitle>Edit the entered amount of water</StyledEditTitle>
-          <StyledCurrentValue>
-            <svg width={"36px"} height={"36px"}>
-              <use href={sprite + "#icon-water-glass"}></use>
-            </svg>
-            <div>250 ml</div>
-            <div>Time</div>
-          </StyledCurrentValue>
+          <StyledSvg width="24" height="24" onClick={handleCloseUserModal}>
+            <use href={`${sprite}#icon-outline`} />
+          </StyledSvg>
+          {action === "edit" ? (
+            <>
+              <StyledEditTitle>
+                Edit the entered amount of water
+              </StyledEditTitle>
+
+              <StyledCurrentValue>
+                <svg width={"36px"} height={"36px"}>
+                  <use href={sprite + "#icon-water-glass"}></use>
+                </svg>
+                <div>250 ml</div>
+                <div>Time</div>
+              </StyledCurrentValue>
+            </>
+          ) : (
+            <StyledEditTitle>Add water</StyledEditTitle>
+          )}
 
           <StyledNewAmountWrapper>
+            {action === "edit" ? (
+              <StyledEditSubTitle>Correct entered data:</StyledEditSubTitle>
+            ) : (
+              <StyledEditSubTitle>Choose a value:</StyledEditSubTitle>
+            )}
             <StyledTitle>Amount of water:</StyledTitle>
             <StyledButtonsWrapper>
               <StyledIncreaseDecreaseBtn>
@@ -145,9 +173,12 @@ const SimpleForm = () => {
             />
           </StyledUsedWater>
           {/* TODO додати WaterAmount*/}
-          <StyledSaveBtn type="submit" color="primary" uiOutlinedInput-root>
-            Save
-          </StyledSaveBtn>
+          <StyledWrapper>
+            <StyledSpan>20ml</StyledSpan>
+            <StyledSaveBtn type="submit" color="primary">
+              Save
+            </StyledSaveBtn>
+          </StyledWrapper>
         </StyledForm>
       </>
     </>

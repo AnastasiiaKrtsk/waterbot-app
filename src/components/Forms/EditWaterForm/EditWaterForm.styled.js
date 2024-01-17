@@ -11,6 +11,19 @@ export const StyledForm = styled.form`
   background: #fff;
 
   width: 592px;
+  position: relative;
+`;
+
+export const StyledSvg = styled.svg`
+  position: absolute;
+  right: 24px;
+  top: 36px;
+  cursor: pointer;
+`;
+
+export const StyledTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const StyledEditTitle = styled.h2`
@@ -143,4 +156,19 @@ export const StyledSaveBtn = styled.button`
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
   width: 160px;
   height: 44px;
+`;
+
+export const StyledWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: 24px;
+`;
+
+export const StyledSpan = styled.span`
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--dark-blue);
 `;
