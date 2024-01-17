@@ -71,6 +71,16 @@ export const updateUserSchema = yup.object().shape({
 });
 
 export const DailyNormaUsrInputSchema = yup.object().shape({
-  dailyNorma: yup.number().max(5, "Maximum 5 L"),
-  // .transform((value) => (value === "" ? undefined : value)),
+  dailyNorma: yup
+    .number()
+    .min(1)
+    .max(15, "Maximum 15 L")
+    .nullable()
+    .transform((value, originalValue) => {
+      if (originalValue === "" || isNaN(originalValue)) {
+        return null;
+      }
+      return value;
+    })
+    .positive(),
 });

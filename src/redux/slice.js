@@ -15,7 +15,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman" || "man",
-    dailyNorma: 1.8,
+    dailyNorma: "2",
   },
   token: null,
   error: null,
@@ -35,9 +35,9 @@ const authSlice = createSlice({
     setModalContent: (state, action) => {
       state.modalContent = action.payload;
     },
-    // setDailyNorma: (state, action) => {
-    //   state.userData.dailyNorma = action.payload;
-    // },
+    setDailyNorma: (state, action) => {
+      state.userData.dailyNorma = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -141,7 +141,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      //========== Update Daily Norma =================//
+      // ========== Update Daily Norma =================//
       .addCase(editDailyNormaThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
