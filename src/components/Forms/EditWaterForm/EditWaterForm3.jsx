@@ -1,20 +1,23 @@
-import { Box, Button, Container, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import moment from "moment";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import {
   StyledButtonsWrapper,
   StyledCurrentValue,
   StyledEditSubTitle,
   StyledEditTitle,
+  StyledForm,
   StyledIncreaseDecreaseBtn,
   StyledNewAmount,
   StyledNewAmountWrapper,
   StyledRecordingTimeWrapper,
+  StyledSaveBtn,
   StyledTitle,
+  StyledUsedWater,
 } from "./EditWaterForm.styled";
-import moment from "moment";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 
 const SimpleForm = () => {
   const handleSubmit = (e) => {
@@ -29,9 +32,9 @@ const SimpleForm = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box mt={5}>
-        <form onSubmit={handleSubmit}>
+    <>
+      <>
+        <StyledForm onSubmit={handleSubmit}>
           <StyledEditTitle>Edit the entered amount of water</StyledEditTitle>
           <StyledCurrentValue>
             <svg width={"36px"} height={"36px"}>
@@ -65,11 +68,36 @@ const SimpleForm = () => {
                 <DemoItem>
                   <TimePicker
                     sx={{
+                      width: "544px",
+                      "& .MuiInputBase-input:hover": { borderColor: "red" },
+                      "& .MuiTextField-root": {
+                        "&:hover": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                      },
                       "& .MuiSvgIcon-root": { fill: "var(--dark-blue)" },
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        "&:hover": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                      },
                       "& .MuiInputBase-root": {
-                        border: "1px solid var(--light-blue-2)",
                         borderRadius: "6px",
                         color: "var(--dark-blue)",
+                      },
+                      // ----------------
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "var(--light-blue-3)",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "var(--dark-blue)",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderRadius: "6px",
+                          border: "1.5px solid var(--dark-blue)",
+                          color: "var(--dark-blue)",
+                        },
                       },
                     }}
                     name="time"
@@ -77,34 +105,52 @@ const SimpleForm = () => {
                     format="hh:mm a"
                     timeSteps={{ minutes: 1 }}
                     ampm={true}
-                    // value={formData.time ? new Date(`2000-01-01T${formData.time}`) : null}
                   />
                 </DemoItem>
               </DemoContainer>
             </LocalizationProvider>
           </StyledRecordingTimeWrapper>
 
-          <StyledEditSubTitle>
-            Enter the value of the water used:
-          </StyledEditSubTitle>
-
-          <TextField
-            name="waterVolume"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="number"
-            inputProps={{
-              min: 1,
-              max: 15000,
-            }}
-          />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <StyledUsedWater>
+            <StyledEditSubTitle>
+              Enter the value of the water used:
+            </StyledEditSubTitle>
+            <TextField
+              sx={{
+                width: "544px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "var(--light-blue-3)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "var(--dark-blue)",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderRadius: "6px",
+                    border: "1.5px solid var(--dark-blue)",
+                    color: "var(--dark-blue)",
+                  },
+                },
+                "& .MuiInputBase-root": {
+                  borderRadius: "6px",
+                  color: "var(--dark-blue)",
+                },
+              }}
+              name="waterVolume"
+              type="number"
+              inputProps={{
+                min: 1,
+                max: 15000,
+              }}
+            />
+          </StyledUsedWater>
+          {/* TODO додати WaterAmount*/}
+          <StyledSaveBtn type="submit" color="primary" uiOutlinedInput-root>
             Save
-          </Button>
-        </form>
-      </Box>
-    </Container>
+          </StyledSaveBtn>
+        </StyledForm>
+      </>
+    </>
   );
 };
 

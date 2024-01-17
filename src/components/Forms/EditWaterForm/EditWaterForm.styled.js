@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEditFormWrapper = styled.div`
+export const StyledForm = styled.form`
   display: flex;
   padding: 32px 24px;
   flex-direction: column;
@@ -109,15 +109,23 @@ export const StyledNewAmount = styled.div`
 export const StyledRecordingTimeWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 12px;
 `;
 
 export const StyledRecordingTimeTitle = styled.div``;
+
+export const StyledUsedWater = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export const StyledSaveBtn = styled.button`
   display: flex;
   padding: 10px 30px;
   justify-content: center;
   align-items: center;
+  align-self: flex-end;
   gap: 10px;
 
   text-align: center;
@@ -133,6 +141,6 @@ export const StyledSaveBtn = styled.button`
   border-radius: 10px;
   background: var(--dark-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 178px;
+  width: 160px;
   height: 44px;
 `;
