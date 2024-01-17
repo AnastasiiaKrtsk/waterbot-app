@@ -59,13 +59,13 @@ export const getWater = async () => {
   return data;
 };
 
-export const addWater = async (data) => {
-  const { data } = await $instance.post("/water/", data);
+export const addWater = async (water) => {
+  const { data } = await $instance.post("/water/", water);
   return data;
 };
 
-export const editWater = async ({ id, data }) => {
-  const { data } = await $instance.patch(`/water/${id}`, data);
+export const editWater = async ({ id, water }) => {
+  const { data } = await $instance.patch(`/water/${id}`, water);
   return data;
 };
 
