@@ -31,7 +31,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
     flexDirection: "column",
     alignItems: "flex-start",
     gap: "16px",
-    color:"var(--dark-blue)"
+    color:"var(--dark-blue)",
   },
 });
 
@@ -61,11 +61,6 @@ const Month = () => {
     (_, index) => index + 1
   );
 
-  const longText = `
-Aliquam eget finibus ante, non facilisis lectus. Sed vitae dignissim est, vel aliquam tellus.
-Praesent non nunc mollis, fermentum neque at, semper arcu.
-Nullam eget est sed sem iaculis gravida eget vitae justo.
-`;
   return (
     <div>
       <StyledMonthWrapper>
@@ -91,7 +86,7 @@ Nullam eget est sed sem iaculis gravida eget vitae justo.
           : "top-end";
           return (
 
-            <CustomWidthTooltip title={day} key={day} placement={placement}>
+            <CustomWidthTooltip title={day+", "+shownDate.format("MMMM")} key={day} placement={placement}>
             <StyledWaterListItemWrapper key={day}>
               <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
               <StyledPercentage>0%</StyledPercentage>
