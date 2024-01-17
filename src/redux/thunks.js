@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addWater,
   currentUser,
+  getWaterDay,
   logout,
   setToken,
   signin,
@@ -29,6 +30,7 @@ export const signInThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await signin(userData);
+      thunkAPI.dispatch(getWaterDayThunk());
       return response;
     } catch (error) {
       toast.error(`Incorrect email or password`);
@@ -99,10 +101,36 @@ export const addWaterThunk = createAsyncThunk(
   async (water, thunkAPI) => {
     try {
       const response = await addWater(water);
-      console.log(response);
+      thunkAPI.dispatch(getWaterDayThunk());
       return response;
     } catch (error) {
-      toast.error(`error`);
+      toast.error("Error add water:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getWaterDayThunk = createAsyncThunk(
+  "waters/getWaterDay",
+  async (_, thunkAPI) => {
+    try {
+      const response = await getWaterDay();
+      return response;
+    } catch (error) {
+      toast.error("Error get water for this day:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getWaterMonthThunk = createAsyncThunk(
+  "waters/getWaterDay",
+  async (_, thunkAPI) => {
+    try {
+      const response = await getWaterDay();
+      return response;
+    } catch (error) {
+      toast.error("Error get water for this day:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

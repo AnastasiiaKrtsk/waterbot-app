@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addWaterThunk,
+  getWaterDayThunk,
   logOutThunk,
   signInThunk,
   signUpThunk,
@@ -23,6 +24,10 @@ const initialState = {
   isLoading: false,
   openModal: false,
   modalContent: null,
+  water: {
+    todayWater: [],
+    monthWater: [],
+  },
 };
 
 const authSlice = createSlice({
@@ -151,6 +156,18 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(addWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getWaterDayThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getWaterDayThunk.fulfilled, (state, action) => {
+        state.water.todayWater.push(action.payload);
+        state.isLoading = false;
+      })
+      .addCase(getWaterDayThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
