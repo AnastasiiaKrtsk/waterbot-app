@@ -45,6 +45,7 @@ const SimpleForm = () => {
           </StyledCurrentValue>
 
           <StyledNewAmountWrapper>
+            <StyledEditSubTitle>Correct entered data:</StyledEditSubTitle>
             <StyledTitle>Amount of water:</StyledTitle>
             <StyledButtonsWrapper>
               <StyledIncreaseDecreaseBtn>
