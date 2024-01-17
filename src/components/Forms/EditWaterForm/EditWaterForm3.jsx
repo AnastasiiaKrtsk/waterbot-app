@@ -39,9 +39,9 @@ const SimpleForm = ({ action }) => {
     const formData = new FormData(e.target);
 
     const waterVolume = formData.get("waterVolume");
-    const date = moment(formData.get("date"), "h:mm a").format();
-
-    console.log({ waterVolume, date });
+    const date = moment(formData.get("date"), "hh:mm a").format(
+      "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+    );
 
     dispatch(addWaterThunk({ waterVolume, date }))
       .unwrap()
