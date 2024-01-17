@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEditFormWrapper = styled.div`
+export const StyledForm = styled.form`
   display: flex;
   padding: 32px 24px;
   flex-direction: column;
@@ -11,6 +11,19 @@ export const StyledEditFormWrapper = styled.div`
   background: #fff;
 
   width: 592px;
+  position: relative;
+`;
+
+export const StyledSvg = styled.svg`
+  position: absolute;
+  right: 24px;
+  top: 36px;
+  cursor: pointer;
+`;
+
+export const StyledTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const StyledEditTitle = styled.h2`
@@ -109,15 +122,23 @@ export const StyledNewAmount = styled.div`
 export const StyledRecordingTimeWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 12px;
 `;
 
 export const StyledRecordingTimeTitle = styled.div``;
+
+export const StyledUsedWater = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export const StyledSaveBtn = styled.button`
   display: flex;
   padding: 10px 30px;
   justify-content: center;
   align-items: center;
+  align-self: flex-end;
   gap: 10px;
 
   text-align: center;
@@ -133,6 +154,21 @@ export const StyledSaveBtn = styled.button`
   border-radius: 10px;
   background: var(--dark-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 178px;
+  width: 160px;
   height: 44px;
+`;
+
+export const StyledWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: 24px;
+`;
+
+export const StyledSpan = styled.span`
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--dark-blue);
 `;
