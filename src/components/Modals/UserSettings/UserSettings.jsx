@@ -106,6 +106,12 @@ const UserSettings = () => {
     reset();
 
     //для релоаду стр. після оновлення данних с серверу
+    // window.location.reload();
+
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent(null));
+
+    //для релоаду стр. після оновлення данних с серверу
     window.location.reload();
   };
 
