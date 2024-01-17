@@ -92,3 +92,18 @@ export const updateUserInfoThunk = createAsyncThunk(
     }
   }
 );
+
+//dailyNorma
+
+export const editDailyNormaThunk = createAsyncThunk(
+  "users/editDailyNorma",
+  async (data, thunkAPI) => {
+    try {
+      const response = await editDailyNorma(data);
+      return response;
+    } catch (error) {
+      toast.error(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

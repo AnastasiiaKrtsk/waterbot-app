@@ -73,3 +73,11 @@ export const deleteWater = async (id) => {
   const { data } = await $instance.delete(`/water/${id}`);
   return { id, data };
 };
+
+//*dailyNorma
+export const editDailyNorma = async (water) => {
+  const { data } = await $instance.patch("/users/dailynorm", water);
+  console.log(data);
+  return data;
+};
+// editDailyNorma();

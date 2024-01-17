@@ -172,7 +172,9 @@ export const InputRadioSettings = styled.input`
   margin-right: 8px;
 `;
 
-export const StyledCloseSvg = styled.svg``;
+export const StyledCloseSvg = styled.svg`
+  cursor: pointer;
+`;
 
 export const BtnSettingSave = styled.button`
   display: flex;
