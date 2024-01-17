@@ -51,3 +51,25 @@ export const updateUserInfo = async (data) => {
   const response = await $instance.patch("/users/update", data);
   return response.data;
 };
+
+//WaterQuery
+
+export const getWater = async () => {
+  const { data } = await $instance.get("/water/");
+  return data;
+};
+
+export const addWater = async (water) => {
+  const { data } = await $instance.post("/water/", water);
+  return data;
+};
+
+export const editWater = async ({ id, water }) => {
+  const { data } = await $instance.patch(`/water/${id}`, water);
+  return data;
+};
+
+export const deleteWater = async (id) => {
+  const { data } = await $instance.delete(`/water/${id}`);
+  return { id, data };
+};
