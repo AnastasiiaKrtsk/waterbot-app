@@ -3,6 +3,7 @@ import {
   addWater,
   currentUser,
   getWaterDay,
+  getWaterMonth,
   logout,
   setToken,
   signin,
@@ -124,13 +125,26 @@ export const getWaterDayThunk = createAsyncThunk(
 );
 
 export const getWaterMonthThunk = createAsyncThunk(
-  "waters/getWaterDay",
-  async (_, thunkAPI) => {
+  "waters/getWaterMonth",
+  async (monthYear, thunkAPI) => {
     try {
-      const response = await getWaterDay();
+      const response = await getWaterMonth(monthYear);
       return response;
     } catch (error) {
-      toast.error("Error get water for this day:", error);
+      toast.error("Error get water for this month", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editWaterThunk = createAsyncThunk(
+  "waters/editWater",
+  async (monthYear, thunkAPI) => {
+    try {
+      const response = await getWaterMonth(monthYear);
+      return response;
+    } catch (error) {
+      toast.error("Error edit water:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
