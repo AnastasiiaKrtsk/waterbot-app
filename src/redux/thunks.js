@@ -74,7 +74,7 @@ export const updateAvatarThunk = createAsyncThunk(
       console.log("Avatar updated successfully:", response);
       return response;
     } catch (error) {
-      console.error("Error updating avatar:", error);
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

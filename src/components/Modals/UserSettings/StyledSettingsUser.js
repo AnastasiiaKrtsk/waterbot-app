@@ -48,6 +48,11 @@ export const StyledSettingsPasswordDiv = styled.div`
   flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 0;
+    gap: 13.3px;
+  }
 `;
 
 export const SettingsCrossDiv = styled.div`
@@ -289,4 +294,13 @@ export const PasswordSettingLabel = styled.label`
   margin-bottom: -4px;
 
   color: var(--black);
+`;
+
+export const Errors = styled.p`
+  position: absolute;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--red);
 `;

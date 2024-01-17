@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   selectAvatarUrl,
+  selectLoader,
   selectUserEmail,
   selectUserGender,
   selectUsername,
@@ -14,9 +15,9 @@ import {
   updateUserInfoThunk,
 } from "../../../redux/thunks.js";
 import {
-  BackdropSettingModal,
   BtnSaveWrapper,
   BtnSettingSave,
+  Errors,
   EyeSvg,
   ImgDownloadIcon,
   InputRadioSettings,
@@ -47,6 +48,8 @@ import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
+import Loader from "../../Loader/Loader.jsx";
+import { toast } from "react-toastify";
 
 const UserSettings = () => {
   const handleCloseUserSettingsModal = () => {
@@ -55,10 +58,12 @@ const UserSettings = () => {
   };
 
   // ===== SELECTORS ==========
+
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
   const storedUserGender = useSelector(selectUserGender);
+  const isLoading = useSelector(selectLoader);
 
   // ===== USE STATES ==========
 
@@ -104,6 +109,11 @@ const UserSettings = () => {
     setUserGender(gender);
 
     reset();
+
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent(null));
+
+    //для релоаду стр. після оновлення данних с серверу
     window.location.reload();
   };
 
@@ -113,7 +123,12 @@ const UserSettings = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    uploadAvatar(selectedFile);
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      toast.warning("File is too large! Please choose another one");
+      event.target.value = "";
+    } else {
+      uploadAvatar(selectedFile);
+    }
   };
 
   const uploadAvatar = (file) => {
@@ -122,7 +137,9 @@ const UserSettings = () => {
     dispatch(updateAvatarThunk(formData));
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <ModalSettingWindow>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
@@ -144,6 +161,7 @@ const UserSettings = () => {
               <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
               Upload a photo
             </PhotoInputUploadLabel>
+
             <PhotoInputUpload
               type="file"
               id="photoInput"
@@ -212,7 +230,7 @@ const UserSettings = () => {
                     {...register("email")}
                     errors={!!errors.email}
                   />
-                  <p>{errors.email?.message}</p>
+                  <Errors>{errors.email?.message}</Errors>
                 </SettingNameEmailDiv>
               </SettingNameEmailWrapper>
             </div>
@@ -242,7 +260,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.oldPassword?.message}</p>
+                  <Errors>{errors.oldPassword?.message}</Errors>
                 </SettingsPasswordSvgDiv>
 
                 <PasswordSettingLabel htmlFor="new-password">
@@ -267,7 +285,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.newPassword?.message}</p>
+                  <Errors>{errors.newPassword?.message}</Errors>
                 </SettingsPasswordSvgDiv>
 
                 <PasswordSettingLabel htmlFor="repeat-password">
@@ -294,7 +312,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.passwordRepeat?.message}</p>
+                  <Errors>{errors.passwordRepeat?.message}</Errors>
                 </SettingsPasswordSvgDiv>
               </StyledSettingsPasswordDiv>
             </div>
