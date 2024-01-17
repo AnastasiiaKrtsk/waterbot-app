@@ -121,21 +121,10 @@ const UserSettings = () => {
 
   const dispatch = useDispatch();
 
-  // const handleFileChange = (event) => {
-  //   const selectedFile = event.target.files[0];
-  //   uploadAvatar(selectedFile);
-  // };
-
-  // const uploadAvatar = (file) => {
-  //   const formData = new FormData();
-  //   formData.append("avatar", file);
-  //   dispatch(updateAvatarThunk(formData));
-  // };
-
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile.size > 5 * 1024 * 1024) {
-      toast.warning("Файл слишком большой, выберите другой файл");
+      toast.warning("File is too large! Please choose another one");
       event.target.value = "";
     } else {
       uploadAvatar(selectedFile);
