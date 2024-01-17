@@ -137,9 +137,10 @@ const UserSettings = () => {
     dispatch(updateAvatarThunk(formData));
   };
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
+    //   isLoading ? (
+    //   <Loader />
+    // ) : (
     <ModalSettingWindow>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
@@ -155,7 +156,11 @@ const UserSettings = () => {
         <SettingsFormWrapper>
           <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
           <SettingPhotoWrapper>
-            <SettingAvatarImg src={avatarUrl || "V"} />
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <SettingAvatarImg isLoading={isLoading} src={avatarUrl || "V"} />
+            )}
 
             <PhotoInputUploadLabel id="customFileUpload" htmlFor="photoInput">
               <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
