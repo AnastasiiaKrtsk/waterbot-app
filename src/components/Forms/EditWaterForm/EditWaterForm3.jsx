@@ -5,7 +5,7 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import sprite from "../../../images/svg+logo/sprite.svg";
-import { setModalStatus } from "../../../redux/slice";
+import { setModalContent, setModalStatus } from "../../../redux/slice";
 import {
   StyledButtonsWrapper,
   StyledCurrentValue,
