@@ -14,6 +14,8 @@ import {
 import {
   Amount,
   CalcResult,
+  DailyInputDiv,
+  Errors,
   Formula,
   FormulaInfo,
   FormulaInfoText,
@@ -22,9 +24,10 @@ import {
   Formulas1,
   Formulas2,
   FormulasText,
-  ModalDilyNorma,
+  ModalDailyNorma,
   SaveBtn,
   SaveBtnDiv,
+  SettingDailyGenderList,
   StyledResult,
 } from "./DailyNorma.styled";
 import { calculateV } from "./CalcNorma";
@@ -37,16 +40,13 @@ import {
 } from "../../../redux/slice";
 import { DailyNormaUsrInputSchema } from "../../../helpers/validation";
 import { editDailyNormaThunk } from "../../../redux/thunks";
-// import { setDailyNorma } from "../../../redux/slice";
+
 const DailyNorma = () => {
   const dispatch = useDispatch();
   const handleCloseDailyNorma = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
   };
-  const dailyNorma = useSelector(selectDailyNorma);
-
-  console.log("daily", dailyNorma);
 
   const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");
@@ -56,7 +56,7 @@ const DailyNorma = () => {
 
   useEffect(() => {
     if (!weight || !activity) {
-      setResult("1.8");
+      setResult("2");
     } else {
       setResult(calculateV(gender, weight, activity));
     }
@@ -71,15 +71,20 @@ const DailyNorma = () => {
     mode: "onSubmit",
     resolver: yupResolver(DailyNormaUsrInputSchema),
   });
+
   //*
-  const onSubmit = ({ dailyNorma }, e) => {
+  const onSubmit = (data, e) => {
     e.preventDefault();
-    dispatch(editDailyNormaThunk({ dailyNorma }));
-    // dispatch(setDailyNorma(null));
+    dispatch(editDailyNormaThunk(data));
+    dispatch(setDailyNorma(data));
+
+    dispatch(setModalStatus(false));
+    dispatch(setModalContent(null));
     reset();
   };
+
   return (
-    <ModalDilyNorma>
+    <ModalDailyNorma>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
           <SettingModalTitleH2>My daily norma</SettingModalTitleH2>
@@ -110,7 +115,7 @@ const DailyNorma = () => {
           </FormulaInfoText>
         </FormulaInfo>
         <StyledYourGenderTitle>Calculate your rate:</StyledYourGenderTitle>
-        <SettingGenderList>
+        <SettingDailyGenderList>
           <li>
             <StyledRadioLabel htmlFor="woman">
               <InputRadioSettings
@@ -135,7 +140,7 @@ const DailyNorma = () => {
               For Man
             </StyledRadioLabel>
           </li>
-        </SettingGenderList>
+        </SettingDailyGenderList>
         <p>Your weight in kilograms:</p>
         <FormulaInput
           className="hide-number-arrows"
@@ -166,11 +171,12 @@ const DailyNorma = () => {
         <StyledYourGenderTitle>
           Write down how much water you will drink:
         </StyledYourGenderTitle>
-        <div>
+        <DailyInputDiv>
           <FormulaInput
             name="dailyNorma"
             className="hide-number-arrows"
             type="number"
+            step="0.01"
             autoComplete="off"
             id="amount"
             placeholder="0"
@@ -178,13 +184,13 @@ const DailyNorma = () => {
             {...register("dailyNorma")}
             errors={!!errors.dailyNorma}
           />
-          <p>{errors.dailyNorma?.message}</p>
-        </div>
+          <Errors>{errors.dailyNorma?.message}</Errors>
+        </DailyInputDiv>
         <SaveBtnDiv>
           <SaveBtn>Save</SaveBtn>
         </SaveBtnDiv>
       </form>
-    </ModalDilyNorma>
+    </ModalDailyNorma>
   );
 };
 

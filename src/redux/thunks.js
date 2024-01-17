@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   currentUser,
+  editDailyNorma,
   logout,
   setToken,
   signin,
@@ -99,7 +100,8 @@ export const editDailyNormaThunk = createAsyncThunk(
   "users/editDailyNorma",
   async (data, thunkAPI) => {
     try {
-      const response = await editDailyNorma(data);
+      const sum = Number(data.dailyNorma) * 1000;
+      const response = await editDailyNorma({ dailyNorma: sum });
       return response;
     } catch (error) {
       toast.error(error.response.data.message);
