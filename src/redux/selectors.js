@@ -6,3 +6,4 @@ export const selectUserGender = (state) => state.auth.userData.gender;
 export const selectOpenModal = (state) => state.auth.openModal;
 export const selectModalContent = (state) => state.auth.modalContent;
 export const selectDailyNorma = (state) => state.auth.userData.dailyNorma;
+export const selectLoader = (state) => state.auth.isLoading;

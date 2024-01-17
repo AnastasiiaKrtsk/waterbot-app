@@ -126,6 +126,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
       //========== Update User Info =================//
       .addCase(updateUserInfoThunk.pending, (state) => {
         state.isLoading = true;

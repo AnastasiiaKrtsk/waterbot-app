@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   selectAvatarUrl,
+  selectLoader,
   selectUserEmail,
   selectUserGender,
   selectUsername,
@@ -47,6 +48,8 @@ import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
+import Loader from "../../Loader/Loader.jsx";
+import { toast } from "react-toastify";
 
 const UserSettings = () => {
   const handleCloseUserSettingsModal = () => {
@@ -55,10 +58,12 @@ const UserSettings = () => {
   };
 
   // ===== SELECTORS ==========
+
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
   const storedUserGender = useSelector(selectUserGender);
+  const isLoading = useSelector(selectLoader);
 
   // ===== USE STATES ==========
 
@@ -105,9 +110,6 @@ const UserSettings = () => {
 
     reset();
 
-    //для релоаду стр. після оновлення данних с серверу
-    // window.location.reload();
-
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
 
@@ -119,9 +121,25 @@ const UserSettings = () => {
 
   const dispatch = useDispatch();
 
+  // const handleFileChange = (event) => {
+  //   const selectedFile = event.target.files[0];
+  //   uploadAvatar(selectedFile);
+  // };
+
+  // const uploadAvatar = (file) => {
+  //   const formData = new FormData();
+  //   formData.append("avatar", file);
+  //   dispatch(updateAvatarThunk(formData));
+  // };
+
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    uploadAvatar(selectedFile);
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      toast.warning("Файл слишком большой, выберите другой файл");
+      event.target.value = "";
+    } else {
+      uploadAvatar(selectedFile);
+    }
   };
 
   const uploadAvatar = (file) => {
@@ -130,7 +148,9 @@ const UserSettings = () => {
     dispatch(updateAvatarThunk(formData));
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <ModalSettingWindow>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
@@ -152,6 +172,7 @@ const UserSettings = () => {
               <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
               Upload a photo
             </PhotoInputUploadLabel>
+
             <PhotoInputUpload
               type="file"
               id="photoInput"
