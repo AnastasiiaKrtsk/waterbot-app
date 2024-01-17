@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addWater,
   currentUser,
+  deleteWater,
   getWaterDay,
   getWaterMonth,
   logout,
@@ -139,12 +140,29 @@ export const getWaterMonthThunk = createAsyncThunk(
 
 export const editWaterThunk = createAsyncThunk(
   "waters/editWater",
-  async (monthYear, thunkAPI) => {
+  async ({ id, water }, thunkAPI) => {
     try {
-      const response = await getWaterMonth(monthYear);
+      const response = await editWater({ id, water });
+      thunkAPI.dispatch(getWaterDayThunk());
+      thunkAPI.dispatch(getWaterMonthThunk(monthYear));
       return response;
     } catch (error) {
       toast.error("Error edit water:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteWaterThunk = createAsyncThunk(
+  "waters/deleteWater",
+  async (id, thunkAPI) => {
+    try {
+      const response = await deleteWater(id);
+      thunkAPI.dispatch(getWaterDayThunk());
+      thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      return response;
+    } catch (error) {
+      toast.error("Error delete water:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

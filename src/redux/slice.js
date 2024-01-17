@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addWaterThunk,
+  deleteWaterThunk,
+  editWaterThunk,
   getWaterDayThunk,
   getWaterMonthThunk,
   logOutThunk,
@@ -181,6 +183,28 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(editWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(editWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteWaterThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
