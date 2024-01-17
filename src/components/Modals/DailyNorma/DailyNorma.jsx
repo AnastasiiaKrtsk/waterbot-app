@@ -20,6 +20,7 @@ import {
   Formulas1,
   Formulas2,
   FormulasText,
+  ModalDilyNorma,
   SaveBtn,
   SaveBtnDiv,
   StyledResult,
@@ -74,7 +75,7 @@ const DailyNorma = () => {
   // // *MODAL SETUP
 
   return (
-    <>
+    <ModalDilyNorma>
       <SettingsCrossDiv>
         <SettingModalTitleH2>My daily norma</SettingModalTitleH2>
         <StyledCloseSvg width="24" height="24">
@@ -167,7 +168,7 @@ const DailyNorma = () => {
       <SaveBtnDiv>
         <SaveBtn type="button">Save</SaveBtn>
       </SaveBtnDiv>
-    </>
+    </ModalDilyNorma>
   );
 };
 
