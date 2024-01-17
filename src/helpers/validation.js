@@ -69,3 +69,8 @@ export const updateUserSchema = yup.object().shape({
     .oneOf([yup.ref("newPassword"), null], "Passwords do not match")
     .transform((value) => (value === "" ? undefined : value)),
 });
+
+export const DailyNormaUsrInputSchema = yup.object().shape({
+  dailyNorma: yup.number().max(5, "Maximum 5 L"),
+  // .transform((value) => (value === "" ? undefined : value)),
+});

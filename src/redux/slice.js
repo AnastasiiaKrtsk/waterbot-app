@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  editDailyNormaThunk,
   logOutThunk,
   signInThunk,
   signUpThunk,
@@ -34,9 +35,9 @@ const authSlice = createSlice({
     setModalContent: (state, action) => {
       state.modalContent = action.payload;
     },
-    setDailyNorma: (state, action) => {
-      state.userData.dailyNorma = action.payload;
-    },
+    // setDailyNorma: (state, action) => {
+    //   state.userData.dailyNorma = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -137,6 +138,22 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserInfoThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      //========== Update Daily Norma =================//
+      .addCase(editDailyNormaThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editDailyNormaThunk.fulfilled, (state, action) => {
+        state.userData = {
+          ...state.userData,
+          dailyNorma: action.payload.dailyNorma,
+        };
+        state.isLoading = false;
+      })
+      .addCase(editDailyNormaThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
