@@ -23,6 +23,8 @@ import {
   StyledUsedWater,
   StyledWrapper,
 } from "./EditWaterForm.styled";
+import { toast } from "react-toastify";
+import { addWaterThunk } from "../../../redux/thunks";
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
@@ -37,9 +39,18 @@ const SimpleForm = ({ action }) => {
     const formData = new FormData(e.target);
 
     const waterVolume = formData.get("waterVolume");
-    const time = moment(formData.get("time"), "h:mm a").format();
+    const date = moment(formData.get("date"), "h:mm a").format();
 
-    console.log({ waterVolume, time });
+    console.log({ waterVolume, date });
+
+    dispatch(addWaterThunk({ waterVolume, date }))
+      .unwrap()
+      .then(() => {
+        toast.success("Water transaction added successfully");
+      })
+      .catch((error) => {
+        toast.error("Error adding water transaction: " + error.message);
+      });
   };
 
   return (
@@ -128,7 +139,7 @@ const SimpleForm = ({ action }) => {
                         },
                       },
                     }}
-                    name="time"
+                    name="date"
                     views={["hours", "minutes"]}
                     format="hh:mm a"
                     timeSteps={{ minutes: 1 }}

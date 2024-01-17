@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addWaterThunk,
   logOutThunk,
   signInThunk,
   signUpThunk,
@@ -136,6 +137,20 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserInfoThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      //============== Water =============================//
+
+      .addCase(addWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addWaterThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

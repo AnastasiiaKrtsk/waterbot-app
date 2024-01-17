@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addWater,
   currentUser,
   logout,
   setToken,
@@ -88,6 +89,20 @@ export const updateUserInfoThunk = createAsyncThunk(
       return response;
     } catch (error) {
       toast.error(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addWaterThunk = createAsyncThunk(
+  "waters/addWater",
+  async (water, thunkAPI) => {
+    try {
+      const response = await addWater(water);
+      console.log(response);
+      return response;
+    } catch (error) {
+      toast.error(`error`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
