@@ -13,9 +13,9 @@ const ModalContent = () => {
 
   switch (modalContent) {
     case "EditWaterForm":
-      return <EditWaterForm3 />;
+      return <EditWaterForm3 action="edit"/>;
     case "Add water":
-      return "<AddWaterForm />";
+      return <EditWaterForm3 action="add"/>;
     case "DailyNorma":
       return <DailyNorma />;
     case "OpenUserModal":
