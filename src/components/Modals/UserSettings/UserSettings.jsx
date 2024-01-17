@@ -14,9 +14,9 @@ import {
   updateUserInfoThunk,
 } from "../../../redux/thunks.js";
 import {
-  BackdropSettingModal,
   BtnSaveWrapper,
   BtnSettingSave,
+  Errors,
   EyeSvg,
   ImgDownloadIcon,
   InputRadioSettings,
@@ -104,6 +104,8 @@ const UserSettings = () => {
     setUserGender(gender);
 
     reset();
+
+    //для релоаду стр. після оновлення данних с серверу
     window.location.reload();
   };
 
@@ -212,7 +214,7 @@ const UserSettings = () => {
                     {...register("email")}
                     errors={!!errors.email}
                   />
-                  <p>{errors.email?.message}</p>
+                  <Errors>{errors.email?.message}</Errors>
                 </SettingNameEmailDiv>
               </SettingNameEmailWrapper>
             </div>
@@ -242,7 +244,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.oldPassword?.message}</p>
+                  <Errors>{errors.oldPassword?.message}</Errors>
                 </SettingsPasswordSvgDiv>
 
                 <PasswordSettingLabel htmlFor="new-password">
@@ -267,7 +269,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.newPassword?.message}</p>
+                  <Errors>{errors.newPassword?.message}</Errors>
                 </SettingsPasswordSvgDiv>
 
                 <PasswordSettingLabel htmlFor="repeat-password">
@@ -294,7 +296,7 @@ const UserSettings = () => {
                       </EyeSvg>
                     )}
                   </div>
-                  <p>{errors.passwordRepeat?.message}</p>
+                  <Errors>{errors.passwordRepeat?.message}</Errors>
                 </SettingsPasswordSvgDiv>
               </StyledSettingsPasswordDiv>
             </div>
