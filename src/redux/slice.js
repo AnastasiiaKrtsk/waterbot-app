@@ -167,7 +167,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterDayThunk.fulfilled, (state, action) => {
-        state.water.todayWater.push(action.payload);
+        state.water.todayWater = action.payload;
         state.isLoading = false;
       })
       .addCase(getWaterDayThunk.rejected, (state, action) => {
@@ -179,7 +179,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
-        state.water.monthWater.push(action.payload);
+        state.water.monthWater = action.payload;
         state.isLoading = false;
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {

@@ -98,12 +98,16 @@ export const updateUserInfoThunk = createAsyncThunk(
   }
 );
 
+//============== Water =============================//
+
 export const addWaterThunk = createAsyncThunk(
   "waters/addWater",
   async (water, thunkAPI) => {
     try {
       const response = await addWater(water);
+
       thunkAPI.dispatch(getWaterDayThunk());
+      thunkAPI.dispatch(getWaterMonthThunk());
       return response;
     } catch (error) {
       toast.error("Error add water:", error);
@@ -144,7 +148,7 @@ export const editWaterThunk = createAsyncThunk(
     try {
       const response = await editWater({ id, water });
       thunkAPI.dispatch(getWaterDayThunk());
-      thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      thunkAPI.dispatch(getWaterMonthThunk());
       return response;
     } catch (error) {
       toast.error("Error edit water:", error);
@@ -159,7 +163,7 @@ export const deleteWaterThunk = createAsyncThunk(
     try {
       const response = await deleteWater(id);
       thunkAPI.dispatch(getWaterDayThunk());
-      thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      thunkAPI.dispatch(getWaterMonthThunk());
       return response;
     } catch (error) {
       toast.error("Error delete water:", error);
