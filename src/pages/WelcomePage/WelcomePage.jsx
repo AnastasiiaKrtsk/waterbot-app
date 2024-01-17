@@ -34,14 +34,6 @@ const WelcomePage = () => {
             <WhyDrinkWater />
           </div>
         </Div>
-        <button type="button" onClick={handleOpenDailyNorma}>
-          Norma
-        </button>
-        <DailyNorma
-          handleClose={handleCloseDailyNorma}
-          isModalOpen={isDailyNormaOpen}
-        />
-        <DropDown />
       </WelcomePageWrapper>
     </>
   );

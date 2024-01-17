@@ -19,7 +19,7 @@ export const BackdropDailyNorma = styled.div`
 `;
 export const ModalDilyNorma = styled.div`
   padding: 32px 12px;
-  position: fixed;
+  /* position: fixed; */
   display: inline-flex;
   flex-direction: column;
   border-radius: 10px;
