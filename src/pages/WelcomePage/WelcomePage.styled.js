@@ -16,37 +16,40 @@ export const WelcomePageWrapper = styled.div`
 `;
 
 export const WelcomeBg = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: -999;
   width: 100vw;
-  height: 100vh;
+  height: 91vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url(${WelcomeBgMobile});
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
+    height: 87vh;
     background-image: url(${WelcomeBgTablet});
   }
 
   @media screen and (min-width: 1440px) {
     background-position: bottom;
     background-size: contain;
-    height: 85vh;
+    height: 83vh;
     background-image: url(${WelcomeBgDesktop});
   }
 `;
 export const Welcome2Bg = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: -999;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 87vh;
 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
   background-image: url(${WelcomeBgMobile2});
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     background-image: url(${WelcomeBgTablet2});
@@ -64,6 +67,7 @@ export const H1 = styled.h1`
   font-weight: var(--bold);
   line-height: 1.14;
   margin-bottom: 16px;
+
   @media screen and (min-width: 768px) {
   }
 
@@ -71,6 +75,7 @@ export const H1 = styled.h1`
   }
 `;
 export const Descr = styled.h2`
+  width: 197px;
   font-size: 24px;
   font-weight: var(--regular);
   line-height: calc(30 / 24);
