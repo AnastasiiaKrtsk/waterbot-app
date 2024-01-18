@@ -5,6 +5,7 @@ import {
   Descr,
   Div,
   H1,
+  Welcome2Bg,
   WelcomeBg,
   WelcomePageWrapper,
 } from "./WelcomePage.styled";
@@ -23,6 +24,7 @@ const WelcomePage = () => {
   return (
     <>
       <WelcomeBg />
+      <Welcome2Bg />
       <WelcomePageWrapper>
         <Div>
           <div>

@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import WelcomeBgMobile from "../../images/mobile/Mobile-Background-Main-Page@2x.png";
-import WelcomeBgTablet from "../../images/tablet/Tablet-Background-Main-Page@2x.png";
-import WelcomeBgDesktop from "../../images/desktop/Desk-Background-Main-Page@2x.png";
+import WelcomeBgMobile from "../../images/mobile/Mobile-Background-Main-Page2@1x.png";
+import WelcomeBgMobile2 from "../../images/mobile/Mobile-Background-element-Sign-In@1x.png";
+import WelcomeBgTablet from "../../images/tablet/Tablet-Background-Main-Page2@1x.png";
+import WelcomeBgTablet2 from "../../images/tablet/Tablet-Background-Main-Page2bubble@1x.png";
+import WelcomeBgDesktop from "../../images/desktop/Desk-Background-Main-Page2@1x.png";
+import WelcomeBgDesktop2 from "../../images/desktop/Desk-Background-element-Main-Page@1x.png";
 
 export const WelcomePageWrapper = styled.div`
   padding-left: 24px;
@@ -15,28 +18,47 @@ export const WelcomePageWrapper = styled.div`
 export const WelcomeBg = styled.div`
   position: absolute;
   z-index: -999;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: bottom;
   background-image: url(${WelcomeBgMobile});
 
   @media screen and (min-width: 768px) {
-    margin-bottom: 64px;
     background-image: url(${WelcomeBgTablet});
   }
 
   @media screen and (min-width: 1440px) {
+    background-position: bottom;
     background-size: contain;
-    background-repeat: no-repeat;
+    height: 85vh;
     background-image: url(${WelcomeBgDesktop});
   }
 `;
+export const Welcome2Bg = styled.div`
+  position: absolute;
+  z-index: -999;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: url(${WelcomeBgMobile2});
+
+  @media screen and (min-width: 768px) {
+    background-image: url(${WelcomeBgTablet2});
+  }
+
+  @media screen and (min-width: 1440px) {
+    background-size: contain;
+
+    background-image: url(${WelcomeBgDesktop2});
+    /* background: none; */
+  }
+`;
 export const H1 = styled.h1`
   font-size: 28px;
   font-weight: var(--bold);
