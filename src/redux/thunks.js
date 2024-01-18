@@ -155,12 +155,22 @@ export const getWaterMonthThunk = createAsyncThunk(
 
 export const editWaterThunk = createAsyncThunk(
   "waters/editWater",
-  async ({ id, water }, thunkAPI) => {
+  async ({ chooseDate, id, water }, thunkAPI) => {
+    const monthYear = {
+      year: moment(water.date).year().toString(),
+      month: (moment(water.date).month() + 1).toString().padStart(2, 0),
+    };
+
     try {
       const response = await editWater({ id, water });
       thunkAPI.dispatch(getWaterDayThunk());
 
-      thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      if (
+        monthYear.year === chooseDate.year &&
+        monthYear.month === chooseDate.month
+      ) {
+        thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      }
       return response;
     } catch (error) {
       toast.error("Error edit water:", error);
@@ -171,11 +181,20 @@ export const editWaterThunk = createAsyncThunk(
 
 export const deleteWaterThunk = createAsyncThunk(
   "waters/deleteWater",
-  async (id, thunkAPI) => {
+  async ({ chooseDate, id }, thunkAPI) => {
+    const monthYear = {
+      year: moment().year().toString(),
+      month: (moment().month() + 1).toString().padStart(2, 0),
+    };
     try {
       const response = await deleteWater(id);
       thunkAPI.dispatch(getWaterDayThunk());
-      thunkAPI.dispatch(getWaterMonthThunk());
+      if (
+        monthYear.year === chooseDate.year &&
+        monthYear.month === chooseDate.month
+      ) {
+        thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      }
       return response;
     } catch (error) {
       toast.error("Error delete water:", error);
