@@ -12,6 +12,7 @@ import {
   signup,
   updateAvatar,
   updateUserInfo,
+  editWater,
 } from "../service/api";
 import { toast } from "react-toastify";
 import moment from "moment";
