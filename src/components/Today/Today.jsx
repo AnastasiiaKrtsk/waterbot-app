@@ -14,7 +14,11 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../images/svg+logo/sprite.svg";
-import { selectOpenModal, selectTodayWater } from "../../redux/selectors";
+import {
+  selectChooseDate,
+  selectOpenModal,
+  selectTodayWater,
+} from "../../redux/selectors";
 import {
   setIdForEditDelete,
   setModalContent,
@@ -26,9 +30,14 @@ import { getWaterDayThunk, getWaterMonthThunk } from "../../redux/thunks";
 
 const Today = () => {
   const dispatch = useDispatch();
+  const toDay = useSelector(selectChooseDate);
+  const monthYear = {
+    year: moment(toDay).year().toString(),
+    month: (moment(toDay).month() + 1).toString().padStart(2, 0),
+  };
   useEffect(() => {
     dispatch(getWaterDayThunk());
-    // dispatch(getWaterMonthThunk())
+    dispatch(getWaterMonthThunk(monthYear));
   }, []);
 
   const modalStatus = useSelector(selectOpenModal);

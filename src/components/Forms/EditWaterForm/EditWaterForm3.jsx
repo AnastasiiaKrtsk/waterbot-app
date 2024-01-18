@@ -5,7 +5,12 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import {
+  selectChooseDate,
+  selectIdForEditDelete,
+} from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
+import { addWaterThunk, editWaterThunk } from "../../../redux/thunks";
 import {
   StyledButtonsWrapper,
   StyledCurrentValue,
@@ -23,14 +28,11 @@ import {
   StyledUsedWater,
   StyledWrapper,
 } from "./EditWaterForm.styled";
-import { toast } from "react-toastify";
-import { addWaterThunk } from "../../../redux/thunks";
-import { selectChooseDate } from "../../../redux/selectors";
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
   const shownDate = useSelector(selectChooseDate);
-
+  const id = useSelector(selectIdForEditDelete);
   const handleCloseUserModal = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
@@ -50,14 +52,11 @@ const SimpleForm = ({ action }) => {
       month: (moment(shownDate).month() + 1).toString().padStart(2, 0),
     };
 
-    dispatch(addWaterThunk({ chooseDate, water: { waterVolume, date } }))
-      .unwrap()
-      .then(() => {
-        toast.success("Water transaction added successfully");
-      })
-      .catch((error) => {
-        toast.error("Error adding water transaction: " + error.message);
-      });
+    action === "edit"
+      ? dispatch(
+          editWaterThunk({ chooseDate, id, water: { waterVolume, date } })
+        )
+      : dispatch(addWaterThunk({ chooseDate, water: { waterVolume, date } }));
   };
 
   return (
