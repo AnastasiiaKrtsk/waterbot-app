@@ -4,13 +4,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signInThunk } from "../../redux/thunks";
 import { signInSchema } from "../../helpers/validation";
-import sprite from "../../images/svg+logo/sprite.svg";
 import {
   Bg,
   Bootle,
   Btn,
   Error,
-  EyeSvg,
   Form,
   Input,
   Label,
@@ -19,6 +17,7 @@ import {
   WrapperForm,
   WrapperInput,
 } from "./SignInPage.styled";
+import PasswordToggle from "../../components/PasswordToggle/PasswordToggle";
 
 const SignInPage = () => {
   const {
@@ -39,11 +38,8 @@ const SignInPage = () => {
     reset();
   };
 
-  const togglePasswordVisibility = (inputId) => {
-    setShowPassword((prevPasswords) => ({
-      ...prevPasswords,
-      [inputId]: !prevPasswords[inputId],
-    }));
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevVisibility) => !prevVisibility);
   };
 
   return (
@@ -70,17 +66,10 @@ const SignInPage = () => {
                 {...register("password")}
                 errors={!!errors.password}
               />
-              <div onClick={() => togglePasswordVisibility("password")}>
-                {showPassword["password"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
+              <PasswordToggle
+                isVisible={showPassword}
+                onToggle={togglePasswordVisibility}
+              />
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
             <Btn type="submit">Sign In</Btn>
