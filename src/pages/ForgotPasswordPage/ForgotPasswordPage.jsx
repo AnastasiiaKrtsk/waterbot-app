@@ -30,9 +30,9 @@ const ForgotPasswordPage = () => {
   });
   const dispatch = useDispatch();
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (email, e) => {
     e.preventDefault();
-    dispatch(signInThunk(data));
+    dispatch(forgotPasswordThunk(email));
     reset();
   };
 

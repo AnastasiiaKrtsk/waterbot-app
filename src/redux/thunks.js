@@ -109,3 +109,29 @@ export const editDailyNormaThunk = createAsyncThunk(
     }
   }
 );
+
+export const forgotPasswordThunk = createAsyncThunk(
+  "auth/forgotPassword",
+  async (email, thunkAPI) => {
+    try {
+      const response = await forgotPassword(email);
+      return response;
+    } catch (error) {
+      toast.error(`Incorrect email`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updatePasswordThunk = createAsyncThunk(
+  "auth/forgotPassword",
+  async (newPassword, thunkAPI) => {
+    try {
+      const response = await updatePassword(newPassword);
+      return response;
+    } catch (error) {
+      toast.error(`Incorrect password`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
