@@ -9,3 +9,4 @@ export const selectDailyNorma = (state) => state.auth.userData.dailyNorma;
 export const selectTodayWater = (state) => state.auth.water.todayWater;
 export const selectMonthWater = (state) => state.auth.water.monthWater;
 export const selectLoader = (state) => state.auth.isLoading;
+export const selectIdForEditDelete = (state) => state.auth.idForEditDelete;

@@ -15,7 +15,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../images/svg+logo/sprite.svg";
 import { selectOpenModal, selectTodayWater } from "../../redux/selectors";
-import { setModalContent, setModalStatus } from "../../redux/slice";
+import {
+  setIdForEditDelete,
+  setModalContent,
+  setModalStatus,
+} from "../../redux/slice";
 import moment from "moment";
 import { useEffect } from "react";
 import { getWaterDayThunk, getWaterMonthThunk } from "../../redux/thunks";
@@ -30,13 +34,15 @@ const Today = () => {
   const modalStatus = useSelector(selectOpenModal);
   const todayWater = useSelector(selectTodayWater);
 
-  const handleEditWater = () => {
+  const handleEditWater = (id) => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("EditWaterForm"));
+    dispatch(setIdForEditDelete(id));
   };
-  const handleDeleteWater = () => {
+  const handleDeleteWater = (id) => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("Delete"));
+    dispatch(setIdForEditDelete(id));
   };
   const handleAddWater = () => {
     dispatch(setModalStatus(!modalStatus));
@@ -54,19 +60,12 @@ const Today = () => {
           {moment(date).format("LT")}
         </StyledWaterInfo>
         <StyledTodayButtonsWrapper>
-          <EditWater onClick={handleEditWater} />
-          <DeleteWater onClick={handleDeleteWater} />
+          <EditWater onClick={() => handleEditWater(_id)} />
+          <DeleteWater onClick={() => handleDeleteWater(_id)} />
         </StyledTodayButtonsWrapper>
       </StyledTodayWaterItem>
     )
   );
-
-  //   _id(pin):"65a9194f061a6952026db88c"
-  // waterVolume(pin):123
-  // date(pin):"2024-01-18T01:02:00.000Z"
-  // owner(pin):"65a835fe8acf942ad1efbfd5"
-  // createdAt(pin):"2024-01-18T12:27:59.660Z"
-  // updatedAt(pin):"2024-01-18T12:27:59.660Z"
 
   return (
     <StyledTodayWrapper>

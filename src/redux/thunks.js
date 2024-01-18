@@ -161,6 +161,7 @@ export const editWaterThunk = createAsyncThunk(
 export const deleteWaterThunk = createAsyncThunk(
   "waters/deleteWater",
   async (id, thunkAPI) => {
+    console.log(id);
     try {
       const response = await deleteWater(id);
       thunkAPI.dispatch(getWaterDayThunk());
@@ -168,7 +169,9 @@ export const deleteWaterThunk = createAsyncThunk(
       return response;
     } catch (error) {
       toast.error("Error delete water:", error);
-    } });
+    }
+  }
+);
 
 //dailyNorma
 

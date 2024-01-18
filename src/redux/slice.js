@@ -28,6 +28,7 @@ const initialState = {
   isLoading: false,
   openModal: false,
   modalContent: null,
+  idForEditDelete: null,
   water: {
     todayWater: [],
     monthWater: [],
@@ -46,6 +47,9 @@ const authSlice = createSlice({
     },
     setDailyNorma: (state, action) => {
       state.userData.dailyNorma = action.payload;
+    },
+    setIdForEditDelete: (state, action) => {
+      state.idForEditDelete = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -210,7 +214,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      
+
       // ========== Update Daily Norma =================//
       .addCase(editDailyNormaThunk.pending, (state) => {
         state.isLoading = true;
@@ -230,6 +234,10 @@ const authSlice = createSlice({
   },
 });
 
-export const { setModalStatus, setModalContent, setDailyNorma } =
-  authSlice.actions;
+export const {
+  setModalStatus,
+  setModalContent,
+  setDailyNorma,
+  setIdForEditDelete,
+} = authSlice.actions;
 export const authReducer = authSlice.reducer;
