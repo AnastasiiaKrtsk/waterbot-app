@@ -191,14 +191,16 @@ export const BtnSettingSave = styled.button`
   border: none;
   border-radius: 10px;
   background: var(--dark-blue);
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
 
   text-align: center;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   color: var(--white);
-
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
   @media screen and (min-width: 768px) {
     padding: 10px 30px;
     width: 160px;

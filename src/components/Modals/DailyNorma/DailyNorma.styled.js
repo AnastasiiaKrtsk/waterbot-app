@@ -146,15 +146,18 @@ export const SaveBtn = styled.button`
   background-color: var(--dark-blue);
   color: var(--white);
   border-radius: 10px;
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
   @media only screen and (min-width: 767px) {
     width: 160px;
   }
 `;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
 
 export const DailyInputDiv = styled.div`
   position: relative;
