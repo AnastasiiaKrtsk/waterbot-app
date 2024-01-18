@@ -55,7 +55,7 @@ const Month = () => {
   };
 
   useEffect(() => {
-    setDaysInMonth(shownDate.daysInMonth());
+    setDaysInMonth(moment(shownDate).daysInMonth());
     const currentMonth = moment();
     setIsCurrentMonth(currentMonth.isSame(shownDate, "month"));
     dispatch(
@@ -67,11 +67,11 @@ const Month = () => {
   }, [shownDate]);
 
   const prevMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")));
+    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")).toISOString());
   };
 
   const nextMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().add(1, "months")));
+    dispatch(setChooseDate(shownDate.clone().add(1, "months")).toISOString());
   };
 
   const daysArray = Array.from(
@@ -89,7 +89,7 @@ const Month = () => {
               <use href={sprite + "#icon-left"}></use>
             </svg>
           </StyledPrevMonth>
-          <StyledMonthName>{shownDate.format("MMMM YYYY")}</StyledMonthName>
+          <StyledMonthName>{moment(shownDate).format("MMMM YYYY")}</StyledMonthName>
           <StyledNextMonth onClick={nextMonth} disabled={isCurrentMonth}>
             <svg width={"16px"} height={"16px"}>
               <use href={sprite + "#icon-right"}></use>
@@ -108,7 +108,7 @@ const Month = () => {
             : "top-end";
           return (
             <CustomWidthTooltip
-              title={day + ", " + shownDate.format("MMMM")}
+              title={day + ", " + moment(shownDate).format("MMMM")}
               key={day}
               placement={placement}
               open={clickedItem === day}

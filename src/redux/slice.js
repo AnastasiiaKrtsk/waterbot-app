@@ -34,7 +34,7 @@ const initialState = {
     todayWater: [],
     monthWater: [],
   },
-  chooseDate: moment(),
+  chooseDate: moment().toISOString(),
 };
 
 const authSlice = createSlice({
@@ -192,10 +192,13 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
-        console.log(moment(action.payload[0].date).date());
-        state.water.monthWater = action.payload.map(day => ({ ...day, date: moment(day.date).date() }));
+        // TODO при полном удалении за день идет ошибка
+        state.water.monthWater = action.payload.map((day) => ({
+          ...day,
+          date: moment(day.date).date(),
+        }));
         state.isLoading = false;
-    })
+      })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
