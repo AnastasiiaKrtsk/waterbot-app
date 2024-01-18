@@ -106,7 +106,7 @@ const Month = () => {
               placement={placement}
             >
               <StyledWaterListItemWrapper key={day}>
-                <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
+                <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
                 <StyledPercentage>{percentage}%</StyledPercentage>
               </StyledWaterListItemWrapper>
             </CustomWidthTooltip>
