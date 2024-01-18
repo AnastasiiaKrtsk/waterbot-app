@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { signInThunk, signUpThunk } from "../../redux/thunks";
+import { signInThunk } from "../../redux/thunks";
 import { toast } from "react-toastify";
 import { updatePasswordSchema } from "../../helpers/validation";
 import sprite from "../../images/svg+logo/sprite.svg";
@@ -34,16 +34,16 @@ const UpdatePasswordPage = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = async ({ username, email, password }, e) => {
+  const onSubmit = async ({ password }, e) => {
     e.preventDefault();
 
     try {
-      await dispatch(signUpThunk({ username, email, password })).unwrap();
+      await dispatch(updatePasswordThunk({ password })).unwrap();
 
       await dispatch(signInThunk({ email, password }));
 
       reset();
-      toast.success("Registration completed successfully");
+      toast.success("Update password successfully");
     } catch (error) {
       toast.error(error.message);
     }
