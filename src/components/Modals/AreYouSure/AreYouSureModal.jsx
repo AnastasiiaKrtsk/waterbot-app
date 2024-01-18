@@ -2,6 +2,7 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutThunk } from "../../../redux/thunks";
 import {
+  CloseSvg,
   LogOutBntDiv,
   LogOutCrossDiv,
   LogOutPar,
@@ -12,7 +13,7 @@ import {
 } from "./StyledLogOut";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 
-const AreYouSureModal = ({title, message, buttonText, action}) => {
+const AreYouSureModal = ({ title, message, buttonText, action }) => {
   const dispatch = useDispatch();
 
   const handleCloseUserModal = () => {
@@ -20,24 +21,26 @@ const AreYouSureModal = ({title, message, buttonText, action}) => {
     dispatch(setModalContent(null));
   };
 
-  
-
   const handleButtonConfirm = () => {
     // TODO сделать thunk
-    action === 'logOut' ? dispatch(logOutThunk()) : 'dispatch("deleteWaterThunk")'
+    action === "logOut"
+      ? dispatch(logOutThunk())
+      : 'dispatch("deleteWaterThunk")';
   };
 
   return (
     <StyledModalWindow className="container">
       <LogOutCrossDiv>
         <LogOutTitle>{title}</LogOutTitle>
-        <svg width="24" height="24" onClick={handleCloseUserModal}>
+        <CloseSvg width="24" height="24" onClick={handleCloseUserModal}>
           <use href={`${sprite}#icon-outline`} />
-        </svg>
+        </CloseSvg>
       </LogOutCrossDiv>
       <LogOutPar>{message}</LogOutPar>
       <LogOutBntDiv>
-        <StyledLogOutButton onClick={handleButtonConfirm}>{buttonText}</StyledLogOutButton>
+        <StyledLogOutButton onClick={handleButtonConfirm}>
+          {buttonText}
+        </StyledLogOutButton>
         <StyledCancelButton onClick={handleCloseUserModal}>
           Cancel
         </StyledCancelButton>

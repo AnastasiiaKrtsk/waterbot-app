@@ -78,13 +78,14 @@ export const StyledLogOutButton = styled.button`
   font-weight: 500;
   line-height: 20px;
   padding: 8px 30px;
-
-  color: var(--white);
-
   border: none;
   border-radius: 10px;
   background: var(--red);
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  color: var(--white);
+  &:hover {
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  }
+  transition: box-shadow var(--transition);
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
@@ -108,6 +109,10 @@ export const StyledCancelButton = styled.button`
   border: none;
   border-radius: 10px;
   background: var(--light-blue-2);
+  &:hover {
+    box-shadow: 0px 4px 4px 0px rgba(113, 113, 113, 0.2);
+  }
+  transition: box-shadow var(--transition);
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
@@ -116,4 +121,7 @@ export const StyledCancelButton = styled.button`
 
     padding: 10px 30px;
   }
+`;
+export const CloseSvg = styled.svg`
+  cursor: pointer;
 `;

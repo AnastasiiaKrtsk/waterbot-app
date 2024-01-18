@@ -45,4 +45,8 @@ export const StyledEditBtn = styled.button`
   border: none;
   background: transparent;
   padding: 0;
+  &:hover {
+    color: var(--orange);
+  }
+  transition: color var(--transition);
 `;

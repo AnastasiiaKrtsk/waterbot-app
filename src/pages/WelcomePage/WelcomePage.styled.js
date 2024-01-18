@@ -19,34 +19,20 @@ export const WelcomeBg = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* display: flex; */
-  /* justify-content: center; */
-  /* margin-top: 52px; */
+  margin-left: auto;
+  margin-right: auto;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(${WelcomeBgMobile});
 
   @media screen and (min-width: 768px) {
-    /* height: 100vh; */
-    /* margin-top: 0; */
     margin-bottom: 64px;
-    background-repeat: no-repeat;
-
     background-image: url(${WelcomeBgTablet});
   }
 
   @media screen and (min-width: 1440px) {
-    /* width: auto;
-    height: 582px;
-    margin-left: 18px;
-    margin-right: 18px; */
     background-size: contain;
-
     background-repeat: no-repeat;
-
     background-image: url(${WelcomeBgDesktop});
   }
 `;
