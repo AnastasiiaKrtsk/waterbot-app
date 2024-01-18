@@ -24,7 +24,6 @@ const AreYouSureModal = ({ title, message, buttonText, action }) => {
   };
 
   const handleButtonConfirm = () => {
-    // TODO сделать thunk
     action === "logOut"
       ? dispatch(logOutThunk())
       : dispatch(deleteWaterThunk(id));

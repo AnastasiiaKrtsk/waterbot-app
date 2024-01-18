@@ -13,6 +13,7 @@ import {
   updateUserInfoThunk,
   userCurrentThunk,
 } from "./thunks";
+import moment from "moment";
 
 const initialState = {
   userData: {
@@ -33,6 +34,7 @@ const initialState = {
     todayWater: [],
     monthWater: [],
   },
+  chooseDate: moment(),
 };
 
 const authSlice = createSlice({
@@ -50,6 +52,9 @@ const authSlice = createSlice({
     },
     setIdForEditDelete: (state, action) => {
       state.idForEditDelete = action.payload;
+    },
+    setChooseDate: (state, action) => {
+      state.chooseDate = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -239,5 +244,6 @@ export const {
   setModalContent,
   setDailyNorma,
   setIdForEditDelete,
+  setChooseDate,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;

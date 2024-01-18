@@ -59,9 +59,9 @@ export const getWaterDay = async () => {
   return data;
 };
 
-export const getWaterMonth = async () => {
+export const getWaterMonth = async ({ year, month }) => {
   const { data } = await $instance.get(
-    `waters/userwatermonth?year=2024&month=01`
+    `waters/userwatermonth/${year}/${month}`
   );
 
   return data;

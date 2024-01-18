@@ -1,8 +1,5 @@
-// import AddWater from "../Buttons/AddWater/AddWater"
-// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddWaterBlue from "../Buttons/AddWater/AddWaterBlue";
-// import Modal from "../Modals/Modal";
 import { selectOpenModal, selectTodayWater } from "../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../redux/slice";
 import Month from "../Month/Month";

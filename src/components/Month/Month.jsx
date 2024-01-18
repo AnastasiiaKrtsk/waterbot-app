@@ -16,6 +16,10 @@ import {
 
 import sprite from "../../images/svg+logo/sprite.svg";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { selectChooseDate } from "../../redux/selectors";
+import { setChooseDate } from "../../redux/slice";
+import { getWaterMonthThunk } from "../../redux/thunks";
 
 const CustomWidthTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -31,29 +35,35 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
     flexDirection: "column",
     alignItems: "flex-start",
     gap: "16px",
-    color:"var(--dark-blue)",
+    color: "var(--dark-blue)",
   },
 });
 
 const Month = () => {
-  const [shownDate, setShownDate] = useState(moment());
+  const shownDate = useSelector(selectChooseDate);
+  const dispatch = useDispatch();
+  // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
-
-
 
   useEffect(() => {
     setDaysInMonth(shownDate.daysInMonth());
     const currentMonth = moment();
-    setIsCurrentMonth(shownDate.isSame(currentMonth, "month"));
+    setIsCurrentMonth(currentMonth.isSame(shownDate, "month"));
+    dispatch(
+      getWaterMonthThunk({
+        year: moment(shownDate).year().toString(),
+        month: (moment(shownDate).month() + 1).toString().padStart(2, "0"),
+      })
+    );
   }, [shownDate]);
 
   const prevMonth = () => {
-    setShownDate(shownDate.clone().subtract(1, "months"));
+    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")));
   };
 
   const nextMonth = () => {
-    setShownDate(shownDate.clone().add(1, "months"));
+    dispatch(setChooseDate(shownDate.clone().add(1, "months")));
   };
 
   const daysArray = Array.from(
@@ -81,19 +91,24 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
-          const placement = [1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31].includes(day)
-          ? "top-start"
-          : "top-end";
+          const placement = [
+            1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
+          ].includes(day)
+            ? "top-start"
+            : "top-end";
           return (
-
-            <CustomWidthTooltip title={day+", "+shownDate.format("MMMM")} key={day} placement={placement}>
-            <StyledWaterListItemWrapper key={day}>
-              <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
-              <StyledPercentage>0%</StyledPercentage>
-            </StyledWaterListItemWrapper>
-          </CustomWidthTooltip>
-            )
-          })}
+            <CustomWidthTooltip
+              title={day + ", " + shownDate.format("MMMM")}
+              key={day}
+              placement={placement}
+            >
+              <StyledWaterListItemWrapper key={day}>
+                <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
+                <StyledPercentage>0%</StyledPercentage>
+              </StyledWaterListItemWrapper>
+            </CustomWidthTooltip>
+          );
+        })}
       </StyledMonthWaterList>
     </div>
   );
