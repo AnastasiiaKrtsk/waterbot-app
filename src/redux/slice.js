@@ -5,6 +5,7 @@ import {
   editWaterThunk,
   getWaterDayThunk,
   getWaterMonthThunk,
+  editDailyNormaThunk,
   logOutThunk,
   signInThunk,
   signUpThunk,
@@ -19,7 +20,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman" || "man",
-    dailyNorma: 1.8,
+    dailyNorma: "2",
   },
   token: null,
   error: null,
@@ -135,6 +136,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
       //========== Update User Info =================//
       .addCase(updateUserInfoThunk.pending, (state) => {
         state.isLoading = true;
@@ -205,6 +207,23 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      
+      // ========== Update Daily Norma =================//
+      .addCase(editDailyNormaThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editDailyNormaThunk.fulfilled, (state, action) => {
+        state.userData = {
+          ...state.userData,
+          dailyNorma: action.payload.dailyNorma,
+        };
+        state.isLoading = false;
+      })
+      .addCase(editDailyNormaThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

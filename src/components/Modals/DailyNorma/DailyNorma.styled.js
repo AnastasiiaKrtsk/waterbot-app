@@ -17,7 +17,7 @@ export const BackdropDailyNorma = styled.div`
     padding: 44px 24px;
   } */
 `;
-export const ModalDilyNorma = styled.div`
+export const ModalDailyNorma = styled.div`
   padding: 32px 12px;
   /* position: fixed; */
   display: inline-flex;
@@ -65,8 +65,9 @@ export const FormulaInfoText = styled.p`
   line-height: calc(16 / 12);
 `;
 export const FormulaInput = styled.input`
+  width: 100%;
   padding: 12px 10px;
-  margin: 8px 0 16px;
+  margin: 8px 0 18px;
   color: var(--dark-blue);
   border: 1px solid var(--light-blue-2);
   font-size: 16px;
@@ -145,12 +146,36 @@ export const SaveBtn = styled.button`
   background-color: var(--dark-blue);
   color: var(--white);
   border-radius: 10px;
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
   @media only screen and (min-width: 767px) {
     width: 160px;
   }
 `;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
-// export const Formulas = styled.div``;
+
+export const DailyInputDiv = styled.div`
+  position: relative;
+`;
+
+export const Errors = styled.p`
+  position: absolute;
+  font-size: 10px;
+  color: red;
+  bottom: 0;
+`;
+
+export const SettingDailyGenderList = styled.ul`
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 16px;
+  }
+`;

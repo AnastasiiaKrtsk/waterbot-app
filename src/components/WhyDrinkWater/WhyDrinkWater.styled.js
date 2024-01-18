@@ -5,7 +5,7 @@ export const WhyWrapper = styled.div`
   padding: 24px 16px;
   flex-direction: column;
   align-items: flex-start;
-
+  margin-top: 32px;
   border-radius: 10px;
   background: var(--light-blue-1);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);

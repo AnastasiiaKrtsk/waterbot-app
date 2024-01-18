@@ -48,6 +48,11 @@ export const StyledSettingsPasswordDiv = styled.div`
   flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 0;
+    gap: 13.3px;
+  }
 `;
 
 export const SettingsCrossDiv = styled.div`
@@ -172,7 +177,9 @@ export const InputRadioSettings = styled.input`
   margin-right: 8px;
 `;
 
-export const StyledCloseSvg = styled.svg``;
+export const StyledCloseSvg = styled.svg`
+  cursor: pointer;
+`;
 
 export const BtnSettingSave = styled.button`
   display: flex;
@@ -184,14 +191,16 @@ export const BtnSettingSave = styled.button`
   border: none;
   border-radius: 10px;
   background: var(--dark-blue);
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
 
   text-align: center;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   color: var(--white);
-
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  transition: box-shadow var(--transition);
   @media screen and (min-width: 768px) {
     padding: 10px 30px;
     width: 160px;
@@ -289,4 +298,13 @@ export const PasswordSettingLabel = styled.label`
   margin-bottom: -4px;
 
   color: var(--black);
+`;
+
+export const Errors = styled.p`
+  position: absolute;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--red);
 `;

@@ -5,6 +5,7 @@ import {
   deleteWater,
   getWaterDay,
   getWaterMonth,
+  editDailyNorma,
   logout,
   setToken,
   signin,
@@ -79,7 +80,7 @@ export const updateAvatarThunk = createAsyncThunk(
       console.log("Avatar updated successfully:", response);
       return response;
     } catch (error) {
-      console.error("Error updating avatar:", error);
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -167,6 +168,19 @@ export const deleteWaterThunk = createAsyncThunk(
       return response;
     } catch (error) {
       toast.error("Error delete water:", error);
+    } });
+
+//dailyNorma
+
+export const editDailyNormaThunk = createAsyncThunk(
+  "users/editDailyNorma",
+  async (data, thunkAPI) => {
+    try {
+      const sum = Number(data.dailyNorma) * 1000;
+      const response = await editDailyNorma({ dailyNorma: sum });
+      return response;
+    } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

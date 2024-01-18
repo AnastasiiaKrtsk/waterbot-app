@@ -147,3 +147,24 @@ textarea {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+/* ====== РАДІО ІНПУТИ  =======*/
+
+
+input[type="radio"] {
+  background-color: var(--dark-blue); 
+  border: 1px solid var(--dark-blue); 
+  border-radius: 1px; 
+}
+
+
+input[type="radio"]:hover {
+  background-color: #003366; 
+  border-color: #003366;
+}
+
+
+input[type="radio"]:checked {
+  background-color:var(--dark-blue); 
+  border-color: var(--dark-blue);
+}
