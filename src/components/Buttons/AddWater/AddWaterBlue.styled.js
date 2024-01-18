@@ -18,11 +18,15 @@ export const StyledAddWaterBtnBlue = styled.button`
   border: none;
   border-radius: 10px;
   background: var(--dark-blue);
-  width: 178px;
+  width: 280px;
   height: 44px;
   /* margin-top: auto; */
   &:hover {
     box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
   }
   transition: box-shadow var(--transition);
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
 `;

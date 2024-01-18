@@ -5,6 +5,10 @@ export const StyledTodayWrapper = styled.div`
   flex-direction: column;
   max-width: 544px;
   height: 260px;
+
+  @media screen and (min-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 export const StyledTodayTitle = styled.div`

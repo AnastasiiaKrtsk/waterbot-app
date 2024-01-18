@@ -21,15 +21,13 @@ const Dashboard = () => {
   const modalStatus = useSelector(selectOpenModal);
 
   const handleAddWater = () => {
-    dispatch(setModalStatus(!modalStatus))
+    dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("Add water"));
   };
 
-
-
   return (
     <>
-      <StyledDashboardWrapper className="container">
+      <StyledDashboardWrapper>
         <StyledLeftPartWrapper>
           <NormaWater />
           <StyledProgressWrapper>

@@ -85,14 +85,23 @@ const WaterProgress = () => {
   return (
     <StyledWaterProgressWrapper>
       <StyledProgressTitle>Today</StyledProgressTitle>
-      <Box sx={{ width: 360, marginLeft:"11px" }}>
+      <Box sx={{ width: 360, marginLeft: "11px" }}>
         <Slider
           sx={{
-            width:360,
+            width: 360,
             margin: 0,
             // paddingLeft:11,
-            "& .custom-line-break": {
-              height: "0px", // Adjust the height as needed
+            "@media screen and (min-width: 320px)": {
+              width: "256px",
+              "& .custom-line-break": {
+                height: "0px",
+              },
+            },
+            "@media screen and (min-width: 768px)": {
+              width: "360px",
+              "& .custom-line-break": {
+                height: "0px",
+              },
             },
             color: "var(--light-blue-3)",
             "& .MuiSlider-markLabel": {
