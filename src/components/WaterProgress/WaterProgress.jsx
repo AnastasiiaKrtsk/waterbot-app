@@ -85,10 +85,10 @@ const WaterProgress = ({ value }) => {
   return (
     <StyledWaterProgressWrapper>
       <StyledProgressTitle>Today</StyledProgressTitle>
-      <Box sx={{ width: 360, marginLeft: "11px" }}>
+      <Box sx={{ marginLeft: "11px" }}>
         <Slider
           sx={{
-            width: 360,
+            // width: 360,
             margin: 0,
             // paddingLeft:11,
             "@media screen and (min-width: 320px)": {

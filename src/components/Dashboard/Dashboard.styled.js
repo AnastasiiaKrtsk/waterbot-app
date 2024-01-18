@@ -22,11 +22,12 @@ export const StyledDashboardWrapper = styled.div`
 `;
 
 export const StyledLeftPartWrapper = styled.div`
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 232px;
-  margin-top: 52px;
+  // margin-top: 52px;
 
   background-position: center;
   background-repeat: no-repeat;
