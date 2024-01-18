@@ -46,6 +46,13 @@ const Month = () => {
   // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
+  const [clickedItem, setClickedItem] = useState(null);
+  
+
+  const handleItemClick = (day) => {
+    // Toggle the tooltip visibility on click
+    setClickedItem(clickedItem === day ? null : day);
+  };
 
   useEffect(() => {
     setDaysInMonth(shownDate.daysInMonth());
@@ -104,8 +111,10 @@ const Month = () => {
               title={day + ", " + shownDate.format("MMMM")}
               key={day}
               placement={placement}
+              open={clickedItem === day}
+              onClose={() => setClickedItem(null)}
             >
-              <StyledWaterListItemWrapper key={day}>
+              <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)} >
                 <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
                 <StyledPercentage>{percentage}%</StyledPercentage>
               </StyledWaterListItemWrapper>

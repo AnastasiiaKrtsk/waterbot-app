@@ -36,20 +36,22 @@ const SimpleForm = ({ action }) => {
   const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
   const todayWaterArray = useSelector(selectTodayWater);
+
   const waterAmount =
     action === "edit"
       ? todayWaterArray.userWaterDay.find((item) => item._id === id).waterVolume
-      : "250";
+      : 250;
 
-  const shownTime = action === "edit"
-  ? moment(
-      todayWaterArray.userWaterDay.find(
-        (item) => item._id === id
-      ).date
-    )
-  : moment()
+  const shownTime =
+    action === "edit"
+      ? moment(
+          todayWaterArray.userWaterDay.find((item) => item._id === id).date
+        )
+      : moment();
 
   const [value, setValue] = useState(shownTime);
+  const [volume, setVolume] = useState(waterAmount);
+  const [customVolume, setCustomVolume] = useState(null);
 
   const handleCloseUserModal = () => {
     dispatch(setModalStatus(false));
@@ -60,7 +62,8 @@ const SimpleForm = ({ action }) => {
 
     const formData = new FormData(e.target);
 
-    const waterVolume = +formData.get("waterVolume");
+    const waterVolume = +(customVolume ? customVolume : volume);
+    // const waterVolume = +formData.get("waterVolume");
     const date = moment(formData.get("date"), "hh:mm a").format(
       "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
     );
@@ -83,6 +86,19 @@ const SimpleForm = ({ action }) => {
     setSelectedTime(newTime);
   };
 
+  const handleIncreaseVolume = (e) => {
+    e.preventDefault();
+    setVolume(volume <= 15000 ? volume + 50 : 15000);
+  };
+  const handleDecreaseVolume = (e) => {
+    e.preventDefault();
+    setVolume(volume > 50 ? volume - 50 : 50);
+  };
+
+  const handleChangeVolume = (e) => {
+    setCustomVolume(e.target.value);
+  };
+
   return (
     <>
       <>
@@ -101,7 +117,12 @@ const SimpleForm = ({ action }) => {
                   <use href={sprite + "#icon-water-glass"}></use>
                 </svg>
                 <div>{waterAmount} ml</div>
-                <div>Time</div>
+                <div>
+                  {moment(
+                    todayWaterArray.userWaterDay.find((item) => item._id === id)
+                      .date
+                  ).format("LT")}
+                </div>
               </StyledCurrentValue>
             </>
           ) : (
@@ -116,13 +137,19 @@ const SimpleForm = ({ action }) => {
             )}
             <StyledTitle>Amount of water:</StyledTitle>
             <StyledButtonsWrapper>
-              <StyledIncreaseDecreaseBtn>
+              <StyledIncreaseDecreaseBtn
+                onClick={handleDecreaseVolume}
+                type="button"
+              >
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-minus"}></use>
                 </svg>
               </StyledIncreaseDecreaseBtn>
-              <StyledNewAmount>{waterAmount}ml</StyledNewAmount>
-              <StyledIncreaseDecreaseBtn>
+              <StyledNewAmount>{volume}ml</StyledNewAmount>
+              <StyledIncreaseDecreaseBtn
+                onClick={handleIncreaseVolume}
+                type="button"
+              >
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-plus"}></use>
                 </svg>
@@ -208,6 +235,7 @@ const SimpleForm = ({ action }) => {
                 },
               }}
               name="waterVolume"
+              onChange={handleChangeVolume}
               type="number"
               inputProps={{
                 min: 1,
@@ -215,9 +243,8 @@ const SimpleForm = ({ action }) => {
               }}
             />
           </StyledUsedWater>
-          {/* TODO додати WaterAmount*/}
           <StyledWrapper>
-            <StyledSpan>20ml</StyledSpan>
+            <StyledSpan>{customVolume ? customVolume : volume}ml</StyledSpan>
             <StyledSaveBtn type="submit" color="primary">
               Save
             </StyledSaveBtn>
