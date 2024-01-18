@@ -3,9 +3,14 @@ import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../../images/svg+logo/sprite.svg";
+import {
+  selectChooseDate,
+  selectIdForEditDelete,
+} from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
+import { addWaterThunk, editWaterThunk } from "../../../redux/thunks";
 import {
   StyledButtonsWrapper,
   StyledCurrentValue,
@@ -26,7 +31,8 @@ import {
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
-
+  const shownDate = useSelector(selectChooseDate);
+  const id = useSelector(selectIdForEditDelete);
   const handleCloseUserModal = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
@@ -36,10 +42,23 @@ const SimpleForm = ({ action }) => {
 
     const formData = new FormData(e.target);
 
-    const waterVolume = formData.get("waterVolume");
-    const time = moment(formData.get("time"), "h:mm a").format();
+    const waterVolume = +formData.get("waterVolume");
+    const date = moment(formData.get("date"), "hh:mm a").format(
+      "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+    );
 
-    console.log({ waterVolume, time });
+    const chooseDate = {
+      year: moment(shownDate).year().toString(),
+      month: (moment(shownDate).month() + 1).toString().padStart(2, 0),
+    };
+
+    if (action === "edit") {
+      dispatch(
+        editWaterThunk({ chooseDate, id, water: { waterVolume, date } })
+      );
+    } else {
+      dispatch(addWaterThunk({ chooseDate, water: { waterVolume, date } }));
+    }
   };
 
   return (
@@ -128,7 +147,7 @@ const SimpleForm = ({ action }) => {
                         },
                       },
                     }}
-                    name="time"
+                    name="date"
                     views={["hours", "minutes"]}
                     format="hh:mm a"
                     timeSteps={{ minutes: 1 }}

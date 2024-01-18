@@ -1,9 +1,6 @@
-// import AddWater from "../Buttons/AddWater/AddWater"
-// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddWaterBlue from "../Buttons/AddWater/AddWaterBlue";
-// import Modal from "../Modals/Modal";
-import { selectOpenModal } from "../../redux/selectors";
+import { selectOpenModal, selectTodayWater } from "../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../redux/slice";
 import Month from "../Month/Month";
 import Today from "../Today/Today";
@@ -17,15 +14,19 @@ import {
 import NormaWater from "./NormaWater/NormaWater";
 
 const Dashboard = () => {
+  const todayWater = useSelector(selectTodayWater);
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
 
   const handleAddWater = () => {
-    dispatch(setModalStatus(!modalStatus))
+    dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("Add water"));
   };
 
-
+  const waterProgressBar =
+    todayWater.percentDailyNormaUser > 100
+      ? 100
+      : todayWater.percentDailyNormaUser;
 
   return (
     <>
@@ -33,7 +34,7 @@ const Dashboard = () => {
         <StyledLeftPartWrapper>
           <NormaWater />
           <StyledProgressWrapper>
-            <WaterProgress />
+            <WaterProgress value={waterProgressBar} />
             <AddWaterBlue onClick={handleAddWater} />
           </StyledProgressWrapper>
         </StyledLeftPartWrapper>

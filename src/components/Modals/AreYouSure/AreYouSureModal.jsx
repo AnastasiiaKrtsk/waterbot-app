@@ -1,6 +1,6 @@
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutThunk } from "../../../redux/thunks";
+import { deleteWaterThunk, logOutThunk } from "../../../redux/thunks";
 import {
   CloseSvg,
   LogOutBntDiv,
@@ -12,8 +12,15 @@ import {
   StyledModalWindow,
 } from "./StyledLogOut";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
+import {
+  selectChooseDate,
+  selectIdForEditDelete,
+} from "../../../redux/selectors";
+import moment from "moment";
 
 const AreYouSureModal = ({ title, message, buttonText, action }) => {
+  const id = useSelector(selectIdForEditDelete);
+  const shownDate = useSelector(selectChooseDate);
   const dispatch = useDispatch();
 
   const handleCloseUserModal = () => {
@@ -21,11 +28,15 @@ const AreYouSureModal = ({ title, message, buttonText, action }) => {
     dispatch(setModalContent(null));
   };
 
+  const chooseDate = {
+    year: moment(shownDate).year().toString(),
+    month: (moment(shownDate).month() + 1).toString().padStart(2, 0),
+  };
+
   const handleButtonConfirm = () => {
-    // TODO сделать thunk
     action === "logOut"
       ? dispatch(logOutThunk())
-      : 'dispatch("deleteWaterThunk")';
+      : dispatch(deleteWaterThunk({ chooseDate, id }));
   };
 
   return (

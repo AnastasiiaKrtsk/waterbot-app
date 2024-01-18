@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addWaterThunk,
+  deleteWaterThunk,
+  editWaterThunk,
+  getWaterDayThunk,
+  getWaterMonthThunk,
   editDailyNormaThunk,
   logOutThunk,
   signInThunk,
@@ -8,6 +13,7 @@ import {
   updateUserInfoThunk,
   userCurrentThunk,
 } from "./thunks";
+import moment from "moment";
 
 const initialState = {
   userData: {
@@ -23,6 +29,12 @@ const initialState = {
   isLoading: false,
   openModal: false,
   modalContent: null,
+  idForEditDelete: null,
+  water: {
+    todayWater: [],
+    monthWater: [],
+  },
+  chooseDate: moment(),
 };
 
 const authSlice = createSlice({
@@ -37,6 +49,12 @@ const authSlice = createSlice({
     },
     setDailyNorma: (state, action) => {
       state.userData.dailyNorma = action.payload;
+    },
+    setIdForEditDelete: (state, action) => {
+      state.idForEditDelete = action.payload;
+    },
+    setChooseDate: (state, action) => {
+      state.chooseDate = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -141,6 +159,67 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
+      //============== Water =============================//
+
+      .addCase(addWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getWaterDayThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getWaterDayThunk.fulfilled, (state, action) => {
+        state.water.todayWater = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getWaterDayThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getWaterMonthThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
+        state.water.monthWater = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getWaterMonthThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(editWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(editWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteWaterThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteWaterThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
       // ========== Update Daily Norma =================//
       .addCase(editDailyNormaThunk.pending, (state) => {
         state.isLoading = true;
@@ -160,6 +239,11 @@ const authSlice = createSlice({
   },
 });
 
-export const { setModalStatus, setModalContent, setDailyNorma } =
-  authSlice.actions;
+export const {
+  setModalStatus,
+  setModalContent,
+  setDailyNorma,
+  setIdForEditDelete,
+  setChooseDate,
+} = authSlice.actions;
 export const authReducer = authSlice.reducer;

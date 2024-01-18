@@ -54,23 +54,31 @@ export const updateUserInfo = async (data) => {
 
 //WaterQuery
 
-export const getWater = async () => {
-  const { data } = await $instance.get("/water/");
+export const getWaterDay = async () => {
+  const { data } = await $instance.get("waters/userwaterday");
+  return data;
+};
+
+export const getWaterMonth = async ({ year, month }) => {
+  const { data } = await $instance.get(
+    `waters/userwatermonth/${year}/${month}`
+  );
+
   return data;
 };
 
 export const addWater = async (water) => {
-  const { data } = await $instance.post("/water/", water);
+  const { data } = await $instance.post("waters/", water);
   return data;
 };
 
 export const editWater = async ({ id, water }) => {
-  const { data } = await $instance.patch(`/water/${id}`, water);
+  const { data } = await $instance.patch(`waters/${id}`, water);
   return data;
 };
 
 export const deleteWater = async (id) => {
-  const { data } = await $instance.delete(`/water/${id}`);
+  const { data } = await $instance.delete(`waters/${id}`);
   return { id, data };
 };
 
