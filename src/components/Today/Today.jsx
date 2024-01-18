@@ -47,6 +47,7 @@ const Today = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("EditWaterForm"));
     dispatch(setIdForEditDelete(id));
+    
   };
   const handleDeleteWater = (id) => {
     dispatch(setModalStatus(!modalStatus));

@@ -17,7 +17,7 @@ import {
 import sprite from "../../images/svg+logo/sprite.svg";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectChooseDate } from "../../redux/selectors";
+import { selectChooseDate, selectMonthWater } from "../../redux/selectors";
 import { setChooseDate } from "../../redux/slice";
 import { getWaterMonthThunk } from "../../redux/thunks";
 
@@ -41,6 +41,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const Month = () => {
   const shownDate = useSelector(selectChooseDate);
+  const MonthWaterArray = useSelector(selectMonthWater);
   const dispatch = useDispatch();
   // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
@@ -91,6 +92,8 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
+          let recordExist = MonthWaterArray.find(item => item.date === day)
+          let percentage = recordExist ? recordExist.percentDailyNorm : 0;
           const placement = [
             1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
           ].includes(day)
@@ -104,7 +107,7 @@ const Month = () => {
             >
               <StyledWaterListItemWrapper key={day}>
                 <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
-                <StyledPercentage>0%</StyledPercentage>
+                <StyledPercentage>{percentage}%</StyledPercentage>
               </StyledWaterListItemWrapper>
             </CustomWidthTooltip>
           );

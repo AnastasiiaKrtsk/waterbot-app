@@ -8,6 +8,7 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 import {
   selectChooseDate,
   selectIdForEditDelete,
+  selectTodayWater,
 } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { addWaterThunk, editWaterThunk } from "../../../redux/thunks";
@@ -28,11 +29,28 @@ import {
   StyledUsedWater,
   StyledWrapper,
 } from "./EditWaterForm.styled";
+import { useState } from "react";
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
   const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
+  const todayWaterArray = useSelector(selectTodayWater);
+  const waterAmount =
+    action === "edit"
+      ? todayWaterArray.userWaterDay.find((item) => item._id === id).waterVolume
+      : "250";
+
+  const shownTime = action === "edit"
+  ? moment(
+      todayWaterArray.userWaterDay.find(
+        (item) => item._id === id
+      ).date
+    )
+  : moment()
+
+  const [value, setValue] = useState(shownTime);
+
   const handleCloseUserModal = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
@@ -61,6 +79,10 @@ const SimpleForm = ({ action }) => {
     }
   };
 
+  const handleTimeChange = (newTime) => {
+    setSelectedTime(newTime);
+  };
+
   return (
     <>
       <>
@@ -78,7 +100,7 @@ const SimpleForm = ({ action }) => {
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-water-glass"}></use>
                 </svg>
-                <div>250 ml</div>
+                <div>{waterAmount} ml</div>
                 <div>Time</div>
               </StyledCurrentValue>
             </>
@@ -99,7 +121,7 @@ const SimpleForm = ({ action }) => {
                   <use href={sprite + "#icon-minus"}></use>
                 </svg>
               </StyledIncreaseDecreaseBtn>
-              <StyledNewAmount>250ml</StyledNewAmount>
+              <StyledNewAmount>{waterAmount}ml</StyledNewAmount>
               <StyledIncreaseDecreaseBtn>
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-plus"}></use>
@@ -111,7 +133,7 @@ const SimpleForm = ({ action }) => {
           <StyledRecordingTimeWrapper>
             <StyledTitle>Recording time:</StyledTitle>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["MobileTimePicker"]}>
+              <DemoContainer components={["TimePicker"]}>
                 <DemoItem>
                   <TimePicker
                     sx={{
@@ -151,6 +173,8 @@ const SimpleForm = ({ action }) => {
                     views={["hours", "minutes"]}
                     format="hh:mm a"
                     timeSteps={{ minutes: 1 }}
+                    value={value}
+                    onChange={handleTimeChange}
                     ampm={true}
                   />
                 </DemoItem>
