@@ -6,8 +6,12 @@ export const StyledWaterProgressWrapper = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  width: 391px;
+  width: 280px;
   /* margin-bottom: 56px; */
+
+  @media screen and (min-width: 768px) {
+    width: 356px;
+  }
 `;
 
 export const StyledProgressTitle = styled.div`
@@ -18,5 +22,3 @@ export const StyledProgressTitle = styled.div`
   font-weight: 400;
   line-height: 24px;
 `;
-
-

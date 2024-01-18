@@ -25,15 +25,20 @@ export const StyledMonthWaterList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 20px 22px;
+  width: 264px;
 
-  width: 544px;
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    gap: 20px 34px;
+  }
 `;
 
 export const StyledWaterListItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
+  gap: 4px;
 `;
 
 export const StyledMonthWaterItem = styled.li`
@@ -42,7 +47,7 @@ export const StyledMonthWaterItem = styled.li`
   align-items: center;
   padding: 7px;
   width: 34px;
-  /* height: 34px; */
+  height: 34px;
   border-radius: 50%;
   /* border: 1px solid blue; */
   background-color: var(--white);
