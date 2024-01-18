@@ -16,6 +16,8 @@ import PublicRoute from "./components/PublicRoute/PublicRoute";
 import { selectOpenModal } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 // import { userCurrentThunk } from "./redux/thunks";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="" element={<PublicRoute />}>
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/update-password" element={<UpdatePasswordPage />} />
           </Route>
           <Route path="" element={<PrivateRoute />}>
             <Route path="/homepage" element={<HomePage />} />

@@ -17,6 +17,7 @@ import {
 import {
   BtnSaveWrapper,
   BtnSettingSave,
+  Error,
   Errors,
   EyeSvg,
   ImgDownloadIcon,
@@ -124,7 +125,9 @@ const UserSettings = () => {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile.size > 5 * 1024 * 1024) {
-      toast.warning("File is too large! Please choose another one");
+      toast.warning(
+        "The photo must be less than 5 MB! Please choose another one"
+      );
       event.target.value = "";
     } else {
       uploadAvatar(selectedFile);
@@ -138,9 +141,6 @@ const UserSettings = () => {
   };
 
   return (
-    //   isLoading ? (
-    //   <Loader />
-    // ) : (
     <ModalSettingWindow>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
@@ -223,7 +223,7 @@ const UserSettings = () => {
                     {...register("username")}
                     errors={!!errors.username}
                   />
-                  <p>{errors.username?.message}</p>
+                  <Error>{errors.username?.message}</Error>
                 </SettingNameEmailDiv>
 
                 <SettingNameEmailDiv>
@@ -235,7 +235,7 @@ const UserSettings = () => {
                     {...register("email")}
                     errors={!!errors.email}
                   />
-                  <Errors>{errors.email?.message}</Errors>
+                  <Error>{errors.email?.message}</Error>
                 </SettingNameEmailDiv>
               </SettingNameEmailWrapper>
             </div>

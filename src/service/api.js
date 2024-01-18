@@ -89,3 +89,12 @@ export const editDailyNorma = async (water) => {
   return data;
 };
 // editDailyNorma();
+
+export const forgotPassword = async (email) => {
+  const { data } = await $instance.post("auth/forgot-password", email);
+  return data;
+};
+
+export const updatePassword = async (newPassword) => {
+  const { data } = await $instance.post("auth/update-password", newPassword);
+};

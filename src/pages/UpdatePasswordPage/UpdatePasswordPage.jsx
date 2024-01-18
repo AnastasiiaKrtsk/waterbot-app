@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signInThunk } from "../../redux/thunks";
-import { signInSchema } from "../../helpers/validation";
+import { toast } from "react-toastify";
+import { updatePasswordSchema } from "../../helpers/validation";
 import sprite from "../../images/svg+logo/sprite.svg";
 import {
   Bg,
@@ -18,9 +18,10 @@ import {
   Title,
   WrapperForm,
   WrapperInput,
-} from "./SignInPage.styled";
+} from "./UpdatePasswordPage.styled";
+import { useState } from "react";
 
-const SignInPage = () => {
+const UpdatePasswordPage = () => {
   const {
     register,
     handleSubmit,
@@ -28,15 +29,24 @@ const SignInPage = () => {
     reset,
   } = useForm({
     mode: "onTouched",
-    resolver: yupResolver(signInSchema),
+    resolver: yupResolver(updatePasswordSchema),
   });
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data, e) => {
+  const onSubmit = async ({ password }, e) => {
     e.preventDefault();
-    dispatch(signInThunk(data));
-    reset();
+
+    try {
+      await dispatch(updatePasswordThunk({ password })).unwrap();
+
+      await dispatch(signInThunk({ email, password }));
+
+      reset();
+      toast.success("Update password successfully");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const togglePasswordVisibility = (inputId) => {
@@ -45,23 +55,12 @@ const SignInPage = () => {
       [inputId]: !prevPasswords[inputId],
     }));
   };
-
   return (
     <Bg>
       <Bootle>
         <WrapperForm>
-          <Title>Sign In</Title>
+          <Title>Update password</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <WrapperInput>
-              <Label>Enter your email</Label>
-              <Input
-                type="email"
-                placeholder="E-mail"
-                {...register("email")}
-                errors={!!errors.email}
-              />
-              <Error>{errors.email?.message}</Error>
-            </WrapperInput>
             <WrapperInput>
               <Label>Enter your password</Label>
               <Input
@@ -83,9 +82,29 @@ const SignInPage = () => {
               </div>
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
-            <Btn type="submit">Sign In</Btn>
-            <LinkBtn to="/forgot-password">Forgot password?</LinkBtn>
-            <LinkBtn to="/signup">Sign Up</LinkBtn>
+            <WrapperInput>
+              <Label>Repeat password</Label>
+              <Input
+                type={showPassword["passwordRepeat"] ? "text" : "password"}
+                placeholder="Repeat password"
+                {...register("passwordRepeat")}
+                errors={!!errors.passwordRepeat}
+              />
+              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
+                {showPassword["passwordRepeat"] ? (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision`} />
+                  </EyeSvg>
+                ) : (
+                  <EyeSvg width="16" height="16">
+                    <use href={`${sprite}#vision-crossed`} />
+                  </EyeSvg>
+                )}
+              </div>
+              <Error>{errors.passwordRepeat?.message}</Error>
+            </WrapperInput>
+            <Btn type="submit">Update password</Btn>
+            <LinkBtn to="/signin">Sign In</LinkBtn>
           </Form>
         </WrapperForm>
       </Bootle>
@@ -93,4 +112,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default UpdatePasswordPage;
