@@ -17,9 +17,15 @@ import sprite from "../../images/svg+logo/sprite.svg";
 import { selectOpenModal, selectTodayWater } from "../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../redux/slice";
 import moment from "moment";
+import { useEffect } from "react";
+import { getWaterDayThunk, getWaterMonthThunk } from "../../redux/thunks";
 
 const Today = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getWaterDayThunk());
+    // dispatch(getWaterMonthThunk())
+  }, []);
 
   const modalStatus = useSelector(selectOpenModal);
   const todayWater = useSelector(selectTodayWater);
