@@ -86,6 +86,7 @@ export const SettingNameEmailWrapper = styled.div`
 `;
 
 export const SettingNameEmailDiv = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -302,6 +303,16 @@ export const PasswordSettingLabel = styled.label`
 
 export const Errors = styled.p`
   position: absolute;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--red);
+`;
+
+export const Error = styled.p`
+  position: absolute;
+  bottom: -17px;
 
   font-size: 10px;
   font-weight: 400;
