@@ -1,12 +1,12 @@
-import Slider from "@mui/material/Slider";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
 import {
   StyledProgressTitle,
   StyledWaterProgressWrapper,
 } from "./WaterProgress.styled";
-import { Typography } from "@mui/material";
 
-const WaterProgress = () => {
+const WaterProgress = ({ value }) => {
   const marks = [
     {
       value: 0,
@@ -132,7 +132,7 @@ const WaterProgress = () => {
             },
           }}
           aria-label="Custom marks"
-          defaultValue={50}
+          value={value ? value : 0}
           getAriaValueText={valuetext}
           marks={marks}
           size="small"

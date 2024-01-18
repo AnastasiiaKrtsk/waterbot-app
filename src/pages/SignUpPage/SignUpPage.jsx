@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { signInThunk, signUpThunk } from "../../redux/thunks";
 import { toast } from "react-toastify";
 import { signUpSchema } from "../../helpers/validation";
-import sprite from "../../images/svg+logo/sprite.svg";
+import PasswordToggle from "../../components/PasswordToggle/PasswordToggle";
 import {
   Bg,
   Bootle,
   Btn,
   Error,
-  EyeSvg,
   Form,
   Input,
   Label,
@@ -19,7 +19,6 @@ import {
   WrapperForm,
   WrapperInput,
 } from "./SignUpPage.styled";
-import { useState } from "react";
 
 const SignUpPage = () => {
   const {
@@ -49,11 +48,8 @@ const SignUpPage = () => {
     }
   };
 
-  const togglePasswordVisibility = (inputId) => {
-    setShowPassword((prevPasswords) => ({
-      ...prevPasswords,
-      [inputId]: !prevPasswords[inputId],
-    }));
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevVisibility) => !prevVisibility);
   };
 
   return (
@@ -90,17 +86,10 @@ const SignUpPage = () => {
                 {...register("password")}
                 errors={!!errors.password}
               />
-              <div onClick={() => togglePasswordVisibility("password")}>
-                {showPassword["password"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
+              <PasswordToggle
+                isVisible={showPassword}
+                onToggle={togglePasswordVisibility}
+              />
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
             <WrapperInput>
@@ -111,17 +100,10 @@ const SignUpPage = () => {
                 {...register("passwordRepeat")}
                 errors={!!errors.passwordRepeat}
               />
-              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
-                {showPassword["passwordRepeat"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
+              <PasswordToggle
+                isVisible={showPassword}
+                onToggle={togglePasswordVisibility}
+              />
               <Error>{errors.passwordRepeat?.message}</Error>
             </WrapperInput>
             <Btn type="submit">Sign Up</Btn>

@@ -1,6 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addWater,
   currentUser,
+  deleteWater,
+  getWaterDay,
+  getWaterMonth,
   editDailyNorma,
   logout,
   setToken,
@@ -8,8 +12,10 @@ import {
   signup,
   updateAvatar,
   updateUserInfo,
+  editWater,
 } from "../service/api";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 export const signUpThunk = createAsyncThunk(
   "auth/signup",
@@ -29,6 +35,7 @@ export const signInThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await signin(userData);
+      thunkAPI.dispatch(getWaterDayThunk());
       return response;
     } catch (error) {
       toast.error(`Incorrect email or password`);
@@ -94,6 +101,108 @@ export const updateUserInfoThunk = createAsyncThunk(
   }
 );
 
+//============== Water =============================//
+
+export const addWaterThunk = createAsyncThunk(
+  "waters/addWater",
+  async ({ chooseDate, water }, thunkAPI) => {
+    const monthYear = {
+      year: moment(water.date).year().toString(),
+      month: (moment(water.date).month() + 1).toString().padStart(2, 0),
+    };
+    try {
+      const response = await addWater(water);
+
+      thunkAPI.dispatch(getWaterDayThunk());
+      if (
+        monthYear.year === chooseDate.year &&
+        monthYear.month === chooseDate.month
+      ) {
+        thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      }
+      return response;
+    } catch (error) {
+      toast.error("Error add water:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getWaterDayThunk = createAsyncThunk(
+  "waters/getWaterDay",
+  async (_, thunkAPI) => {
+    try {
+      const response = await getWaterDay();
+      return response;
+    } catch (error) {
+      toast.error("Error get water for this day:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getWaterMonthThunk = createAsyncThunk(
+  "waters/getWaterMonth",
+  async (monthYear, thunkAPI) => {
+    try {
+      const response = await getWaterMonth(monthYear);
+      return response;
+    } catch (error) {
+      toast.error("Error get water for this month", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editWaterThunk = createAsyncThunk(
+  "waters/editWater",
+  async ({ chooseDate, id, water }, thunkAPI) => {
+    const monthYear = {
+      year: moment(water.date).year().toString(),
+      month: (moment(water.date).month() + 1).toString().padStart(2, 0),
+    };
+
+    try {
+      const response = await editWater({ id, water });
+      thunkAPI.dispatch(getWaterDayThunk());
+
+      if (
+        monthYear.year === chooseDate.year &&
+        monthYear.month === chooseDate.month
+      ) {
+        thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      }
+      return response;
+    } catch (error) {
+      toast.error("Error edit water:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteWaterThunk = createAsyncThunk(
+  "waters/deleteWater",
+  async ({ chooseDate, id }, thunkAPI) => {
+    const monthYear = {
+      year: moment().year().toString(),
+      month: (moment().month() + 1).toString().padStart(2, 0),
+    };
+    try {
+      const response = await deleteWater(id);
+      thunkAPI.dispatch(getWaterDayThunk());
+      if (
+        monthYear.year === chooseDate.year &&
+        monthYear.month === chooseDate.month
+      ) {
+        thunkAPI.dispatch(getWaterMonthThunk(monthYear));
+      }
+      return response;
+    } catch (error) {
+      toast.error("Error delete water:", error);
+    }
+  }
+);
+
 //dailyNorma
 
 export const editDailyNormaThunk = createAsyncThunk(
@@ -105,6 +214,32 @@ export const editDailyNormaThunk = createAsyncThunk(
       return response;
     } catch (error) {
       toast.error(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const forgotPasswordThunk = createAsyncThunk(
+  "auth/forgotPassword",
+  async (email, thunkAPI) => {
+    try {
+      const response = await forgotPassword(email);
+      return response;
+    } catch (error) {
+      toast.error(`Incorrect email`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updatePasswordThunk = createAsyncThunk(
+  "auth/forgotPassword",
+  async (newPassword, thunkAPI) => {
+    try {
+      const response = await updatePassword(newPassword);
+      return response;
+    } catch (error) {
+      toast.error(`Incorrect password`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

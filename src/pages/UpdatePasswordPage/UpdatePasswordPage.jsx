@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { signInThunk, signUpThunk } from "../../redux/thunks";
+import { signInThunk } from "../../redux/thunks";
 import { toast } from "react-toastify";
 import { updatePasswordSchema } from "../../helpers/validation";
-import sprite from "../../images/svg+logo/sprite.svg";
 import {
   Bg,
   Bootle,
   Btn,
   Error,
-  EyeSvg,
   Form,
   Input,
   Label,
@@ -20,6 +18,7 @@ import {
   WrapperInput,
 } from "./UpdatePasswordPage.styled";
 import { useState } from "react";
+import PasswordToggle from "../../components/PasswordToggle/PasswordToggle";
 
 const UpdatePasswordPage = () => {
   const {
@@ -34,27 +33,25 @@ const UpdatePasswordPage = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = async ({ username, email, password }, e) => {
+  const onSubmit = async ({ password }, e) => {
     e.preventDefault();
 
     try {
-      await dispatch(signUpThunk({ username, email, password })).unwrap();
+      await dispatch(updatePasswordThunk({ password })).unwrap();
 
       await dispatch(signInThunk({ email, password }));
 
       reset();
-      toast.success("Registration completed successfully");
+      toast.success("Update password successfully");
     } catch (error) {
       toast.error(error.message);
     }
   };
 
-  const togglePasswordVisibility = (inputId) => {
-    setShowPassword((prevPasswords) => ({
-      ...prevPasswords,
-      [inputId]: !prevPasswords[inputId],
-    }));
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevVisibility) => !prevVisibility);
   };
+
   return (
     <Bg>
       <Bootle>
@@ -69,17 +66,10 @@ const UpdatePasswordPage = () => {
                 {...register("password")}
                 errors={!!errors.password}
               />
-              <div onClick={() => togglePasswordVisibility("password")}>
-                {showPassword["password"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
+              <PasswordToggle
+                isVisible={showPassword}
+                onToggle={togglePasswordVisibility}
+              />
               <Error>{errors.password?.message}</Error>
             </WrapperInput>
             <WrapperInput>
@@ -90,17 +80,10 @@ const UpdatePasswordPage = () => {
                 {...register("passwordRepeat")}
                 errors={!!errors.passwordRepeat}
               />
-              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
-                {showPassword["passwordRepeat"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
+              <PasswordToggle
+                isVisible={showPassword}
+                onToggle={togglePasswordVisibility}
+              />
               <Error>{errors.passwordRepeat?.message}</Error>
             </WrapperInput>
             <Btn type="submit">Update password</Btn>

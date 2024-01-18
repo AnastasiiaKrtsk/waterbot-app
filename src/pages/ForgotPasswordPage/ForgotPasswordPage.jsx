@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { signInThunk } from "../../redux/thunks";
 import { forgotPasswordSchema } from "../../helpers/validation";
-
 import {
   Bg,
   Bootle,
@@ -30,9 +28,9 @@ const ForgotPasswordPage = () => {
   });
   const dispatch = useDispatch();
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (email, e) => {
     e.preventDefault();
-    dispatch(signInThunk(data));
+    dispatch(forgotPasswordThunk(email));
     reset();
   };
 
