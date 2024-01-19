@@ -40,6 +40,8 @@ const Today = () => {
     dispatch(getWaterMonthThunk(monthYear));
   }, []);
 
+  
+
   const modalStatus = useSelector(selectOpenModal);
   const todayWater = useSelector(selectTodayWater);
 
@@ -67,7 +69,8 @@ const Today = () => {
             <use href={sprite + "#icon-water-glass"}></use>
           </svg>
           <StyledWaterVolume>{waterVolume} ml</StyledWaterVolume>{" "}
-          {moment(date).format("LT")}
+          {/* {new Date(date).getUTCHours()} */}
+          {moment(date).utc().format("LT")}
         </StyledWaterInfo>
         <StyledTodayButtonsWrapper>
           <EditWater onClick={() => handleEditWater(_id)} />
