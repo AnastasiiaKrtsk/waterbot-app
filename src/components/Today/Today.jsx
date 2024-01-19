@@ -67,7 +67,7 @@ const Today = () => {
             <use href={sprite + "#icon-water-glass"}></use>
           </svg>
           <StyledWaterVolume>{waterVolume} ml</StyledWaterVolume>{" "}
-          {moment(date).format("LT")}
+          {moment(date).utc().format("LT")}
         </StyledWaterInfo>
         <StyledTodayButtonsWrapper>
           <EditWater onClick={() => handleEditWater(_id)} />

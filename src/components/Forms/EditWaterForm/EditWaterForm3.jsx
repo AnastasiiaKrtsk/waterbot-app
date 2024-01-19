@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,8 +46,8 @@ const SimpleForm = ({ action }) => {
     action === "edit"
       ? moment(
           todayWaterArray.userWaterDay.find((item) => item._id === id).date
-        )
-      : moment();
+        ).utc()
+      : moment().utc();
 
   const [value, setValue] = useState(shownTime);
   const [volume, setVolume] = useState(waterAmount);
@@ -83,7 +83,7 @@ const SimpleForm = ({ action }) => {
   };
 
   const handleTimeChange = (newTime) => {
-    setSelectedTime(newTime);
+    setValue(newTime);
   };
 
   const handleIncreaseVolume = (e) => {
@@ -121,7 +121,7 @@ const SimpleForm = ({ action }) => {
                   {moment(
                     todayWaterArray.userWaterDay.find((item) => item._id === id)
                       .date
-                  ).format("LT")}
+                  ).utc().format("LT")}
                 </div>
               </StyledCurrentValue>
             </>
@@ -159,7 +159,7 @@ const SimpleForm = ({ action }) => {
 
           <StyledRecordingTimeWrapper>
             <StyledTitle>Recording time:</StyledTitle>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
               <DemoContainer components={["TimePicker"]}>
                 <DemoItem>
                   <TimePicker
