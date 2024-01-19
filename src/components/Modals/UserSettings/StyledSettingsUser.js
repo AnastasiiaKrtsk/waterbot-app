@@ -82,7 +82,10 @@ export const SettingNameEmailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const SettingNameEmailDiv = styled.div`
@@ -99,21 +102,15 @@ export const StyledSettingModalH3 = styled.h3`
   color: var(--black);
 `;
 
-export const SettingGenderList = styled.ul`
-  display: flex;
-  gap: 24px;
-  margin-bottom: 24px;
-
-  @media screen and (min-width: 1440px) {
-    margin-bottom: 52px;
-  }
-`;
-
 export const SettingPhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const SettingAvatarImg = styled.img`
@@ -147,12 +144,18 @@ export const UserDataWrapper = styled.div`
   @media screen and (min-width: 1440px) {
     display: flex;
     gap: 24px;
+    margin-bottom: 24px;
   }
 `;
 
 export const GenderInfoDiv = styled.div`
+  @media screen and (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+
   @media screen and (min-width: 1440px) {
     width: 392px;
+    margin-bottom: 52px;
   }
 `;
 
@@ -162,6 +165,20 @@ export const StyledYourGenderTitle = styled.h4`
   line-height: 20px;
   margin-bottom: 12px;
   color: var(--black);
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 6px;
+  }
+`;
+
+export const SettingGenderList = styled.div`
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 52px;
+  }
 `;
 
 export const StyledRadioLabel = styled.label`
@@ -176,6 +193,8 @@ export const StyledRadioLabel = styled.label`
 export const InputRadioSettings = styled.input`
   cursor: pointer;
   margin-right: 8px;
+  color: blue;
+  background-color: blue;
 `;
 
 export const StyledCloseSvg = styled.svg`
@@ -318,4 +337,12 @@ export const Error = styled.p`
   font-weight: 400;
   line-height: 18px;
   color: var(--red);
+`;
+
+export const YourInfoWrapp = styled.div`
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 `;
