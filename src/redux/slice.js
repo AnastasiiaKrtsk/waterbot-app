@@ -34,7 +34,7 @@ const initialState = {
     todayWater: [],
     monthWater: [],
   },
-  chooseDate: moment(),
+  chooseDate: moment().toISOString(),
 };
 
 const authSlice = createSlice({
@@ -168,6 +168,8 @@ const authSlice = createSlice({
       })
       .addCase(addWaterThunk.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.openModal = false;
+        state.modalContent = null;
       })
       .addCase(addWaterThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -190,7 +192,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
-        state.water.monthWater = action.payload;
+        // TODO при полном удалении за день идет ошибка
+        state.water.monthWater = action.payload.map((day) => ({
+          ...day,
+          date: moment(day.date).date(),
+        }));
         state.isLoading = false;
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {
@@ -203,6 +209,8 @@ const authSlice = createSlice({
       })
       .addCase(editWaterThunk.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.openModal = false;
+        state.modalContent = null;
       })
       .addCase(editWaterThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -214,6 +222,8 @@ const authSlice = createSlice({
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.openModal = false;
+        state.modalContent = null;
       })
       .addCase(deleteWaterThunk.rejected, (state, action) => {
         state.isLoading = false;

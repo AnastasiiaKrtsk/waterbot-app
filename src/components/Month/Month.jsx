@@ -17,7 +17,7 @@ import {
 import sprite from "../../images/svg+logo/sprite.svg";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectChooseDate } from "../../redux/selectors";
+import { selectChooseDate, selectMonthWater } from "../../redux/selectors";
 import { setChooseDate } from "../../redux/slice";
 import { getWaterMonthThunk } from "../../redux/thunks";
 
@@ -41,13 +41,21 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const Month = () => {
   const shownDate = useSelector(selectChooseDate);
+  const MonthWaterArray = useSelector(selectMonthWater);
   const dispatch = useDispatch();
   // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
+  const [clickedItem, setClickedItem] = useState(null);
+  
+
+  const handleItemClick = (day) => {
+    // Toggle the tooltip visibility on click
+    setClickedItem(clickedItem === day ? null : day);
+  };
 
   useEffect(() => {
-    setDaysInMonth(shownDate.daysInMonth());
+    setDaysInMonth(moment(shownDate).daysInMonth());
     const currentMonth = moment();
     setIsCurrentMonth(currentMonth.isSame(shownDate, "month"));
     dispatch(
@@ -59,11 +67,11 @@ const Month = () => {
   }, [shownDate]);
 
   const prevMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")));
+    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")).toISOString());
   };
 
   const nextMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().add(1, "months")));
+    dispatch(setChooseDate(shownDate.clone().add(1, "months")).toISOString());
   };
 
   const daysArray = Array.from(
@@ -81,7 +89,7 @@ const Month = () => {
               <use href={sprite + "#icon-left"}></use>
             </svg>
           </StyledPrevMonth>
-          <StyledMonthName>{shownDate.format("MMMM YYYY")}</StyledMonthName>
+          <StyledMonthName>{moment(shownDate).format("MMMM YYYY")}</StyledMonthName>
           <StyledNextMonth onClick={nextMonth} disabled={isCurrentMonth}>
             <svg width={"16px"} height={"16px"}>
               <use href={sprite + "#icon-right"}></use>
@@ -91,6 +99,8 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
+          let recordExist = MonthWaterArray.find(item => item.date === day)
+          let percentage = recordExist ? recordExist.percentDailyNorm : 0;
           const placement = [
             1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
           ].includes(day)
@@ -98,13 +108,15 @@ const Month = () => {
             : "top-end";
           return (
             <CustomWidthTooltip
-              title={day + ", " + shownDate.format("MMMM")}
+              title={day + ", " + moment(shownDate).format("MMMM")}
               key={day}
               placement={placement}
+              open={clickedItem === day}
+              onClose={() => setClickedItem(null)}
             >
-              <StyledWaterListItemWrapper key={day}>
-                <StyledMonthWaterItem>{day}</StyledMonthWaterItem>
-                <StyledPercentage>0%</StyledPercentage>
+              <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)} >
+                <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
+                <StyledPercentage>{percentage}%</StyledPercentage>
               </StyledWaterListItemWrapper>
             </CustomWidthTooltip>
           );
