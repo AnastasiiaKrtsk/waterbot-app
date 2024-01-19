@@ -119,6 +119,7 @@ export const Input = styled.input`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
+  transition: all, var(--transition);
   color: ${(props) => (props.errors ? "var(--red)" : "var(--dark-blue)")};
 
   &::placeholder {
@@ -133,11 +134,15 @@ export const Input = styled.input`
     -webkit-text-fill-color: var(--dark-blue);
   }
 
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+  }
+
   &:focus {
     caret-color: var(--dark-blue);
     outline: none;
     border: 1px solid
-      ${(props) => (props.errors ? "var(--red)" : "var(--light-blue-2)")};
+      ${(props) => (props.errors ? "var(--red)" : "var(--dark-blue)")};
   }
 `;
 
