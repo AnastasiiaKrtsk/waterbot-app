@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <StyledDashboardWrapper className="container">
+      <StyledDashboardWrapper>
         <StyledLeftPartWrapper>
           <NormaWater />
           <StyledProgressWrapper>
