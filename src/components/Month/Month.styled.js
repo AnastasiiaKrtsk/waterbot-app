@@ -37,8 +37,7 @@ export const StyledWaterListItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  gap: 4px;
+  cursor:pointer;
 `;
 
 export const StyledMonthWaterItem = styled.li`
@@ -51,6 +50,8 @@ export const StyledMonthWaterItem = styled.li`
   border-radius: 50%;
   /* border: 1px solid blue; */
   background-color: var(--white);
+  /* border-radius: ${props => props.$borderMarker ? '20px' : null}; */
+  outline: ${props => props.$borderMarker ? '1px solid var(--orange)' : null};
 `;
 
 export const StyledPercentage = styled.div`
