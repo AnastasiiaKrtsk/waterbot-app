@@ -90,9 +90,9 @@ export const updateAvatarThunk = createAsyncThunk(
 
 export const updateUserInfoThunk = createAsyncThunk(
   "users/updateInfo",
-  async (data, thunkAPI) => {
+  async ({ endpoint, data }, thunkAPI) => {
     try {
-      const response = await updateUserInfo(data);
+      const response = await updateUserInfo({ endpoint, data });
       return response;
     } catch (error) {
       toast.error(error.response.data.message);

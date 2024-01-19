@@ -35,9 +35,9 @@ const App = () => {
     dispatch(userCurrentThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    fetch("https://backend-water-tracker.onrender.com/api-docs/");
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://backend-water-tracker.onrender.com/api/users");
+  // }, []);
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
