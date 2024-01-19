@@ -47,8 +47,8 @@ export const updateAvatar = async (data) => {
   }
 };
 
-export const updateUserInfo = async (data) => {
-  const response = await $instance.patch("/users/update", data);
+export const updateUserInfo = async ({ endpoint, data }) => {
+  const response = await $instance.patch(`/users/${endpoint}`, data);
   return response.data;
 };
 

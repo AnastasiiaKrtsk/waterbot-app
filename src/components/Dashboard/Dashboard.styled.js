@@ -7,7 +7,7 @@ export const StyledDashboardWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   // padding: 0 112px;
 
   @media screen and (min-width: 768px) {
@@ -16,7 +16,9 @@ export const StyledDashboardWrapper = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    justify-content: center;
     padding: 30px 112px;
+    gap: 36px;
     flex-direction: row;
   }
 `;
@@ -43,6 +45,7 @@ export const StyledLeftPartWrapper = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    padding: 0px;
     gap: 446px;
     background-position: top;
     background-image: url(${bootleDesktop});
