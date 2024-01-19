@@ -7,7 +7,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-
 import {
   selectAvatarUrl,
   selectLoader,
@@ -27,15 +26,14 @@ import {
   EyeSvg,
   GenderInfoDiv,
   ImgDownloadIcon,
-  // InputRadioSettings,
   ModalSettingWindow,
   NameSettingInput,
   PasswordSettingInput,
   PasswordSettingLabel,
   PhotoInputUpload,
   PhotoInputUploadLabel,
+  SendSvg,
   SettingAvatarImg,
-  // SettingGenderList,
   SettingModalTitleH2,
   SettingNameEmailDiv,
   SettingNameEmailWrapper,
@@ -44,7 +42,6 @@ import {
   SettingsFormWrapper,
   SettingsPasswordSvgDiv,
   StyledCloseSvg,
-  // StyledRadioLabel,
   StyledSettingModalH3,
   StyledSettingsPasswordDiv,
   StyledYourGenderTitle,
@@ -52,7 +49,6 @@ import {
   YourInfoWrapp,
   YourPhotoTitleH3,
 } from "./StyledSettingsUser";
-import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
@@ -177,7 +173,11 @@ const UserSettings = () => {
             )}
 
             <PhotoInputUploadLabel id="customFileUpload" htmlFor="photoInput">
-              <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
+              <ImgDownloadIcon>
+                <SendSvg>
+                  <use href={`${sprite}#send`} />
+                </SendSvg>
+              </ImgDownloadIcon>
               Upload a photo
             </PhotoInputUploadLabel>
 

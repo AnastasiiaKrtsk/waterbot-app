@@ -119,13 +119,23 @@ export const SettingAvatarImg = styled.img`
   border-radius: 50%;
 `;
 
-export const ImgDownloadIcon = styled.img`
+export const ImgDownloadIcon = styled.div`
+  width: 16px;
+  height: 16px;
+`;
+
+export const SendSvg = styled.svg`
   width: 16px;
   height: 16px;
 `;
 
 export const PhotoInputUpload = styled.input`
   display: none;
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
+  }
 `;
 
 export const PhotoInputUploadLabel = styled.label`
@@ -138,6 +148,12 @@ export const PhotoInputUploadLabel = styled.label`
   color: var(--dark-blue);
 
   cursor: pointer;
+
+  &:hover {
+    color: var(--orange);
+    stroke: var(--orange);
+    transition: var(--transition);
+  }
 `;
 
 export const UserDataWrapper = styled.div`
@@ -171,32 +187,6 @@ export const StyledYourGenderTitle = styled.h4`
   }
 `;
 
-export const SettingGenderList = styled.div`
-  display: flex;
-  gap: 24px;
-  margin-bottom: 24px;
-
-  @media screen and (min-width: 1440px) {
-    margin-bottom: 52px;
-  }
-`;
-
-export const StyledRadioLabel = styled.label`
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  color: var(--black);
-
-  cursor: pointer;
-`;
-
-export const InputRadioSettings = styled.input`
-  cursor: pointer;
-  margin-right: 8px;
-  color: blue;
-  background-color: blue;
-`;
-
 export const StyledCloseSvg = styled.svg`
   cursor: pointer;
 `;
@@ -217,9 +207,12 @@ export const BtnSettingSave = styled.button`
   font-weight: 500;
   line-height: 20px;
   color: var(--white);
+
   &:hover {
-    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
+
   transition: box-shadow var(--transition);
   @media screen and (min-width: 768px) {
     padding: 10px 30px;
@@ -237,6 +230,8 @@ export const BtnSaveWrapper = styled.div`
 `;
 
 export const NameSettingInput = styled.input`
+  cursor: pointer;
+
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -253,6 +248,11 @@ export const NameSettingInput = styled.input`
     font-weight: 400;
     line-height: 20px;
     color: #9ebbff;
+  }
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
 
   @media screen and (min-width: 1440px) {
@@ -261,6 +261,8 @@ export const NameSettingInput = styled.input`
 `;
 
 export const PasswordSettingInput = styled.input`
+  cursor: pointer;
+
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -277,6 +279,11 @@ export const PasswordSettingInput = styled.input`
     font-weight: 400;
     line-height: 20px;
     color: #9ebbff;
+  }
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
 
   @media screen and (min-width: 1440px) {
