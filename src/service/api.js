@@ -96,5 +96,6 @@ export const forgotPassword = async (email) => {
 };
 
 export const updatePassword = async (newPassword) => {
-  const { data } = await $instance.post("auth/update-password", newPassword);
+  const { data } = await $instance.patch("auth/update-password", newPassword);
+  return data;
 };
