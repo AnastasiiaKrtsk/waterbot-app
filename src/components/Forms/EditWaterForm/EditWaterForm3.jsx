@@ -8,6 +8,7 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 import {
   selectChooseDate,
   selectIdForEditDelete,
+  selectTodayWater,
 } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { addWaterThunk, editWaterThunk } from "../../../redux/thunks";
@@ -28,11 +29,30 @@ import {
   StyledUsedWater,
   StyledWrapper,
 } from "./EditWaterForm.styled";
+import { useState } from "react";
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
   const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
+  const todayWaterArray = useSelector(selectTodayWater);
+
+  const waterAmount =
+    action === "edit"
+      ? todayWaterArray.userWaterDay.find((item) => item._id === id).waterVolume
+      : 250;
+
+  const shownTime =
+    action === "edit"
+      ? moment(
+          todayWaterArray.userWaterDay.find((item) => item._id === id).date
+        )
+      : moment();
+
+  const [value, setValue] = useState(shownTime);
+  const [volume, setVolume] = useState(waterAmount);
+  const [customVolume, setCustomVolume] = useState(null);
+
   const handleCloseUserModal = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
@@ -42,7 +62,8 @@ const SimpleForm = ({ action }) => {
 
     const formData = new FormData(e.target);
 
-    const waterVolume = +formData.get("waterVolume");
+    const waterVolume = +(customVolume ? customVolume : volume);
+    // const waterVolume = +formData.get("waterVolume");
     const date = moment(formData.get("date"), "hh:mm a").format(
       "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
     );
@@ -59,6 +80,23 @@ const SimpleForm = ({ action }) => {
     } else {
       dispatch(addWaterThunk({ chooseDate, water: { waterVolume, date } }));
     }
+  };
+
+  const handleTimeChange = (newTime) => {
+    setSelectedTime(newTime);
+  };
+
+  const handleIncreaseVolume = (e) => {
+    e.preventDefault();
+    setVolume(volume <= 15000 ? volume + 50 : 15000);
+  };
+  const handleDecreaseVolume = (e) => {
+    e.preventDefault();
+    setVolume(volume > 50 ? volume - 50 : 50);
+  };
+
+  const handleChangeVolume = (e) => {
+    setCustomVolume(e.target.value);
   };
 
   return (
@@ -78,8 +116,13 @@ const SimpleForm = ({ action }) => {
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-water-glass"}></use>
                 </svg>
-                <div>250 ml</div>
-                <div>Time</div>
+                <div>{waterAmount} ml</div>
+                <div>
+                  {moment(
+                    todayWaterArray.userWaterDay.find((item) => item._id === id)
+                      .date
+                  ).format("LT")}
+                </div>
               </StyledCurrentValue>
             </>
           ) : (
@@ -94,13 +137,19 @@ const SimpleForm = ({ action }) => {
             )}
             <StyledTitle>Amount of water:</StyledTitle>
             <StyledButtonsWrapper>
-              <StyledIncreaseDecreaseBtn>
+              <StyledIncreaseDecreaseBtn
+                onClick={handleDecreaseVolume}
+                type="button"
+              >
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-minus"}></use>
                 </svg>
               </StyledIncreaseDecreaseBtn>
-              <StyledNewAmount>250ml</StyledNewAmount>
-              <StyledIncreaseDecreaseBtn>
+              <StyledNewAmount>{volume}ml</StyledNewAmount>
+              <StyledIncreaseDecreaseBtn
+                onClick={handleIncreaseVolume}
+                type="button"
+              >
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-plus"}></use>
                 </svg>
@@ -111,7 +160,7 @@ const SimpleForm = ({ action }) => {
           <StyledRecordingTimeWrapper>
             <StyledTitle>Recording time:</StyledTitle>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["MobileTimePicker"]}>
+              <DemoContainer components={["TimePicker"]}>
                 <DemoItem>
                   <TimePicker
                     sx={{
@@ -151,6 +200,8 @@ const SimpleForm = ({ action }) => {
                     views={["hours", "minutes"]}
                     format="hh:mm a"
                     timeSteps={{ minutes: 1 }}
+                    value={value}
+                    onChange={handleTimeChange}
                     ampm={true}
                   />
                 </DemoItem>
@@ -184,6 +235,7 @@ const SimpleForm = ({ action }) => {
                 },
               }}
               name="waterVolume"
+              onChange={handleChangeVolume}
               type="number"
               inputProps={{
                 min: 1,
@@ -191,9 +243,8 @@ const SimpleForm = ({ action }) => {
               }}
             />
           </StyledUsedWater>
-          {/* TODO додати WaterAmount*/}
           <StyledWrapper>
-            <StyledSpan>20ml</StyledSpan>
+            <StyledSpan>{customVolume ? customVolume : volume}ml</StyledSpan>
             <StyledSaveBtn type="submit" color="primary">
               Save
             </StyledSaveBtn>
