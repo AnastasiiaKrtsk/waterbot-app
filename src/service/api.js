@@ -46,9 +46,9 @@ export const updateAvatar = async (avatar) => {
   }
 };
 
-export const updateUserInfo = async (userData) => {
-  const { data } = await $instance.patch("/users/update", userData);
-  return data;
+export const updateUserInfo = async ({ endpoint, data }) => {
+  const response = await $instance.patch(`/users/${endpoint}`, data);
+  return response.data;
 };
 
 //WaterQuery

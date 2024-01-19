@@ -29,4 +29,8 @@ export const StyledAddWaterBtnBlue = styled.button`
   @media screen and (min-width: 768px) {
     width: 336px;
   }
+
+  @media screen and (min-width: 1440px) {
+    width: 178px;
+  }
 `;

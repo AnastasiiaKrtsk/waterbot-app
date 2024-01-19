@@ -99,11 +99,14 @@ const UserSettings = () => {
   }) => {
     await dispatch(
       updateUserInfoThunk({
-        username,
-        email,
-        newPassword,
-        oldPassword,
-        gender,
+        endpoint: "update",
+        data: {
+          username,
+          email,
+          newPassword,
+          oldPassword,
+          gender,
+        },
       })
     ).unwrap();
 
