@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { longFormatters } from "date-fns";
 
 const BASE_URL = "https://backend-water-tracker.onrender.com/api/";
 const $instance = axios.create({ baseURL: BASE_URL });
@@ -32,14 +31,14 @@ export const currentUser = async () => {
   return data;
 };
 
-export const updateAvatar = async (data) => {
+export const updateAvatar = async (avatar) => {
   try {
-    const response = await $instance.patch("/users/avatars", data, {
+    const { data } = await $instance.patch("/users/avatars", avatar, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     console.error("Error updating avatar:", error.message);
     console.error("Error details:", error);
@@ -47,9 +46,9 @@ export const updateAvatar = async (data) => {
   }
 };
 
-export const updateUserInfo = async (data) => {
-  const response = await $instance.patch("/users/update", data);
-  return response.data;
+export const updateUserInfo = async (userData) => {
+  const { data } = await $instance.patch("/users/update", userData);
+  return data;
 };
 
 //WaterQuery
@@ -85,7 +84,6 @@ export const deleteWater = async (id) => {
 //*dailyNorma
 export const editDailyNorma = async (water) => {
   const { data } = await $instance.patch("/users/dailynorm", water);
-  console.log(data);
   return data;
 };
 // editDailyNorma();
