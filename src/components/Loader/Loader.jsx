@@ -5,7 +5,7 @@ const Loader = () => {
     <div
       style={{
         position: "fixed",
-        zIndex: 999999999,
+        zIndex: 999,
         top: 0,
         left: 0,
         width: "100vw",
@@ -13,7 +13,7 @@ const Loader = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "rgba(255, 255, 255, 0.3)",
+        background: "rgba(0, 0, 0, 0.25)",
         backdropFilter: "blur(3px)",
       }}
     >
