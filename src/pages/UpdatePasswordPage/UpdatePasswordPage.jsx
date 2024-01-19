@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { signInThunk } from "../../redux/thunks";
+import { updatePasswordThunk } from "../../redux/thunks";
 import { toast } from "react-toastify";
 import { updatePasswordSchema } from "../../helpers/validation";
 import sprite from "../../images/svg+logo/sprite.svg";
@@ -20,6 +20,7 @@ import {
   WrapperInput,
 } from "./UpdatePasswordPage.styled";
 import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const UpdatePasswordPage = () => {
   const {
@@ -33,20 +34,24 @@ const UpdatePasswordPage = () => {
   });
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const searchParams = useSearchParams();
+  const resetToken = searchParams[0].get("resetToken");
+  const navigate = useNavigate();
 
-  const onSubmit = async ({ password }, e) => {
+  const onSubmit = ({ newPassword }, e) => {
     e.preventDefault();
 
-    try {
-      await dispatch(updatePasswordThunk({ password })).unwrap();
-
-      await dispatch(signInThunk({ email, password }));
-
-      reset();
-      toast.success("Update password successfully");
-    } catch (error) {
-      toast.error(error.message);
-    }
+    dispatch(updatePasswordThunk({ newPassword, resetToken }))
+      .then(({ requestStatus }) => {
+        console.log(requestStatus);
+        if (requestStatus === "fulfilled") {
+          navigate("/signin");
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating password:", error);
+      });
+    reset();
   };
 
   const togglePasswordVisibility = (inputId) => {
@@ -64,13 +69,13 @@ const UpdatePasswordPage = () => {
             <WrapperInput>
               <Label>Enter your password</Label>
               <Input
-                type={showPassword["password"] ? "text" : "password"}
+                type={showPassword["newPassword"] ? "text" : "password"}
                 placeholder="Password"
-                {...register("password")}
+                {...register("newPassword")}
                 errors={!!errors.password}
               />
-              <div onClick={() => togglePasswordVisibility("password")}>
-                {showPassword["password"] ? (
+              <div onClick={() => togglePasswordVisibility("newPassword")}>
+                {showPassword["newPassword"] ? (
                   <EyeSvg width="16" height="16">
                     <use href={`${sprite}#vision`} />
                   </EyeSvg>
