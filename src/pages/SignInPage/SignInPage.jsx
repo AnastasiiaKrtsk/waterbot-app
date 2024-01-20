@@ -18,7 +18,7 @@ import {
   Title,
   WrapperForm,
   WrapperInput,
-} from "./SignInPage.styled";
+} from "../SignUpPage/SignUpPage.styled.js";
 
 const SignInPage = () => {
   const {

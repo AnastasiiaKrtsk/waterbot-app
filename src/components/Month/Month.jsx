@@ -2,8 +2,11 @@ import moment from "moment";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { useEffect, useState } from "react";
 import {
+  StyledDateParagraph,
+  StyledDayToolTipWrapper,
   StyledMonthChanger,
   StyledMonthName,
+  StyledMonthParagraph,
   StyledMonthTitle,
   StyledMonthWaterItem,
   StyledMonthWaterList,
@@ -12,6 +15,7 @@ import {
   StyledPercentage,
   StyledPrevMonth,
   StyledWaterListItemWrapper,
+  StylesBlueSpan,
 } from "./Month.styled";
 
 import { StyledCloseSvg } from "../Modals/UserSettings/StyledSettingsUser.js";
@@ -42,6 +46,12 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
     alignItems: "flex-start",
     gap: "16px",
     color: "var(--dark-blue)",
+  },
+  "@media screen and (min-width: 320px)": {
+    [`& .${tooltipClasses.tooltip}`]: {
+      width: 280,
+      padding: "24px 13px",
+    },
   },
 });
 
@@ -137,24 +147,35 @@ const Month = () => {
             <CustomWidthTooltip
               disableHoverListener
               title={
-                <div>
-                  <StyledCloseSvg
-                    width="24"
-                    height="24"
-                    onClick={handleTooltipClose}
-                  >
-                    <use href={`${sprite}#icon-outline`} />
-                  </StyledCloseSvg>
-                  <span>{day + ", " + moment(shownDate).format("MMMM")}</span>
-                  <span>Daily norma: </span>
-                  <div>{(dailyNorma / 1000).toFixed(1)}</div>
+                <StyledDayToolTipWrapper>
+                  <StyledDateParagraph>
+                    {day + ", " + moment(shownDate).format("MMMM")}
+                    <StyledCloseSvg
+                      width="24"
+                      height="24"
+                      onClick={handleTooltipClose}
+                    >
+                      <use href={`${sprite}#icon-outline`} />
+                    </StyledCloseSvg>
+                  </StyledDateParagraph>
+                  <StyledMonthParagraph>
+                    Daily norma:
+                    <StylesBlueSpan>
+                      {(dailyNorma / 1000).toFixed(1)}
+                      <StylesBlueSpan>L</StylesBlueSpan>
+                    </StylesBlueSpan>
+                  </StyledMonthParagraph>
 
-                  <span>Fulfillment of the daily norm: </span>
-                  <div>{percentage}%</div>
+                  <StyledMonthParagraph>
+                    Fulfillment of the daily norm:
+                    <StylesBlueSpan>{percentage}%</StylesBlueSpan>
+                  </StyledMonthParagraph>
 
-                  <span>How many servings of water: </span>
-                  <div>{consumptionCount}</div>
-                </div>
+                  <StyledMonthParagraph>
+                    How many servings of water:
+                    <StylesBlueSpan>{consumptionCount}</StylesBlueSpan>
+                  </StyledMonthParagraph>
+                </StyledDayToolTipWrapper>
               }
               key={day}
               placement={placement}

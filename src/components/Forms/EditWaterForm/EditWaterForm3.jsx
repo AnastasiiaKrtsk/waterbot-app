@@ -84,7 +84,6 @@ const SimpleForm = ({ action }) => {
 
   const handleTimeChange = (newTime) => {
     setValue(newTime);
-
   };
 
   const handleIncreaseVolume = (e) => {
@@ -122,7 +121,9 @@ const SimpleForm = ({ action }) => {
                   {moment(
                     todayWaterArray.userWaterDay.find((item) => item._id === id)
                       .date
-                  ).utc().format("LT")}
+                  )
+                    .utc()
+                    .format("LT")}
                 </div>
               </StyledCurrentValue>
             </>

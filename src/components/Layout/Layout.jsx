@@ -8,12 +8,14 @@ import {
   selectUsername,
   selectToken,
   selectOpenModal,
+  selectModalContent,
 } from "../../redux/selectors";
 
 import {
   AvatarInMenu,
   AvatarWrapper,
   DivWrapper,
+  DownSvg,
   DropMenuBtn,
   LogoContent,
   LogoText,
@@ -34,6 +36,9 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   const modalStatus = useSelector(selectOpenModal);
+
+  const openModal = useSelector(selectOpenModal);
+  const ModalContent = useSelector(selectModalContent);
 
   const handleOpenUserModal = () => {
     dispatch(setModalStatus(!modalStatus));
@@ -64,9 +69,15 @@ const Layout = () => {
                     <AvatarInMenu src={avatar} alt="" width={28} />
                   </AvatarWrapper>
                   <DropMenuBtn type="button" onClick={handleOpenUserModal}>
-                    <svg width="18" height="10">
+                    <DownSvg
+                      width="18"
+                      height="10"
+                      $transform={
+                        openModal === true && ModalContent === "OpenUserModal"
+                      }
+                    >
                       <use href={`${sprite}#arrow-down`} />
-                    </svg>
+                    </DownSvg>
                   </DropMenuBtn>
                 </DivWrapper>
               </SignIn>
