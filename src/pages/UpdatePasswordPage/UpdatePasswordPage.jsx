@@ -38,13 +38,12 @@ const UpdatePasswordPage = () => {
   const resetToken = searchParams[0].get("resetToken");
   const navigate = useNavigate();
 
-  const onSubmit = ({ newPassword }, e) => {
+  function onSubmit({ newPassword }, e) {
     e.preventDefault();
 
     dispatch(updatePasswordThunk({ newPassword, resetToken }))
-      .then(({ requestStatus }) => {
-        console.log(requestStatus);
-        if (requestStatus === "fulfilled") {
+      .then((response) => {
+        if (response.meta.requestStatus === "fulfilled") {
           navigate("/signin");
         }
       })
@@ -52,7 +51,7 @@ const UpdatePasswordPage = () => {
         console.error("Error updating password:", error);
       });
     reset();
-  };
+  }
 
   const togglePasswordVisibility = (inputId) => {
     setShowPassword((prevPasswords) => ({
