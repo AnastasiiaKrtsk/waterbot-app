@@ -40,7 +40,8 @@ import {
   setModalStatus,
 } from "../../../redux/slice";
 import { DailyNormaUsrInputSchema } from "../../../helpers/validation";
-import { editDailyNormaThunk } from "../../../redux/thunks";
+import { editDailyNormaThunk, userCurrentThunk } from "../../../redux/thunks";
+import { current } from "@reduxjs/toolkit";
 
 const DailyNorma = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,6 @@ const DailyNorma = () => {
 
   const storedUserGender = useSelector(selectUserGender);
 
-  const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");
   const [activity, setActivity] = useState("");
   const [amount, setAmount] = useState("");
@@ -60,11 +60,11 @@ const DailyNorma = () => {
 
   useEffect(() => {
     if (!weight || !activity) {
-      setResult("2");
+      setResult(2);
     } else {
-      setResult(calculateV(gender, weight, activity));
+      setResult(calculateV(userGender, weight, activity));
     }
-  }, [gender, weight, activity]);
+  }, [userGender, weight, activity]);
 
   const {
     register,
@@ -80,7 +80,7 @@ const DailyNorma = () => {
   const onSubmit = (data, e) => {
     e.preventDefault();
     dispatch(editDailyNormaThunk(data));
-    dispatch(setDailyNorma(data));
+    dispatch(userCurrentThunk);
 
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
