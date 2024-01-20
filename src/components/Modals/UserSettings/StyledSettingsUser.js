@@ -1,19 +1,5 @@
 import styled from "@emotion/styled";
 
-export const BackdropSettingModal = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 44px 20px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  overflow: scroll;
-`;
-
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   width: 280px;
@@ -23,6 +9,8 @@ export const ModalSettingWindow = styled.div`
 
   border-radius: 10px;
   background: var(--white);
+
+  transition: transform 0.5s ease-in-out;
 
   @media screen and (min-width: 768px) {
     padding: 32px 24px;
@@ -189,6 +177,13 @@ export const StyledYourGenderTitle = styled.h4`
 
 export const StyledCloseSvg = styled.svg`
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+
+  &:hover {
+    transform: rotate(85deg);
+    transition: transform 0.5s ease-in-out;
+  }
 `;
 
 export const BtnSettingSave = styled.button`

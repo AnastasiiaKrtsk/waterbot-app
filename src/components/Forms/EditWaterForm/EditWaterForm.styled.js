@@ -19,6 +19,11 @@ export const StyledSvg = styled.svg`
   right: 24px;
   top: 36px;
   cursor: pointer;
+
+  &:hover {
+    transform: rotate(85deg);
+    transition: transform 0.5s ease-in-out;
+  }
 `;
 
 export const StyledTitleWrapper = styled.div`

@@ -120,7 +120,6 @@ const UserSettings = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
 
-    //для релоаду стр. після оновлення данних с серверу
     window.location.reload();
   };
 
@@ -155,11 +154,7 @@ const UserSettings = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
           <SettingModalTitleH2>Setting</SettingModalTitleH2>
-          <StyledCloseSvg
-            width="24"
-            height="24"
-            onClick={handleCloseUserSettingsModal}
-          >
+          <StyledCloseSvg onClick={handleCloseUserSettingsModal}>
             <use href={`${sprite}#icon-outline`} />
           </StyledCloseSvg>
         </SettingsCrossDiv>

@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const DownSvg = styled.svg`
+  transform: ${(props) => (props.$transform ? "rotate(180deg)" : null)};
+  transition: transform 0.5s ease-in-out;
+`;
+
 export const WrapperHeader = styled.div`
   display: flex;
   justify-content: space-between;
