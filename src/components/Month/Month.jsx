@@ -1,6 +1,7 @@
 import moment from "moment";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import {
   StyledDateParagraph,
   StyledDayToolTipWrapper,
@@ -66,6 +67,8 @@ const Month = () => {
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(null);
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleItemClick = (day) => {
     setIsTooltipOpen(isTooltipOpen === day ? null : day);
@@ -133,11 +136,20 @@ const Month = () => {
             let recordExist = monthWaterArray.find((item) => item.date === day);
             percentage = recordExist ? recordExist.percentDailyNorm : 0;
           }
-          const placement = [
-            1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
-          ].includes(day)
+
+          const isCenteredDay =
+            isMobile && [3, 8, 13, 18, 23, 28].includes(day);
+
+          const placement = isMobile
+            ? isCenteredDay
+              ? "top"
+              : [1, 2, 3, 7, 11, 12, 13, 17, 21, 22, 23, 27, 31].includes(day)
+              ? "top-start"
+              : "top-end"
+            : [1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31].includes(day)
             ? "top-start"
             : "top-end";
+
           return (
             <CustomWidthTooltip
               disableHoverListener
