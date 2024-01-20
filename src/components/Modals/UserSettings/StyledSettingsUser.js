@@ -1,19 +1,5 @@
 import styled from "@emotion/styled";
 
-export const BackdropSettingModal = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 44px 20px;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  overflow: scroll;
-`;
-
 export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   width: 280px;
@@ -23,6 +9,8 @@ export const ModalSettingWindow = styled.div`
 
   border-radius: 10px;
   background: var(--white);
+
+  transition: transform 0.5s ease-in-out;
 
   @media screen and (min-width: 768px) {
     padding: 32px 24px;
@@ -82,7 +70,10 @@ export const SettingNameEmailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const SettingNameEmailDiv = styled.div`
@@ -99,21 +90,15 @@ export const StyledSettingModalH3 = styled.h3`
   color: var(--black);
 `;
 
-export const SettingGenderList = styled.ul`
-  display: flex;
-  gap: 24px;
-  margin-bottom: 24px;
-
-  @media screen and (min-width: 1440px) {
-    margin-bottom: 52px;
-  }
-`;
-
 export const SettingPhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const SettingAvatarImg = styled.img`
@@ -122,13 +107,23 @@ export const SettingAvatarImg = styled.img`
   border-radius: 50%;
 `;
 
-export const ImgDownloadIcon = styled.img`
+export const ImgDownloadIcon = styled.div`
+  width: 16px;
+  height: 16px;
+`;
+
+export const SendSvg = styled.svg`
   width: 16px;
   height: 16px;
 `;
 
 export const PhotoInputUpload = styled.input`
   display: none;
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
+  }
 `;
 
 export const PhotoInputUploadLabel = styled.label`
@@ -141,18 +136,30 @@ export const PhotoInputUploadLabel = styled.label`
   color: var(--dark-blue);
 
   cursor: pointer;
+
+  &:hover {
+    color: var(--orange);
+    stroke: var(--orange);
+    transition: var(--transition);
+  }
 `;
 
 export const UserDataWrapper = styled.div`
   @media screen and (min-width: 1440px) {
     display: flex;
     gap: 24px;
+    margin-bottom: 24px;
   }
 `;
 
 export const GenderInfoDiv = styled.div`
+  @media screen and (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+
   @media screen and (min-width: 1440px) {
     width: 392px;
+    margin-bottom: 52px;
   }
 `;
 
@@ -162,24 +169,21 @@ export const StyledYourGenderTitle = styled.h4`
   line-height: 20px;
   margin-bottom: 12px;
   color: var(--black);
-`;
 
-export const StyledRadioLabel = styled.label`
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  color: var(--black);
-
-  cursor: pointer;
-`;
-
-export const InputRadioSettings = styled.input`
-  cursor: pointer;
-  margin-right: 8px;
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 6px;
+  }
 `;
 
 export const StyledCloseSvg = styled.svg`
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+
+  &:hover {
+    transform: rotate(85deg);
+    transition: transform 0.5s ease-in-out;
+  }
 `;
 
 export const BtnSettingSave = styled.button`
@@ -198,9 +202,12 @@ export const BtnSettingSave = styled.button`
   font-weight: 500;
   line-height: 20px;
   color: var(--white);
+
   &:hover {
-    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
+
   transition: box-shadow var(--transition);
   @media screen and (min-width: 768px) {
     padding: 10px 30px;
@@ -218,6 +225,8 @@ export const BtnSaveWrapper = styled.div`
 `;
 
 export const NameSettingInput = styled.input`
+  cursor: pointer;
+
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -234,6 +243,11 @@ export const NameSettingInput = styled.input`
     font-weight: 400;
     line-height: 20px;
     color: #9ebbff;
+  }
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
 
   @media screen and (min-width: 1440px) {
@@ -242,6 +256,8 @@ export const NameSettingInput = styled.input`
 `;
 
 export const PasswordSettingInput = styled.input`
+  cursor: pointer;
+
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -258,6 +274,11 @@ export const PasswordSettingInput = styled.input`
     font-weight: 400;
     line-height: 20px;
     color: #9ebbff;
+  }
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
   }
 
   @media screen and (min-width: 1440px) {
@@ -318,4 +339,12 @@ export const Error = styled.p`
   font-weight: 400;
   line-height: 18px;
   color: var(--red);
+`;
+
+export const YourInfoWrapp = styled.div`
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 `;

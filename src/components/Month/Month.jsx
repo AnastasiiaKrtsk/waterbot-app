@@ -2,8 +2,11 @@ import moment from "moment";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { useEffect, useState } from "react";
 import {
+  StyledDateParagraph,
+  StyledDayToolTipWrapper,
   StyledMonthChanger,
   StyledMonthName,
+  StyledMonthParagraph,
   StyledMonthTitle,
   StyledMonthWaterItem,
   StyledMonthWaterList,
@@ -12,12 +15,20 @@ import {
   StyledPercentage,
   StyledPrevMonth,
   StyledWaterListItemWrapper,
+  StylesBlueSpan,
 } from "./Month.styled";
+
+import { StyledCloseSvg } from "../Modals/UserSettings/StyledSettingsUser.js";
 
 import sprite from "../../images/svg+logo/sprite.svg";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectChooseDate, selectMonthWater } from "../../redux/selectors";
+import {
+  selectChooseDate,
+  selectDailyNorma,
+  selectMonthWater,
+  selectTodayWater,
+} from "../../redux/selectors";
 import { setChooseDate } from "../../redux/slice";
 import { getWaterMonthThunk } from "../../redux/thunks";
 
@@ -37,21 +48,31 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
     gap: "16px",
     color: "var(--dark-blue)",
   },
+  "@media screen and (min-width: 320px)": {
+    [`& .${tooltipClasses.tooltip}`]: {
+      width: 280,
+      padding: "24px 13px",
+    },
+  },
 });
 
 const Month = () => {
   const shownDate = useSelector(selectChooseDate);
-  const MonthWaterArray = useSelector(selectMonthWater);
+  const monthWaterArray = useSelector(selectMonthWater);
+  const dailyNorma = useSelector(selectDailyNorma);
+  const dayWaterUser = useSelector(selectTodayWater);
+
   const dispatch = useDispatch();
-  // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
-  const [clickedItem, setClickedItem] = useState(null);
-  
+  const [isTooltipOpen, setIsTooltipOpen] = useState(null);
 
   const handleItemClick = (day) => {
-    // Toggle the tooltip visibility on click
-    setClickedItem(clickedItem === day ? null : day);
+    setIsTooltipOpen(isTooltipOpen === day ? null : day);
+  };
+
+  const handleTooltipClose = () => {
+    setIsTooltipOpen(null);
   };
 
   useEffect(() => {
@@ -67,11 +88,16 @@ const Month = () => {
   }, [shownDate]);
 
   const prevMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")).toISOString());
+    const newDate = moment(shownDate)
+      .clone()
+      .subtract(1, "months")
+      .toISOString();
+    dispatch(setChooseDate(newDate));
   };
 
   const nextMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().add(1, "months")).toISOString());
+    const newDate = moment(shownDate).clone().add(1, "months").toISOString();
+    dispatch(setChooseDate(newDate));
   };
 
   const daysArray = Array.from(
@@ -89,7 +115,9 @@ const Month = () => {
               <use href={sprite + "#icon-left"}></use>
             </svg>
           </StyledPrevMonth>
-          <StyledMonthName>{moment(shownDate).format("MMMM YYYY")}</StyledMonthName>
+          <StyledMonthName>
+            {moment(shownDate).format("MMMM YYYY")}
+          </StyledMonthName>
           <StyledNextMonth onClick={nextMonth} disabled={isCurrentMonth}>
             <svg width={"16px"} height={"16px"}>
               <use href={sprite + "#icon-right"}></use>
@@ -99,8 +127,12 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
-          let recordExist = MonthWaterArray.find(item => item.date === day)
-          let percentage = recordExist ? recordExist.percentDailyNorm : 0;
+          let percentage = 0;
+
+          if (monthWaterArray.length) {
+            let recordExist = monthWaterArray.find((item) => item.date === day);
+            percentage = recordExist ? recordExist.percentDailyNorm : 0;
+          }
           const placement = [
             1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
           ].includes(day)
@@ -108,14 +140,54 @@ const Month = () => {
             : "top-end";
           return (
             <CustomWidthTooltip
-              title={day + ", " + moment(shownDate).format("MMMM")}
+              disableHoverListener
+              title={
+                <StyledDayToolTipWrapper>
+                  <StyledDateParagraph>
+                    {day + ", " + moment(shownDate).format("MMMM")}
+                    <StyledCloseSvg
+                      width="24"
+                      height="24"
+                      onClick={handleTooltipClose}
+                    >
+                      <use href={`${sprite}#icon-outline`} />
+                    </StyledCloseSvg>
+                  </StyledDateParagraph>
+                  <StyledMonthParagraph>
+                    Daily norma:
+                    <StylesBlueSpan>
+                      {(dailyNorma / 1000).toFixed(1)}
+                      <StylesBlueSpan>L</StylesBlueSpan>
+                    </StylesBlueSpan>
+                  </StyledMonthParagraph>
+
+                  <StyledMonthParagraph>
+                    Fulfillment of the daily norm:
+                    <StylesBlueSpan>{percentage}%</StylesBlueSpan>
+                  </StyledMonthParagraph>
+
+                  <StyledMonthParagraph>
+                    How many servings of water:
+                    <StylesBlueSpan>
+                      {dayWaterUser.userWaterDay
+                        ? dayWaterUser.userWaterDay.length
+                        : 0}
+                    </StylesBlueSpan>
+                  </StyledMonthParagraph>
+                </StyledDayToolTipWrapper>
+              }
               key={day}
               placement={placement}
-              open={clickedItem === day}
-              onClose={() => setClickedItem(null)}
+              open={isTooltipOpen === day}
+              onClose={() => setIsTooltipOpen(null)}
             >
-              <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)} >
-                <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
+              <StyledWaterListItemWrapper
+                key={day}
+                onClick={() => handleItemClick(day)}
+              >
+                <StyledMonthWaterItem $borderMarker={percentage < 100}>
+                  {day}
+                </StyledMonthWaterItem>
                 <StyledPercentage>{percentage}%</StyledPercentage>
               </StyledWaterListItemWrapper>
             </CustomWidthTooltip>

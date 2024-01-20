@@ -2,7 +2,6 @@ import sprite from "../../../images/svg+logo/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteWaterThunk, logOutThunk } from "../../../redux/thunks";
 import {
-  CloseSvg,
   LogOutBntDiv,
   LogOutCrossDiv,
   LogOutPar,
@@ -17,6 +16,7 @@ import {
   selectIdForEditDelete,
 } from "../../../redux/selectors";
 import moment from "moment";
+import { StyledCloseSvg } from "../UserSettings/StyledSettingsUser";
 
 const AreYouSureModal = ({ title, message, buttonText, action }) => {
   const id = useSelector(selectIdForEditDelete);
@@ -43,9 +43,9 @@ const AreYouSureModal = ({ title, message, buttonText, action }) => {
     <StyledModalWindow className="container">
       <LogOutCrossDiv>
         <LogOutTitle>{title}</LogOutTitle>
-        <CloseSvg width="24" height="24" onClick={handleCloseUserModal}>
+        <StyledCloseSvg onClick={handleCloseUserModal}>
           <use href={`${sprite}#icon-outline`} />
-        </CloseSvg>
+        </StyledCloseSvg>
       </LogOutCrossDiv>
       <LogOutPar>{message}</LogOutPar>
       <LogOutBntDiv>

@@ -2,7 +2,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import {
   selectAvatarUrl,
   selectLoader,
@@ -20,16 +24,16 @@ import {
   Error,
   Errors,
   EyeSvg,
+  GenderInfoDiv,
   ImgDownloadIcon,
-  InputRadioSettings,
   ModalSettingWindow,
   NameSettingInput,
   PasswordSettingInput,
   PasswordSettingLabel,
   PhotoInputUpload,
   PhotoInputUploadLabel,
+  SendSvg,
   SettingAvatarImg,
-  SettingGenderList,
   SettingModalTitleH2,
   SettingNameEmailDiv,
   SettingNameEmailWrapper,
@@ -38,14 +42,13 @@ import {
   SettingsFormWrapper,
   SettingsPasswordSvgDiv,
   StyledCloseSvg,
-  StyledRadioLabel,
   StyledSettingModalH3,
   StyledSettingsPasswordDiv,
   StyledYourGenderTitle,
   UserDataWrapper,
+  YourInfoWrapp,
   YourPhotoTitleH3,
 } from "./StyledSettingsUser";
-import downloadSvg from "../../../images/svg+logo/svgs/send.svg";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
@@ -117,13 +120,16 @@ const UserSettings = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
 
-    //для релоаду стр. після оновлення данних с серверу
     window.location.reload();
   };
 
   //======= Avatar File Change ======
 
   const dispatch = useDispatch();
+
+  const handleGenderChange = (event) => {
+    setUserGender(event.target.value);
+  };
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -148,11 +154,7 @@ const UserSettings = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SettingsCrossDiv>
           <SettingModalTitleH2>Setting</SettingModalTitleH2>
-          <StyledCloseSvg
-            width="24"
-            height="24"
-            onClick={handleCloseUserSettingsModal}
-          >
+          <StyledCloseSvg onClick={handleCloseUserSettingsModal}>
             <use href={`${sprite}#icon-outline`} />
           </StyledCloseSvg>
         </SettingsCrossDiv>
@@ -166,7 +168,11 @@ const UserSettings = () => {
             )}
 
             <PhotoInputUploadLabel id="customFileUpload" htmlFor="photoInput">
-              <ImgDownloadIcon src={downloadSvg} alt="Download Icon" />
+              <ImgDownloadIcon>
+                <SendSvg>
+                  <use href={`${sprite}#send`} />
+                </SendSvg>
+              </ImgDownloadIcon>
               Upload a photo
             </PhotoInputUploadLabel>
 
@@ -180,41 +186,54 @@ const UserSettings = () => {
           </SettingPhotoWrapper>
 
           <UserDataWrapper>
-            <div>
+            <YourInfoWrapp>
               <StyledYourGenderTitle>
                 Your gender identity
               </StyledYourGenderTitle>
 
-              <SettingGenderList>
-                <li>
-                  <StyledRadioLabel htmlFor="woman">
-                    <InputRadioSettings
-                      type="radio"
-                      id="woman"
-                      name="radioGroup"
+              <GenderInfoDiv>
+                <FormControl component="fieldset">
+                  <FormLabel id="demo-row-radio-buttons-group-label" />
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    value={userGender}
+                    onChange={handleGenderChange}
+                  >
+                    <FormControlLabel
                       value="woman"
-                      defaultChecked={userGender === "woman"}
-                      onChange={() => setUserGender("woman")}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "var(--dark-blue)",
+                            "& .MuiSvgIcon-root": {
+                              fontSize: "medium",
+                            },
+                          }}
+                        />
+                      }
+                      label="Woman"
                       {...register("gender")}
                     />
-                    Woman
-                  </StyledRadioLabel>
-                </li>
-                <li>
-                  <StyledRadioLabel htmlFor="man">
-                    <InputRadioSettings
-                      type="radio"
-                      id="man"
-                      name="radioGroup"
+                    <FormControlLabel
                       value="man"
-                      defaultChecked={userGender === "man"}
-                      onChange={() => setUserGender("man")}
+                      control={
+                        <Radio
+                          sx={{
+                            color: "var(--dark-blue)",
+                            "& .MuiSvgIcon-root": {
+                              fontSize: "medium",
+                            },
+                          }}
+                        />
+                      }
+                      label="Man"
                       {...register("gender")}
                     />
-                    Man
-                  </StyledRadioLabel>
-                </li>
-              </SettingGenderList>
+                  </RadioGroup>
+                </FormControl>
+              </GenderInfoDiv>
 
               <SettingNameEmailWrapper>
                 <SettingNameEmailDiv>
@@ -241,7 +260,7 @@ const UserSettings = () => {
                   <Error>{errors.email?.message}</Error>
                 </SettingNameEmailDiv>
               </SettingNameEmailWrapper>
-            </div>
+            </YourInfoWrapp>
 
             <div>
               <StyledSettingsPasswordDiv>

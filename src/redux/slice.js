@@ -12,6 +12,8 @@ import {
   updateAvatarThunk,
   updateUserInfoThunk,
   userCurrentThunk,
+  forgotPasswordThunk,
+  updatePasswordThunk,
 } from "./thunks";
 import moment from "moment";
 
@@ -21,7 +23,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman" || "man",
-    dailyNorma: "2",
+    dailyNorma: 1.8,
   },
   token: null,
   error: null,
@@ -106,7 +108,31 @@ const authSlice = createSlice({
         state.isSignedIn = false;
         state.error = action.payload;
       })
-
+      //========= Forgot/Update Password ================//
+      .addCase(forgotPasswordThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updatePasswordThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updatePasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updatePasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       //========== Current User ==================//
 
       .addCase(userCurrentThunk.pending, (state) => {
@@ -192,11 +218,14 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
-        // TODO при полном удалении за день идет ошибка
-        state.water.monthWater = action.payload.map((day) => ({
-          ...day,
-          date: moment(day.date).date(),
-        }));
+        if (action.payload.length) {
+          state.water.monthWater = action.payload?.map((day) => ({
+            ...day,
+            date: moment(day.date).date(),
+          }));
+        } else {
+          state.water.monthWater = action.payload;
+        }
         state.isLoading = false;
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {

@@ -46,8 +46,8 @@ const SimpleForm = ({ action }) => {
     action === "edit"
       ? moment(
           todayWaterArray.userWaterDay.find((item) => item._id === id).date
-        )
-      : moment();
+        ).utc()
+      : moment().utc();
 
   const [value, setValue] = useState(shownTime);
 
@@ -84,7 +84,6 @@ const SimpleForm = ({ action }) => {
 
   const handleTimeChange = (newTime) => {
     setValue(newTime);
-    // console.log(newTime.$d)
   };
 
   const handleIncreaseVolume = (e) => {
@@ -122,7 +121,9 @@ const SimpleForm = ({ action }) => {
                   {moment(
                     todayWaterArray.userWaterDay.find((item) => item._id === id)
                       .date
-                  ).format("LT")}
+                  )
+                    .utc()
+                    .format("LT")}
                 </div>
               </StyledCurrentValue>
             </>
