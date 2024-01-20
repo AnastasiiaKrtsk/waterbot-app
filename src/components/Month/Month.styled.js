@@ -23,13 +23,17 @@ export const StyledMonthChanger = styled.div`
 
 export const StyledMonthWaterList = styled.ul`
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px 22px;
+  gap: 16px 26px;
   width: 264px;
 
   @media screen and (min-width: 768px) {
     width: 100%;
     gap: 20px 34px;
+  }
+  @media screen and (min-width: 1440px) {
+    gap: 20px 22px;
   }
 `;
 
@@ -41,18 +45,26 @@ export const StyledWaterListItemWrapper = styled.div`
 `;
 
 export const StyledMonthWaterItem = styled.li`
+  width: 32px;
+  height: 32px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 7px;
-  width: 34px;
-  height: 34px;
+  margin-bottom: 4px;
+
   border-radius: 50%;
   /* border: 1px solid blue; */
   background-color: var(--white);
   /* border-radius: ${(props) => (props.$borderMarker ? "20px" : null)}; */
   outline: ${(props) =>
     props.$borderMarker ? "1px solid var(--orange)" : null};
+
+  @media screen and (min-width: 1440px) {
+    width: 34px;
+    height: 34px;
+  }
 `;
 
 export const StyledPercentage = styled.div`
