@@ -65,6 +65,7 @@ export const StyledWaterVolume = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  width: 70px;
   color: var(--dark-blue);
 `;
 
