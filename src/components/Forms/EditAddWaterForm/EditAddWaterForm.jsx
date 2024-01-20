@@ -166,7 +166,13 @@ const EditAddWaterForm = ({ action }) => {
                 <DemoItem>
                   <TimePicker
                     sx={{
-                      width: "544px",
+                      width: "150px",
+                      "@media screen and (min-width: 768px)": {
+                        width: "656px",
+                      },
+                      "@media screen and (min-width: 1440px)": {
+                        width: "544px",
+                      },
                       "& .MuiInputBase-input:hover": { borderColor: "red" },
                       "& .MuiTextField-root": {
                         "&:hover": {
@@ -217,7 +223,13 @@ const EditAddWaterForm = ({ action }) => {
             </StyledEditSubTitle>
             <TextField
               sx={{
-                width: "544px",
+                width: "150px",
+                "@media screen and (min-width: 768px)": {
+                  width: "656px",
+                },
+                "@media screen and (min-width: 1440px)": {
+                  width: "544px",
+                },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor: "var(--light-blue-3)",
@@ -229,6 +241,14 @@ const EditAddWaterForm = ({ action }) => {
                     borderRadius: "6px",
                     border: "1.5px solid var(--dark-blue)",
                     color: "var(--dark-blue)",
+                  },
+                  "& .MuiInputBase-input[type='number']": {
+                    "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button":
+                      {
+                        WebkitAppearance: "none",
+                        margin: 0,
+                      },
+                    MozAppearance: "textfield",
                   },
                 },
                 "& .MuiInputBase-root": {

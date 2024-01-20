@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const StyledForm = styled.form`
   display: flex;
-  padding: 32px 24px;
+  padding: 24px 12px;
+
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
@@ -10,8 +11,11 @@ export const StyledForm = styled.form`
   border-radius: 10px;
   background: #fff;
 
-  width: 592px;
+  /* width: 592px; */
   position: relative;
+  @media screen and (min-width: 320px) {
+    padding: 32px 24px;
+  }
 `;
 
 export const StyledSvg = styled.svg`
@@ -63,6 +67,10 @@ export const StyledEditSubTitle = styled.h3`
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  width: auto;
+  @media only screen and (min-width: 320px) {
+    width: 240px;
+  }
 `;
 
 export const StyledNewAmountWrapper = styled.div`
@@ -99,14 +107,17 @@ export const StyledIncreaseDecreaseBtn = styled.button`
   border-radius: 30px;
   border: 1px solid var(--light-blue-3);
   background: #fff;
-  box-shadow: 0px 2px 4px 0px rgba(64, 123, 255, 0.2);
-
   background-color: transparent;
+
+  &:hover {
+    box-shadow: 0px 2px 4px 0px rgba(64, 123, 255, 0.2);
+  }
+  transition: box-shadow var(--transition);
 `;
 
 export const StyledNewAmount = styled.div`
   display: flex;
-  padding: 6px 10px;
+  padding: 10px 25px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -143,31 +154,40 @@ export const StyledSaveBtn = styled.button`
   padding: 10px 30px;
   justify-content: center;
   align-items: center;
-  align-self: flex-end;
-  gap: 10px;
 
-  text-align: center;
-  font-family: Roboto;
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  line-height: calc(24 / 18);
 
   color: var(--white);
-
   border: none;
   border-radius: 10px;
   background: var(--dark-blue);
-  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 160px;
-  height: 44px;
-`;
+  width: 256px;
 
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    transition: box-shadow 0.5s ease-in-out;
+  }
+  @media only screen and (min-width: 767px) {
+    width: 160px;
+  }
+`;
+// @media screen and (min-width: 768px) {
+//     padding-left: 32px;
+//     padding-right: 32px;
+//   }
 export const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
-  align-self: flex-end;
+  flex-direction: column;
+  align-self: center;
+
   gap: 24px;
+  @media only screen and (min-width: 768px) {
+    align-self: flex-end;
+    flex-direction: row;
+  }
 `;
 
 export const StyledSpan = styled.span`
