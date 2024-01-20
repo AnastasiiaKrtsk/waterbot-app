@@ -49,9 +49,6 @@ const authSlice = createSlice({
     setModalContent: (state, action) => {
       state.modalContent = action.payload;
     },
-    setDailyNorma: (state, action) => {
-      state.userData.dailyNorma = action.payload;
-    },
     setIdForEditDelete: (state, action) => {
       state.idForEditDelete = action.payload;
     },
@@ -65,17 +62,13 @@ const authSlice = createSlice({
       .addCase(signUpThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.error = null;
         state.isSignedIn = true;
-        state.isLoading = false;
       })
       //=======signIn=========================//
       .addCase(signInThunk.fulfilled, (state, action) => {
         state.userData = action.payload.user;
         state.token = action.payload.token;
-        state.error = null;
         state.isSignedIn = true;
-        state.isLoading = false;
       })
       //=======LogOut=========================//;
       .addCase(logOutThunk.fulfilled, () => {
@@ -84,20 +77,9 @@ const authSlice = createSlice({
       .addCase(logOutThunk.rejected, (state, action) => {
         state.isSignedIn = false;
       })
-      //========= Forgot/Update Password ================//
-      .addCase(forgotPasswordThunk.fulfilled, (state) => {
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(updatePasswordThunk.fulfilled, (state) => {
-        state.isLoading = false;
-        state.error = null;
-      })
       //========== Current User ==================//
       .addCase(userCurrentThunk.fulfilled, (state, action) => {
         state.userData = action.payload.user;
-        state.error = null;
-        state.isLoading = false;
         state.userData = action.payload;
         state.isSignedIn = true;
         state.user = {
@@ -110,7 +92,6 @@ const authSlice = createSlice({
           ...state.userData,
           avatarURL: action.payload.avatarURL,
         };
-        state.isLoading = false;
       })
       //========== Update User Info =================//
       .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
@@ -220,7 +201,6 @@ const authSlice = createSlice({
 export const {
   setModalStatus,
   setModalContent,
-  setDailyNorma,
   setIdForEditDelete,
   setChooseDate,
 } = authSlice.actions;

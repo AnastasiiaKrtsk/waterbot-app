@@ -34,11 +34,7 @@ import {
 import { calculateV } from "./CalcNorma";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDailyNorma, selectUserGender } from "../../../redux/selectors";
-import {
-  setDailyNorma,
-  setModalContent,
-  setModalStatus,
-} from "../../../redux/slice";
+import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { DailyNormaUsrInputSchema } from "../../../helpers/validation";
 import { editDailyNormaThunk } from "../../../redux/thunks";
 
@@ -80,7 +76,6 @@ const DailyNorma = () => {
   const onSubmit = (data, e) => {
     e.preventDefault();
     dispatch(editDailyNormaThunk(data));
-    dispatch(setDailyNorma(data));
 
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
