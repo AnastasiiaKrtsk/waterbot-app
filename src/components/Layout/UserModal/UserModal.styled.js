@@ -10,7 +10,7 @@ export const ModalUserMenu = styled.div`
   flex-direction: column;
 
   border-radius: 10px;
-  background: var(--Primery-Color-White, #fff);
+  background: var(--white);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
   @media screen and (min-width: 1440px) {
     right: 112px;
@@ -51,4 +51,3 @@ export const MenuBtnSvg = styled.svg`
     stroke: var(--orange);
   }
 `;
-// export const SettingsBtn = styled.button``;

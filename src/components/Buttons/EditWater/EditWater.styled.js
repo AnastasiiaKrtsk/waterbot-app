@@ -15,6 +15,6 @@ export const StyledEditWaterButton = styled.button`
     width: 100%;
     height: 1px;
     background-color: var(--light-blue-3);
-    border-radius:1px;
+    border-radius: 1px;
   }
 `;

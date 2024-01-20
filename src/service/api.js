@@ -22,7 +22,6 @@ export const signin = async (userData) => {
 export const logout = async () => {
   const { data } = await $instance.post("/auth/logout");
   setToken("");
-
   return data;
 };
 
@@ -32,18 +31,12 @@ export const currentUser = async () => {
 };
 
 export const updateAvatar = async (avatar) => {
-  try {
-    const { data } = await $instance.patch("/users/avatars", avatar, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return data;
-  } catch (error) {
-    console.error("Error updating avatar:", error.message);
-    console.error("Error details:", error);
-    throw error;
-  }
+  const { data } = await $instance.patch("/users/avatars", avatar, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
 };
 
 export const updateUserInfo = async ({ endpoint, data }) => {

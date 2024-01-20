@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import bootleDesktop from "../../images/desktop/Desk-Botle-Home-screen@1x.png";
-import bootleTablet from "../../images/tablet/Tablet-Bottle-Home-Screen@1x.png";
 
 import bubbles from "../../images/desktop/Desk-Background-element-Main-Page@1x.png";
 import bubblesTab from "../../images/tablet/Tablet-Background-element-Home-Screen@1x.png";

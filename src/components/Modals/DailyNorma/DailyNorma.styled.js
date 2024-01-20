@@ -12,14 +12,9 @@ export const BackdropDailyNorma = styled.div`
   height: 100%;
   background-color: rgba(6, 33, 54, 0.4);
   overflow: scroll;
-
-  /* @media only screen and (min-width: 767px) {
-    padding: 44px 24px;
-  } */
 `;
 export const ModalDailyNorma = styled.div`
   padding: 32px 12px;
-  /* position: fixed; */
   display: inline-flex;
   flex-direction: column;
   border-radius: 10px;
@@ -112,7 +107,6 @@ export const CalcResult = styled.div`
 `;
 
 export const ResultParagraph = styled.p`
-  /* Common styles for both cases */
   color: var(--dark-blue);
   font-weight: bold;
 `;
@@ -173,7 +167,6 @@ export const Errors = styled.p`
 export const SettingDailyGenderList = styled.ul`
   display: flex;
   gap: 24px;
-  // margin-bottom: 24px;
 
   @media screen and (min-width: 1440px) {
     margin-bottom: 16px;

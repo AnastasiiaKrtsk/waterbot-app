@@ -28,7 +28,6 @@ import {
   selectChooseDate,
   selectDailyNorma,
   selectMonthWater,
-  selectTodayWater,
 } from "../../redux/selectors";
 import { setChooseDate } from "../../redux/slice";
 import { getWaterMonthThunk } from "../../redux/thunks";
@@ -61,7 +60,6 @@ const Month = () => {
   const shownDate = useSelector(selectChooseDate);
   const monthWaterArray = useSelector(selectMonthWater);
   const dailyNorma = useSelector(selectDailyNorma);
-  const dayWaterUser = useSelector(selectTodayWater);
 
   const dispatch = useDispatch();
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
@@ -131,6 +129,7 @@ const Month = () => {
       <StyledMonthWaterList>
         {daysArray.map((day) => {
           let percentage = 0;
+          let consumptionCount = 0;
 
           if (monthWaterArray.length) {
             let recordExist = monthWaterArray.find((item) => item.date === day);
@@ -180,11 +179,7 @@ const Month = () => {
 
                   <StyledMonthParagraph>
                     How many servings of water:
-                    <StylesBlueSpan>
-                      {dayWaterUser.userWaterDay
-                        ? dayWaterUser.userWaterDay.length
-                        : 0}
-                    </StylesBlueSpan>
+                    <StylesBlueSpan>{consumptionCount}</StylesBlueSpan>
                   </StyledMonthParagraph>
                 </StyledDayToolTipWrapper>
               }

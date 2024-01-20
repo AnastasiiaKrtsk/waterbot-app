@@ -35,19 +35,19 @@ export const WhyList = styled.ol`
     counter-increment: list-counter;
     margin-bottom: 8px;
     display: flex;
-    align-items: center; /* Vertically center the content */
+    align-items: center;
   }
 
   li::before {
     content: "";
-    width: 8px; /* Diameter of the ellipse */
-    height: 8px; /* Height of the ellipse */
-    background-color: var(--dark-blue); /* Change to your desired color */
-    border-radius: 50%; /* Makes it an ellipse */
+    width: 8px;
+    height: 8px;
+    background-color: var(--dark-blue);
+    border-radius: 50%;
     position: absolute;
     left: -20px;
-    top: 50%; /* Adjust vertically to center */
-    transform: translateY(-50%); /* Adjust vertically to center */
+    top: 50%;
+    transform: translateY(-50%);
   }
   @media only screen and (min-width: 767px) {
     li {

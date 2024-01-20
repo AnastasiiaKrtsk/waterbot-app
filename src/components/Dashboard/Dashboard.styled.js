@@ -7,8 +7,6 @@ export const StyledDashboardWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  // justify-content: space-between;
-  // padding: 0 112px;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -29,7 +27,6 @@ export const StyledLeftPartWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 232px;
-  // margin-top: 52px;
 
   background-position: center;
   background-repeat: no-repeat;
@@ -57,7 +54,6 @@ export const StyledWaterInfoWrapper = styled.div`
   flex-direction: column;
   gap: 24px;
   margin: 32px 0 40px;
-  /* margin-left: auto; */
 
   padding: 24px 8px;
   width: 280px;
