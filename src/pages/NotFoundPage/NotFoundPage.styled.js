@@ -64,9 +64,9 @@ export const NotFound404 = styled.p`
   font-size: 80px;
   font-weight: var(--bold);
   color: var(--dark-blue);
-  text-shadow: 3px 4px 4px #8296c1;
+  text-shadow: 3px 4px 4px #aebbd8;
   @media screen and (min-width: 768px) {
-    font-size: 150px;
+    text-shadow: 3px 4px 4px #8296c1;
   }
 `;
 export const NotFoundH1 = styled.p`
