@@ -13,11 +13,13 @@ export const BackdropDailyNorma = styled.div`
   background-color: rgba(6, 33, 54, 0.4);
   overflow: scroll;
 `;
+
 export const ModalDailyNorma = styled.div`
   padding: 32px 12px;
   display: inline-flex;
   flex-direction: column;
   border-radius: 10px;
+  width: 290px;
   background: var(--white);
 
   @media only screen and (min-width: 767px) {
@@ -25,25 +27,34 @@ export const ModalDailyNorma = styled.div`
     width: 592px;
   }
 `;
+
 export const Formulas1 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
   margin-bottom: 16px;
   margin-right: 24px;
+
+  gap: 4px;
 `;
 export const Formulas2 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
   margin-bottom: 12px;
+
+  gap: 4px;
 `;
-export const FormulasText = styled.p``;
+
 export const Formula = styled.p`
   color: var(--dark-blue);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   line-height: calc(24 / 18);
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const FormulaInfo = styled.div`

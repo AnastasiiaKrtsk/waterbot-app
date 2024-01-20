@@ -25,7 +25,6 @@ import {
   Formulas,
   Formulas1,
   Formulas2,
-  FormulasText,
   ModalDailyNorma,
   SaveBtn,
   SaveBtnDiv,
@@ -113,11 +112,11 @@ const DailyNorma = () => {
         </SettingsCrossDiv>
         <Formulas>
           <Formulas1>
-            <FormulasText>For woman:</FormulasText>
+            <p>For woman:</p>
             <Formula>V=(M*0.03) + (T*0.4)</Formula>
           </Formulas1>
           <Formulas2>
-            <FormulasText>For man:</FormulasText>
+            <p>For man:</p>
             <Formula>V=(M*0.04) + (T*0.6)</Formula>
           </Formulas2>
         </Formulas>
