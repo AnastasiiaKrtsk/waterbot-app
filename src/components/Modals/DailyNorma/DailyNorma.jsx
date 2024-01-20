@@ -33,10 +33,15 @@ import {
 } from "./DailyNorma.styled";
 import { calculateV } from "./CalcNorma";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserGender } from "../../../redux/selectors";
+import { selectChooseDate, selectUserGender } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { DailyNormaUsrInputSchema } from "../../../helpers/validation";
-import { editDailyNormaThunk, userCurrentThunk } from "../../../redux/thunks";
+import {
+  editDailyNormaThunk,
+  getWaterMonthThunk,
+  userCurrentThunk,
+} from "../../../redux/thunks";
+import moment from "moment";
 
 const DailyNorma = () => {
   const dispatch = useDispatch();
@@ -46,6 +51,7 @@ const DailyNorma = () => {
   };
 
   const storedUserGender = useSelector(selectUserGender);
+  const shownDate = useSelector(selectChooseDate);
 
   const [weight, setWeight] = useState("");
   const [activity, setActivity] = useState("");
@@ -76,6 +82,12 @@ const DailyNorma = () => {
     e.preventDefault();
     dispatch(editDailyNormaThunk(data));
     dispatch(userCurrentThunk);
+    dispatch(
+      getWaterMonthThunk({
+        year: moment(shownDate).year().toString(),
+        month: (moment(shownDate).month() + 1).toString().padStart(2, "0"),
+      })
+    );
 
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
