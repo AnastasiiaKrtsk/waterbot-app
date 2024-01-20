@@ -136,6 +136,7 @@ export const Input = styled.input`
 
   &:hover {
     box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+    transition: var(--transition);
   }
 
   &:focus {
@@ -183,6 +184,7 @@ export const Btn = styled.button`
 
   &:hover {
     box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+    transition: var(--transition);
   }
 `;
 

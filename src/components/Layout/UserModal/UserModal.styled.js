@@ -49,5 +49,6 @@ export const MenuBtns = styled.button`
 export const MenuBtnSvg = styled.svg`
   &:hover {
     stroke: var(--orange);
+    transition: var(--transition);
   }
 `;
