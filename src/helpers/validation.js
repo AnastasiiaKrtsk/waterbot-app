@@ -43,7 +43,7 @@ export const forgotPasswordSchema = yup.object().shape({
 });
 
 export const updatePasswordSchema = yup.object().shape({
-  password: yup
+  newPassword: yup
     .string()
     .required("Field is required")
     .min(8, "Minimum 8 characters")
@@ -51,7 +51,7 @@ export const updatePasswordSchema = yup.object().shape({
   passwordRepeat: yup
     .string()
     .required("Сonfirm your password")
-    .oneOf([yup.ref("password"), null], "Passwords do not match"),
+    .oneOf([yup.ref("newPassword"), null], "Passwords do not match"),
 });
 
 export const updateUserSchema = yup.object().shape({
@@ -69,7 +69,12 @@ export const updateUserSchema = yup.object().shape({
     .string()
     .min(8, "Minimum 8 characters")
     .max(64, "Maximum 64 characters")
-    .transform((value) => (value === "" ? undefined : value)),
+    .transform((value) => (value === "" ? undefined : value))
+    .when("newPassword", (newPassword, field) =>
+      newPassword[0]
+        ? field.required("Old password is required to fill")
+        : field
+    ),
   newPassword: yup
     .string()
     .min(8, "Minimum 8 characters")
@@ -88,7 +93,6 @@ export const updateUserSchema = yup.object().shape({
     .oneOf([yup.ref("newPassword"), null], "Passwords do not match")
     .transform((value) => (value === "" ? undefined : value)),
 });
-
 export const DailyNormaUsrInputSchema = yup.object().shape({
   dailyNorma: yup
     .number()

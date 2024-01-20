@@ -69,7 +69,7 @@ const Today = () => {
             <use href={sprite + "#icon-water-glass"}></use>
           </svg>
           <StyledWaterVolume>{waterVolume} ml</StyledWaterVolume>{" "}
-          {/* {new Date(date).getUTCHours()} */}
+
           {moment(date).utc().format("LT")}
         </StyledWaterInfo>
         <StyledTodayButtonsWrapper>

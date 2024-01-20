@@ -13,6 +13,8 @@ import {
   updateAvatar,
   updateUserInfo,
   editWater,
+  forgotPassword,
+  updatePassword,
 } from "../service/api";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -234,10 +236,11 @@ export const forgotPasswordThunk = createAsyncThunk(
 );
 
 export const updatePasswordThunk = createAsyncThunk(
-  "auth/forgotPassword",
+  "auth/updatePassword",
   async (newPassword, thunkAPI) => {
     try {
       const response = await updatePassword(newPassword);
+      toast.success("Update password successfully");
       return response;
     } catch (error) {
       toast.error(`Incorrect password`);

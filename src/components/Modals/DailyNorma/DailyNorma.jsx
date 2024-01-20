@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import {
-  InputRadioSettings,
-  SettingGenderList,
   SettingModalTitleH2,
   SettingsCrossDiv,
   StyledCloseSvg,
-  StyledRadioLabel,
   StyledYourGenderTitle,
 } from "../UserSettings/StyledSettingsUser";
 import {
@@ -27,12 +29,11 @@ import {
   ModalDailyNorma,
   SaveBtn,
   SaveBtnDiv,
-  SettingDailyGenderList,
   StyledResult,
 } from "./DailyNorma.styled";
 import { calculateV } from "./CalcNorma";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDailyNorma } from "../../../redux/selectors";
+import { selectDailyNorma, selectUserGender } from "../../../redux/selectors";
 import {
   setDailyNorma,
   setModalContent,
@@ -48,11 +49,14 @@ const DailyNorma = () => {
     dispatch(setModalContent(null));
   };
 
+  const storedUserGender = useSelector(selectUserGender);
+
   const [gender, setGender] = useState("woman");
   const [weight, setWeight] = useState("");
   const [activity, setActivity] = useState("");
   const [amount, setAmount] = useState("");
   const [result, setResult] = useState(null);
+  const [userGender, setUserGender] = useState(storedUserGender);
 
   useEffect(() => {
     if (!weight || !activity) {
@@ -81,6 +85,10 @@ const DailyNorma = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
     reset();
+  };
+
+  const handleGenderChange = (event) => {
+    setUserGender(event.target.value);
   };
 
   return (
@@ -115,32 +123,48 @@ const DailyNorma = () => {
           </FormulaInfoText>
         </FormulaInfo>
         <StyledYourGenderTitle>Calculate your rate:</StyledYourGenderTitle>
-        <SettingDailyGenderList>
-          <li>
-            <StyledRadioLabel htmlFor="woman">
-              <InputRadioSettings
-                type="radio"
-                id="woman"
-                name="gender"
-                checked={gender === "woman"}
-                onChange={() => setGender("woman")}
-              />
-              For Woman
-            </StyledRadioLabel>
-          </li>
-          <li>
-            <StyledRadioLabel htmlFor="man">
-              <InputRadioSettings
-                type="radio"
-                id="man"
-                name="gender"
-                checked={gender === "man"}
-                onChange={() => setGender("man")}
-              />
-              For Man
-            </StyledRadioLabel>
-          </li>
-        </SettingDailyGenderList>
+
+        <FormControl component="fieldset">
+          <FormLabel id="demo-row-radio-buttons-group-label" />
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            value={userGender}
+            onChange={handleGenderChange}
+          >
+            <FormControlLabel
+              value="woman"
+              control={
+                <Radio
+                  sx={{
+                    color: "var(--dark-blue)",
+                    "& .MuiSvgIcon-root": {
+                      fontSize: "medium",
+                    },
+                  }}
+                />
+              }
+              label="Woman"
+              {...register("gender")}
+            />
+            <FormControlLabel
+              value="man"
+              control={
+                <Radio
+                  sx={{
+                    color: "var(--dark-blue)",
+                    "& .MuiSvgIcon-root": {
+                      fontSize: "medium",
+                    },
+                  }}
+                />
+              }
+              label="Man"
+              {...register("gender")}
+            />
+          </RadioGroup>
+        </FormControl>
         <p>Your weight in kilograms:</p>
         <FormulaInput
           className="hide-number-arrows"
