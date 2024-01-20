@@ -12,6 +12,8 @@ import {
   updateAvatarThunk,
   updateUserInfoThunk,
   userCurrentThunk,
+  forgotPasswordThunk,
+  updatePasswordThunk,
 } from "./thunks";
 import moment from "moment";
 
@@ -106,7 +108,31 @@ const authSlice = createSlice({
         state.isSignedIn = false;
         state.error = action.payload;
       })
-
+      //========= Forgot/Update Password ================//
+      .addCase(forgotPasswordThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updatePasswordThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updatePasswordThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updatePasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       //========== Current User ==================//
 
       .addCase(userCurrentThunk.pending, (state) => {
