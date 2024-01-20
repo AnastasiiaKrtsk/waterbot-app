@@ -8,22 +8,21 @@ import ModalContent from "./components/ModalContent/ModalContent";
 import Modal from "./components/Modals/Modal";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
-// import HomePage from "./pages/HomePage/HomePage";
-// import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-// import SignInPage from "./pages/SignInPage/SignInPage";
-// import SignUpPage from "./pages/SignUpPage/SignUpPage";
-// import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import { selectOpenModal } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-import UpdatePasswordPage from "./pages/UpdatePasswordPage/UpdatePasswordPage";
 // import { userCurrentThunk } from "./redux/thunks";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const ForgotPasswordPage = lazy(() =>
+  import("./pages/ForgotPasswordPage/ForgotPasswordPage")
+);
+const UpdatePasswordPage = lazy(() =>
+  import("./pages/UpdatePasswordPage/UpdatePasswordPage")
+);
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
@@ -34,10 +33,6 @@ const App = () => {
   useEffect(() => {
     dispatch(userCurrentThunk());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   fetch("https://backend-water-tracker.onrender.com/api/users");
-  // }, []);
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
