@@ -204,3 +204,18 @@ export const ErrorText = styled.p`
   bottom: -22px;
   color: var(--red);
 `;
+
+export const StyledMainParagraphEdit = styled.p`
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--dark-blue);
+`;
+
+export const StyledSecondaryParagraphEdit = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+
+  color: var(--black);
+`;

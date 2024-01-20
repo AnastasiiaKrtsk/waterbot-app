@@ -21,10 +21,12 @@ import {
   StyledEditTitle,
   StyledForm,
   StyledIncreaseDecreaseBtn,
+  StyledMainParagraphEdit,
   StyledNewAmount,
   StyledNewAmountWrapper,
   StyledRecordingTimeWrapper,
   StyledSaveBtn,
+  StyledSecondaryParagraphEdit,
   StyledSpan,
   StyledSvg,
   StyledTitle,
@@ -124,15 +126,17 @@ const EditAddWaterForm = ({ action }) => {
                 <svg width={"36px"} height={"36px"}>
                   <use href={sprite + "#icon-water-glass"}></use>
                 </svg>
-                <div>{waterAmount} ml</div>
-                <div>
+                <StyledMainParagraphEdit>
+                  {waterAmount} ml
+                </StyledMainParagraphEdit>
+                <StyledSecondaryParagraphEdit>
                   {moment(
                     todayWaterArray.userWaterDay.find((item) => item._id === id)
                       .date
                   )
                     .utc()
                     .format("LT")}
-                </div>
+                </StyledSecondaryParagraphEdit>
               </StyledCurrentValue>
             </>
           ) : (
