@@ -59,6 +59,7 @@ export const FormulaInfoText = styled.p`
   font-weight: 400;
   line-height: calc(16 / 12);
 `;
+
 export const FormulaInput = styled.input`
   width: 100%;
   padding: 12px 10px;
@@ -75,7 +76,17 @@ export const FormulaInput = styled.input`
   &.hide-number-arrows {
     -moz-appearance: textfield;
   }
+
+  &:hover {
+    transition: var(--transition);
+    box-shadow: 3px 2px 10px 0px rgba(64, 123, 255, 0.2);
+  }
+
+  &::placeholder {
+    color: var(--dark-blue);
+  }
 `;
+
 export const CalcBtn = styled.button`
   margin-bottom: 16px;
   width: 100%;
