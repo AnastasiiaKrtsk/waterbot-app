@@ -14,10 +14,17 @@ import {
   StyledWaterListItemWrapper,
 } from "./Month.styled";
 
+import { StyledCloseSvg } from "../Modals/UserSettings/StyledSettingsUser.js";
+
 import sprite from "../../images/svg+logo/sprite.svg";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectChooseDate, selectMonthWater } from "../../redux/selectors";
+import {
+  selectChooseDate,
+  selectDailyNorma,
+  selectMonthWater,
+  selectTodayWater,
+} from "../../redux/selectors";
 import { setChooseDate } from "../../redux/slice";
 import { getWaterMonthThunk } from "../../redux/thunks";
 
@@ -41,7 +48,10 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const Month = () => {
   const shownDate = useSelector(selectChooseDate);
-  const MonthWaterArray = useSelector(selectMonthWater);
+  const monthWaterArray = useSelector(selectMonthWater);
+  const dailyNorma = useSelector(selectDailyNorma);
+  const dayWaterUser = useSelector(selectTodayWater);
+
   const dispatch = useDispatch();
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
@@ -109,8 +119,8 @@ const Month = () => {
         {daysArray.map((day) => {
           let percentage = 0;
 
-          if (MonthWaterArray.length) {
-            let recordExist = MonthWaterArray.find((item) => item.date === day);
+          if (monthWaterArray.length) {
+            let recordExist = monthWaterArray.find((item) => item.date === day);
             percentage = recordExist ? recordExist.percentDailyNorm : 0;
           }
           const placement = [
@@ -123,8 +133,22 @@ const Month = () => {
               disableHoverListener
               title={
                 <div>
-                  <button onClick={handleTooltipClose}>Close</button>
-                  {day + ", " + moment(shownDate).format("MMMM")}
+                  <StyledCloseSvg
+                    width="24"
+                    height="24"
+                    onClick={handleTooltipClose}
+                  >
+                    <use href={`${sprite}#icon-outline`} />
+                  </StyledCloseSvg>
+                  <span>{day + ", " + moment(shownDate).format("MMMM")}</span>
+                  <span>Daily norma: </span>
+                  <div>{(dailyNorma / 1000).toFixed(1)}</div>
+
+                  <span>Fulfillment of the daily norm: </span>
+                  <div>{percentage}%</div>
+
+                  <span>How many servings of water: </span>
+                  <div>{dayWaterUser.userWaterDay.length}</div>
                 </div>
               }
               key={day}
