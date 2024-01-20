@@ -50,7 +50,7 @@ export const updatePasswordSchema = yup.object().shape({
     .max(64, "Maximum 64 characters"),
   passwordRepeat: yup
     .string()
-    .required("Сonfirm your password")
+    .required("Confirm your password")
     .oneOf([yup.ref("newPassword"), null], "Passwords do not match"),
 });
 
@@ -98,7 +98,7 @@ export const DailyNormaUsrInputSchema = yup.object().shape({
     .number()
     .min(1)
     .max(15, "Maximum 15 L")
-    .nullable()
+    .required("Field is required")
     .transform((value, originalValue) => {
       if (originalValue === "" || isNaN(originalValue)) {
         return null;
