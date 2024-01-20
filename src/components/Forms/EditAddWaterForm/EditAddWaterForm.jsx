@@ -14,6 +14,7 @@ import {
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { addWaterThunk, editWaterThunk } from "../../../redux/thunks";
 import {
+  ErrorText,
   StyledButtonsWrapper,
   StyledCurrentValue,
   StyledEditSubTitle,
@@ -38,6 +39,7 @@ const EditAddWaterForm = ({ action }) => {
   const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
   const todayWaterArray = useSelector(selectTodayWater);
+  const [error, setError] = useState(null);
 
   const waterAmount =
     action === "edit"
@@ -99,6 +101,12 @@ const EditAddWaterForm = ({ action }) => {
 
   const handleChangeVolume = (e) => {
     setCustomVolume(e.target.value);
+
+    if (e.target.value < 1 || e.target.value > 15000) {
+      setError("The value should not exceed 15000 ml");
+    } else {
+      setError(null);
+    }
   };
 
   return (
@@ -268,6 +276,7 @@ const EditAddWaterForm = ({ action }) => {
                 max: 15000,
               }}
             />
+            {error && <ErrorText>{error}</ErrorText>}
           </StyledUsedWater>
           <StyledWrapper>
             <StyledSpan>{customVolume ? customVolume : volume}ml</StyledSpan>
