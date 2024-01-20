@@ -122,6 +122,3 @@ export const StyledCancelButton = styled.button`
     padding: 10px 30px;
   }
 `;
-export const CloseSvg = styled.svg`
-  cursor: pointer;
-`;

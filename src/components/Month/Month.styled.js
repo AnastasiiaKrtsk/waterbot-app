@@ -37,7 +37,7 @@ export const StyledWaterListItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 export const StyledMonthWaterItem = styled.li`
@@ -50,8 +50,9 @@ export const StyledMonthWaterItem = styled.li`
   border-radius: 50%;
   /* border: 1px solid blue; */
   background-color: var(--white);
-  /* border-radius: ${props => props.$borderMarker ? '20px' : null}; */
-  outline: ${props => props.$borderMarker ? '1px solid var(--orange)' : null};
+  /* border-radius: ${(props) => (props.$borderMarker ? "20px" : null)}; */
+  outline: ${(props) =>
+    props.$borderMarker ? "1px solid var(--orange)" : null};
 `;
 
 export const StyledPercentage = styled.div`
@@ -92,4 +93,42 @@ export const StyledNextMonth = styled.button`
   width: 14px;
   height: 14px;
   padding: 0;
+`;
+
+export const StyledDateParagraph = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--dark-blue);
+`;
+
+export const StyledMonthParagraph = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
+export const StylesBlueSpan = styled.span`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+
+  margin-left: 6px;
+
+  color: var(--dark-blue);
+`;
+
+export const StyledDayToolTipWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 254px;
+
+  @media screen and (min-width: 768px) {
+    width: 262px;
+  }
 `;
