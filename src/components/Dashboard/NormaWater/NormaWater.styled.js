@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const NormaBtnWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
-  /* align-items: center; */
   flex-direction: column;
   gap: 12px;
   padding: 8px 20px;

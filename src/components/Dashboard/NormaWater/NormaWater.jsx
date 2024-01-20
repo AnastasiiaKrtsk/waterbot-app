@@ -18,13 +18,13 @@ const NormaWater = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("DailyNorma"));
   };
-  const formatingDailyNorma = dailyNorma / 1000;
+  const formatDailyNorma = dailyNorma / 1000;
   return (
     <NormaBtnWrapper>
       <StyledNormaTitle>My daily norma</StyledNormaTitle>
       <NormaResultDiv>
         <StyledNormaVolume>
-          {dailyNorma ? formatingDailyNorma : 0} L
+          {dailyNorma ? formatDailyNorma : 0} L
         </StyledNormaVolume>
         <StyledEditBtn onClick={handleEditNorma}> Edit</StyledEditBtn>
       </NormaResultDiv>
