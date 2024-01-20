@@ -14,5 +14,6 @@ export const StyledAddWaterBtn = styled.button`
 
   &:hover {
     color: var(--orange);
+    transition: var(--transition);
   }
 `;

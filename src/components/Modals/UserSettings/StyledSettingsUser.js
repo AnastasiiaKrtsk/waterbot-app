@@ -181,7 +181,12 @@ export const StyledCloseSvg = styled.svg`
   height: 24px;
 
   &:hover {
-    transform: rotate(85deg);
+    transform: rotate(40deg);
+    transition: transform 0.5s ease-in-out;
+  }
+
+  &:not(:hover) {
+    transform: rotate(-90deg);
     transition: transform 0.5s ease-in-out;
   }
 `;

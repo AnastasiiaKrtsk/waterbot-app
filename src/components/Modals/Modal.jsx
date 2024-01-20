@@ -26,6 +26,12 @@ const Modal = ({ open, onClose, children }) => {
   );
 
   useEffect(() => {
+    // if (open) {
+    //   document.body.classList.add("modal-open");
+    // } else {
+    //   document.body.classList.remove("modal-open");
+    // }
+
     modalRootElement.appendChild(element);
 
     document.addEventListener("keydown", handleKeyDown);

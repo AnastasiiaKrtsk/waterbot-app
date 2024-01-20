@@ -25,7 +25,12 @@ export const StyledSvg = styled.svg`
   cursor: pointer;
 
   &:hover {
-    transform: rotate(85deg);
+    transform: rotate(40deg);
+    transition: transform 0.5s ease-in-out;
+  }
+
+  &:not(:hover) {
+    transform: rotate(-90deg);
     transition: transform 0.5s ease-in-out;
   }
 `;
@@ -170,6 +175,7 @@ export const StyledSaveBtn = styled.button`
     box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
     transition: box-shadow 0.5s ease-in-out;
   }
+
   @media only screen and (min-width: 767px) {
     width: 160px;
   }
