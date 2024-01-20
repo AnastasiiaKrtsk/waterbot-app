@@ -14,7 +14,7 @@ import {
   Title,
   WrapperForm,
   WrapperInput,
-} from "./ForgotPasswordPage.styled";
+} from "../SignUpPage/SignUpPage.styled.js";
 import { forgotPasswordThunk } from "../../redux/thunks";
 
 const ForgotPasswordPage = () => {
