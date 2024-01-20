@@ -48,7 +48,7 @@ const UpdatePasswordPage = () => {
         }
       })
       .catch((error) => {
-        console.error("Error updating password:", error);
+        toast.error("Error updating password:", error);
       });
     reset();
   }
