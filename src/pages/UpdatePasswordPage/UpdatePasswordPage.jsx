@@ -18,7 +18,7 @@ import {
   Title,
   WrapperForm,
   WrapperInput,
-} from "./UpdatePasswordPage.styled";
+} from "../SignUpPage/SignUpPage.styled.js";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
