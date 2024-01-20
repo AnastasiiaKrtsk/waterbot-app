@@ -59,7 +59,6 @@ export const Welcome2Bg = styled.div`
     background-size: contain;
 
     background-image: url(${WelcomeBgDesktop2});
-    /* background: none; */
   }
 `;
 export const H1 = styled.h1`

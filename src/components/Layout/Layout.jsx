@@ -32,13 +32,11 @@ const Layout = () => {
   const token = useSelector(selectToken);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
-
-  const dispatch = useDispatch();
-
   const modalStatus = useSelector(selectOpenModal);
-
   const openModal = useSelector(selectOpenModal);
   const ModalContent = useSelector(selectModalContent);
+
+  const dispatch = useDispatch();
 
   const handleOpenUserModal = () => {
     dispatch(setModalStatus(!modalStatus));

@@ -75,7 +75,7 @@ export const NotFoundH1 = styled.p`
   font-weight: var(--bold);
   color: #5f5f5f;
   @media screen and (min-width: 768px) {
-    font-size: 50pxpx;
+    font-size: 50px;
   }
 `;
 
@@ -111,5 +111,3 @@ export const NotFoundHomeBtn = styled.button`
   }
   transition: box-shadow var(--transition);
 `;
-// export const NotFoundWrapper = styled.div``;
-// export const NotFoundWrapper = styled.div``;

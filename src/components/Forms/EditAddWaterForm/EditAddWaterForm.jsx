@@ -29,9 +29,9 @@ import {
   StyledTitle,
   StyledUsedWater,
   StyledWrapper,
-} from "./EditWaterForm.styled";
+} from "./EditAddWaterForm.styled";
 
-const SimpleForm = ({ action }) => {
+const EditAddWaterForm = ({ action }) => {
   const dispatch = useDispatch();
   const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
@@ -210,7 +210,6 @@ const SimpleForm = ({ action }) => {
                     timeSteps={{ minutes: 1 }}
                     value={value}
                     onChange={handleTimeChange}
-                    // onChange={(newTime) => console.log(newTime)}
                     ampm={true}
                   />
                 </DemoItem>
@@ -278,4 +277,4 @@ const SimpleForm = ({ action }) => {
   );
 };
 
-export default SimpleForm;
+export default EditAddWaterForm;

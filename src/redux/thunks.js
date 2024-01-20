@@ -81,7 +81,7 @@ export const updateAvatarThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await updateAvatar(data);
-      console.log("Avatar updated successfully:", response);
+
       return response;
     } catch (error) {
       toast.error(error.response.data.message);
