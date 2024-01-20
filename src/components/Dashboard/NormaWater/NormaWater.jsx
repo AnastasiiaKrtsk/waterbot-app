@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectOpenModal } from "../../../redux/selectors";
+import { selectDailyNorma, selectOpenModal } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { NormaBtnWrapper, NormaResultDiv, StyledEditBtn, StyledNormaTitle, StyledNormaVolume } from "./NormaWater.styled";
 
@@ -7,6 +7,7 @@ const NormaWater = () => {
 
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
+  const dailyNorma = useSelector(selectDailyNorma)
 
 
   const handleEditNorma = () => {
@@ -17,7 +18,7 @@ const NormaWater = () => {
     <NormaBtnWrapper>
       <StyledNormaTitle>My daily norma</StyledNormaTitle>
       <NormaResultDiv>
-        <StyledNormaVolume>1.5 L</StyledNormaVolume>
+        <StyledNormaVolume>{dailyNorma / 1000} L</StyledNormaVolume>
         <StyledEditBtn onClick={handleEditNorma}> Edit</StyledEditBtn>
       </NormaResultDiv>
     </NormaBtnWrapper>

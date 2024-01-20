@@ -21,7 +21,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman" || "man",
-    dailyNorma: "2",
+    dailyNorma: 1.8,
   },
   token: null,
   error: null,
@@ -192,12 +192,14 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
-        // TODO при полном удалении за день идет ошибка
-        state.water.monthWater = action.payload.map((day) => ({
-          ...day,
-          date: moment(day.date).date(),
-        }));
-        state.isLoading = false;
+        if (action.payload.length) {
+          // TODO при полном удалении за день идет ошибка
+          state.water.monthWater = action.payload?.map((day) => ({
+            ...day,
+            date: moment(day.date).date(),
+          }));
+          state.isLoading = false;
+        }
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {
         state.isLoading = false;

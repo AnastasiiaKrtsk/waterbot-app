@@ -43,15 +43,16 @@ const Month = () => {
   const shownDate = useSelector(selectChooseDate);
   const MonthWaterArray = useSelector(selectMonthWater);
   const dispatch = useDispatch();
-  // const [shownDate, setShownDate] = useState(moment());
   const [daysInMonth, setDaysInMonth] = useState(moment().daysInMonth());
   const [isCurrentMonth, setIsCurrentMonth] = useState(false);
-  const [clickedItem, setClickedItem] = useState(null);
-  
+  const [isTooltipOpen, setIsTooltipOpen] = useState(null);
 
   const handleItemClick = (day) => {
-    // Toggle the tooltip visibility on click
-    setClickedItem(clickedItem === day ? null : day);
+    setIsTooltipOpen(isTooltipOpen === day ? null : day);
+  };
+
+  const handleTooltipClose = () => {
+    setIsTooltipOpen(null);
   };
 
   useEffect(() => {
@@ -67,11 +68,15 @@ const Month = () => {
   }, [shownDate]);
 
   const prevMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().subtract(1, "months")).toISOString());
+    console.log("-")
+    const newDate = moment(shownDate).clone().subtract(1, "months").toISOString();
+    dispatch(setChooseDate(newDate));
   };
 
   const nextMonth = () => {
-    dispatch(setChooseDate(shownDate.clone().add(1, "months")).toISOString());
+    console.log("+")
+    const newDate = moment(shownDate).clone().add(1, "months").toISOString();
+    dispatch(setChooseDate(newDate));
   };
 
   const daysArray = Array.from(
@@ -99,8 +104,12 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
-          let recordExist = MonthWaterArray.find(item => item.date === day)
-          let percentage = recordExist ? recordExist.percentDailyNorm : 0;
+          let percentage=0;
+
+          if (MonthWaterArray.length) {
+            let recordExist = MonthWaterArray.find(item => item.date === day)
+            percentage = recordExist ? recordExist.percentDailyNorm : 0;
+          }
           const placement = [
             1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31,
           ].includes(day)
@@ -108,17 +117,23 @@ const Month = () => {
             : "top-end";
           return (
             <CustomWidthTooltip
-              title={day + ", " + moment(shownDate).format("MMMM")}
-              key={day}
-              placement={placement}
-              open={clickedItem === day}
-              onClose={() => setClickedItem(null)}
-            >
-              <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)} >
-                <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
-                <StyledPercentage>{percentage}%</StyledPercentage>
-              </StyledWaterListItemWrapper>
-            </CustomWidthTooltip>
+            disableHoverListener
+            title={
+              <div>
+                {day + ", " + moment(shownDate).format("MMMM")}
+                <button onClick={handleTooltipClose}>Close</button>
+              </div>
+            }
+            key={day}
+            placement={placement}
+            open={isTooltipOpen === day}
+            onClose={() => setIsTooltipOpen(null)}
+          >
+            <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)}>
+              <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
+              <StyledPercentage>{percentage}%</StyledPercentage>
+            </StyledWaterListItemWrapper>
+          </CustomWidthTooltip>
           );
         })}
       </StyledMonthWaterList>
