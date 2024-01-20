@@ -91,10 +91,11 @@ export const editDailyNorma = async (water) => {
 // editDailyNorma();
 
 export const forgotPassword = async (email) => {
-  const { data } = await $instance.post("auth/forgot-password", email);
+  const { data } = await $instance.post("auth/restore-password", email);
   return data;
 };
 
 export const updatePassword = async (newPassword) => {
-  const { data } = await $instance.post("auth/update-password", newPassword);
+  const { data } = await $instance.post("auth/reset-password", newPassword);
+  return data;
 };

@@ -36,12 +36,9 @@ const SignUpPage = () => {
 
   const onSubmit = async ({ username, email, password }, e) => {
     e.preventDefault();
-
     try {
       await dispatch(signUpThunk({ username, email, password })).unwrap();
-
       await dispatch(signInThunk({ email, password }));
-
       reset();
       toast.success("Registration completed successfully");
     } catch (error) {

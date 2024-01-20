@@ -3,6 +3,7 @@ import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import moment from "moment";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import {
@@ -29,7 +30,6 @@ import {
   StyledUsedWater,
   StyledWrapper,
 } from "./EditWaterForm.styled";
-import { useState } from "react";
 
 const SimpleForm = ({ action }) => {
   const dispatch = useDispatch();
@@ -50,6 +50,7 @@ const SimpleForm = ({ action }) => {
       : moment().utc();
 
   const [value, setValue] = useState(shownTime);
+
   const [volume, setVolume] = useState(waterAmount);
   const [customVolume, setCustomVolume] = useState(null);
 
@@ -63,7 +64,6 @@ const SimpleForm = ({ action }) => {
     const formData = new FormData(e.target);
 
     const waterVolume = +(customVolume ? customVolume : volume);
-    // const waterVolume = +formData.get("waterVolume");
     const date = moment(formData.get("date"), "hh:mm a").format(
       "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
     );
@@ -84,6 +84,7 @@ const SimpleForm = ({ action }) => {
 
   const handleTimeChange = (newTime) => {
     setValue(newTime);
+
   };
 
   const handleIncreaseVolume = (e) => {
@@ -202,6 +203,7 @@ const SimpleForm = ({ action }) => {
                     timeSteps={{ minutes: 1 }}
                     value={value}
                     onChange={handleTimeChange}
+                    // onChange={(newTime) => console.log(newTime)}
                     ampm={true}
                   />
                 </DemoItem>

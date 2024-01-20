@@ -173,7 +173,7 @@ export const Errors = styled.p`
 export const SettingDailyGenderList = styled.ul`
   display: flex;
   gap: 24px;
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
 
   @media screen and (min-width: 1440px) {
     margin-bottom: 16px;
