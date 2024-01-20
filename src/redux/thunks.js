@@ -148,7 +148,7 @@ export const getWaterMonthThunk = createAsyncThunk(
   async (monthYear, thunkAPI) => {
     try {
       const response = await getWaterMonth(monthYear);
-      // console.log(response)
+      console.log(response);
       return response;
     } catch (error) {
       toast.error("Error get water for this month", error);

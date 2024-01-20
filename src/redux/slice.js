@@ -193,13 +193,14 @@ const authSlice = createSlice({
       })
       .addCase(getWaterMonthThunk.fulfilled, (state, action) => {
         if (action.payload.length) {
-          // TODO при полном удалении за день идет ошибка
           state.water.monthWater = action.payload?.map((day) => ({
             ...day,
             date: moment(day.date).date(),
           }));
-          state.isLoading = false;
+        } else {
+          state.water.monthWater = action.payload;
         }
+        state.isLoading = false;
       })
       .addCase(getWaterMonthThunk.rejected, (state, action) => {
         state.isLoading = false;

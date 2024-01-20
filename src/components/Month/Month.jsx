@@ -68,13 +68,14 @@ const Month = () => {
   }, [shownDate]);
 
   const prevMonth = () => {
-    console.log("-")
-    const newDate = moment(shownDate).clone().subtract(1, "months").toISOString();
+    const newDate = moment(shownDate)
+      .clone()
+      .subtract(1, "months")
+      .toISOString();
     dispatch(setChooseDate(newDate));
   };
 
   const nextMonth = () => {
-    console.log("+")
     const newDate = moment(shownDate).clone().add(1, "months").toISOString();
     dispatch(setChooseDate(newDate));
   };
@@ -94,7 +95,9 @@ const Month = () => {
               <use href={sprite + "#icon-left"}></use>
             </svg>
           </StyledPrevMonth>
-          <StyledMonthName>{moment(shownDate).format("MMMM YYYY")}</StyledMonthName>
+          <StyledMonthName>
+            {moment(shownDate).format("MMMM YYYY")}
+          </StyledMonthName>
           <StyledNextMonth onClick={nextMonth} disabled={isCurrentMonth}>
             <svg width={"16px"} height={"16px"}>
               <use href={sprite + "#icon-right"}></use>
@@ -104,10 +107,10 @@ const Month = () => {
       </StyledMonthWrapper>
       <StyledMonthWaterList>
         {daysArray.map((day) => {
-          let percentage=0;
+          let percentage = 0;
 
           if (MonthWaterArray.length) {
-            let recordExist = MonthWaterArray.find(item => item.date === day)
+            let recordExist = MonthWaterArray.find((item) => item.date === day);
             percentage = recordExist ? recordExist.percentDailyNorm : 0;
           }
           const placement = [
@@ -117,23 +120,28 @@ const Month = () => {
             : "top-end";
           return (
             <CustomWidthTooltip
-            disableHoverListener
-            title={
-              <div>
-                {day + ", " + moment(shownDate).format("MMMM")}
-                <button onClick={handleTooltipClose}>Close</button>
-              </div>
-            }
-            key={day}
-            placement={placement}
-            open={isTooltipOpen === day}
-            onClose={() => setIsTooltipOpen(null)}
-          >
-            <StyledWaterListItemWrapper key={day} onClick={() => handleItemClick(day)}>
-              <StyledMonthWaterItem $borderMarker={percentage < 100}>{day}</StyledMonthWaterItem>
-              <StyledPercentage>{percentage}%</StyledPercentage>
-            </StyledWaterListItemWrapper>
-          </CustomWidthTooltip>
+              disableHoverListener
+              title={
+                <div>
+                  <button onClick={handleTooltipClose}>Close</button>
+                  {day + ", " + moment(shownDate).format("MMMM")}
+                </div>
+              }
+              key={day}
+              placement={placement}
+              open={isTooltipOpen === day}
+              onClose={() => setIsTooltipOpen(null)}
+            >
+              <StyledWaterListItemWrapper
+                key={day}
+                onClick={() => handleItemClick(day)}
+              >
+                <StyledMonthWaterItem $borderMarker={percentage < 100}>
+                  {day}
+                </StyledMonthWaterItem>
+                <StyledPercentage>{percentage}%</StyledPercentage>
+              </StyledWaterListItemWrapper>
+            </CustomWidthTooltip>
           );
         })}
       </StyledMonthWaterList>
