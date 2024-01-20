@@ -147,6 +147,7 @@ export const StyledUsedWater = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 `;
 
 export const StyledSaveBtn = styled.button`
@@ -196,4 +197,10 @@ export const StyledSpan = styled.span`
   font-weight: 700;
   line-height: 24px;
   color: var(--dark-blue);
+`;
+
+export const ErrorText = styled.p`
+  position: absolute;
+  bottom: -22px;
+  color: var(--red);
 `;
