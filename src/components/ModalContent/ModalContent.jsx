@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
-import EditAddWaterForm from "../Forms/EditAddWaterForm/EditAddWaterForm";
-// import DeleteForm from "../Forms/DeleteForm/DeleteForm";
-// import AddWaterForm from "../Forms/AddWaterForm/AddWaterForm";
 import { selectModalContent } from "../../redux/selectors";
+import EditAddWaterForm from "../Forms/EditAddWaterForm/EditAddWaterForm";
 import DailyNorma from "../Modals/DailyNorma/DailyNorma";
 import UserModal from "../Layout/UserModal/UserModal";
 import UserSettings from "../Modals/UserSettings/UserSettings";

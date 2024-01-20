@@ -7,7 +7,6 @@ export const StyledWaterProgressWrapper = styled.div`
   gap: 16px;
 
   width: 280px;
-  /* margin-bottom: 56px; */
 
   @media screen and (min-width: 768px) {
     width: 356px;

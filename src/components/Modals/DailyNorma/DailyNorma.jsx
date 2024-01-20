@@ -33,11 +33,10 @@ import {
 } from "./DailyNorma.styled";
 import { calculateV } from "./CalcNorma";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDailyNorma, selectUserGender } from "../../../redux/selectors";
+import { selectUserGender } from "../../../redux/selectors";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import { DailyNormaUsrInputSchema } from "../../../helpers/validation";
 import { editDailyNormaThunk, userCurrentThunk } from "../../../redux/thunks";
-import { current } from "@reduxjs/toolkit";
 
 const DailyNorma = () => {
   const dispatch = useDispatch();

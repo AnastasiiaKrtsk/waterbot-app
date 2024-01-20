@@ -1,12 +1,7 @@
-import {
-  BackdropUserMenu,
-  MenuBtnSvg,
-  MenuBtns,
-  ModalUserMenu,
-} from "./UserModal.styled";
+import { MenuBtnSvg, MenuBtns, ModalUserMenu } from "./UserModal.styled";
 import sprite from "../../../images/svg+logo/sprite.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { setModalContent, setModalStatus } from "../../../redux/slice";
+import { useDispatch } from "react-redux";
+import { setModalContent } from "../../../redux/slice";
 
 const UserModal = () => {
   const dispatch = useDispatch();

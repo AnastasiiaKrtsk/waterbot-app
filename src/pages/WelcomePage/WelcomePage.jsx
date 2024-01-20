@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ConsumTracker from "../../components/ConsumTracker/ConsumTracker";
 import WhyDrinkWater from "../../components/WhyDrinkWater/WhyDrinkWater";
 import {
@@ -9,18 +8,8 @@ import {
   WelcomeBg,
   WelcomePageWrapper,
 } from "./WelcomePage.styled";
-import DailyNorma from "../../components/Modals/DailyNorma/DailyNorma";
-import DropDown from "../../components/Modals/DropDown/DropDown";
+
 const WelcomePage = () => {
-  const [isDailyNormaOpen, setIsDailyNormaOpen] = useState(false);
-
-  const handleOpenDailyNorma = () => {
-    setIsDailyNormaOpen(true);
-  };
-
-  const handleCloseDailyNorma = () => {
-    setIsDailyNormaOpen(false);
-  };
   return (
     <>
       <WelcomeBg />

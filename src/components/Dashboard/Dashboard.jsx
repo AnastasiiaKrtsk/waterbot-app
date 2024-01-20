@@ -24,9 +24,9 @@ const Dashboard = () => {
   };
 
   const waterProgressBar =
-    todayWater.percentDailyNormaUser > 100
+    todayWater?.percentDailyNormaUser > 100
       ? 100
-      : todayWater.percentDailyNormaUser;
+      : todayWater?.percentDailyNormaUser;
 
   return (
     <>
