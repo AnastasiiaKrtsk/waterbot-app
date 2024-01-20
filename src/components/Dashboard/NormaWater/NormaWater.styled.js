@@ -10,7 +10,7 @@ export const NormaBtnWrapper = styled.div`
   border: 1px solid var(--light-blue-2);
   background: var(--white);
   box-shadow: 0px 4px 8px 0px rgba(158, 187, 255, 0.12);
-  width: 164px;
+  width: fit-content;
 `;
 export const NormaResultDiv = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ export const StyledNormaVolume = styled.div`
   font-weight: 700;
   line-height: 24px;
   color: var(--dark-blue);
-  width: 54px;
+  // width: 70px;
 `;
 
 export const StyledEditBtn = styled.button`
