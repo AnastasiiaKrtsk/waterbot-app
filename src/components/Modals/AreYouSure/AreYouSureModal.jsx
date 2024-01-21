@@ -22,7 +22,6 @@ import { containerVariants } from "../Modal";
 
 const AreYouSureModal = ({ title, message, buttonText, action }) => {
   const id = useSelector(selectIdForEditDelete);
-  const shownDate = useSelector(selectChooseDate);
   const dispatch = useDispatch();
 
   const handleCloseUserModal = () => {
@@ -30,15 +29,10 @@ const AreYouSureModal = ({ title, message, buttonText, action }) => {
     dispatch(setModalContent(null));
   };
 
-  const chooseDate = {
-    year: moment(shownDate).year().toString(),
-    month: (moment(shownDate).month() + 1).toString().padStart(2, 0),
-  };
-
   const handleButtonConfirm = () => {
     action === "logOut"
       ? dispatch(logOutThunk())
-      : dispatch(deleteWaterThunk({ chooseDate, id }));
+      : dispatch(deleteWaterThunk(id));
   };
 
   return (
