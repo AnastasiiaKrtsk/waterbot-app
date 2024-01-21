@@ -37,25 +37,24 @@ const ForgotPasswordPage = () => {
 
   return (
     <Bg>
-      <Bootle>
-        <WrapperForm>
-          <Title>Forgot password</Title>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <WrapperInput>
-              <Label>Enter your email</Label>
-              <Input
-                type="email"
-                placeholder="E-mail"
-                {...register("email")}
-                errors={!!errors.email}
-              />
-              <Error>{errors.email?.message}</Error>
-            </WrapperInput>
-            <Btn type="submit">Send</Btn>
-            <LinkBtn to="/signin">Sign In</LinkBtn>
-          </Form>
-        </WrapperForm>
-      </Bootle>
+      <WrapperForm>
+        <Title>Forgot password</Title>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <WrapperInput>
+            <Label>Enter your email</Label>
+            <Input
+              type="email"
+              placeholder="E-mail"
+              {...register("email")}
+              errors={!!errors.email}
+            />
+            <Error>{errors.email?.message}</Error>
+          </WrapperInput>
+          <Btn type="submit">Send</Btn>
+          <LinkBtn to="/signin">Sign In</LinkBtn>
+        </Form>
+      </WrapperForm>
+      <Bootle />
     </Bg>
   );
 };

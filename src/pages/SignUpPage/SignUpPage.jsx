@@ -55,77 +55,76 @@ const SignUpPage = () => {
 
   return (
     <Bg>
-      <Bootle>
-        <WrapperForm>
-          <Title>Sign Up</Title>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <WrapperInput>
-              <Label>Enter your name</Label>
-              <Input
-                type="text"
-                placeholder="Name"
-                {...register("username")}
-                errors={!!errors.username}
-              />
-              <Error>{errors.username?.message}</Error>
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Enter your email</Label>
-              <Input
-                type="email"
-                placeholder="E-mail"
-                {...register("email")}
-                errors={!!errors.email}
-              />
-              <Error>{errors.email?.message}</Error>
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Enter your password</Label>
-              <Input
-                type={showPassword["password"] ? "text" : "password"}
-                placeholder="Password"
-                {...register("password")}
-                errors={!!errors.password}
-              />
-              <div onClick={() => togglePasswordVisibility("password")}>
-                {showPassword["password"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
-              <Error>{errors.password?.message}</Error>
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Repeat password</Label>
-              <Input
-                type={showPassword["passwordRepeat"] ? "text" : "password"}
-                placeholder="Repeat password"
-                {...register("passwordRepeat")}
-                errors={!!errors.passwordRepeat}
-              />
-              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
-                {showPassword["passwordRepeat"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
-              <Error>{errors.passwordRepeat?.message}</Error>
-            </WrapperInput>
-            <Btn type="submit">Sign Up</Btn>
-            <LinkBtn to="/signin">Sign In</LinkBtn>
-          </Form>
-        </WrapperForm>
-      </Bootle>
+      <WrapperForm>
+        <Title>Sign Up</Title>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <WrapperInput>
+            <Label>Enter your name</Label>
+            <Input
+              type="text"
+              placeholder="Name"
+              {...register("username")}
+              errors={!!errors.username}
+            />
+            <Error>{errors.username?.message}</Error>
+          </WrapperInput>
+          <WrapperInput>
+            <Label>Enter your email</Label>
+            <Input
+              type="email"
+              placeholder="E-mail"
+              {...register("email")}
+              errors={!!errors.email}
+            />
+            <Error>{errors.email?.message}</Error>
+          </WrapperInput>
+          <WrapperInput>
+            <Label>Enter your password</Label>
+            <Input
+              type={showPassword["password"] ? "text" : "password"}
+              placeholder="Password"
+              {...register("password")}
+              errors={!!errors.password}
+            />
+            <div onClick={() => togglePasswordVisibility("password")}>
+              {showPassword["password"] ? (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision`} />
+                </EyeSvg>
+              ) : (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision-crossed`} />
+                </EyeSvg>
+              )}
+            </div>
+            <Error>{errors.password?.message}</Error>
+          </WrapperInput>
+          <WrapperInput>
+            <Label>Repeat password</Label>
+            <Input
+              type={showPassword["passwordRepeat"] ? "text" : "password"}
+              placeholder="Repeat password"
+              {...register("passwordRepeat")}
+              errors={!!errors.passwordRepeat}
+            />
+            <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
+              {showPassword["passwordRepeat"] ? (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision`} />
+                </EyeSvg>
+              ) : (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision-crossed`} />
+                </EyeSvg>
+              )}
+            </div>
+            <Error>{errors.passwordRepeat?.message}</Error>
+          </WrapperInput>
+          <Btn type="submit">Sign Up</Btn>
+          <LinkBtn to="/signin">Sign In</LinkBtn>
+        </Form>
+      </WrapperForm>
+      <Bootle />
     </Bg>
   );
 };
