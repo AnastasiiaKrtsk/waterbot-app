@@ -22,7 +22,7 @@ const initialState = {
     username: null,
     email: null,
     avatarURL: "V",
-    gender: "woman" || "man",
+    gender: "woman",
     dailyNorma: 1.8,
   },
   token: null,
@@ -79,7 +79,7 @@ const authSlice = createSlice({
       })
       //========== Current User ==================//
       .addCase(userCurrentThunk.fulfilled, (state, action) => {
-        state.userData = action.payload.user;
+        // state.userData = action.payload.user;
         state.userData = action.payload;
         state.isSignedIn = true;
         state.user = {
@@ -95,7 +95,10 @@ const authSlice = createSlice({
       })
       //========== Update User Info =================//
       .addCase(updateUserInfoThunk.fulfilled, (state, action) => {
-        state.userData = action.payload;
+        state.userData = {
+          ...state.userData,
+          ...action.payload.result,
+        };
       })
       //============== Water =============================//
       .addCase(addWaterThunk.fulfilled, (state, action) => {
@@ -189,12 +192,12 @@ const authSlice = createSlice({
           editWaterThunk.rejected,
           deleteWaterThunk.rejected,
           editDailyNormaThunk.rejected
-        )
-      ),
-      (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      };
+        ),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 

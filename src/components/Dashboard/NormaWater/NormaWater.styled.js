@@ -32,7 +32,6 @@ export const StyledNormaVolume = styled.div`
   font-weight: 700;
   line-height: 24px;
   color: var(--dark-blue);
-  // width: 70px;
 `;
 
 export const StyledEditBtn = styled.button`

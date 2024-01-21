@@ -65,6 +65,7 @@ export const StyledWaterInfoWrapper = styled.div`
   @media screen and (min-width: 768px) {
     padding: 32px 24px;
     margin: 0px;
+    margin-bottom: 44px;
     width: 704px;
   }
 

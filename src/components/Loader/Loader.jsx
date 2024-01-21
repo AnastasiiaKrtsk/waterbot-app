@@ -1,4 +1,5 @@
 import { Hourglass } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 
 const Loader = () => {
   return (
@@ -27,6 +28,24 @@ const Loader = () => {
         colors={["var(--dark-blue)", "var(--light-blue-3)"]}
       />
     </div>
+  );
+};
+
+export const FragmentLoader = () => {
+  return (
+    <>
+      <TailSpin
+        visible={true}
+        height="80"
+        width="80"
+        color="var(--light-blue-3)"
+        ariaLabel="tail-spin-loading"
+        radius="1"
+        wrapperStyle={{}}
+        wrapperClass=""
+        zIndex="3"
+      />
+    </>
   );
 };
 

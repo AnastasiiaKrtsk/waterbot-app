@@ -25,7 +25,7 @@ export const StyledSvg = styled.svg`
   cursor: pointer;
 
   &:hover {
-    transform: rotate(40deg);
+    transform: rotate(4deg);
     transition: transform 0.5s ease-in-out;
   }
 
@@ -43,10 +43,15 @@ export const StyledTitleWrapper = styled.div`
 export const StyledEditTitle = styled.h2`
   color: var(--black);
 
+  width: 200px;
   font-size: 26px;
   font-style: normal;
   font-weight: 500;
   line-height: 32px;
+
+  @media only screen and (min-width: 768px) {
+    width: fit-content;
+  }
 `;
 
 export const StyledCurrentValue = styled.div`

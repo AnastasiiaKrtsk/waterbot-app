@@ -1,8 +1,26 @@
 import { useEffect, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { StyledBackdrop, StyledModalContent } from "./Modal.styled";
+import { motion, AnimatePresence } from "framer-motion";
 
 const modalRootElement = document.querySelector("#modal");
+
+export const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0,
+      duration: 0.5,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: { delay: 0, duration: 0.5 },
+  },
+};
 
 const Modal = ({ open, onClose, children }) => {
   const element = useMemo(() => document.createElement("div"), []);
@@ -26,11 +44,11 @@ const Modal = ({ open, onClose, children }) => {
   );
 
   useEffect(() => {
-    // if (open) {
-    //   document.body.classList.add("modal-open");
-    // } else {
-    //   document.body.classList.remove("modal-open");
-    // }
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
     modalRootElement.appendChild(element);
 
@@ -40,17 +58,25 @@ const Modal = ({ open, onClose, children }) => {
       modalRootElement.removeChild(element);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [element, handleKeyDown]);
+  }, [element, handleKeyDown, open]);
 
-  if (open) {
-    return createPortal(
-      <StyledBackdrop onClick={handleBackdropClick}>
-        <StyledModalContent>{children}</StyledModalContent>
-      </StyledBackdrop>,
-      element
-    );
-  }
-  return null;
+  return createPortal(
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <StyledBackdrop onClick={handleBackdropClick}>
+            <StyledModalContent>{children}</StyledModalContent>
+          </StyledBackdrop>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    element
+  );
 };
 
 export default Modal;

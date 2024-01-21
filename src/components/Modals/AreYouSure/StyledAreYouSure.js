@@ -11,7 +11,7 @@ export const LogOutBackdrop = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  overflow: scroll;
+  overflow: auto;
 
   @media screen and (min-width: 1440px) {
     display: flex;
