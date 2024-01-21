@@ -61,57 +61,56 @@ const UpdatePasswordPage = () => {
   };
   return (
     <Bg>
-      <Bootle>
-        <WrapperForm>
-          <Title>Update password</Title>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <WrapperInput>
-              <Label>Enter your password</Label>
-              <Input
-                type={showPassword["newPassword"] ? "text" : "password"}
-                placeholder="Password"
-                {...register("newPassword")}
-                errors={!!errors.password}
-              />
-              <div onClick={() => togglePasswordVisibility("newPassword")}>
-                {showPassword["newPassword"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
-              <Error>{errors.password?.message}</Error>
-            </WrapperInput>
-            <WrapperInput>
-              <Label>Repeat password</Label>
-              <Input
-                type={showPassword["passwordRepeat"] ? "text" : "password"}
-                placeholder="Repeat password"
-                {...register("passwordRepeat")}
-                errors={!!errors.passwordRepeat}
-              />
-              <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
-                {showPassword["passwordRepeat"] ? (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision`} />
-                  </EyeSvg>
-                ) : (
-                  <EyeSvg width="16" height="16">
-                    <use href={`${sprite}#vision-crossed`} />
-                  </EyeSvg>
-                )}
-              </div>
-              <Error>{errors.passwordRepeat?.message}</Error>
-            </WrapperInput>
-            <Btn type="submit">Update password</Btn>
-            <LinkBtn to="/signin">Sign In</LinkBtn>
-          </Form>
-        </WrapperForm>
-      </Bootle>
+      <WrapperForm>
+        <Title>Update password</Title>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <WrapperInput>
+            <Label>Enter your password</Label>
+            <Input
+              type={showPassword["newPassword"] ? "text" : "password"}
+              placeholder="Password"
+              {...register("newPassword")}
+              errors={!!errors.password}
+            />
+            <div onClick={() => togglePasswordVisibility("newPassword")}>
+              {showPassword["newPassword"] ? (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision`} />
+                </EyeSvg>
+              ) : (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision-crossed`} />
+                </EyeSvg>
+              )}
+            </div>
+            <Error>{errors.password?.message}</Error>
+          </WrapperInput>
+          <WrapperInput>
+            <Label>Repeat password</Label>
+            <Input
+              type={showPassword["passwordRepeat"] ? "text" : "password"}
+              placeholder="Repeat password"
+              {...register("passwordRepeat")}
+              errors={!!errors.passwordRepeat}
+            />
+            <div onClick={() => togglePasswordVisibility("passwordRepeat")}>
+              {showPassword["passwordRepeat"] ? (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision`} />
+                </EyeSvg>
+              ) : (
+                <EyeSvg width="16" height="16">
+                  <use href={`${sprite}#vision-crossed`} />
+                </EyeSvg>
+              )}
+            </div>
+            <Error>{errors.passwordRepeat?.message}</Error>
+          </WrapperInput>
+          <Btn type="submit">Update password</Btn>
+          <LinkBtn to="/signin">Sign In</LinkBtn>
+        </Form>
+      </WrapperForm>
+      <Bootle />
     </Bg>
   );
 };

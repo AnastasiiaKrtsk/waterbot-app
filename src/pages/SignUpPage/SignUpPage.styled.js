@@ -9,10 +9,12 @@ import bootleDesktop from "../../images/sign/bootleDesktop.png";
 
 export const Bg = styled.div`
   width: 100vw;
-  height: 80vh;
+  /* height: 80vh; */
   margin-left: auto;
   margin-right: auto;
+  padding: 0 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 52px;
   background-size: cover;
@@ -20,7 +22,7 @@ export const Bg = styled.div`
   background-image: url(${bgMobile});
 
   @media screen and (min-width: 768px) {
-    height: 100vh;
+    /* height: 80vh; */
     margin-top: 0;
     background-image: url(${bgTablet});
   }
@@ -35,23 +37,40 @@ export const Bg = styled.div`
 `;
 
 export const Bootle = styled.div`
-  margin-left: 20px;
+  /* margin-left: 20px;
   margin-right: 20px;
   width: 100%;
   height: 80vh;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center bottom; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
+  height: 210px;
+  background-repeat: no-repeat;
+  /* background-position: center bottom; */
   background-image: url(${bootleMobile});
 
   @media screen and (min-width: 768px) {
-    height: 88vh;
-    background-position: right bottom;
-    margin-bottom: 16px;
-    margin-right: 0;
+    /* height: 88vh; */
+    width: 736px;
+    height: 548px;
+    position: absolute;
+    left: 112px;
+    top: 100px;
+    /* right: -80px; */
+    /* background-position: right bottom; */
+    /* margin-bottom: 16px; */
+    /* margin-right: 0; */
     background-image: url(${bootleTablet});
   }
 
   @media screen and (min-width: 1440px) {
+    width: 916px;
+    height: 680px;
+    /* top: 80px; */
+    bottom: 40px;
+    left: 0;
     background-image: url(${bootleDesktop});
     background-position: left bottom;
     margin-right: auto;
@@ -60,15 +79,20 @@ export const Bootle = styled.div`
 
 export const WrapperForm = styled.div`
   display: flex;
-  width: 100%;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
   flex-direction: column;
   margin-top: -28px;
   gap: 16px;
+  z-index: 1;
 
   @media screen and (min-width: 768px) {
     width: 336px;
     margin-left: 12px;
     margin-top: 40px;
+    margin-bottom: auto;
+    position: relative;
   }
 
   @media screen and (min-width: 1440px) {
