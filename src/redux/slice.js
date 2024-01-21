@@ -99,8 +99,6 @@ const authSlice = createSlice({
           ...state.userData,
           ...action.payload.result,
         };
-
-        console.log(action.payload);
       })
       //============== Water =============================//
       .addCase(addWaterThunk.fulfilled, (state, action) => {

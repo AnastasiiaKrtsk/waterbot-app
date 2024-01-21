@@ -7,12 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     include: ["@mui/x-date-pickers"],
   },
-  // resolve: {
-  //   alias: {
-  //     "@mui/x-date-pickers": path.resolve(
-  //       new URL("node_modules/@mui/x-date-pickers", import.meta.url).pathname
-  //     ),
-  //   },
-  // },
   plugins: [react()],
 });

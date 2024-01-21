@@ -10,7 +10,7 @@ import {
   StyledCancelButton,
   StyledLogOutButton,
   StyledModalWindow,
-} from "./StyledLogOut";
+} from "./StyledAreYouSure";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
 import {
   selectChooseDate,

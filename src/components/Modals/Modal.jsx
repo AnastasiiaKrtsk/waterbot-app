@@ -11,7 +11,6 @@ export const containerVariants = {
   },
   visible: {
     opacity: 1,
-    overflow: "auto",
     transition: {
       delay: 0,
       duration: 0.5,
@@ -69,7 +68,6 @@ const Modal = ({ open, onClose, children }) => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          style={{ overflowY: "auto" }}
         >
           <StyledBackdrop onClick={handleBackdropClick}>
             <StyledModalContent>{children}</StyledModalContent>

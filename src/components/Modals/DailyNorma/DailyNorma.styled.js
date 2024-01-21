@@ -11,7 +11,7 @@ export const BackdropDailyNorma = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(6, 33, 54, 0.4);
-  // overflow: scroll;
+  overflow: auto;
 `;
 
 export const ModalDailyNorma = styled.div`

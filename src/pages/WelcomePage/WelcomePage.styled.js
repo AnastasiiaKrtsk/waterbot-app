@@ -24,7 +24,7 @@ export const WelcomeBg = styled.div`
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url(${WelcomeBgMobile});
-  // overflow: hidden;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     height: 87vh;
@@ -49,7 +49,7 @@ export const Welcome2Bg = styled.div`
   background-repeat: no-repeat;
   background-position: top;
   background-image: url(${WelcomeBgMobile2});
-  // overflow: hidden;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     background-image: url(${WelcomeBgTablet2});

@@ -8,7 +8,8 @@ export const ModalSettingWindow = styled.div`
   top: 50%;
   translate: -50% -50%;
 
-  overflow: auto;
+  max-height: 100vh;
+  overflow-y: auto;
 
   display: inline-flex;
   flex-direction: column;
@@ -17,6 +18,19 @@ export const ModalSettingWindow = styled.div`
   background: var(--white);
 
   transition: transform 0.5s ease-in-out;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--light-blue-4);
+  }
+
+  scrollbar thumb:hover {
+    background-color: var(--dark-blue);
+  }
 
   @media screen and (min-width: 768px) {
     position: fixed;

@@ -15,7 +15,21 @@ export const StyledBackdrop = styled.div`
 
 export const StyledModalContent = styled.div`
   background: white;
-  overflow: auto;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--light-blue-4);
+  }
+
+  scrollbar thumb:hover {
+    background-color: var(--dark-blue);
+  }
 
   border-radius: 10px;
 `;

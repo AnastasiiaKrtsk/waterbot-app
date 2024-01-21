@@ -88,9 +88,7 @@ const WaterProgress = ({ value }) => {
       <Box sx={{ marginLeft: "11px" }}>
         <Slider
           sx={{
-            // width: 360,
             margin: 0,
-            // paddingLeft:11,
             "@media screen and (min-width: 320px)": {
               width: "256px",
               "& .custom-line-break": {
