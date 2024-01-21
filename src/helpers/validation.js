@@ -56,6 +56,7 @@ export const updatePasswordSchema = yup.object().shape({
 
 export const updateUserSchema = yup.object().shape({
   gender: yup.string().oneOf(["woman", "man"]),
+  photo: yup.string(),
   username: yup
     .string()
     .min(3, "Minimum 3 characters")
@@ -93,6 +94,7 @@ export const updateUserSchema = yup.object().shape({
     .oneOf([yup.ref("newPassword"), null], "Passwords do not match")
     .transform((value) => (value === "" ? undefined : value)),
 });
+
 export const DailyNormaUsrInputSchema = yup.object().shape({
   dailyNorma: yup
     .number()

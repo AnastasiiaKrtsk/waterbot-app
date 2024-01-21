@@ -4,6 +4,12 @@ export const ModalSettingWindow = styled.div`
   padding: 32px 12px;
   width: 280px;
 
+  position: fixed;
+  top: 50%;
+  translate: -50% -50%;
+
+  overflow: auto;
+
   display: inline-flex;
   flex-direction: column;
 
@@ -13,6 +19,11 @@ export const ModalSettingWindow = styled.div`
   transition: transform 0.5s ease-in-out;
 
   @media screen and (min-width: 768px) {
+    position: fixed;
+    top: 55%;
+    translate: 0;
+    translate: -50% -50%;
+
     padding: 32px 24px;
     width: 704px;
   }
@@ -181,7 +192,7 @@ export const StyledCloseSvg = styled.svg`
   height: 24px;
 
   &:hover {
-    transform: rotate(40deg);
+    transform: rotate(4deg);
     transition: transform 0.5s ease-in-out;
   }
 
@@ -230,8 +241,6 @@ export const BtnSaveWrapper = styled.div`
 `;
 
 export const NameSettingInput = styled.input`
-  cursor: pointer;
-
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -261,8 +270,6 @@ export const NameSettingInput = styled.input`
 `;
 
 export const PasswordSettingInput = styled.input`
-  cursor: pointer;
-
   padding: 12px 10px;
   height: 44px;
   border-radius: 6px;
@@ -306,6 +313,8 @@ export const BtnEye = styled.button`
 `;
 
 export const EyeSvg = styled.svg`
+  cursor: pointer;
+
   width: 16px;
   height: 16px;
   position: absolute;

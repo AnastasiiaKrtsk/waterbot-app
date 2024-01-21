@@ -33,9 +33,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-body.modal-open {
-  overflow: hidden;
-}
 
 img {
   display: block;
@@ -147,12 +144,12 @@ textarea {
   white-space: nowrap;
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* ====== РАДІО ІНПУТИ  =======*/
 
-
+/* 
 input[type="radio"] {
   background-color: var(--dark-blue); 
   border: 1px solid var(--dark-blue); 
@@ -169,4 +166,4 @@ input[type="radio"]:hover {
 input[type="radio"]:checked {
   background-color:var(--dark-blue); 
   border-color: var(--dark-blue);
-}
+} */

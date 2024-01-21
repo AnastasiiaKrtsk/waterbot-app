@@ -52,10 +52,14 @@ import {
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
-import Loader from "../../Loader/Loader.jsx";
 import { toast } from "react-toastify";
+import { FragmentLoader } from "../../Loader/Loader.jsx";
+import { motion, AnimatePresence } from "framer-motion";
+import { containerVariants } from "../Modal.jsx";
 
 const UserSettings = () => {
+  const dispatch = useDispatch();
+
   const handleCloseUserSettingsModal = () => {
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
@@ -119,13 +123,9 @@ const UserSettings = () => {
 
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
-
-    window.location.reload();
   };
 
   //======= Avatar File Change ======
-
-  const dispatch = useDispatch();
 
   const handleGenderChange = (event) => {
     setUserGender(event.target.value);
@@ -150,206 +150,240 @@ const UserSettings = () => {
   };
 
   return (
-    <ModalSettingWindow>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <SettingsCrossDiv>
-          <SettingModalTitleH2>Setting</SettingModalTitleH2>
-          <StyledCloseSvg onClick={handleCloseUserSettingsModal}>
-            <use href={`${sprite}#icon-outline`} />
-          </StyledCloseSvg>
-        </SettingsCrossDiv>
-        <SettingsFormWrapper>
-          <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
-          <SettingPhotoWrapper>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <SettingAvatarImg isLoading={isLoading} src={avatarUrl || "V"} />
-            )}
-
-            <PhotoInputUploadLabel id="customFileUpload" htmlFor="photoInput">
-              <ImgDownloadIcon>
-                <SendSvg>
-                  <use href={`${sprite}#send`} />
-                </SendSvg>
-              </ImgDownloadIcon>
-              Upload a photo
-            </PhotoInputUploadLabel>
-
-            <PhotoInputUpload
-              type="file"
-              id="photoInput"
-              name="photo"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-          </SettingPhotoWrapper>
-
-          <UserDataWrapper>
-            <YourInfoWrapp>
-              <StyledYourGenderTitle>
-                Your gender identity
-              </StyledYourGenderTitle>
-
-              <GenderInfoDiv>
-                <FormControl component="fieldset">
-                  <FormLabel id="demo-row-radio-buttons-group-label" />
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    value={userGender}
-                    onChange={handleGenderChange}
-                  >
-                    <FormControlLabel
-                      value="woman"
-                      control={
-                        <Radio
-                          sx={{
-                            color: "var(--dark-blue)",
-                            "& .MuiSvgIcon-root": {
-                              fontSize: "medium",
-                            },
-                          }}
-                        />
-                      }
-                      label="Woman"
-                      {...register("gender")}
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <ModalSettingWindow>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <SettingsCrossDiv>
+                <SettingModalTitleH2>Setting</SettingModalTitleH2>
+                <StyledCloseSvg onClick={handleCloseUserSettingsModal}>
+                  <use href={`${sprite}#icon-outline`} />
+                </StyledCloseSvg>
+              </SettingsCrossDiv>
+              <SettingsFormWrapper>
+                <YourPhotoTitleH3>Your photo</YourPhotoTitleH3>
+                <SettingPhotoWrapper>
+                  {isLoading ? (
+                    <FragmentLoader />
+                  ) : (
+                    <SettingAvatarImg
+                      alt="user avatar"
+                      src={avatarUrl || "V"}
                     />
-                    <FormControlLabel
-                      value="man"
-                      control={
-                        <Radio
-                          sx={{
-                            color: "var(--dark-blue)",
-                            "& .MuiSvgIcon-root": {
-                              fontSize: "medium",
-                            },
-                          }}
-                        />
-                      }
-                      label="Man"
-                      {...register("gender")}
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </GenderInfoDiv>
+                  )}
 
-              <SettingNameEmailWrapper>
-                <SettingNameEmailDiv>
-                  <StyledSettingModalH3>Your name</StyledSettingModalH3>
-                  <NameSettingInput
-                    placeholder={userName}
-                    type="text"
-                    name="username"
-                    {...register("username")}
-                    errors={!!errors.username}
-                  />
-                  <Error>{errors.username?.message}</Error>
-                </SettingNameEmailDiv>
-
-                <SettingNameEmailDiv>
-                  <StyledSettingModalH3>E-mail</StyledSettingModalH3>
-                  <NameSettingInput
-                    placeholder={userEmail}
-                    type="email"
-                    name="email"
-                    {...register("email")}
-                    errors={!!errors.email}
-                  />
-                  <Error>{errors.email?.message}</Error>
-                </SettingNameEmailDiv>
-              </SettingNameEmailWrapper>
-            </YourInfoWrapp>
-
-            <div>
-              <StyledSettingsPasswordDiv>
-                <StyledSettingModalH3>Password</StyledSettingModalH3>
-                <PasswordSettingLabel htmlFor="old-password">
-                  Outdated password:
-                </PasswordSettingLabel>
-                <SettingsPasswordSvgDiv>
-                  <PasswordSettingInput
-                    placeholder="Password"
-                    type={showPassword["old-password"] ? "text" : "password"}
-                    name="oldPassword"
-                    {...register("oldPassword")}
-                    errors={!!errors.oldPassword}
-                  />
-                  <div onClick={() => togglePasswordVisibility("old-password")}>
-                    {showPassword["old-password"] ? (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision`} />
-                      </EyeSvg>
-                    ) : (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision-crossed`} />
-                      </EyeSvg>
-                    )}
-                  </div>
-                  <Errors>{errors.oldPassword?.message}</Errors>
-                </SettingsPasswordSvgDiv>
-
-                <PasswordSettingLabel htmlFor="new-password">
-                  New Password:
-                </PasswordSettingLabel>
-                <SettingsPasswordSvgDiv>
-                  <PasswordSettingInput
-                    placeholder="Password"
-                    type={showPassword["new-password"] ? "text" : "password"}
-                    name="newPassword"
-                    {...register("newPassword")}
-                    errors={!!errors.newPassword}
-                  />
-                  <div onClick={() => togglePasswordVisibility("new-password")}>
-                    {showPassword["new-password"] ? (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision`} />
-                      </EyeSvg>
-                    ) : (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision-crossed`} />
-                      </EyeSvg>
-                    )}
-                  </div>
-                  <Errors>{errors.newPassword?.message}</Errors>
-                </SettingsPasswordSvgDiv>
-
-                <PasswordSettingLabel htmlFor="repeat-password">
-                  Repeat new password:
-                </PasswordSettingLabel>
-                <SettingsPasswordSvgDiv>
-                  <PasswordSettingInput
-                    placeholder="Password"
-                    type={showPassword["repeat-password"] ? "text" : "password"}
-                    name="passwordRepeat"
-                    {...register("passwordRepeat")}
-                    errors={!!errors.passwordRepeat}
-                  />
-                  <div
-                    onClick={() => togglePasswordVisibility("repeat-password")}
+                  <PhotoInputUploadLabel
+                    id="customFileUpload"
+                    htmlFor="photoInput"
                   >
-                    {showPassword["repeat-password"] ? (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision`} />
-                      </EyeSvg>
-                    ) : (
-                      <EyeSvg>
-                        <use href={`${sprite}#vision-crossed`} />
-                      </EyeSvg>
-                    )}
+                    <ImgDownloadIcon>
+                      <SendSvg>
+                        <use href={`${sprite}#send`} />
+                      </SendSvg>
+                    </ImgDownloadIcon>
+                    Upload a photo
+                  </PhotoInputUploadLabel>
+
+                  <PhotoInputUpload
+                    type="file"
+                    id="photoInput"
+                    name="photo"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </SettingPhotoWrapper>
+
+                <UserDataWrapper>
+                  <YourInfoWrapp>
+                    <StyledYourGenderTitle>
+                      Your gender identity
+                    </StyledYourGenderTitle>
+
+                    <GenderInfoDiv>
+                      <FormControl component="fieldset">
+                        <FormLabel id="demo-row-radio-buttons-group-label" />
+                        <RadioGroup
+                          row
+                          aria-labelledby="demo-row-radio-buttons-group-label"
+                          name="row-radio-buttons-group"
+                          value={userGender}
+                          onChange={handleGenderChange}
+                        >
+                          <FormControlLabel
+                            value="woman"
+                            control={
+                              <Radio
+                                sx={{
+                                  color: "var(--dark-blue)",
+                                  "& .MuiSvgIcon-root": {
+                                    fontSize: "medium",
+                                  },
+                                }}
+                              />
+                            }
+                            label="Woman"
+                            {...register("gender")}
+                          />
+                          <FormControlLabel
+                            value="man"
+                            control={
+                              <Radio
+                                sx={{
+                                  color: "var(--dark-blue)",
+                                  "& .MuiSvgIcon-root": {
+                                    fontSize: "medium",
+                                  },
+                                }}
+                              />
+                            }
+                            label="Man"
+                            {...register("gender")}
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </GenderInfoDiv>
+
+                    <SettingNameEmailWrapper>
+                      <SettingNameEmailDiv>
+                        <StyledSettingModalH3>Your name</StyledSettingModalH3>
+                        <NameSettingInput
+                          placeholder={userName}
+                          type="text"
+                          name="username"
+                          {...register("username")}
+                          errors={!!errors.username}
+                        />
+                        <Error>{errors.username?.message}</Error>
+                      </SettingNameEmailDiv>
+
+                      <SettingNameEmailDiv>
+                        <StyledSettingModalH3>E-mail</StyledSettingModalH3>
+                        <NameSettingInput
+                          placeholder={userEmail}
+                          type="email"
+                          name="email"
+                          {...register("email")}
+                          errors={!!errors.email}
+                        />
+                        <Error>{errors.email?.message}</Error>
+                      </SettingNameEmailDiv>
+                    </SettingNameEmailWrapper>
+                  </YourInfoWrapp>
+
+                  <div>
+                    <StyledSettingsPasswordDiv>
+                      <StyledSettingModalH3>Password</StyledSettingModalH3>
+                      <PasswordSettingLabel htmlFor="old-password">
+                        Outdated password:
+                      </PasswordSettingLabel>
+                      <SettingsPasswordSvgDiv>
+                        <PasswordSettingInput
+                          placeholder="Password"
+                          type={
+                            showPassword["old-password"] ? "text" : "password"
+                          }
+                          name="oldPassword"
+                          {...register("oldPassword")}
+                          errors={!!errors.oldPassword}
+                        />
+                        <div
+                          onClick={() =>
+                            togglePasswordVisibility("old-password")
+                          }
+                        >
+                          {showPassword["old-password"] ? (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision`} />
+                            </EyeSvg>
+                          ) : (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision-crossed`} />
+                            </EyeSvg>
+                          )}
+                        </div>
+                        <Errors>{errors.oldPassword?.message}</Errors>
+                      </SettingsPasswordSvgDiv>
+
+                      <PasswordSettingLabel htmlFor="new-password">
+                        New Password:
+                      </PasswordSettingLabel>
+                      <SettingsPasswordSvgDiv>
+                        <PasswordSettingInput
+                          placeholder="Password"
+                          type={
+                            showPassword["new-password"] ? "text" : "password"
+                          }
+                          name="newPassword"
+                          {...register("newPassword")}
+                          errors={!!errors.newPassword}
+                        />
+                        <div
+                          onClick={() =>
+                            togglePasswordVisibility("new-password")
+                          }
+                        >
+                          {showPassword["new-password"] ? (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision`} />
+                            </EyeSvg>
+                          ) : (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision-crossed`} />
+                            </EyeSvg>
+                          )}
+                        </div>
+                        <Errors>{errors.newPassword?.message}</Errors>
+                      </SettingsPasswordSvgDiv>
+
+                      <PasswordSettingLabel htmlFor="repeat-password">
+                        Repeat new password:
+                      </PasswordSettingLabel>
+                      <SettingsPasswordSvgDiv>
+                        <PasswordSettingInput
+                          placeholder="Password"
+                          type={
+                            showPassword["repeat-password"]
+                              ? "text"
+                              : "password"
+                          }
+                          name="passwordRepeat"
+                          {...register("passwordRepeat")}
+                          errors={!!errors.passwordRepeat}
+                        />
+                        <div
+                          onClick={() =>
+                            togglePasswordVisibility("repeat-password")
+                          }
+                        >
+                          {showPassword["repeat-password"] ? (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision`} />
+                            </EyeSvg>
+                          ) : (
+                            <EyeSvg>
+                              <use href={`${sprite}#vision-crossed`} />
+                            </EyeSvg>
+                          )}
+                        </div>
+                        <Errors>{errors.passwordRepeat?.message}</Errors>
+                      </SettingsPasswordSvgDiv>
+                    </StyledSettingsPasswordDiv>
                   </div>
-                  <Errors>{errors.passwordRepeat?.message}</Errors>
-                </SettingsPasswordSvgDiv>
-              </StyledSettingsPasswordDiv>
-            </div>
-          </UserDataWrapper>
-        </SettingsFormWrapper>
-        <BtnSaveWrapper>
-          <BtnSettingSave type="submit">Save</BtnSettingSave>
-        </BtnSaveWrapper>
-      </form>
-    </ModalSettingWindow>
+                </UserDataWrapper>
+              </SettingsFormWrapper>
+              <BtnSaveWrapper>
+                <BtnSettingSave type="submit">Save</BtnSettingSave>
+              </BtnSaveWrapper>
+            </form>
+          </ModalSettingWindow>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

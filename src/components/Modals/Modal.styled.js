@@ -6,7 +6,7 @@ export const StyledBackdrop = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
   background: rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
@@ -15,6 +15,7 @@ export const StyledBackdrop = styled.div`
 
 export const StyledModalContent = styled.div`
   background: white;
+  overflow: auto;
 
   border-radius: 10px;
 `;
