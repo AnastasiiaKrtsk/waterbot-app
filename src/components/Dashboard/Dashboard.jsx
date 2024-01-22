@@ -12,6 +12,7 @@ import {
   StyledWaterInfoWrapper,
 } from "./Dashboard.styled";
 import NormaWater from "./NormaWater/NormaWater";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const todayWater = useSelector(selectTodayWater);
