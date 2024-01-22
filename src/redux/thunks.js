@@ -37,7 +37,7 @@ export const signInThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await signin(userData);
-      thunkAPI.dispatch(getWaterDayThunk());
+      // thunkAPI.dispatch(getWaterDayThunk());
       return response;
     } catch (error) {
       toast.error(`Incorrect email or password`);

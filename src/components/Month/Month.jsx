@@ -86,7 +86,7 @@ const Month = () => {
         month: (moment(shownDate).month() + 1).toString().padStart(2, "0"),
       })
     );
-  }, [shownDate]);
+  }, [shownDate,dailyNorma]);
 
   const prevMonth = () => {
     const newDate = moment(shownDate)
