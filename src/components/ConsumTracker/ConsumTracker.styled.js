@@ -35,6 +35,10 @@ export const CalendarIcon = styled.img.attrs({ src: CalendarSvg })`
     height: 32px;
     width: 32px;
   }
+  @media only screen and (max-width: 1440px) {
+    height: 32px;
+    width: 32px;
+  }
 `;
 
 export const StatisticsIcon = styled.img.attrs({ src: PresentationSvg })`
@@ -43,11 +47,19 @@ export const StatisticsIcon = styled.img.attrs({ src: PresentationSvg })`
     height: 32px;
     width: 32px;
   }
+  @media only screen and (max-width: 1440px) {
+    height: 32px;
+    width: 32px;
+  }
 `;
 
 export const SettingsIcon = styled.img.attrs({ src: ToolsSvg })`
   margin-right: 8px;
   @media only screen and (max-width: 767px) {
+    height: 32px;
+    width: 32px;
+  }
+  @media only screen and (max-width: 1440px) {
     height: 32px;
     width: 32px;
   }
