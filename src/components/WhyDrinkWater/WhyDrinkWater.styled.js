@@ -13,12 +13,12 @@ export const WhyWrapper = styled.div`
   @media only screen and (min-width: 767px) {
     margin-top: 44px;
     width: 494px;
-    padding: 32px 24px;
+    padding: 32px 24px 0;
   }
 
   @media only screen and (min-width: 1440px) {
     margin-top: 0;
-    padding: 16px 24px;
+    padding: 29px 24px;
   }
 `;
 export const WhyText = styled.div`

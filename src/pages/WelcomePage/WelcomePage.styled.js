@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-import wave from "../../images/desktop/Desk-Background-Main-Page2@2x.png";
-import waveTab from "../../images/tablet/Tablet-Background-Main-Page2@1x.png";
-import waveMob from "../../images/mobile/Mobile-Background-Main-Page2@1x.png";
-
 import bubbles from "../../images/desktop/Not-Found-Bg2@1x.png";
 import bubblesTab from "../../images/tablet/Tablet-Background-Main-Page2bubble@1x.png";
 import bubblesMob from "../../images/mobile/Mobile-Background-element-Sign-In@2x.png";
+import wave from "../../images/desktop/Not-Found-Bg@1x.png";
+import waveTab from "../../images/tablet/Tablet-Background-Main-Page2@1x.png";
+import waveMob from "../../images/mobile/Mobile-Background-Main-Page2@1x.png";
 
 export const WelcomeBg = styled.div`
   background-size: contain;
@@ -25,9 +24,7 @@ export const WelcomeBg = styled.div`
     background-position: top;
     background-size: contain;
     background-image: url(${bubbles});
-
     max-width: 1440px;
-    max-height: 800px;
   }
 `;
 
@@ -43,6 +40,7 @@ export const WelcomeBg2 = styled.div`
   @media screen and (min-width: 768px) {
     background-image: url(${waveTab});
     max-width: 768px;
+    max-height: 700px;
   }
 
   @media screen and (min-width: 1440px) {
@@ -51,7 +49,7 @@ export const WelcomeBg2 = styled.div`
     background-image: url(${wave});
 
     max-width: 1440px;
-    max-height: 800px;
+    max-height: 660px;
   }
 `;
 
@@ -65,12 +63,13 @@ export const WelcomePageWrapper = styled.div`
     margin-top: 40px;
     padding-left: 32px;
     padding-right: 32px;
+    margin-bottom: 0;
   }
   @media only screen and (min-width: 1440px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 81px;
+    gap: 150px;
     margin-top: 80px;
     margin-bottom: 100px;
   }
