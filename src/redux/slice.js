@@ -23,7 +23,7 @@ const initialState = {
     email: null,
     avatarURL: "V",
     gender: "woman",
-    dailyNorma: 1.8,
+    dailyNorma: null,
   },
   token: null,
   error: null,
