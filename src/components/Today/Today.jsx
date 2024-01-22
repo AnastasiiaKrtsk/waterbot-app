@@ -37,7 +37,7 @@ const Today = () => {
   };
   useEffect(() => {
     dispatch(getWaterDayThunk());
-    dispatch(getWaterMonthThunk(monthYear));
+    // dispatch(getWaterMonthThunk(monthYear));
   }, []);
 
   const modalStatus = useSelector(selectOpenModal);
