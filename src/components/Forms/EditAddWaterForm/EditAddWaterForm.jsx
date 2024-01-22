@@ -36,7 +36,6 @@ import {
 
 const EditAddWaterForm = ({ action }) => {
   const dispatch = useDispatch();
-  const shownDate = useSelector(selectChooseDate);
   const id = useSelector(selectIdForEditDelete);
   const todayWaterArray = useSelector(selectTodayWater);
   const [error, setError] = useState(null);
@@ -72,17 +71,10 @@ const EditAddWaterForm = ({ action }) => {
       "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
     );
 
-    const chooseDate = {
-      year: moment(shownDate).year().toString(),
-      month: (moment(shownDate).month() + 1).toString().padStart(2, 0),
-    };
-
     if (action === "edit") {
-      dispatch(
-        editWaterThunk({ chooseDate, id, water: { waterVolume, date } })
-      );
+      dispatch(editWaterThunk({ id, water: { waterVolume, date } }));
     } else {
-      dispatch(addWaterThunk({ chooseDate, water: { waterVolume, date } }));
+      dispatch(addWaterThunk({ waterVolume, date }));
     }
   };
 

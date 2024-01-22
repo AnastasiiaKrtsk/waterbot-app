@@ -102,6 +102,18 @@ const authSlice = createSlice({
       })
       //============== Water =============================//
       .addCase(addWaterThunk.fulfilled, (state, action) => {
+        state.water.todayWater = action.payload.dayWaterUser;
+        if (
+          state.chooseDate === moment().toISOString() &&
+          action.payload.monthWaterUser.length
+        ) {
+          state.water.monthWater = action.payload.monthWaterUser?.map(
+            (day) => ({
+              ...day,
+              date: moment(day.date).date(),
+            })
+          );
+        }
         state.openModal = false;
         state.modalContent = null;
       })
@@ -119,10 +131,34 @@ const authSlice = createSlice({
         }
       })
       .addCase(editWaterThunk.fulfilled, (state, action) => {
+        state.water.todayWater = action.payload.dayWaterUser;
+        if (
+          state.chooseDate === moment().toISOString() &&
+          action.payload.monthWaterUser.length
+        ) {
+          state.water.monthWater = action.payload.monthWaterUser?.map(
+            (day) => ({
+              ...day,
+              date: moment(day.date).date(),
+            })
+          );
+        }
         state.openModal = false;
         state.modalContent = null;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
+        state.water.todayWater = action.payload.dayWaterUser;
+        if (
+          state.chooseDate === moment().toISOString() &&
+          action.payload.monthWaterUser.length
+        ) {
+          state.water.monthWater = action.payload.monthWaterUser?.map(
+            (day) => ({
+              ...day,
+              date: moment(day.date).date(),
+            })
+          );
+        }
         state.openModal = false;
       })
       // ========== Update Daily Norma =================//
