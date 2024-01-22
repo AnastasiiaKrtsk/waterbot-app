@@ -42,13 +42,14 @@ const EditAddWaterForm = ({ action }) => {
 
   const waterAmount =
     action === "edit"
-      ? todayWaterArray.userWaterDay.find((item) => item._id === id).waterVolume
+      ? todayWaterArray.userWaterDay?.find((item) => item._id === id)
+          .waterVolume
       : 250;
 
   const shownTime =
     action === "edit"
       ? moment(
-          todayWaterArray.userWaterDay.find((item) => item._id === id).date
+          todayWaterArray.userWaterDay?.find((item) => item._id === id).date
         ).utc()
       : moment().utc();
 

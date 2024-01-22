@@ -104,7 +104,8 @@ const authSlice = createSlice({
       .addCase(addWaterThunk.fulfilled, (state, action) => {
         state.water.todayWater = action.payload.dayWaterUser;
         if (
-          state.chooseDate === moment().toISOString() &&
+          moment(state.chooseDate).year() === moment().year() &&
+          moment(state.chooseDate).month() === moment().month() &&
           action.payload.monthWaterUser.length
         ) {
           state.water.monthWater = action.payload.monthWaterUser?.map(
@@ -133,7 +134,8 @@ const authSlice = createSlice({
       .addCase(editWaterThunk.fulfilled, (state, action) => {
         state.water.todayWater = action.payload.dayWaterUser;
         if (
-          state.chooseDate === moment().toISOString() &&
+          moment(state.chooseDate).year() === moment().year() &&
+          moment(state.chooseDate).month() === moment().month() &&
           action.payload.monthWaterUser.length
         ) {
           state.water.monthWater = action.payload.monthWaterUser?.map(
@@ -147,12 +149,14 @@ const authSlice = createSlice({
         state.modalContent = null;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
-        state.water.todayWater = action.payload.dayWaterUser;
+        console.log(moment().toISOString());
+        state.water.todayWater = action.payload.data.dayWaterUser;
         if (
-          state.chooseDate === moment().toISOString() &&
-          action.payload.monthWaterUser.length
+          moment(state.chooseDate).year() === moment().year() &&
+          moment(state.chooseDate).month() === moment().month() &&
+          action.payload.data.monthWaterUser.length
         ) {
-          state.water.monthWater = action.payload.monthWaterUser?.map(
+          state.water.monthWater = action.payload.data.monthWaterUser?.map(
             (day) => ({
               ...day,
               date: moment(day.date).date(),
