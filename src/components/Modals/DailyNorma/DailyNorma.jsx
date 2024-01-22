@@ -81,12 +81,12 @@ const DailyNorma = () => {
     e.preventDefault();
     dispatch(editDailyNormaThunk(data));
     dispatch(userCurrentThunk);
-    dispatch(
-      getWaterMonthThunk({
-        year: moment(shownDate).year().toString(),
-        month: (moment(shownDate).month() + 1).toString().padStart(2, "0"),
-      })
-    );
+    // dispatch(
+    //   getWaterMonthThunk({
+    //     year: moment(shownDate).year().toString(),
+    //     month: (moment(shownDate).month() + 1).toString().padStart(2, "0"),
+    //   })
+    // );
 
     dispatch(setModalStatus(false));
     dispatch(setModalContent(null));
