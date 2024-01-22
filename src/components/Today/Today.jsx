@@ -35,12 +35,11 @@ const Today = () => {
     year: moment(toDay).year().toString(),
     month: (moment(toDay).month() + 1).toString().padStart(2, 0),
   };
+
   useEffect(() => {
     dispatch(getWaterDayThunk());
     dispatch(getWaterMonthThunk(monthYear));
   }, []);
-
-  
 
   const modalStatus = useSelector(selectOpenModal);
   const todayWater = useSelector(selectTodayWater);
@@ -49,7 +48,6 @@ const Today = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("EditWaterForm"));
     dispatch(setIdForEditDelete(id));
-    
   };
   const handleDeleteWater = (id) => {
     dispatch(setModalStatus(!modalStatus));
@@ -69,7 +67,6 @@ const Today = () => {
             <use href={sprite + "#icon-water-glass"}></use>
           </svg>
           <StyledWaterVolume>{waterVolume} ml</StyledWaterVolume>{" "}
-
           {moment(date).utc().format("LT")}
         </StyledWaterInfo>
         <StyledTodayButtonsWrapper>
