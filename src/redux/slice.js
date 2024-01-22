@@ -149,7 +149,6 @@ const authSlice = createSlice({
         state.modalContent = null;
       })
       .addCase(deleteWaterThunk.fulfilled, (state, action) => {
-        console.log(moment().toISOString());
         state.water.todayWater = action.payload.data.dayWaterUser;
         if (
           moment(state.chooseDate).year() === moment().year() &&
@@ -171,7 +170,22 @@ const authSlice = createSlice({
           ...state.userData,
           dailyNorma: action.payload.dailyNorma,
         };
+
+        state.water.todayWater.percentDailyNormaUser =
+          action.payload.dayWaterUserPercentage;
+
+        if (state.water.monthWater.length) {
+          state.water.monthWater?.map((item) => {
+            if (item.date === moment().date()) {
+              return {
+                ...item,
+                percentDailyNorm: action.payload.dayWaterUserPercentage,
+              };
+            }
+          });
+        }
       })
+
       .addMatcher(
         isAnyOf(
           signUpThunk.pending,
