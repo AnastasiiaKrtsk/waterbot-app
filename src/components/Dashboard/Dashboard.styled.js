@@ -14,8 +14,10 @@ export const StyledDashboardWrapper = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    overflow: hidden;
     justify-content: center;
-    padding: 30px 112px;
+    // padding: 30px 112px;
+    padding-top: 30px;
     gap: 36px;
     flex-direction: row;
   }
