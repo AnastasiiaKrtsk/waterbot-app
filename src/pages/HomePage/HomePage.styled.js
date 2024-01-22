@@ -5,7 +5,7 @@ import bubblesTab from "../../images/tablet/Tablet-Background-element-Home-Scree
 import bubblesMob from "../../images/mobile/Mobile-Background-element-Home-screen@1x.png";
 
 export const HomePageWrapper = styled.div`
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url(${bubblesMob});
