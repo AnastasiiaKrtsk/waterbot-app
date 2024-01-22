@@ -15,7 +15,7 @@ export const StyledBackdrop = styled.div`
 
 export const StyledModalContent = styled.div`
   background: white;
-  max-height: 100vh;
+  max-height: 90vh;
   overflow-y: auto;
 
   &::-webkit-scrollbar {

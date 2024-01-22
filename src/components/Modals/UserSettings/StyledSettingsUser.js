@@ -8,7 +8,7 @@ export const ModalSettingWindow = styled.div`
   top: 50%;
   translate: -50% -50%;
 
-  max-height: 100vh;
+  max-height: 90vh;
   overflow-y: auto;
 
   display: inline-flex;
