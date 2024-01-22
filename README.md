@@ -23,13 +23,13 @@ To get started with the Water Tracker web application, follow these steps:
 1. **Clone the Repository:**
 
    ```
-   git clone https://github.com/your-username/water-tracker.git
+   git clone https://github.com/AnastasiiaKrtsk/waterbot-app.git
    ```
 
 2. **Navigate to the Project Directory:**
 
    ```
-   cd water-tracker
+   cd waterbot-app
    ```
 
 3. **Install Dependencies:**
