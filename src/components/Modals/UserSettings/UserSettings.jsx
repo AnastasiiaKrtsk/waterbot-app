@@ -48,7 +48,7 @@ import {
   UserDataWrapper,
   YourInfoWrapp,
   YourPhotoTitleH3,
-} from "./StyledSettingsUser";
+} from "./StyledSettingsUser.js";
 import sprite from "../../../images/svg+logo/sprite.svg";
 import { updateUserSchema } from "../../../helpers/validation.js";
 import { setModalContent, setModalStatus } from "../../../redux/slice.js";
@@ -57,7 +57,7 @@ import { FragmentLoader } from "../../Loader/Loader.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { containerVariants } from "../Modal.jsx";
 
-const UserSettings = () => {
+export const UserSettings = () => {
   const dispatch = useDispatch();
 
   const handleCloseUserSettingsModal = () => {
@@ -66,7 +66,6 @@ const UserSettings = () => {
   };
 
   // ===== SELECTORS ==========
-
   const avatarUrl = useSelector(selectAvatarUrl);
   const userName = useSelector(selectUsername);
   const userEmail = useSelector(selectUserEmail);
@@ -74,7 +73,6 @@ const UserSettings = () => {
   const isLoading = useSelector(selectLoader);
 
   // ===== USE STATES ==========
-
   const [userGender, setUserGender] = useState(storedUserGender);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -86,7 +84,6 @@ const UserSettings = () => {
   };
 
   // ======= * on Submit ==========
-
   const {
     register,
     handleSubmit,
@@ -126,7 +123,6 @@ const UserSettings = () => {
   };
 
   //======= Avatar File Change ======
-
   const handleGenderChange = (event) => {
     setUserGender(event.target.value);
   };
@@ -386,5 +382,3 @@ const UserSettings = () => {
     </AnimatePresence>
   );
 };
-
-export default UserSettings;
