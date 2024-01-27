@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectAvatarUrl,
   selectUsername,
-  selectToken,
   selectOpenModal,
   selectModalContent,
+  selectIsSignedIn,
 } from "../../redux/selectors";
 
 import {
@@ -29,7 +29,8 @@ import Loader from "../Loader/Loader";
 import { setModalContent, setModalStatus } from "../../redux/slice";
 
 const Layout = () => {
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
+  const isSignedIn = useSelector(selectIsSignedIn);
   const name = useSelector(selectUsername);
   const avatar = useSelector(selectAvatarUrl);
   const modalStatus = useSelector(selectOpenModal);
@@ -45,7 +46,7 @@ const Layout = () => {
 
   return (
     <>
-      {token ? (
+      {isSignedIn ? (
         <>
           <header>
             <WrapperHeader>
