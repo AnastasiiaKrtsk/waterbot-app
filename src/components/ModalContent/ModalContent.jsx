@@ -3,8 +3,9 @@ import { selectModalContent } from "../../redux/selectors";
 import EditAddWaterForm from "../Forms/EditAddWaterForm/EditAddWaterForm";
 import DailyNorma from "../Modals/DailyNorma/DailyNorma";
 import UserModal from "../Layout/UserModal/UserModal";
-import UserSettings from "../Modals/UserSettings/UserSettings";
+
 import AreYouSureModal from "../Modals/AreYouSure/AreYouSureModal";
+import { UserSettings } from "../Modals/UserSettings/UserSettings";
 
 const ModalContent = () => {
   const modalContent = useSelector(selectModalContent);

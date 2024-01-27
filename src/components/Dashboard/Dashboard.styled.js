@@ -69,6 +69,7 @@ export const StyledWaterInfoWrapper = styled.div`
     margin: 0px;
     margin-bottom: 44px;
     width: 704px;
+    height: 688px;
   }
 
   @media screen and (min-width: 1440px) {
