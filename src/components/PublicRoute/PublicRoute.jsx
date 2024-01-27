@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { selectToken } from "../../redux/selectors";
+import { selectIsSignedIn } from "../../redux/selectors";
 
 const PublicRoute = () => {
-  const token = useSelector(selectToken);
-  return !token ? <Outlet /> : <Navigate to="/homepage" />;
+  // const token = useSelector(selectToken);
+  const isSignedIn = useSelector(selectIsSignedIn);
+
+  return isSignedIn ? <Navigate to="/homepage" /> : <Outlet />;
 };
 
 export default PublicRoute;
