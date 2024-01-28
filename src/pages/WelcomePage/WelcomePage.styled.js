@@ -6,50 +6,25 @@ import bubblesMob from "../../images/mobile/Mobile-Background-element-Sign-In@2x
 import wave from "../../images/desktop/Not-Found-Bg@1x.png";
 import waveTab from "../../images/tablet/Tablet-Background-Main-Page2@1x.png";
 import waveMob from "../../images/mobile/Mobile-Background-Main-Page2@1x.png";
-
-export const WelcomeBg = styled.div`
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url(${bubblesMob});
-  margin: auto;
-  max-width: 320px;
-
-  @media screen and (min-width: 768px) {
-    background-image: url(${bubblesTab});
-    max-width: 768px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    background-position: top;
-    background-size: contain;
-    background-image: url(${bubbles});
-    max-width: 1440px;
-  }
-`;
+import bottle from "../../images/mobile/Mobile-Bottle-home-screen@1x.png";
 
 export const WelcomeBg2 = styled.div`
   background-size: auto;
   background-repeat: no-repeat;
-  background-position: center;
-  background-image: url(${waveMob});
-  margin: auto;
-  max-width: 320px;
-  height: 950px;
+  background-position: top, bottom;
+  background-image: url(${bubblesMob}), url(${waveMob});
+  width: 100vw;
 
   @media screen and (min-width: 768px) {
-    background-image: url(${waveTab});
-    max-width: 768px;
-    max-height: 700px;
+    background-image: url(${bubblesTab}), url(${waveTab});
+    height: 89vh;
   }
 
   @media screen and (min-width: 1440px) {
-    background-position: bottom;
-    background-size: contain;
-    background-image: url(${wave});
-
-    max-width: 1440px;
-    max-height: 660px;
+    background-position: right bottom, top, bottom;
+    background-size: auto, contain, contain;
+    background-image: url(${bottle}), url(${bubbles}), url(${wave});
+    height: 82.5vh;
   }
 `;
 
@@ -57,7 +32,7 @@ export const WelcomePageWrapper = styled.div`
   padding-left: 24px;
   padding-right: 24px;
   margin-top: 24px;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 
   @media screen and (min-width: 768px) {
     margin-top: 40px;

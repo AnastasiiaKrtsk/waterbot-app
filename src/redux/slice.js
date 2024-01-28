@@ -74,7 +74,7 @@ const authSlice = createSlice({
       .addCase(logOutThunk.fulfilled, () => {
         return initialState;
       })
-      .addCase(logOutThunk.rejected, (state, action) => {
+      .addCase(logOutThunk.rejected, (state) => {
         state.isSignedIn = false;
       })
       //========== Current User ==================//
