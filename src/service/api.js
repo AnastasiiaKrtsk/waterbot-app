@@ -4,7 +4,11 @@ const BASE_URL = "https://backend-water-tracker.onrender.com/api/";
 const $instance = axios.create({ baseURL: BASE_URL });
 
 export const setToken = (token) => {
-  $instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  $instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearToken = () => {
+  $instance.defaults.headers.common.Authorization = "";
 };
 
 export const signup = async (userData) => {
@@ -21,7 +25,7 @@ export const signin = async (userData) => {
 
 export const logout = async () => {
   const { data } = await $instance.post("/auth/logout");
-  setToken("");
+  clearToken();
   return data;
 };
 

@@ -8,9 +8,10 @@ import ModalContent from "./components/ModalContent/ModalContent";
 import Modal from "./components/Modals/Modal";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
-import { selectOpenModal } from "./redux/selectors";
+import { selectLoader, selectOpenModal } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
+import Loader from "./components/Loader/Loader";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
@@ -26,6 +27,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectLoader);
 
   const modalStatus = useSelector(selectOpenModal);
 
@@ -38,7 +40,9 @@ const App = () => {
     dispatch(setModalContent(null));
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
