@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { selectIsSignedIn } from "../../redux/selectors";
 
-const PublicRoute = () => {
+const PublicRoute = ({ children }) => {
   const isSignedIn = useSelector(selectIsSignedIn);
+  const location = useLocation();
 
-  return isSignedIn ? <Navigate to="/homepage" /> : <Outlet />;
+  return isSignedIn ? <Navigate to={location.state ?? "/"} /> : children;
 };
 
 export default PublicRoute;
