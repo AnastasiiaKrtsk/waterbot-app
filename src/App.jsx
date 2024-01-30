@@ -8,7 +8,11 @@ import ModalContent from "./components/ModalContent/ModalContent";
 import Modal from "./components/Modals/Modal";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
-import { selectLoader, selectOpenModal } from "./redux/selectors";
+import {
+  selectIsSignedIn,
+  selectLoader,
+  selectOpenModal,
+} from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
 import Loader from "./components/Loader/Loader";
@@ -28,6 +32,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoader);
+  const isSignedIn = useSelector(selectIsSignedIn);
 
   const modalStatus = useSelector(selectOpenModal);
 
@@ -46,7 +51,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<WelcomePage />} />
+          <Route index element={isSignedIn ? <HomePage /> : <WelcomePage />} />
           <Route
             path="/signup"
             element={
