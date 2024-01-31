@@ -12,11 +12,7 @@ import {
   StyledModalWindow,
 } from "./StyledAreYouSure";
 import { setModalContent, setModalStatus } from "../../../redux/slice";
-import {
-  selectChooseDate,
-  selectIdForEditDelete,
-} from "../../../redux/selectors";
-import moment from "moment";
+import { selectIdForEditDelete } from "../../../redux/selectors";
 import { StyledCloseSvg } from "../UserSettings/StyledSettingsUser";
 import { containerVariants } from "../Modal";
 
