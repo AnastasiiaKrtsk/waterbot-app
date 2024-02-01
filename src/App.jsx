@@ -15,7 +15,6 @@ import {
 } from "./redux/selectors";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import { userCurrentThunk } from "./redux/thunks";
-import Loader from "./components/Loader/Loader";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
@@ -31,7 +30,6 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoader);
   const isSignedIn = useSelector(selectIsSignedIn);
 
   const modalStatus = useSelector(selectOpenModal);
@@ -45,9 +43,7 @@ const App = () => {
     dispatch(setModalContent(null));
   };
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
