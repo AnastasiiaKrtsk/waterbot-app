@@ -197,8 +197,8 @@ const authSlice = createSlice({
           updateAvatarThunk.pending,
           updateUserInfoThunk.pending,
           addWaterThunk.pending,
-          getWaterDayThunk.pending,
-          getWaterMonthThunk.pending,
+          // getWaterDayThunk.pending,
+          // getWaterMonthThunk.pending,
           editWaterThunk.pending,
           deleteWaterThunk.pending,
           editDailyNormaThunk.pending
@@ -206,6 +206,13 @@ const authSlice = createSlice({
         (state) => {
           state.error = null;
           state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(getWaterDayThunk.pending, getWaterMonthThunk.pending),
+        (state) => {
+          state.error = null;
+          state.isLoading = false;
         }
       )
       .addMatcher(
